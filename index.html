@@ -1834,6 +1834,102 @@ body.xoon{overflow:hidden}
 :root[data-theme="purple"] .finbox,:root[data-theme="purple"] .marc,:root[data-theme="purple"] .qzbox,:root[data-theme="purple"] .qzb,:root[data-theme="purple"] .finpad,:root[data-theme="purple"] .hvs,:root[data-theme="purple"] .hvb,:root[data-theme="purple"] .maro li,:root[data-theme="purple"] .petbub:not([hidden]){border-radius:0}
 :root[data-theme="purple"] .finbox,:root[data-theme="purple"] .marc,:root[data-theme="purple"] .qzbox{border:2px solid #30285a}
 :root[data-theme="baby"] .finbox,:root[data-theme="baby"] .marc,:root[data-theme="baby"] .qzbox{border:2px solid #ffd3e8;box-shadow:0 4px 0 #f7c8de}
+/* =====================================================================
+   Runde 2: Bewertung als Zahl + Regler, Weiterschauen, Empfehlungen, Glocke
+   ===================================================================== */
+/* ---------- Bewertung eingeben: große Zahl, Wort, Regler von Rot nach Grün ---------- */
+.rwrap.r2{display:flex;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:4px;width:100%;min-width:0;--rc:hsl(calc(var(--rv,0)*125) 70% 45%)}
+:root[data-theme="dark"] .rwrap.r2,:root[data-theme="purple"] .rwrap.r2{--rc:hsl(calc(var(--rv,0)*125) 75% 58%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme]) .rwrap.r2{--rc:hsl(calc(var(--rv,0)*125) 75% 58%)}}
+.rhd{display:flex;align-items:baseline;gap:5px;min-width:0}
+.r2 .rnum{font-size:1.45rem;font-weight:800;line-height:1;color:var(--rc);min-width:0;text-align:left;font-variant-numeric:tabular-nums;transition:color .2s}
+.r2 .rnum:empty{display:inline}
+.rof{font-size:.72rem;color:var(--mute);font-weight:600}
+.rword{margin-left:auto;font-size:.78rem;font-weight:700;color:var(--rc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+.r2.emp .rnum,.r2.emp .rword{color:var(--mute)}
+.rrow{display:flex;align-items:center;gap:6px;min-width:0}
+.r2 .rate,.r2 .rate[data-rate]{flex:1;min-width:0;display:block;height:28px;padding:0;font-size:1rem;letter-spacing:0;border-radius:999px}
+:root .rwrap.r2 .rate[data-rate] .rbg::before,:root .rwrap.r2 .rate[data-rate] .rfg::before{content:none}
+.r2 .rate .rbg{position:absolute;left:0;right:0;top:50%;height:10px;margin-top:-5px;border-radius:999px;background:color-mix(in srgb,var(--ink) 13%,transparent);opacity:1;font-size:0}
+.r2 .rate .rfg,.r2 .rate[data-rate] .rfg{top:50%;bottom:auto;height:10px;margin-top:-5px;border-radius:999px;font-size:0;text-shadow:none;background:linear-gradient(90deg,hsl(0 72% 52%),hsl(40 88% 52%) 50%,hsl(125 62% 44%));background-size:calc(100%/max(var(--rv,0),.02)) 100%;background-repeat:no-repeat;min-width:10px}
+.r2.emp .rate .rfg{display:none}
+/* Griff */
+.r2 .rate::before{content:"";position:absolute;top:50%;left:calc(var(--rv,0)*100%);width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#fff;border:3px solid var(--rc);box-shadow:0 3px 8px rgba(0,0,0,.3);transition:transform .2s var(--spring),border-color .2s;pointer-events:none;z-index:1}
+.r2.emp .rate::before{left:50%;border-color:var(--mute);opacity:.6;animation:rNudge 2.4s ease-in-out infinite}
+@keyframes rNudge{0%,100%{transform:translateX(-8px)}50%{transform:translateX(8px)}}
+.r2 .rate.drag::before,.r2 .rate:hover::before{transform:scale(1.2)}
+.r2 .rate[data-rate]:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.r2 .rate[data-rate]:hover .rfg{filter:none}
+/* Vorschau unter der Maus: heller Streifen bis zur Zeigerposition */
+:root .rwrap.r2 .rate[data-rate].hov:not(.drag) .rbg{color:inherit;-webkit-background-clip:border-box;background-clip:border-box;background:linear-gradient(90deg,color-mix(in srgb,var(--ink) 30%,transparent) var(--hv,0%),color-mix(in srgb,var(--ink) 13%,transparent) var(--hv,0%))}
+.r2 .rsb{flex:none}
+.rwrap.r2.rpop .rnum{animation:pop .5s var(--spring)}
+/* Orte: Karte, kleine Karte, Verlauf, Fenster */
+.stars{width:100%}
+.small .r2 .rnum{font-size:1.15rem}.small .r2 .rword{font-size:.7rem}.small .r2 .rate{height:24px}.small .r2 .rate::before{width:16px;height:16px;margin:-8px 0 0 -8px}
+.rr .stars{flex:1;display:flex;align-items:center;gap:6px;min-width:0}
+.rr .rwrap.r2{flex-direction:row;align-items:center;gap:10px;flex:1;max-width:420px}
+.rr .r2 .rhd{flex:none;min-width:96px}.rr .r2 .rword{margin-left:4px}.rr .r2 .rnum{font-size:1.2rem}.rr .r2 .rrow{flex:1}
+.pst{display:flex;width:min(380px,100%);margin:0 auto 16px}
+.pst .r2 .rnum{font-size:2.2rem}.pst .r2 .rword{font-size:.95rem}.pst .r2 .rate{height:36px}.pst .r2 .rate .rbg,.pst .r2 .rate .rfg{height:14px;margin-top:-7px}.pst .r2 .rate::before{width:26px;height:26px;margin:-13px 0 0 -13px}
+.drow{flex-wrap:wrap}.drow .pst{flex:1 1 240px;margin:0}
+/* ---------- Bewertung anzeigen: ein Stern + Zahl ---------- */
+.sst{display:inline-flex;align-items:center;gap:3px;flex-wrap:nowrap;font-variant-numeric:tabular-nums}
+.sstar{font-style:normal;color:var(--star);line-height:1}.sstar::before{content:"★"}
+:root[data-theme="purple"] .sstar::before{content:"✦"}:root[data-theme="purple"] .sstar{text-shadow:0 0 8px rgba(61,232,255,.7)}
+:root[data-theme="baby"] .sstar::before{content:"💖";font-size:.85em}
+.sst .snum{font-size:1em;font-weight:700}.sst.none{color:var(--mute)}
+.rws{display:inline-flex;align-items:center;gap:4px}.rws .sstar{color:var(--racc,var(--star))}.rws b{font-size:1em}
+/* ---------- Weiterschauen ---------- */
+.conth{font-size:1.05rem;margin:0 0 10px}
+.contl{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:22px}
+.contc{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:9px 12px 9px 9px;min-width:0;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+.contc:hover{transform:translateY(-2px);border-color:var(--acc)}
+.contc .cv{width:46px;flex:none;border-radius:8px;font-size:1.3rem;padding:0}
+.contt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}.contt .lnk{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contt small{color:var(--mute);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contb{flex:none;padding:9px 14px;white-space:nowrap}
+#main.enter .contc{animation:cardIn .5s var(--ease) both}#main.enter .contc:nth-child(2){animation-delay:.06s}#main.enter .contc:nth-child(3){animation-delay:.12s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .contc{background:var(--glass)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .conth{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;font-size:1.25rem}
+/* ---------- Empfehlungen + Wer ist dran ---------- */
+.recin{display:flex;gap:14px;align-items:center;background:var(--panel);border:2px solid var(--pink);border-radius:var(--rad);padding:12px 14px;margin-bottom:14px;animation:heroIn .5s var(--ease)}
+.recinc{flex:none}.recinc .cv{width:62px;border-radius:9px;font-size:1.5rem;padding:0}
+.recint{flex:1;min-width:0}.recint .k{margin:0 0 2px;color:var(--pink);font-weight:700;font-size:.85rem}
+.recinn{font-weight:700;font-size:1.1rem}
+.recint blockquote{margin:6px 0;padding-left:10px;border-left:3px solid var(--line);color:var(--mute);font-style:italic}
+.recint .btns{flex-wrap:wrap;margin-top:8px}
+.turn{margin:0 0 14px;padding:9px 14px;border-radius:14px;background:color-mix(in srgb,var(--acc) 8%,transparent);font-size:.95rem}
+.turn .lnk{color:var(--mute);text-decoration:underline;font-size:.85rem;margin-left:6px}.turn .rn{min-width:0}
+.recrow{margin-top:14px}.recrow+.rmrow{margin-top:8px}
+.recb:hover{border-color:var(--pink);color:var(--pink)}
+.recf{margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:600}
+.recfr{display:flex;gap:8px;flex-wrap:wrap}.recfr input{flex:1 1 200px;min-width:0;font:inherit;font-weight:400;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:9px 12px}.recfr input:focus{outline:2px solid var(--acc);outline-offset:1px}
+#modal .recinfo{font-size:.9rem;color:var(--mute);margin:14px 0 0}.recinfo .lnk{text-decoration:underline}
+/* ---------- Glocke + Neuigkeiten ---------- */
+.bell{position:relative;font-size:1.1rem;width:44px;padding:0;flex:none}
+.bdg{position:absolute;top:-4px;right:-4px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#e5484d;color:#fff;font-size:.68rem;font-weight:800;line-height:19px;text-align:center;box-shadow:0 0 0 2px var(--bg)}
+.bell.has>span:first-child{display:inline-block;transform-origin:50% 10%;animation:bellSwing 2.8s ease-in-out infinite}
+.bell.ring>span:first-child{animation:bellSwing .7s ease-in-out 3}
+@keyframes bellSwing{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(16deg)}82%{transform:rotate(-14deg)}88%{transform:rotate(9deg)}94%{transform:rotate(-5deg)}}
+.newsl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-width:760px}
+.newsl li{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 14px;animation:riseIn .4s var(--ease) both}
+.newsl li:nth-child(2){animation-delay:.04s}.newsl li:nth-child(3){animation-delay:.08s}.newsl li:nth-child(4){animation-delay:.12s}.newsl li:nth-child(n+5){animation-delay:.16s}
+.newsl li.neu{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 9%,var(--panel))}
+.newsl li.neu .nwt::before{content:"NEU";font-size:.62rem;font-weight:800;letter-spacing:.08em;color:var(--accink);background:var(--acc);border-radius:999px;padding:1px 7px;margin-right:7px;vertical-align:2px}
+.nwi{font-size:1.4rem;flex:none}.nwt{flex:1;min-width:0;line-height:1.35}.nwt small{display:block;color:var(--mute);font-size:.76rem;margin-top:1px}
+.newsl .rej{flex:none;border-radius:999px;padding:7px 13px}
+.newsnote{margin-top:18px;max-width:760px}
+:root[data-theme="purple"] .contc,:root[data-theme="purple"] .recin,:root[data-theme="purple"] .newsl li,:root[data-theme="purple"] .turn{border-radius:0}
+@media (max-width:767.98px){
+  .contl{grid-template-columns:1fr}.contb span{display:none}.contb{padding:9px 13px}
+  .recin{align-items:flex-start}.recinc .cv{width:50px}
+  .rr .rwrap.r2{flex-direction:column;align-items:stretch;gap:3px}.rr .r2 .rhd{min-width:0}
+  .ctop .sbox{flex-wrap:nowrap}
+}
+@media (prefers-reduced-motion:reduce){.r2.emp .rate::before,.bell.has>span:first-child,.bell.ring>span:first-child,.recin,.newsl li,#main.enter .contc{animation:none}}
+/* Beim Ziehen zeigt schon die große Zahl den Wert – die kleine Blase braucht es dann nicht */
+.r2 .rate.drag::after{display:none}
 /* EXTRA-END */
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1851,12 +1947,12 @@ body.xoon{overflow:hidden}
 </aside>
 <div class="scrim" id="scrim" hidden></div>
 <main id="main">
-<div class="ctop"><div class="cth"><h2 id="cth" class="sr"></h2><nav class="ctabs" aria-label="Bereiche"><button class="ttab" data-top="anime"><span aria-hidden="true">🌸</span> Animes</button><button class="ttab" data-top="film"><span aria-hidden="true">🎬</span> Filme</button><button class="ttab" data-top="serie"><span aria-hidden="true">📺</span> Serien</button></nav><span class="ctv" id="ctv"></span></div><div class="sbox"><div class="srch" id="srch" role="search"><input id="sq" type="search" placeholder="Titel suchen …" autocomplete="off" aria-label="Titel suchen" aria-controls="sres"><div class="sres" id="sres" hidden></div></div><button class="brwb" id="brwb" data-brw="1" aria-label="Alle Titel sortieren und filtern" title="Sortieren &amp; filtern"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="brwt">Alle Titel</span></button></div></div>
+<div class="ctop"><div class="cth"><h2 id="cth" class="sr"></h2><nav class="ctabs" aria-label="Bereiche"><button class="ttab" data-top="anime"><span aria-hidden="true">🌸</span> Animes</button><button class="ttab" data-top="film"><span aria-hidden="true">🎬</span> Filme</button><button class="ttab" data-top="serie"><span aria-hidden="true">📺</span> Serien</button></nav><span class="ctv" id="ctv"></span></div><div class="sbox"><div class="srch" id="srch" role="search"><input id="sq" type="search" placeholder="Titel suchen …" autocomplete="off" aria-label="Titel suchen" aria-controls="sres"><div class="sres" id="sres" hidden></div></div><button class="brwb bell" id="bell" data-xo="news" aria-label="Neuigkeiten"><span aria-hidden="true">🔔</span><span class="bdg" id="belln" hidden></span></button><button class="brwb" id="brwb" data-brw="1" aria-label="Alle Titel sortieren und filtern" title="Sortieren &amp; filtern"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="brwt">Alle Titel</span></button></div></div>
 <div id="v-main">
 <div class="howto" id="howto" hidden></div>
 <p class="sub">Gesehen? <b>Sterne geben</b> – fertig. ✨</p>
 <p class="ro" id="ro" hidden></p>
-<div id="v-wl"><div class="rwban" id="rwban" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite"></section>
+<div id="v-wl"><div class="rwban" id="rwban" hidden></div><div id="recin" hidden></div><div id="cont" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite"></section>
 <button class="todob" id="todob" data-todo="1" hidden></button>
 <div class="bar"><span id="cnt"></span><button class="rollb" id="rollb" data-roll="1">🎲 <span class="lg2">Was schauen wir heute?</span><span class="sm2t">Würfeln</span></button><button class="rollb swb2" id="swb2" data-swipe="1">💞 <span class="lg2">Gemeinsam swipen</span><span class="sm2t">Swipen</span></button><button class="rollb finb" id="finb" data-xo="fin">🧭 <span class="lg2">Zeit &amp; Stimmung</span><span class="sm2t">Finder</span></button></div>
 <div class="grid" id="grid"></div>
@@ -6969,11 +7065,11 @@ const trailerHtml=id=>{const n=esc(M[id].name);return`<div class="trls"><a class
 function modalHtml(){
   const m=M[openId],x=META[openId]||{};
   if(m.sec!=="anime"){const w=x.syn||"";
-    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
   // Animes: Jahr/Wertung/Sprache aus dem Katalog (AniList/aniSearch), sonst aus den online geladenen Infos.
   const t=m.desc||PLOT[openId]||m.plot||x.syn||"",y=m.y||x.y||YEAR[openId],r=m.r||x.s,cu=covOf(openId);
   const meta=[y||"Jahr unbekannt",r?"AniList "+String(r).replace(".",",")+" / 10":"",m.fmt||"",m.lang==="de"?"🇩🇪 Deutsche Synchro":m.lang==="omu"?"🇯🇵 Nur OmU (Untertitel)":""].filter(Boolean).join(" · ");
-  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${trailerHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${trailerHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
 const rt=(id,u)=>((S.w[id]||{}).r||{})[u];
 const avg=id=>{const v=Object.values((S.w[id]||{}).r||{});return v.length?v.reduce((a,b)=>a+b,0)/v.length:0};
 // ---------- Bewertung mit Kommastelle: 1 bis 10 Sterne in 0,1er-Schritten ----------
@@ -6983,10 +7079,10 @@ const fmtR=v=>String(r1(v)).replace(".",",");
 // Sternbalken: zwei Lagen gleicher Zeichen (10 Sterne), die obere wird auf Wert/10 gekürzt. rview = nur Anzeige.
 const rbar=(v,cls,attrs)=>`<span class="rate${cls?" "+cls:""}"${attrs||""}><span class="rbg" aria-hidden="true"></span><span class="rfg" aria-hidden="true" style="width:${(v||0)/RMAX*100}%"></span></span>`;
 // ctx: "n" = eigene Bewertung in der Liste, "pr" = Schon-gesehen-Fenster, "dr:jos|joh" = gemeinsames Fenster.
-function rateHtml(id,v,ctx,who){const lab=`Bewertung${who?" von "+who:""}: ${v?fmtR(v)+" von 10 Sternen":"noch nicht bewertet"}. Tippen oder ziehen, Pfeiltasten und Enter.`;
-  return`<span class="rwrap">${rbar(v,v?"":"empty",` role="slider" tabindex="0" aria-label="${esc(lab)}" aria-valuemin="${RMIN}" aria-valuemax="${RMAX}" aria-valuenow="${v||0}" aria-valuetext="${v?fmtR(v)+" von 10 Sternen":"noch nicht bewertet"}" data-rate="${ctx}" data-id="${id}"`)}<span class="rstp">${v?`<button class="rsb" data-rstep="${ctx}|${id}|-1" aria-label="0,1 Sterne weniger">−</button>`:""}<b class="rnum">${v?fmtR(v):""}</b>${v?`<button class="rsb" data-rstep="${ctx}|${id}|1" aria-label="0,1 Sterne mehr">+</button>`:""}</span></span>`}
+function rateHtml(id,v,ctx,who){const lab=`Bewertung${who?" von "+who:""}: ${v?fmtR(v)+" von 10":"noch nicht bewertet"}. Regler antippen oder ziehen, Pfeiltasten und Enter.`;
+  return`<span class="rwrap r2${v?"":" emp"}" style="--rv:${(v||0)/RMAX}"><span class="rhd"><b class="rnum">${v?fmtR(v):"–"}</b><span class="rof">/ 10</span><span class="rword">${v?rWord(v):"Bewerten"}</span></span><span class="rrow">${v?`<button class="rsb" data-rstep="${ctx}|${id}|-1" aria-label="0,1 weniger">−</button>`:""}${rbar(v,v?"":"empty",` role="slider" tabindex="0" aria-label="${esc(lab)}" aria-valuemin="${RMIN}" aria-valuemax="${RMAX}" aria-valuenow="${v||0}" aria-valuetext="${v?fmtR(v)+" von 10, "+rWord(v):"noch nicht bewertet"}" data-rate="${ctx}" data-id="${id}"`)}${v?`<button class="rsb" data-rstep="${ctx}|${id}|1" aria-label="0,1 mehr">+</button>`:""}</span></span>`}
 const liveStars=id=>rateHtml(id,rt(id,I())||0,"n");
-const sst=n=>`<span class="sst" aria-label="${n?fmtR(n)+" von 10 Sternen":"noch nicht bewertet"}">${rbar(n,"rview")}${n?`<b class="snum">${fmtR(n)}</b>`:""}</span>`;
+const sst=n=>n?`<span class="sst" aria-label="${fmtR(n)} von 10"><i class="sstar" aria-hidden="true"></i><b class="snum">${fmtR(n)}</b></span>`:`<span class="sst none" aria-label="noch nicht bewertet">–</span>`;
 const fdate=t=>new Date(t).toLocaleDateString("de-DE");
 const vname=v=>v==="both"?"Zusammen":U[v].n;
 function notesHtml(id){
@@ -8100,7 +8196,7 @@ function render(){
     :rstAsk?`<p class="hint" style="margin:0 0 8px">Alle Listen bei Animes, Filmen und Serien, alle Bewertungen, Notizen und Verläufe werden gelöscht. Design und Personenwahl bleiben. Direkt danach könnt ihr es noch rückgängig machen.</p><div class="btns"><button class="rst warn" data-rsty="1">Ja, zurücksetzen</button><button class="rst" data-rstn="1">Abbrechen</button></div>`
     :`<div class="btns"><button class="rst" data-exp="1">Backup speichern</button><button class="rst" data-imp="1">Backup laden</button></div><p class="hint">Speichert alles (Animes, Filme, Serien, alle Listen, Bewertungen, Notizen) als Datei. So geht nichts verloren, wenn der Browser geleert wird.</p><button class="rst" data-rst="1" style="margin-top:12px">Alles zurücksetzen</button><p class="hint">Setzt Animes, Filme und Serien komplett auf den Anfang zurück. Am besten vorher ein Backup speichern.</p>`;
   renderSide();renderToast();showStat();renderSearch();cloudUI();cloudKick();rwBanner();seaBanner();autoUI();
-  fxFlip();histViews();xoRender();tintApply();petBub();
+  fxFlip();histViews();x2Render();xoRender();tintApply();petBub();
   if(swOpen||!$("sw").hidden)swRender();if(brw)brwResults();clearTimeout(achLast);achLast=setTimeout(achCheck,1500);
 }
 const BKEYS=[SEC.anime.key,SEC.film.key,SEC.serie.key,"anime-theme-v1","wl-hsort"];
@@ -8127,9 +8223,9 @@ function dualHtml(){const m=M[dual.id],row=u=>`<div class="drow"><span class="rn
 function rateCommit(ctx,id,v){v=rclamp(v);rFocus=ctx+"|"+id;
   if(ctx==="n")act({n:String(v),id});else if(ctx==="pr")act({pr:String(v)});
   else if(ctx.startsWith("dr:")){dual.r[ctx.slice(3)]=v;render()}
-  const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null;if(f&&!calm()){f.parentNode.classList.add("rpop");const r=f.getBoundingClientRect();if(r.width)fxBurst(r.left+r.width*Math.min(1,v/RMAX),r.top+r.height/2,v>=8?16:v>=5?9:5)}}
+  const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null;if(f&&!calm()){(f.closest(".rwrap")||f.parentNode).classList.add("rpop");const r=f.getBoundingClientRect();if(r.width)fxBurst(r.left+r.width*Math.min(1,v/RMAX),r.top+r.height/2,v>=8?16:v>=5?9:5)}}
 function ratePreview(el,v){el.querySelector(".rfg").style.width=v/RMAX*100+"%";el.classList.remove("empty");el.dataset.tip=fmtR(v);
-  el.setAttribute("aria-valuenow",v);el.setAttribute("aria-valuetext",fmtR(v)+" von 10 Sternen");const n=el.parentNode.querySelector(".rnum");if(n)n.textContent=fmtR(v)}
+  el.setAttribute("aria-valuenow",v);el.setAttribute("aria-valuetext",fmtR(v)+" von 10, "+rWord(v));const w=el.closest(".rwrap");if(w){w.style.setProperty("--rv",v/RMAX);w.classList.remove("emp");const n=w.querySelector(".rnum");if(n)n.textContent=fmtR(v);const t=w.querySelector(".rword");if(t)t.textContent=rWord(v)}}
 const rateAt=(el,x)=>{const r=el.getBoundingClientRect(),f=(x-r.left)/r.width;return f>=.985?RMAX:rclamp(f*RMAX)};
 const rateOk=el=>el.dataset.rate!=="n"||editable();
 document.addEventListener("pointerdown",e=>{const el=e.target.closest&&e.target.closest(".rate[data-rate]");if(!el||!rateOk(el)||e.button>0)return;
@@ -8226,7 +8322,7 @@ function act(d){
   else if(d.online){onlineSearch();return}
   else if(d.onl){const o=sOnline[+d.onl];if(!o)return;const id=adopt(o);sOnline=[];sq=M[id].name;$("sq").value=sq;sOpen=true;toast(`„${M[id].name}“ übernommen. Jetzt bewerten oder zur Watchlist hinzufügen.`)}
   else if(d.sadd){const id=d.sadd,j=c.list.indexOf("@");
-    if(j>-1){snap(`„${M[id].name}“ hinzugefügt`);c.list[j]=id;c.rej=c.rej.filter(x=>x!==id);toast(`„${M[id].name}“ zur Watchlist „${vname(view)}“ hinzugefügt`)}else{swapId=id;rollOn=false}}
+    if(j>-1){snap(`„${M[id].name}“ hinzugefügt`);c.list[j]=id;c.rej=c.rej.filter(x=>x!==id);xTurn();toast(`„${M[id].name}“ zur Watchlist „${vname(view)}“ hinzugefügt`)}else{swapId=id;rollOn=false}}
   else if(d.swap){const id=swapId,i=c.list.indexOf(d.swap);if(!id||i<0)return;snap(`„${M[d.swap].name}“ gegen „${M[id].name}“ getauscht`);
     c.list[i]=id;delete c.seen[d.swap];c.rej=c.rej.filter(x=>x!==id);swapId=null;toast(`„${M[id].name}“ ersetzt „${M[d.swap].name}“`)}
   else if(d.rmask)rmAsk=d.rmask;
@@ -8278,7 +8374,7 @@ function act(d){
     if(pn>p0)toast(`✓ ${pn-p0>1?"Staffeln "+(p0+1)+"–"+pn:EPS[id].length>1?"Staffel "+pn:"Alle Folgen"} von „${M[id].name}“ gesehen`)}
   else if(d.seen){const x0=xpNow(),on=!c.seen[d.seen];if(on)fxMark={k:"seen",id:d.seen};snap(`Haken bei „${M[d.seen].name}“`);if(on)c.seen[d.seen]=true;else delete c.seen[d.seen];
     toast(on?`👀 „${M[d.seen].name}“ gesehen${xpTag(x0)} – fehlen nur noch die Sterne`:`Haken bei „${M[d.seen].name}“ entfernt${xpTag(x0)}`)}
-  else if(d.acc){snap(`„${M[d.acc].name}“ angenommen`);c.list[c.list.indexOf("@")]=d.acc;vi=0;toast(`„${M[d.acc].name}“ zur Liste ${vname(view)} hinzugefügt`)}
+  else if(d.acc){snap(`„${M[d.acc].name}“ angenommen`);c.list[c.list.indexOf("@")]=d.acc;vi=0;xTurn();toast(`„${M[d.acc].name}“ zur Liste ${vname(view)} hinzugefügt`)}
   else if(d.skip)vi++;
   else if(d.rej){snap(`„${M[d.rej].name}“ abgelehnt`);c.rej.push(d.rej);vi=0;toast(`„${M[d.rej].name}“ abgelehnt`)}
   else if(d.back){snap(`„${M[d.back].name}“ zurückgeholt`);c.done=c.done.filter(x=>x.id!==d.back);delete c.seen[d.back];
@@ -8688,7 +8784,7 @@ let rw=null,rwLastOpen=null,rwFocus=null;
 const rwTheme=()=>document.documentElement.dataset.theme||"";
 const rwSym=()=>rwTheme()==="baby"?["💖","🤍"]:rwTheme()==="purple"?["✦","✧"]:["★","☆"];
 // Sterne im Rewind: gleiche Teil-Füllung wie in der App, dazu der Wert mit Kommastelle.
-const rwSt=n=>`<span class="rws" aria-label="${fmtR(n)} von 10 Sternen">${rbar(n,"rview")}<b>${fmtR(n)}</b></span>`;
+const rwSt=n=>`<span class="rws" aria-label="${fmtR(n)} von 10"><i class="sstar" aria-hidden="true"></i><b>${fmtR(n)}</b></span>`;
 const rwNum=v=>String(+v.toFixed(1)).replace(".",",");
 // Cover wie cv(), aber ohne neue Abrufe anzustoßen.
 const rwCv=id=>{const u=covOf(id);return`<div class="cv ico rwc" style="background:linear-gradient(160deg,hsl(calc(var(--cvh) + ${hue(id)%40}) 28% 32%),hsl(calc(var(--cvh) + ${hue(id)%40}) 25% 16%))" aria-hidden="true">${icon(id)}${u?`<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</div>`};
@@ -8879,7 +8975,7 @@ const xRate=(k,id,u)=>(((ST[k].w||{})[id]||{}).r||{})[u]||0;
 
 // ---------- Gemeinsame Ebene für die Extras (#xo, liegt wie „Stöbern“ unter dem Info-Fenster) ----------
 let xo=null;
-const XO_T={fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster"};
+const XO_T={fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster",news:"🔔 Neuigkeiten"};
 function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   xo=Object.assign({k,back:document.activeElement},o||{});
   if(k==="fin")Object.assign(xo,{min:0,x:0,y:0,set:false});
@@ -8889,7 +8985,7 @@ function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   const el=$("xo");el.scrollTop=0;const f=el.querySelector(".bwback");if(f)f.focus({preventScroll:true})}
 function xoClose(){const b=xo&&xo.back;if(xo&&xo.url)URL.revokeObjectURL(xo.url);xo=null;document.body.classList.remove("xoon");const el=$("xo");el.hidden=true;el.innerHTML="";render();if(b&&document.contains(b)&&b.getClientRects().length)b.focus()}
 function xoRender(){const el=$("xo");if(!xo){if(!el.hidden){el.hidden=true;el.innerHTML=""}return}el.hidden=false;
-  const body=xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():posterHtml();
+  const body=xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():posterHtml();
   const st=el.scrollTop;keepFocus(el,()=>el.innerHTML=`<div class="xoin x-${xo.k}"><header class="bwhead"><button class="rst bwback" data-xoclose="1">‹ Zurück</button><h2>${XO_T[xo.k]}</h2></header>${body}</div>`);el.scrollTop=st;
   if(xo.k==="fin")finResults()}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&xo&&!openId&&!preId&&!rw&&!menu&&$("modal").hidden){e.preventDefault();xoClose()}});
@@ -9116,6 +9212,7 @@ function rwReact(e,b){if(calm())return;const r=b.getBoundingClientRect();for(let
 const xStatBtns=()=>`<div class="xbtns"><button class="rollb" data-xo="poster">🖼 Jahres-Poster</button><button class="rollb" data-xo="quiz">🧠 Quiz aus eurem Verlauf</button><button class="rollb" data-xo="mar">🎞️ Marathon-Planer</button><button class="rollb" data-xo="fin">🧭 Zeit &amp; Stimmung</button></div>`;
 // ---------- Aktionen der Extras (wird am Anfang von act() gefragt) ----------
 function xAct(d){
+  if(xAct2(d))return true;
   if(d.xo){xoOpen(d.xo,d.xo==="poster"?{year:new Date().getFullYear(),who:"both"}:null);return true}
   if(d.xoclose){xoClose();return true}
   if(d.hview){hview=d.hview;try{localStorage.setItem("wl-hview",hview)}catch(e){}fxEnter("tab");render();return true}
@@ -9131,6 +9228,84 @@ function xAct(d){
   if(d.pyear){xo.year=d.pyear==="all"?"all":+d.pyear;posterMake();return true}
   if(d.pwho){xo.who=d.pwho;posterMake();return true}
   if(d.psave){posterSave();return true}
+  return false}
+
+// =====================================================================
+// Runde 2: Bewertung als Zahl mit Regler, Weiterschauen, Empfehlungen + „Wer ist dran“, Neuigkeiten (Glocke)
+// =====================================================================
+// ---------- Bewertung: Zahl + Wort, Regler färbt sich von Rot nach Grün ----------
+const RWORDS=[[2,"schwach"],[4,"mäßig"],[5.5,"geht so"],[6.9,"okay"],[7.9,"gut"],[8.9,"sehr gut"],[9.6,"großartig"],[10,"Meisterwerk"]];
+const rWord=v=>!v?"":(RWORDS.find(x=>v<=x[0])||RWORDS[RWORDS.length-1])[1];
+
+// ---------- Weiterschauen: angefangene Serien/Animes der aktuellen Liste, nächste Folge mit einem Tipp abhaken ----------
+function contHtml(){if(topTab==="film"||tab!=="wl"||!editable())return"";const c=C(),P=(S.prog||{})[view]||{},E=(S.ep||{})[view]||{};
+  const it=c.list.filter(id=>id!=="@"&&M[id]).map(id=>({id,nx:epNext(id),st:(P[id]||0)>0||Object.keys(E[id]||{}).length>0})).filter(o=>o.nx&&o.st).slice(0,3);
+  if(!it.length)return"";
+  return`<h2 class="conth">▶ Weiterschauen</h2><div class="contl">${it.map(o=>{const m=M[o.id],Lx=EPS[o.id]||[],tot=Lx.reduce((a,x)=>a+x.n,0),sn=Lx.reduce((a,x,i)=>a+epSeen(o.id,i+1),0),one=Lx.length<2;
+    return`<div class="contc">${cv(o.id,m.name)}<div class="contt"><button class="lnk" data-info="${o.id}">${esc(m.name)}</button><small>${one?"":"Staffel "+o.nx.s+" · "}Folge ${o.nx.e} von ${o.nx.c}${o.nx.t?" – "+esc(o.nx.t):""}</small><span class="marp" title="${sn} von ${tot} Folgen gesehen"><i style="width:${tot?sn/tot*100:0}%"></i></span></div><button class="add contb" data-ep="${o.id}:${o.nx.s}:${o.nx.e}" aria-label="Folge ${o.nx.e} von ${esc(m.name)} abhaken">✓ <span>Folge ${o.nx.e}</span></button></div>`}).join("")}</div>`}
+
+// ---------- Empfehlungen an die andere Person + „Wer ist dran“ (liegt in ST.film.x und wird mit der Cloud geteilt) ----------
+const xData=()=>{const x=ST.film.x||(ST.film.x={});if(!Array.isArray(x.recs))x.recs=[];return x};
+function xSave(){try{localStorage.setItem(SEC.film.key,JSON.stringify(ST.film))}catch(e){}cloudKick()}
+let recAsk=null,recMsg="";const recLater=new Set();
+document.addEventListener("input",e=>{if(e.target.id==="recmsg")recMsg=e.target.value});
+function recBtnHtml(id){if(!me||!M[id])return"";const o=O(),open=xData().recs.find(r=>r.id===id&&r.from===I()&&r.st==="new");
+  if(open)return`<p class="recinfo">💌 An ${esc(U[o].n)} empfohlen – wartet auf Antwort. <button class="lnk" data-recundo="${open.t}">zurückziehen</button></p>`;
+  if(recAsk===id)return`<div class="recf"><label for="recmsg">Nachricht an ${esc(U[o].n)} (optional)</label><div class="recfr"><input id="recmsg" maxlength="120" value="${esc(recMsg)}" placeholder="z. B. Das musst du sehen!"><button class="add" data-recsend="${id}">💌 Senden</button><button class="rej" data-reccancel="1">Abbrechen</button></div></div>`;
+  return`<div class="rmrow recrow"><button class="rmb recb" data-recask="${id}">💌 ${esc(U[o].n)} empfehlen</button></div>`}
+function recInHtml(){if(!me||tab!=="wl")return"";const u=I(),x=xData(),L1=x.recs.filter(r=>r.to===u&&r.st==="new"&&M[r.id]&&!recLater.has(r.t));let h="";
+  for(const r of L1.slice(0,2)){const m=M[r.id];h+=`<div class="recin"><div class="recinc">${cv(r.id,m.name)}</div><div class="recint"><p class="k">💌 ${esc(U[r.from].n)} empfiehlt dir</p><button class="lnk recinn" data-newsgo="${r.k}:${r.id}">${esc(m.name)}</button>${r.msg?`<blockquote>„${esc(r.msg)}“</blockquote>`:""}<div class="btns"><button class="add" data-recok="${r.t}"><span aria-hidden="true">＋</span> Auf meine Liste</button><button class="rej" data-reclater="${r.t}">Später</button><button class="rej rno" data-recno="${r.t}">Nein danke</button></div></div></div>`}
+  if(view==="both"){const t=x.turn,nx=t&&U[t.last]?(t.last==="jos"?"joh":"jos"):null;
+    h+=`<p class="turn">🎬 ${nx?`Heute darf <b class="rn ${nx}">${esc(U[nx].n)}</b> aussuchen <span class="gn">(zuletzt hat ${esc(U[t.last].n)} gewählt)</span> <button class="lnk" data-turnflip="1">tauschen</button>`:`Wer zuerst etwas auf die gemeinsame Liste setzt, hat gewählt – danach ist die andere Person dran.`}</p>`}
+  return h}
+function xTurn(){if(view!=="both"||!me)return;xData().turn={last:I(),t:Date.now()};xSave()}
+
+// ---------- Neuigkeiten (Glocke): was seit dem letzten Blick passiert ist ----------
+const newsKey=()=>"wl-news-"+I();
+const newsSeen=()=>{try{return +localStorage.getItem(newsKey())||0}catch(e){return 0}};
+function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=Date.now()-45*864e5,x=xData();
+  for(const k of RW_SECS){const s0=ST[k],mine=new Set();for(const l of [u,"both"])if(s0.lists[l]){for(const d of s0.lists[l].done)mine.add(d.id);for(const id of s0.lists[l].list)mine.add(id)}
+    for(const id in s0.w||{}){const w=s0.w[id],t=(w.rt||{})[o],r=(w.r||{})[o];if(!M[id]||!t||!r||t<t30||!(mine.has(id)||(w.r||{})[u]))continue;
+      N.push({t,ic:"⭐",h:`${esc(U[o].n)} hat <b>${esc(M[id].name)}</b> mit ${fmtR(r)} bewertet${(w.r||{})[u]?` <span class="gn">(du: ${fmtR(w.r[u])})</span>`:" – deine Bewertung fehlt noch"}`,go:k+":"+id})}
+    const todo=s0.lists.both?s0.lists.both.done.filter(d=>M[d.id]&&!xRate(k,d.id,u)).length:0;if(todo)N.push({t:0,ic:"✍️",h:`<b>${todo}</b> gemeinsam ${todo===1?"gesehener Titel wartet":"gesehene Titel warten"} bei ${SEC[k].many} auf deine Bewertung`,top:k})}
+  for(const r of x.recs){if(!M[r.id])continue;
+    if(r.to===u&&r.st==="new")N.push({t:r.t,ic:"💌",h:`${esc(U[r.from].n)} empfiehlt dir <b>${esc(M[r.id].name)}</b>${r.msg?` – „${esc(r.msg)}“`:""}`,go:r.k+":"+r.id});
+    if(r.from===u&&r.st!=="new"&&r.at)N.push({t:r.at,ic:r.st==="ok"?"💚":"🙅",h:`${esc(U[r.to].n)} hat deine Empfehlung <b>${esc(M[r.id].name)}</b> ${r.st==="ok"?"auf die Liste gesetzt":"abgelehnt"}`,go:r.k+":"+r.id})}
+  for(const k of ["anime","serie"]){let H=[];try{H=seaHints(k)}catch(e){}for(const h of H.filter(h=>h.t==="new").slice(0,4))if(M[h.id])N.push({t:0,pin:1,ic:"🆕",h:`${esc(seaHintTxt(h))} · <b>${esc(M[h.id].name)}</b>`,go:k+":"+h.id})}
+  try{if(vHot())N.push({t:0,pin:1,ic:"💞",h:`Swipe-Abstimmung: ${esc(vStatus()||"du bist dran")}`,swipe:1})}catch(e){}
+  for(const n of N)n.neu=n.t>seen;
+  return N.sort((a,b)=>(b.neu-a.neu)||(!!b.pin-!!a.pin)||b.t-a.t).slice(0,40)}
+const newsCount=()=>newsList().filter(n=>n.neu).length;
+function newsHtml(){const N=xo.list||(xo.list=newsList());
+  return`<p class="xolead">Was seit deinem letzten Blick passiert ist. Die Glocke zählt nur Neues.</p>${N.length?`<ul class="newsl">${N.map(n=>`<li class="${n.neu?"neu":""}"><span class="nwi" aria-hidden="true">${n.ic}</span><span class="nwt">${n.h}${n.t?`<small>${fdate(n.t)}</small>`:""}</span>${n.go?`<button class="rej" data-newsgo="${n.go}">Ansehen</button>`:n.top?`<button class="rej" data-newstop="${n.top}">Öffnen</button>`:n.swipe?`<button class="rej" data-newsswipe="1">Swipen</button>`:""}</li>`).join("")}</ul>`:`<div class="qzbox"><p class="qzbig">🔕</p><h3>Nichts Neues</h3><p class="gn">Hier erscheinen Bewertungen von ${esc(U[O()].n)}, Empfehlungen, neue Staffeln und offene Abstimmungen.</p></div>`}
+  <p class="gn newsnote">Hinweis: Die Glocke zeigt Neues, sobald du die Seite öffnest. Mitteilungen aufs gesperrte Handy gibt es noch nicht.</p>`}
+let newsPrev=null;
+function xBell(){const b=$("bell");if(!b)return;const n=me?newsCount():0,bd=$("belln");bd.hidden=!n;bd.textContent=n>9?"9+":n;b.classList.toggle("has",!!n);b.setAttribute("aria-label",n?`Neuigkeiten: ${n} neu`:"Neuigkeiten");
+  if(newsPrev!==null&&n>newsPrev&&!(xo&&xo.k==="news")){const x=newsList().find(y=>y.neu);if(x){const d=document.createElement("div");d.innerHTML=x.h;toast("🔔 "+d.textContent);if(!calm()){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}}}
+  newsPrev=n}
+// Wird in render() aufgerufen: Streifen, Empfehlungen, Glocke
+function x2Render(){const c=$("cont");if(c){const h=contHtml();if(c._h!==h){c.innerHTML=h;c._h=h}c.hidden=!h}
+  const r=$("recin");if(r){const h=recInHtml();r.innerHTML=h;r.hidden=!h}
+  xBell()}
+function xAct2(d){
+  if(d.close||d.info)recAsk=null;
+  if(d.recask){recAsk=d.recask;recMsg="";render();const i=$("recmsg");if(i)i.focus();return true}
+  if(d.reccancel){recAsk=null;render();return true}
+  if(d.recsend){const id=d.recsend,m=M[id];if(!m||!me)return true;const i=$("recmsg");xData().recs.push({id,k:m.sec,from:I(),to:O(),msg:cleanStr(String(i?i.value:recMsg).trim().slice(0,120)),t:Date.now(),st:"new"});if(xData().recs.length>60)xData().recs.splice(0,xData().recs.length-60);
+    recAsk=null;recMsg="";xSave();toast(`💌 „${m.name}“ an ${U[O()].n} empfohlen`);render();return true}
+  if(d.recundo){const x=xData();x.recs=x.recs.filter(r=>String(r.t)!==d.recundo);xSave();render();return true}
+  if(d.reclater){recLater.add(+d.reclater);render();return true}
+  if(d.recno||d.recok){const r=xData().recs.find(r=>String(r.t)===(d.recno||d.recok));if(!r)return true;
+    if(d.recno){r.st="no";r.at=Date.now();xSave();toast("Empfehlung abgelehnt");render();return true}
+    if(topTab!==r.k)act({top:r.k});if(view!==I()){view=I();fixView()}
+    if(C().list.includes(r.id)||C().done.some(x=>x.id===r.id)){r.st="ok";r.at=Date.now();xSave();toast("Steht schon auf deiner Liste 👍");render();return true}
+    if(!C().list.includes("@")){toast("Deine Liste ist voll – erst einen Titel bewerten oder entfernen.");render();return true}
+    r.st="ok";r.at=Date.now();xSave();act({sadd:r.id});return true}
+  if(d.turnflip){const x=xData();x.turn={last:x.turn&&x.turn.last==="jos"?"joh":"jos",t:Date.now()};xSave();render();return true}
+  if(d.newsgo){const [k,id]=d.newsgo.split(":");if(xo)xoClose();if(M[id]){if(topTab!==k)act({top:k});act({info:id})}return true}
+  if(d.newstop){if(xo)xoClose();act({top:d.newstop});view="both";fixView();render();return true}
+  if(d.newsswipe){if(xo)xoClose();act({swipe:"1"});return true}
+  if(d.xo==="news"){xoOpen("news");try{localStorage.setItem(newsKey(),String(Date.now()))}catch(e){}newsPrev=0;xBell();return true}
   return false}
 // EXTRAS-END
 chReset();   // einmaliger Kisten-Neustart (siehe CH_RESET)

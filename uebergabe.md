@@ -384,3 +384,12 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - **Rewind interaktiv:** `rwInteractive()` fügt bis zu drei Tipp-Fragen vor die Auflösungen ein (Top-Titel, wer war strenger, stärkster Monat; Slide-ID `tipp`, Zustand in `slide.g`), Awards werden einzeln aufgedeckt (`rw.rev`, „Alle aufdecken“), Reaktions-Emojis auf jeder Slide (`rwReact`), Tipp-Bilanz auf der Schluss-Slide, Knopf „🖼 Als Poster“.
 - Testhinweis: Bei vielen Testbewertungen geht das Kisten-Fenster auf und fängt Klicks ab – im Test `chShow=()=>{}` setzen.
 - sw.js: Cache `jj-watchlist-v32`.
+
+### Update: Bewertung als Zahl mit Regler, Weiterschauen, Empfehlungen, Glocke
+- **Bewerten:** `rateHtml` zeigt jetzt große Zahl, Wort (`rWord`, „schwach“ … „Meisterwerk“) und einen Regler, der sich von Rot nach Grün färbt (`.rwrap.r2`, CSS-Variable `--rv` = Wert/10). Die Technik dahinter ist unverändert (`.rate[data-rate]`, Ziehen/Tippen, −/+, Tastatur). **Anzeigen:** `sst()` und `rwSt()` zeigen einen Stern mit Zahl („★ 7,4“; Lila ✦, Baby 💖). Die Zehn-Sterne-Leiste gibt es nicht mehr.
+- **Weiterschauen** (`contHtml`, `#cont` über der Empfehlung): bis zu drei angefangene Serien/Animes der aktuellen Liste mit „✓ Folge n“ (nutzt die bestehende Aktion `data-ep`).
+- **Empfehlungen:** im Info-Fenster „💌 … empfehlen“ mit optionaler Nachricht. Liegt in `ST.film.x.recs` (`{id,k,from,to,msg,t,st:"new"|"ok"|"no",at}`, höchstens 60) und wird mit dem Film-Bereich über die Cloud geteilt. Die andere Person sieht oben eine Karte (`recInHtml`, `#recin`): Auf meine Liste / Später / Nein danke.
+- **Wer ist dran:** `ST.film.x.turn={last,t}`; wer in „Zusammen“ einen Titel auf die Liste setzt, hat gewählt (`xTurn`). In der gemeinsamen Ansicht steht, wer als Nächstes aussuchen darf, mit „tauschen“.
+- **Glocke** (`#bell`, Ebene `news`): `newsList()` sammelt Bewertungen der anderen Person (aus `w[id].rt`, letzte 45 Tage, nur Titel, die einen betreffen), Empfehlungen und Antworten darauf, neue Staffeln, offene gemeinsame Bewertungen und wartende Swipe-Abstimmungen. „Neu“ = neuer als der letzte Blick (pro Gerät und Person: `wl-news-<person>`). Kommt beim Abgleich etwas dazu, erscheint eine Meldung und die Glocke läutet.
+- **Nicht enthalten:** Mitteilungen aufs gesperrte Handy. Dafür bräuchte es einen Versand über den Server (Supabase) – die Glocke zeigt Neues nur, wenn die Seite geöffnet wird.
+- sw.js: Cache `jj-watchlist-v33`.
