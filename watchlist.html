@@ -1254,6 +1254,307 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
 :root[data-theme="purple"] .achme,:root[data-theme="purple"] .achpet{border:1px solid rgba(242,237,255,.22);box-shadow:3px 3px 0 rgba(139,92,255,.55)}
 :root[data-theme="purple"] .pet{border-color:rgba(127,211,230,.35);background:rgba(127,211,230,.03)}
 :root[data-theme="purple"] .petsay{border:1px solid rgba(242,237,255,.4);box-shadow:3px 3px 0 rgba(139,92,255,.55)}
+/* KINO-START */
+/* =====================================================================
+   Redesign „Kino“ (Nov. 2026)
+   1) Aufbau + Bewegung: gilt für alle Designs.
+   2) Aussehen (Farben, Glas, Leuchten): nur Hell/Dunkel – Lila und Baby behalten ihren eigenen Stil.
+   Regeln mit :where(html:not(purple,baby)) treffen nur Hell/Dunkel, ohne die Spezifität zu erhöhen.
+   ===================================================================== */
+:root{--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1);--rad:18px}
+/* ---------- Farben Hell / Dunkel ---------- */
+:root,:root[data-theme="light"]{--bg:#f6f3fb;--panel:#ffffff;--ink:#221c33;--mute:#6d6685;--line:#e6e0f1;--star:#e99a0c;--acc:#6f4fd8;--accink:#fff;--off:#d9d3e6;--glass:rgba(255,255,255,.74);--shadow:0 12px 34px rgba(64,42,128,.12);--glow1:rgba(217,87,155,.20);--glow2:rgba(124,92,191,.22);--scrim:rgba(30,22,52,.42)}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--bg:#0b0a11;--panel:#16141f;--ink:#f3f0fa;--mute:#a29db6;--line:#2a2738;--star:#ffc857;--acc:#b7a2ff;--accink:#120f1f;--off:#3b3750;--glass:rgba(22,20,31,.68);--shadow:0 16px 44px rgba(0,0,0,.5);--glow1:rgba(240,140,192,.15);--glow2:rgba(140,118,238,.20);--scrim:rgba(6,5,12,.62)}}
+:root[data-theme="dark"]{--bg:#0b0a11;--panel:#16141f;--ink:#f3f0fa;--mute:#a29db6;--line:#2a2738;--star:#ffc857;--acc:#b7a2ff;--accink:#120f1f;--off:#3b3750;--glass:rgba(22,20,31,.68);--shadow:0 16px 44px rgba(0,0,0,.5);--glow1:rgba(240,140,192,.15);--glow2:rgba(140,118,238,.20);--scrim:rgba(6,5,12,.62)}
+:root[data-theme="purple"]{--glass:rgba(23,18,43,.8);--shadow:0 16px 44px rgba(0,0,0,.5);--scrim:rgba(6,4,16,.66)}
+:root[data-theme="baby"]{--glass:rgba(255,248,251,.86);--shadow:0 12px 30px rgba(224,85,154,.18);--scrim:rgba(120,50,90,.3)}
+/* ---------- Lebendiger Hintergrund (Polarlicht in euren beiden Farben) ---------- */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) body::before{content:"";position:fixed;inset:-25vmax;z-index:-1;pointer-events:none;background:radial-gradient(40vmax 40vmax at 24% 22%,var(--glow1),transparent 62%),radial-gradient(46vmax 46vmax at 80% 16%,var(--glow2),transparent 62%),radial-gradient(52vmax 42vmax at 58% 88%,var(--glow1),transparent 60%);animation:aurora 38s ease-in-out infinite alternate;will-change:transform}
+@keyframes aurora{0%{transform:translate3d(0,0,0) rotate(0deg)}50%{transform:translate3d(5vmax,-3vmax,0) rotate(9deg)}100%{transform:translate3d(-4vmax,4vmax,0) rotate(-7deg)}}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) body{-webkit-font-smoothing:antialiased}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .sec,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec h2,:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal h3,:where(html:not([data-theme="purple"],[data-theme="baby"])) .sth,:where(html:not([data-theme="purple"],[data-theme="baby"])) .cth h2,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwhead h2{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;letter-spacing:-.01em}
+/* ---------- Seitenleiste + Kopf ---------- */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .side{background:var(--glass);border-right:1px solid var(--line);-webkit-backdrop-filter:blur(22px) saturate(1.3);backdrop-filter:blur(22px) saturate(1.3)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb{border-radius:14px;transition:background .25s,transform .25s var(--ease)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb:hover{transform:translateX(3px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb.on,:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb.act{background:linear-gradient(90deg,color-mix(in srgb,var(--c1) 20%,transparent),color-mix(in srgb,var(--c2) 12%,transparent))}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb .si{transition:transform .35s var(--spring)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb:hover .si,:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb.on .si{transform:scale(1.18) rotate(-6deg)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .mst{border-radius:16px;background:color-mix(in srgb,var(--acc) 9%,transparent);border-color:transparent;transition:opacity .3s,border-color .2s,transform .25s var(--ease)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .mst:hover{transform:translateY(-2px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .accb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .accp{background:var(--glass);border-radius:20px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .avr,:where(html:not([data-theme="purple"],[data-theme="baby"])) .atb{border-radius:14px;transition:background .2s,transform .2s var(--ease)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .atb:hover,:where(html:not([data-theme="purple"],[data-theme="baby"])) .avr:hover{transform:translateX(2px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .mtop{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);border-bottom:1px solid var(--line)}
+/* Bereichs-Reiter als Pille mit Farbverlauf */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs{display:inline-flex;flex-wrap:nowrap;gap:4px;margin:0;padding:5px;border-radius:999px;background:color-mix(in srgb,var(--panel) 70%,transparent);border:1px solid var(--line);width:max-content;max-width:100%}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs .ttab{margin:0;border:0;border-radius:999px;padding:9px 18px;font-size:1rem;color:var(--mute);transition:color .25s,background .35s var(--ease),transform .25s var(--spring),box-shadow .3s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs .ttab:hover{color:var(--ink);transform:translateY(-1px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs .ttab.on{color:#fff;background:linear-gradient(120deg,var(--c1),var(--c2));box-shadow:0 6px 18px color-mix(in srgb,var(--c2) 45%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctv{margin-top:8px;padding-left:6px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .srch input{background-color:var(--glass);border-radius:999px;padding-top:11px;padding-bottom:11px;transition:box-shadow .25s,border-color .25s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .srch input:focus{outline:0;border-color:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .brwb{background:var(--glass);height:44px;transition:transform .25s var(--spring),border-color .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .brwb:hover{transform:translateY(-2px);border-color:var(--acc)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .sres{border-radius:18px;box-shadow:var(--shadow);background:var(--panel);animation:dropIn .25s var(--ease)}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px) scale(.98)}}
+/* ---------- Knöpfe ---------- */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .add{background:linear-gradient(120deg,var(--c1),var(--c2));color:#fff;border-radius:999px;padding:11px 20px;font-weight:700;box-shadow:0 8px 22px color-mix(in srgb,var(--c2) 42%,transparent);transition:transform .25s var(--spring),box-shadow .25s,filter .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .add:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 12px 28px color-mix(in srgb,var(--c2) 55%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .btns button,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rej,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .chk,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rmb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .howx{border-radius:999px;transition:transform .2s var(--spring),border-color .2s,background .2s,color .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rej,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .chk{background:color-mix(in srgb,var(--panel) 62%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rej:hover,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb:hover,:where(html:not([data-theme="purple"],[data-theme="baby"])) .chk:hover{border-color:var(--acc);transform:translateY(-1px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .add:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rej:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .chk:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .howx:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .ttab:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .chip:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwchip:active,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bnb:active{transform:scale(.95)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rej.rno{border-color:transparent;background:none;color:var(--mute)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rej.rno:hover{color:#e5484d;border-color:transparent}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rst{border-radius:14px;transition:border-color .2s,background .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .menu{border-radius:20px;box-shadow:var(--shadow);animation:dropIn .25s var(--ease)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .seg{border-radius:12px}
+/* ---------- Kurzanleitung ---------- */
+.howto{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:12px 14px;margin:0 0 18px}
+.howto:not([hidden])+.sub{display:none}
+.hows{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 18px;margin:0;padding:0;flex:1}
+.hows li{display:grid;grid-template-columns:auto 1fr;column-gap:11px;align-items:center;min-width:0}
+.hwi{grid-row:span 2;font-size:1.45rem;width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:color-mix(in srgb,var(--acc) 14%,transparent)}
+.hows b{font-size:.95rem;align-self:end;line-height:1.2}
+.hows small{color:var(--mute);font-size:.78rem;align-self:start;line-height:1.25}
+.howx{flex:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 14px;font-weight:600;font-size:.88rem}
+.howx:hover{border-color:var(--acc)}
+.howx:focus-visible,.slb:focus-visible,.bnb:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .howto{background:var(--glass);box-shadow:var(--shadow)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hwi{background:linear-gradient(135deg,color-mix(in srgb,var(--c1) 22%,transparent),color-mix(in srgb,var(--c2) 22%,transparent))}
+#main.enter .hows li{animation:riseIn .55s var(--ease) both}
+#main.enter .hows li:nth-child(2){animation-delay:.09s}
+#main.enter .hows li:nth-child(3){animation-delay:.18s}
+/* ---------- Empfehlung als Bühne ---------- */
+.recbg{display:none}
+.rdots{display:inline-flex;gap:5px;vertical-align:middle;margin-left:6px}
+.rdots i{width:7px;height:7px;border-radius:50%;background:var(--off);transition:width .35s var(--ease),background .3s}
+.rdots i.on{width:20px;border-radius:7px;background:var(--acc)}
+.rec .btns{flex-wrap:wrap;margin-top:12px}
+.rec .btns button{white-space:nowrap}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec{position:relative;isolation:isolate;overflow:hidden;border-radius:26px;border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line));padding:26px;gap:26px;align-items:center;background:var(--panel);box-shadow:var(--shadow);margin-bottom:30px;min-height:230px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .recbg{display:block;position:absolute;inset:-40px;z-index:-2;background-size:cover;background-position:center 25%;filter:blur(42px) saturate(1.5);opacity:.5;transform:scale(1.15)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,color-mix(in srgb,var(--panel) 55%,transparent),color-mix(in srgb,var(--panel) 88%,transparent) 55%)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv{width:150px;height:225px;border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.45);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,-4deg));transition:transform .5s var(--ease)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec.tilt .cv{transition:transform .08s linear}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec h2{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.12;margin:2px 0 6px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .k{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .tx>p:not(.k):not(.why){font-size:1.02rem;line-height:1.5;max-width:70ch;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rec.swap .cv{animation:recPoster .6s var(--ease)}
+.rec.swap .tx>*{animation:riseIn .5s var(--ease) both}
+.rec.swap .tx>:nth-child(2){animation-delay:.05s}
+.rec.swap .tx>:nth-child(3){animation-delay:.09s}
+.rec.swap .tx>:nth-child(4){animation-delay:.13s}
+.rec.swap .tx>:nth-child(n+5){animation-delay:.17s}
+.rec.swap .recbg{animation:bgIn .9s ease both}
+@keyframes recPoster{0%{opacity:0;transform:perspective(900px) translateX(-40px) rotateY(-38deg) scale(.9)}100%{opacity:1}}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px)}}
+@keyframes titleIn{from{opacity:0;transform:translateX(-18px);letter-spacing:.08em}}
+@keyframes bgIn{from{opacity:0}}
+/* ---------- Karten ---------- */
+.card .slp{display:none}
+.slb{background:var(--acc);color:var(--accink);border:0;border-radius:999px;padding:8px 14px;font-weight:700;font-size:.88rem}
+.card.slot{gap:8px}
+.card.slot .gn{margin-top:0}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .grid{gap:18px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card{border-radius:var(--rad);padding:9px 9px 12px;background:var(--glass);border:1px solid var(--line);transition:transform .35s var(--ease),box-shadow .35s,border-color .3s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .grid>.card:not(.slot):hover{transform:translateY(-6px);box-shadow:0 22px 46px color-mix(in srgb,var(--c2) 26%,rgba(0,0,0,.28));border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .cv{border-radius:12px;transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .45s var(--ease);box-shadow:0 8px 20px rgba(0,0,0,.22)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.tilt .cv{transition:transform .08s linear}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .cv::after,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc .cv::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.34),transparent 46%)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.tilt .cv::after,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc.tilt .cv::after{opacity:1}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .nm{font-size:1rem;line-height:1.25;padding:2px 3px 0}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .gn{padding:0 3px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.seen{border-color:color-mix(in srgb,var(--star) 60%,var(--line))}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.seen .cv::before{content:"✓";position:absolute;top:8px;right:8px;z-index:1;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--star);color:#1b1407;font-size:.9rem;font-weight:800;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .chk{padding:7px 12px;gap:8px;font-weight:600}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .box{border-radius:50%;width:20px;height:20px;transition:background .25s,border-color .25s,transform .3s var(--spring)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .seen .box{transform:scale(1.1)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot{border:2px dashed color-mix(in srgb,var(--acc) 45%,var(--line));background:color-mix(in srgb,var(--acc) 5%,transparent);min-height:300px;gap:10px;transition:border-color .3s,background .3s,transform .35s var(--ease)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot:hover{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,transparent);transform:translateY(-3px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .slp{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;font-size:1.5rem;color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent);transition:transform .45s var(--spring)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot:hover .slp{transform:rotate(90deg) scale(1.1)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb{background:linear-gradient(120deg,var(--c1),var(--c2));color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--c2) 38%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb:hover{transform:translateY(-2px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .small .card{padding:7px 7px 9px;border-radius:14px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .small .cv{border-radius:9px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bar{align-items:center;gap:10px;flex-wrap:wrap}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bar #cnt{margin-right:auto}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb{padding:9px 16px;background:var(--glass);border-color:var(--line)}
+.rollb{white-space:nowrap}
+.grid>p.gn{grid-column:1/-1;margin:0}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .sec{font-size:1.5rem;margin:38px 0 14px;display:flex;align-items:center;gap:14px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.rwrap.rpop .rnum{animation:pop .5s var(--spring)}
+.rwrap.rpop .rfg{animation:starGlow .7s ease}
+@keyframes starGlow{30%{filter:brightness(1.6) drop-shadow(0 0 8px var(--star))}}
+/* ---------- Einblenden nach einem Wechsel ---------- */
+#main.enter .grid>.card{animation:cardIn .6s var(--ease) both;animation-delay:calc(var(--i,0)*45ms)}
+#main.enter .rec{animation:heroIn .6s var(--ease) both}
+#main.enter .bar{animation:riseIn .5s var(--ease) .1s both}
+#main.enter .hist li{animation:cardIn .5s var(--ease) both}
+#main.enter .hist li:nth-child(2){animation-delay:.05s}
+#main.enter .hist li:nth-child(3){animation-delay:.1s}
+#main.enter .hist li:nth-child(4){animation-delay:.15s}
+#main.enter .hist li:nth-child(n+5){animation-delay:.2s}
+#main.enter .tile,#main.enter .fav{animation:cardIn .55s var(--ease) both}
+#main.enter .tile:nth-child(2),#main.enter .fav:nth-child(2){animation-delay:.06s}
+#main.enter .tile:nth-child(3),#main.enter .fav:nth-child(3){animation-delay:.12s}
+#main.enter .tile:nth-child(4){animation-delay:.18s}
+#main.enter .tile:nth-child(n+5){animation-delay:.24s}
+#main.enter .hf{animation:growX .9s var(--ease) .15s both;transform-origin:left center}
+#main.enter .cb{animation:growY .9s var(--ease) .15s both;transform-origin:center bottom}
+#main.enter-sec .ctv{animation:riseIn .45s var(--ease) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.95)}}
+@keyframes heroIn{from{opacity:0;transform:translateY(-14px) scale(.985)}}
+@keyframes growX{from{transform:scaleX(0)}}
+@keyframes growY{from{transform:scaleY(0)}}
+/* Beim Scrollen einblenden (wo der Browser das kann) */
+@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){
+  #doneg .card:not(.pop),.bwgrid .bwc{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 60%}}}
+@keyframes reveal{from{opacity:0;transform:translateY(28px) scale(.94)}}
+/* ---------- Verlauf, Statistik ---------- */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist li,:where(html:not([data-theme="purple"],[data-theme="baby"])) .tile,:where(html:not([data-theme="purple"],[data-theme="baby"])) .fav,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rml li{border-radius:var(--rad);background:var(--glass);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist li:hover,:where(html:not([data-theme="purple"],[data-theme="baby"])) .tile:hover,:where(html:not([data-theme="purple"],[data-theme="baby"])) .fav:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--acc) 40%,var(--line))}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist li{padding:12px 14px;gap:14px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist .cv{width:54px;border-radius:9px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist .ico{height:81px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .tile{padding:16px 18px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .tile b{font-size:2rem;background:linear-gradient(120deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hf{background:linear-gradient(90deg,var(--c2),var(--c1));border-radius:999px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .cb{background:linear-gradient(0deg,var(--c2),var(--c1));border-radius:10px 10px 0 0}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ht{height:10px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hf.c1{background:var(--c1)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hf.c2{background:var(--c2)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .sth{font-size:1.25rem;margin:34px 0 12px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hbar select,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwsel select{border-radius:999px;padding:7px 12px}
+/* ---------- Info-Fenster ---------- */
+.mhero{display:none}
+#modal{background:var(--scrim)}
+#modal:not([hidden]){animation:fade .25s ease}
+#modal.opening .mbox{animation:modalIn .42s var(--ease)}
+@keyframes modalIn{from{opacity:0;transform:translateY(26px) scale(.96)}}
+#modal .fpo{view-transition-name:poster}
+::view-transition-group(poster){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .mbox{isolation:isolate;border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:32px 36px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .mhero{display:block;position:absolute;left:0;right:0;top:0;height:300px;z-index:-1;background-size:cover;background-position:center 22%;filter:blur(34px) saturate(1.5);opacity:.42;-webkit-mask-image:linear-gradient(#000 30%,transparent);mask-image:linear-gradient(#000 30%,transparent);pointer-events:none}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .fpo{border-radius:14px;box-shadow:0 20px 46px rgba(0,0,0,.5);width:220px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal h3{font-size:2rem;line-height:1.12}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .x{background:color-mix(in srgb,var(--ink) 12%,transparent);transition:transform .3s var(--spring),background .2s;z-index:2}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .x:hover{transform:rotate(90deg) scale(1.08);background:color-mix(in srgb,var(--ink) 22%,transparent)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .notes textarea{border-radius:14px;padding:10px 12px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) a.rst.trl{border-radius:999px;padding:9px 16px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .epc,:where(html:not([data-theme="purple"],[data-theme="baby"])) .epss button{transition:transform .2s var(--spring),background .2s,border-color .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .epc:hover{transform:scale(1.12)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #main:not([data-tab="wl"]) .sub{display:none}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #who{background:radial-gradient(60vmax 50vmax at 28% 18%,var(--glow1),transparent 62%),radial-gradient(60vmax 50vmax at 76% 84%,var(--glow2),transparent 62%),var(--bg)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>*{animation:riseIn .6s var(--ease) both}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>:nth-child(2){animation-delay:.08s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>:nth-child(3){animation-delay:.16s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>:nth-child(n+4){animation-delay:.24s}
+/* ---------- Meldung ---------- */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #toast{background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-color:color-mix(in srgb,var(--acc) 50%,var(--line));box-shadow:var(--shadow);animation:toastIn .5s var(--spring)}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,24px) scale(.92)}to{opacity:1;transform:translate(-50%,0)}}
+/* ---------- Stöbern ---------- */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc{border-radius:16px;background:var(--glass);transition:transform .35s var(--ease),box-shadow .35s,border-color .3s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc:hover{transform:translateY(-5px);box-shadow:0 18px 38px color-mix(in srgb,var(--c2) 24%,rgba(0,0,0,.25));border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwcv .cv{border-radius:11px}
+/* ---------- Handy: Navigationsleiste unten ---------- */
+.bnav{display:none}
+@media (max-width:767.98px){
+  .bnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;position:fixed;left:calc(10px + env(safe-area-inset-left,0px));right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:7;padding:6px;background:var(--glass,var(--panel));border:1px solid var(--line);border-radius:24px;box-shadow:0 12px 34px rgba(0,0,0,.28);-webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4)}
+  .bnb,.bnav .accfab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;min-width:0;max-width:none;width:auto;padding:5px 2px;border:0;background:none;color:var(--mute);border-radius:18px;font:inherit;font-size:.68rem;font-weight:600;line-height:1.1;position:static;box-shadow:none;transition:background .3s,color .3s,transform .2s var(--spring)}
+  .bnb small,.bnav .fabn{font-size:.68rem;font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bni{font-size:1.3rem;line-height:1;transition:transform .4s var(--spring)}
+  .bnb.on{color:var(--ink);background:color-mix(in srgb,var(--acc) 18%,transparent)}
+  .bnb.on .bni{transform:translateY(-2px) scale(1.18)}
+  .bnav .accfab .aca{display:none}
+  .bnav .accfab .av{width:26px;height:26px;font-size:.78rem}
+  .bnav .accfab[aria-expanded="true"]{color:var(--ink);background:color-mix(in srgb,var(--acc) 18%,transparent)}
+  .bnav[inert]{opacity:.5}
+  main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+  #toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  /* Bereichswahl liegt jetzt unten: oben steht nur noch, wo man ist */
+  .ctabs{display:none}
+  .cth::before{content:attr(data-t);font-size:1.9rem;font-weight:700;line-height:1.1;letter-spacing:-.01em}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .cth::before{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;font-size:2.1rem;background:linear-gradient(120deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content;max-width:100%;padding-right:.15em}
+  #main.enter-sec .cth::before{animation:titleIn .5s var(--ease) both}
+  .ctv{margin-top:2px;padding-left:0}
+  .howto{flex-direction:column;align-items:stretch;gap:10px;padding:12px}
+  .hows{gap:8px}
+  .hows li{grid-template-columns:1fr;justify-items:center;text-align:center;row-gap:5px}
+  .hwi{grid-row:auto;width:42px;height:42px;font-size:1.3rem}
+  .hows b{font-size:.85rem}
+  .hows small{font-size:.7rem}
+  .howx{align-self:stretch;padding:9px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec{display:block;padding:16px;border-radius:22px;min-height:0}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec::after{content:"";display:block;clear:both}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv{float:left;width:104px;height:156px;border-radius:12px;margin:0 14px 8px 0}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .tx{min-width:0}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec h2{font-size:1.35rem}
+  .rec .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rec .btns .add,.rec .btns .rno{grid-column:1/-1}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .btns{clear:both;padding-top:6px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .btns button{padding:11px 10px;font-size:.92rem}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .btns .rno{padding:4px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .grid{gap:12px}
+  /* Der Gesehen-Haken behält auf dem Handy seine Beschriftung (vorher nur ein Kästchen) */
+  .card .chk{font-size:.82rem;gap:7px;padding:6px 11px 6px 7px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb{padding:8px 13px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .bar{flex-wrap:nowrap}
+  #toast{width:calc(100vw - 24px);max-width:none;border-radius:20px;justify-content:space-between}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .card{padding:7px 7px 10px;border-radius:16px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot{min-height:220px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .sec{font-size:1.3rem}
+  /* Info-Fenster kommt von unten hoch */
+  #modal{align-items:flex-end;padding:0}
+  #modal .mbox{width:100%;max-height:92vh;max-height:92dvh;min-height:0;border-radius:26px 26px 0 0;border-bottom:0;padding:26px 18px calc(26px + env(safe-area-inset-bottom,0px))}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .mbox{border-radius:28px 28px 0 0;padding:26px 18px calc(26px + env(safe-area-inset-bottom,0px))}
+  #modal .mbox::before{content:"";position:absolute;top:9px;left:50%;width:42px;height:5px;margin-left:-21px;border-radius:5px;background:var(--off)}
+  #modal.opening .mbox{animation:sheetup .42s var(--ease)}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .fpo{width:132px}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) #modal h3{font-size:1.5rem}
+  #modal .fm{gap:14px}
+}
+/* ---------- Lila und Baby: neue Bausteine im jeweiligen Stil ---------- */
+:root[data-theme="purple"] #modal:not(.opening) .mbox,:root[data-theme="baby"] #modal:not(.opening) .mbox{animation:none}
+:root[data-theme="purple"] .howto{border-radius:0;border:2px solid #30285a;background:#17122b}
+:root[data-theme="purple"] .hwi{border-radius:0;transform:skewX(-8deg);background:rgba(139,92,255,.24)}
+:root[data-theme="purple"] .howx,:root[data-theme="purple"] .slb{border-radius:0;transform:skewX(-8deg)}
+:root[data-theme="purple"] .slb{background:linear-gradient(90deg,#8b5cff,#3de8ff);color:#0d0a1c;text-transform:uppercase}
+:root[data-theme="purple"] .rdots i{border-radius:0;transform:skewX(-20deg)}
+:root[data-theme="purple"] .rdots i.on{background:#8b5cff}
+:root[data-theme="baby"] .howto{border:2px solid #ffd3e8;border-radius:24px;box-shadow:0 4px 0 #f7c8de}
+:root[data-theme="baby"] .hwi{border-radius:50%;background:#ffe3f0}
+:root[data-theme="baby"] .howx{border:2px solid #ffd3e8}
+:root[data-theme="baby"] .slb{box-shadow:0 4px 0 #c94687}
+@media (min-width:768px){
+  :root[data-theme="purple"] .rec .cv,:root[data-theme="baby"] .rec .cv{width:128px;height:192px}
+  :root[data-theme="purple"] .rec,:root[data-theme="baby"] .rec{gap:22px}
+}
+@media (max-width:767.98px){
+  :root[data-theme="purple"] .bnav{border-radius:0;border:2px solid #30285a;background:rgba(13,10,28,.94);box-shadow:5px 5px 0 rgba(139,92,255,.55)}
+  :root[data-theme="purple"] .bnb,:root[data-theme="purple"] .bnav .accfab{border-radius:0;border:0;background:none;box-shadow:none;transform:none;clip-path:none;outline-offset:-2px}
+  :root[data-theme="purple"] .bnb.on,:root[data-theme="purple"] .bnav .accfab[aria-expanded="true"]{background:rgba(139,92,255,.28);color:#3de8ff}
+  :root[data-theme="purple"] .bnb small,:root[data-theme="purple"] .bnav .fabn{font-family:"Anton",Impact,sans-serif;font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+  :root[data-theme="baby"] .bnav{border:2px solid #ffd3e8;background:rgba(255,248,251,.94);box-shadow:0 6px 0 #f7c8de,0 14px 30px rgba(224,85,154,.22);border-radius:28px}
+  :root[data-theme="baby"] .bnb,:root[data-theme="baby"] .bnav .accfab{border:0;background:none;box-shadow:none;border-radius:20px}
+  :root[data-theme="baby"] .bnb.on,:root[data-theme="baby"] .bnav .accfab[aria-expanded="true"]{background:#ffe0ee;color:#c2387f}
+  :root[data-theme="purple"] #modal.opening .mbox,:root[data-theme="baby"] #modal.opening .mbox{animation:sheetup .42s var(--ease)}
+  :root[data-theme="purple"] #modal .mbox,:root[data-theme="baby"] #modal .mbox{border-bottom-left-radius:0;border-bottom-right-radius:0}
+}
+@media (max-width:420px){.bnb small,.bnav .fabn{font-size:.62rem}}
+@media (prefers-reduced-motion:reduce){
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) body::before{animation:none}
+  #main.enter .grid>.card,#main.enter .rec,#main.enter .bar,#main.enter .hist li,#main.enter .tile,#main.enter .fav,#main.enter .hf,#main.enter .cb,#main.enter .hows li,#main.enter-sec .cth::before,.rec.swap .cv,.rec.swap .tx>*,.rec.swap .recbg,#modal.opening .mbox,#modal:not([hidden]),.whoin>*,.rwrap.rpop .rnum,.rwrap.rpop .rfg{animation:none}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) #toast{animation:none}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .card,:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc,:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .ttab,:where(html:not([data-theme="purple"],[data-theme="baby"])) .add{transition:none}
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none}
+}
+/* KINO-END */
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Baloo+2:wght@500;700;800&family=Anton&display=swap">
@@ -1272,6 +1573,7 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
 <main id="main">
 <div class="ctop"><div class="cth"><h2 id="cth" class="sr"></h2><nav class="ctabs" aria-label="Bereiche"><button class="ttab" data-top="anime"><span aria-hidden="true">🌸</span> Animes</button><button class="ttab" data-top="film"><span aria-hidden="true">🎬</span> Filme</button><button class="ttab" data-top="serie"><span aria-hidden="true">📺</span> Serien</button></nav><span class="ctv" id="ctv"></span></div><div class="sbox"><div class="srch" id="srch" role="search"><input id="sq" type="search" placeholder="Titel suchen …" autocomplete="off" aria-label="Titel suchen" aria-controls="sres"><div class="sres" id="sres" hidden></div></div><button class="brwb" id="brwb" data-brw="1" aria-label="Alle Titel sortieren und filtern" title="Sortieren &amp; filtern"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="brwt">Alle Titel</span></button></div></div>
 <div id="v-main">
+<div class="howto" id="howto" hidden></div>
 <p class="sub">Gesehen? <b>Sterne geben</b> – fertig. ✨</p>
 <p class="ro" id="ro" hidden></p>
 <div id="v-wl"><div class="rwban" id="rwban" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite"></section>
@@ -1287,7 +1589,8 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
 <p class="note" id="covstat"></p>
 <p class="note">Tipp: Deutsche Tonspur vor dem DVD-Kauf prüfen.</p>
 </main>
-<button class="accfab" id="accfab" data-sheet="1" aria-expanded="false" aria-controls="sheet"><span class="acv" id="fabv" aria-hidden="true"></span><span class="fabn" id="fabn"></span><span class="aca" aria-hidden="true">▲</span></button>
+<nav class="bnav" id="bnav" aria-label="Schnellzugriff"><button class="bnb" data-top="anime"><span class="bni" aria-hidden="true">🌸</span><small>Animes</small></button><button class="bnb" data-top="film"><span class="bni" aria-hidden="true">🎬</span><small>Filme</small></button><button class="bnb" data-top="serie"><span class="bni" aria-hidden="true">📺</span><small>Serien</small></button><button class="bnb" data-brw="1"><span class="bni" aria-hidden="true">🔎</span><small>Stöbern</small></button>
+<button class="accfab" id="accfab" data-sheet="1" aria-expanded="false" aria-controls="sheet"><span class="acv" id="fabv" aria-hidden="true"></span><span class="fabn" id="fabn"></span><span class="aca" aria-hidden="true">▲</span></button></nav>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Ansicht, Statistik und Verlauf" hidden></div>
 <div class="menu" id="menu" hidden><div class="grp"><h4>Design</h4><div class="seg" role="group" aria-label="Design"><button data-th="light">Hell</button><button data-th="dark">Dunkel</button><button data-th="purple">Lila</button><button data-th="baby">Baby</button></div></div>
 <div class="grp"><h4>Cloud-Sync</h4><div id="cloudbox"></div></div>
@@ -6383,11 +6686,11 @@ const trailerHtml=id=>{const n=esc(M[id].name);return`<div class="trls"><a class
 function modalHtml(){
   const m=M[openId],x=META[openId]||{};
   if(m.sec!=="anime"){const w=x.syn||"";
-    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
   // Animes: Jahr/Wertung/Sprache aus dem Katalog (AniList/aniSearch), sonst aus den online geladenen Infos.
   const t=m.desc||PLOT[openId]||m.plot||x.syn||"",y=m.y||x.y||YEAR[openId],r=m.r||x.s,cu=covOf(openId);
   const meta=[y||"Jahr unbekannt",r?"AniList "+String(r).replace(".",",")+" / 10":"",m.fmt||"",m.lang==="de"?"🇩🇪 Deutsche Synchro":m.lang==="omu"?"🇯🇵 Nur OmU (Untertitel)":""].filter(Boolean).join(" · ");
-  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${trailerHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${trailerHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
 const rt=(id,u)=>((S.w[id]||{}).r||{})[u];
 const avg=id=>{const v=Object.values((S.w[id]||{}).r||{});return v.length?v.reduce((a,b)=>a+b,0)/v.length:0};
 // ---------- Bewertung mit Kommastelle: 1 bis 10 Sterne in 0,1er-Schritten ----------
@@ -7371,7 +7674,7 @@ ${withStat?tb("stat","📊","Statistik")+mstHtml()+tb("ach","🏅","Abzeichen",`
 <button class="atb agear" data-gear="2" aria-expanded="${menu}" aria-controls="menu"><span class="ai" aria-hidden="true">⚙️</span><span class="atl">Einstellungen</span></button><button class="atb sm" data-whoopen="1"><span class="ai" aria-hidden="true">🔄</span><span class="atl">Person wechseln<small>angemeldet als ${U[I()].n}</small></span></button>`}
 function renderSide(){const Ly=lay();
   if(layNow&&Ly!==layNow){drawer=false;sheet=false;if(Ly==="t")accOpen=false}layNow=Ly;
-  document.querySelectorAll(".ttab[data-top]").forEach(b=>{const on=b.dataset.top===topTab;b.classList.toggle("on",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+  document.querySelectorAll(".ttab[data-top],.bnb[data-top]").forEach(b=>{const on=b.dataset.top===topTab;b.classList.toggle("on",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
   $("acv").innerHTML=avHtml(view);$("acnm").textContent=vtitle(view);$("acsub").textContent="angemeldet als "+U[I()].n;
   const ab=$("accb");ab.setAttribute("aria-expanded",accOpen);ab.setAttribute("aria-label",`Account: Ansicht ${vtitle(view)}, angemeldet als ${U[I()].n} – ${accOpen?"zuklappen":"aufklappen"}`);
   const p=$("accp");p.hidden=!accOpen;if(accOpen){const o=p.querySelector(".accs"),st=o?o.scrollTop:0;keepFocus(p,()=>p.innerHTML=`<div class="accs">${accPanel()}</div>`);p.firstChild.scrollTop=st}else p.innerHTML="";
@@ -7380,14 +7683,15 @@ function renderSide(){const Ly=lay();
   $("accb").classList.toggle("vhot",vHot());$("accfab").classList.toggle("vhot",vHot());
   $("fabv").innerHTML=avHtml(view);$("fabn").textContent=vtitle(view);const fb=$("accfab");fb.setAttribute("aria-expanded",sheet);fb.setAttribute("aria-label",`Ansicht ${vtitle(view)} – Ansicht, Statistik und Verlauf öffnen`);
   const sd=$("side");sd.classList.toggle("open",drawer);sd.classList.toggle("popen",accOpen&&Ly==="t");$("hamb").setAttribute("aria-expanded",drawer);
-  sd.inert=Ly==="m"&&!drawer;$("main").inert=drawer||sheet;$("mtop").inert=drawer||sheet;fb.inert=drawer||sheet;
+  sd.inert=Ly==="m"&&!drawer;$("main").inert=drawer||sheet;$("mtop").inert=drawer||sheet;fb.inert=drawer||sheet;$("bnav").inert=drawer||sheet;
   const sc=$("scrim");sc.hidden=!(drawer||sheet||(accOpen&&Ly==="t"));sc.classList.toggle("clear",!drawer&&!sheet);
   document.documentElement.classList.toggle("navlock",drawer||sheet);
   $("cth").textContent=SEC[topTab].many+(tab==="hist"?" · Verlauf":tab==="stat"?" · Statistik":tab==="ach"?" · Abzeichen":tab==="inv"?" · Inventar":"");$("ctv").textContent=vlong(view)+(tab==="hist"?" · Verlauf":tab==="stat"?" · Statistik":tab==="ach"?" · Abzeichen":tab==="inv"?" · Inventar":"");
   // Für die Themes: Bereich/Tab/Ansicht am Inhalt; im Manga-Theme beim Bereichswechsel ein Eyecatch-Wischer wie zwischen zwei Folgen
   const mn=$("main"),kana={anime:"アニメ",film:"エイガ",serie:"シリーズ"}[topTab];
   if(mn.dataset.sec&&mn.dataset.sec!==topTab&&document.documentElement.dataset.theme==="purple"&&!calm()){mn.classList.remove("eyec");void mn.offsetWidth;mn.classList.add("eyec");clearTimeout(renderSide.ey);renderSide.ey=setTimeout(()=>mn.classList.remove("eyec"),800)}
-  mn.dataset.sec=topTab;mn.dataset.tab=tab;mn.dataset.view=view;mn.dataset.kana=kana;mn.querySelector(".ctop").dataset.kana=kana;
+  if(mn.dataset.sec!==topTab||mn.dataset.tab!==tab||mn.dataset.view!==view)fxEnter(mn.dataset.sec!==undefined&&mn.dataset.sec!==topTab?"sec":"tab");
+  mn.dataset.sec=topTab;mn.dataset.tab=tab;mn.dataset.view=view;mn.dataset.kana=kana;mn.querySelector(".ctop").dataset.kana=kana;mn.querySelector(".cth").dataset.t=SEC[topTab].many;
   accScroll();
   if(navFocus){const box=$(navFocus);navFocus="";setTimeout(()=>{const b=box.querySelector(".navx");if(b)b.focus()},40)}}
 // Passt der Reiter nicht in die Höhe, scrollt nur er: unten ausblenden als Hinweis, aktiven Punkt beim Öffnen/Wechsel ins Bild holen
@@ -7403,26 +7707,58 @@ document.addEventListener("keydown",e=>{if(e.key!=="Tab"||!(drawer||sheet))retur
   const a=f[0],z=f[f.length-1],ae=document.activeElement;
   if(!box.contains(ae)){e.preventDefault();a.focus()}else if(e.shiftKey&&ae===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&ae===z){e.preventDefault();a.focus()}});
 let rsT=0;addEventListener("resize",()=>{clearTimeout(rsT);rsT=setTimeout(()=>{if(lay()!==layNow)render()},120)});
+// ---------- Redesign: Bewegung ----------
+// fxEnter: gestaffeltes Einblenden nach einem Wechsel von Bereich/Tab/Ansicht (nicht bei jedem render()).
+function fxEnter(kind){if(calm())return;const m=$("main");m.classList.remove("enter","enter-sec");void m.offsetWidth;m.classList.add("enter");if(kind==="sec")m.classList.add("enter-sec");
+  clearTimeout(fxEnter.t);fxEnter.t=setTimeout(()=>m.classList.remove("enter","enter-sec"),1300);
+  if(tab==="stat")setTimeout(fxCount,30)}
+// Zahlen in der Statistik zählen hoch.
+function fxCount(){document.querySelectorAll("#v-stat .tile b").forEach(b=>{const m=b.textContent.match(/^(\d+(?:,\d)?)(.*)$/);if(!m)return;const to=parseFloat(m[1].replace(",",".")),dec=m[1].includes(",")?1:0,rest=m[2],t0=performance.now();if(!to)return;
+  const step=t=>{const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);if(!b.isConnected)return;b.textContent=(to*e).toFixed(dec).replace(".",",")+rest;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})}
+// Poster kippen der Maus hinterher (nur mit Maus, nur helles/dunkles Design).
+const fxFine=()=>window.matchMedia&&matchMedia("(hover:hover) and (pointer:fine)").matches;
+let fxTiltEl=null,fxRaf=0;
+document.addEventListener("pointermove",e=>{if(!fxFine()||calm()||rDrag)return;const el=e.target.closest&&e.target.closest("#grid .card:not(.slot),#doneg .card,.bwc,.rec");
+  if(el!==fxTiltEl){if(fxTiltEl){fxTiltEl.style.removeProperty("--rx");fxTiltEl.style.removeProperty("--ry");fxTiltEl.classList.remove("tilt")}fxTiltEl=el;if(el)el.classList.add("tilt")}
+  if(!el)return;cancelAnimationFrame(fxRaf);fxRaf=requestAnimationFrame(()=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height,k=el.classList.contains("rec")?2.2:7;
+    el.style.setProperty("--ry",((x-.5)*2*k).toFixed(2)+"deg");el.style.setProperty("--rx",((.5-y)*2*k).toFixed(2)+"deg");el.style.setProperty("--gx",(x*100).toFixed(1)+"%");el.style.setProperty("--gy",(y*100).toFixed(1)+"%")})},{passive:true});
+// Info-Fenster: das Poster „fliegt“ aus der Karte ins Fenster und zurück (View Transitions, wo der Browser sie kann).
+const fxVT=()=>!!document.startViewTransition&&!calm();
+function fxOpenInfo(b){const c=b.closest(".card,.fav,.rec,.hist li,.rres"),cvEl=c&&c.querySelector(".cv");if(!fxVT()||!cvEl||openId||preId||rollOn||dual||swapId)return false;
+  cvEl.style.viewTransitionName="poster";try{document.startViewTransition(()=>{cvEl.style.viewTransitionName="";act(b.dataset)})}catch(x){cvEl.style.viewTransitionName="";return false}return true}
+function fxCloseInfo(fn){const id=openId;if(!fxVT()||!id||rmAsk){fn();return}
+  try{const t=document.startViewTransition(()=>{fn();const fp=document.querySelector("#modal .fpo");if(fp)fp.style.viewTransitionName="none";const b=[...document.querySelectorAll("#v-main [data-info]")].find(x=>x.dataset.info===id&&x.getClientRects().length),c=b&&b.closest(".card,.fav,.rec,.hist li"),cvEl=c&&c.querySelector(".cv");if(cvEl){cvEl.style.viewTransitionName="poster";fxCloseInfo.el=cvEl}});
+    t.finished.finally(()=>{if(fxCloseInfo.el){fxCloseInfo.el.style.viewTransitionName="";fxCloseInfo.el=null}})}catch(x){fn()}}
+// Redesign: Bühnen-Hintergrund (unscharfes Cover) für Empfehlung und Info-Fenster; nur https-Bilder.
+let recLast=null;
+const bgOf=id=>{const u=covOf(id);return /^https:\/\//i.test(u)?` style="background-image:url(&quot;${esc(u)}&quot;)"`:""};
+const recBg=id=>`<div class="recbg" aria-hidden="true"${bgOf(id)}></div>`;
+// Kurzanleitung für neue Nutzer (pro Gerät ausblendbar)
+let howOff=false;try{howOff=localStorage.getItem("wl-howto-hide")==="1"}catch(e){}
+function howRender(){const h=$("howto");if(!h)return;const show=!howOff&&tab==="wl"&&editable();h.hidden=!show;
+  if(show&&!h.firstChild)h.innerHTML=`<ol class="hows"><li><span class="hwi" aria-hidden="true">🍿</span><b>Aussuchen</b><small>Tipp annehmen oder Titel suchen</small></li><li><span class="hwi" aria-hidden="true">📺</span><b>Schauen</b><small>Folgen und Staffeln abhaken</small></li><li><span class="hwi" aria-hidden="true">⭐</span><b>Bewerten</b><small>Sterne geben – fertig</small></li></ol><button class="howx" data-howx="1" aria-label="Kurzanleitung ausblenden">Verstanden</button>`}
 function render(){
   if(rDrag)return;
   const c=C(),ed=editable(),R=rank(),F=five(R),pp=popId,fi=freshIdx;popId=null;freshIdx=-1;
   $("ro").hidden=ed;$("ro").innerHTML=ed?"":`Das ist ${U[view].g} Liste. Ansehen geht, bearbeiten kann sie nur ${U[view].n}. <button class="lnk" data-whoopen="1">Person wechseln</button>`;
   $("cnt").textContent=c.list.filter(x=>x!=="@").length+" aktiv, "+c.done.length+" abgeschlossen";
   $("grid").innerHTML=c.list.map((id,i)=>{
-    if(id==="@")return `<article class="card slot${i===fi?" fresh":""}"><div class="nm">Platz frei</div><p class="gn">${ed?"Nimm oben die Empfehlung an.":"Noch leer."}</p></article>`;
+    if(id==="@")return `<article class="card slot${i===fi?" fresh":""}" style="--i:${i}"><span class="slp" aria-hidden="true">＋</span><div class="nm">Platz frei</div>${ed?`<button class="slb" data-brw="1">Titel aussuchen</button><p class="gn">oder oben den Tipp annehmen</p>`:`<p class="gn">Noch leer.</p>`}</article>`;
     const m=M[id],sn=!!c.seen[id],o=rt(id,O());
-    return `<article class="card${sn?" seen":""}">${cv(id,m.name)}<button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`<button class="chk" data-seen="${id}" aria-pressed="${sn}"><span class="box">${sn?"✓":""}</span>${sn?"Gesehen":"Noch nicht gesehen"}</button><div class="stars" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(id)}</div>${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
+    return `<article class="card${sn?" seen":""}" style="--i:${i}">${cv(id,m.name)}<button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`<button class="chk" data-seen="${id}" aria-pressed="${sn}"><span class="box">${sn?"✓":""}</span>${sn?"Gesehen":"Schon gesehen?"}</button><div class="stars" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(id)}</div>${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
   }).join("");
   const box=$("rec"),free=c.list.includes("@");
   vi=F.length?((vi%F.length)+F.length)%F.length:0;
   const r0=F[vi];box.hidden=!ed;
   if(!ed)box.innerHTML="";
   else if(!r0)box.innerHTML=`<div class="tx"><p class="k">Keine Empfehlung</p><p class="why">${Object.values(M).some(m=>m.sec===topTab&&!m.old)?"Alle passenden Titel sind schon in der Liste, bewertet oder abgelehnt.":topTab!=="anime"?`Noch keine ${SEC[topTab].many} im Katalog. Die Liste wird bald ergänzt.`:"Der Katalog ist leer."}</p></div>`;
-  else box.innerHTML=`${cv(r0.m.id,r0.m.name)}<div class="tx"><p class="k">💡 ${view==="both"?"Tipp für euch":"Tipp für dich"} <span class="mut">${vi+1}/${F.length}</span>${r0.nw?` <span class="newg">Neu</span>`:""}${autoNew(r0.m)?` <span class="newg">✨ Neu erschienen</span>`:""}</p>${info(r0)}<div class="btns">${free?`<button class="add" data-acc="${r0.m.id}">Annehmen</button>`:""}<button class="rej" data-skip="1">Skip</button>${free?`<button class="rej" data-rej="${r0.m.id}">Ablehnen</button>`:""}<button class="rej" data-pre="${r0.m.id}">Schon gesehen</button></div>${free?"":`<p class="why">Liste voll – erst einen Titel bewerten.</p>`}</div>`;
+  else box.innerHTML=`${recBg(r0.m.id)}${cv(r0.m.id,r0.m.name)}<div class="tx"><p class="k">💡 ${view==="both"?"Tipp für euch":"Tipp für dich"} <span class="rdots" role="img" aria-label="Tipp ${vi+1} von ${F.length}">${F.map((_,i)=>`<i class="${i===vi?"on":""}"></i>`).join("")}</span>${r0.nw?` <span class="newg">Neu</span>`:""}${autoNew(r0.m)?` <span class="newg">✨ Neu erschienen</span>`:""}</p>${info(r0)}<div class="btns">${free?`<button class="add" data-acc="${r0.m.id}"><span aria-hidden="true">＋</span> Auf die Liste</button>`:""}<button class="rej" data-skip="1"><span aria-hidden="true">↻</span> Anderer Tipp</button><button class="rej" data-pre="${r0.m.id}"><span aria-hidden="true">✓</span> Schon gesehen</button>${free?`<button class="rej rno" data-rej="${r0.m.id}"><span aria-hidden="true">✕</span> Nichts für mich</button>`:""}</div>${free?"":`<p class="why">Liste voll – erst einen Titel bewerten.</p>`}</div>`;
+  {const k=r0&&ed?r0.m.id:"";if(k!==recLast){if(recLast!==null&&k&&!calm()){box.classList.remove("swap");void box.offsetWidth;box.classList.add("swap")}recLast=k}}
+  howRender();
   // Abgeschlossen: eigene Sterne anklickbar. In "Zusammen" kann die zweite Person nachträglich bewerten.
   const owner=view==="both"?I():view,todo=view==="both"?c.done.filter(d=>!rt(d.id,I())):[];
-  $("doneg").innerHTML=c.done.map(d=>{const mine=rt(d.id,owner),o=rt(d.id,O()),miss=view==="both"&&!mine;
-    return `<article class="card${d.id===pp?" pop":""}${miss?" todo":""}" id="dn-${d.id}">${cv(d.id,M[d.id].name)}<button class="nm lnk" data-info="${d.id}">${M[d.id].name}</button>${seaBadge(d.id)}${miss?`<span class="todo-l">Deine Bewertung fehlt</span>`:""}${ed?`<div class="stars sm2" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(d.id)}</div>`:`<div class="num">${sst(mine)}</div>`}<div class="oth">${U[O()].n}: ${o?sst(o):"–"}</div></article>`}).join("")||`<p class="gn">Noch nichts abgeschlossen.</p>`;
+  $("doneg").innerHTML=c.done.map((d,di)=>{const mine=rt(d.id,owner),o=rt(d.id,O()),miss=view==="both"&&!mine;
+    return `<article class="card${d.id===pp?" pop":""}${miss?" todo":""}" id="dn-${d.id}" style="--i:${Math.min(di,14)}">${cv(d.id,M[d.id].name)}<button class="nm lnk" data-info="${d.id}">${M[d.id].name}</button>${seaBadge(d.id)}${miss?`<span class="todo-l">Deine Bewertung fehlt</span>`:""}${ed?`<div class="stars sm2" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(d.id)}</div>`:`<div class="num">${sst(mine)}</div>`}<div class="oth">${U[O()].n}: ${o?sst(o):"–"}</div></article>`}).join("")||`<p class="gn">Noch nichts abgeschlossen.</p>`;
   const tb=$("todob");tb.hidden=!todo.length;tb.textContent=todo.length?`⭐ ${todo.length} ${todo.length===1?"Titel wartet":"Titel warten"} auf deine Bewertung, ${U[I()].n}`:"";
   const rowFor=(id,u)=>`<div class="rr"><span class="rn ${u}">${U[u].n}</span>${u===I()&&ed?`<span class="stars sm2">${liveStars(id)}${rt(id,u)?`<button class="rsb rclr" data-rclr="${id}" aria-label="Deine Bewertung entfernen">×</button>`:""}</span>`:sst(rt(id,u))}</div>`;
   const nt=id=>{const n=S.notes[id]||{};return["jos","joh"].filter(u=>n[u]).map(u=>`<p class="hn"><b>${U[u].n}:</b> ${esc(n[u])}</p>`).join("")};
@@ -7431,7 +7767,7 @@ function render(){
   if(tab==="stat")$("v-stat").innerHTML=rwStatTile()+statHtml();
   $("ro").hidden=ed||tab==="stat";$("rollb").hidden=!ed;$("swb2").hidden=!ed;
   $("v-wl").hidden=tab!=="wl";$("v-hist").hidden=tab!=="hist";$("v-stat").hidden=tab!=="stat";$("v-ach").hidden=tab!=="ach";if(tab==="ach")$("v-ach").innerHTML=achHtml();$("v-inv").hidden=tab!=="inv";if(tab==="inv")$("v-inv").innerHTML=invHtml();
-  const mo=$("modal"),ae=document.activeElement;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual;
+  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual;if(moWas&&!mo.hidden&&!calm()){mo.classList.add("opening");clearTimeout(mo._t);mo._t=setTimeout(()=>mo.classList.remove("opening"),520)}
   // Beim Tippen einer Notiz das Fenster nicht neu aufbauen, sonst springt der Cursor raus.
   if(!(ae&&ae.dataset&&ae.dataset.note&&mo.contains(ae))&&!(spinning&&rollOn&&$("reel")&&$("reel").children.length>1)){
     if(openId)mo.innerHTML=modalHtml();
@@ -7474,7 +7810,7 @@ function dualHtml(){const m=M[dual.id],row=u=>`<div class="drow"><span class="rn
 function rateCommit(ctx,id,v){v=rclamp(v);rFocus=ctx+"|"+id;
   if(ctx==="n")act({n:String(v),id});else if(ctx==="pr")act({pr:String(v)});
   else if(ctx.startsWith("dr:")){dual.r[ctx.slice(3)]=v;render()}
-  const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null}
+  const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null;if(f&&!calm())f.parentNode.classList.add("rpop")}
 function ratePreview(el,v){el.querySelector(".rfg").style.width=v/RMAX*100+"%";el.classList.remove("empty");el.dataset.tip=fmtR(v);
   el.setAttribute("aria-valuenow",v);el.setAttribute("aria-valuetext",fmtR(v)+" von 10 Sternen");const n=el.parentNode.querySelector(".rnum");if(n)n.textContent=fmtR(v)}
 const rateAt=(el,x)=>{const r=el.getBoundingClientRect(),f=(x-r.left)/r.width;return f>=.985?RMAX:rclamp(f*RMAX)};
@@ -7499,15 +7835,18 @@ document.addEventListener("click",e=>{
   if(brwClick(e))return;
   {const ob=e.target.closest&&e.target.closest("[data-brw]");if(ob){brwOpen();return}}
   if(e.target.id==="scrim"){closeNav();render();return}
-  if(e.target.id==="modal"){openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;render();return}
+  if(e.target.id==="modal"){fxCloseInfo(()=>{openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;render()});return}
   if(sOpen&&!e.target.closest("#srch,#modal,#toast")){sOpen=false;renderSearch()}
   const b=e.target.closest("button");
   if(menu&&!e.target.closest("#menu,[data-gear]")){menu=false;rstAsk=false;impData=null;if(!b){render();return}}
   if(!b)return;
+  if(b.dataset.info&&!b.dataset.epjump&&fxOpenInfo(b))return;
+  if(b.dataset.close&&openId&&!brw){fxCloseInfo(()=>act(b.dataset));return}
   act(b.dataset)});
 // Alle Aktionen nach data-*-Attributen (auch von der Sternleiste aufgerufen, siehe rateCommit).
 function act(d){
   const c=C(),w=id=>S.w[id]||(S.w[id]={});
+  if(d.howx){howOff=true;try{localStorage.setItem("wl-howto-hide","1")}catch(e){}render();return}
   if(d.achwho){achWho=d.achwho;render();return}
   if(d.achf){achF=d.achf;render();return}
   if(d.petpick){const f=pForm(d.petpick),u=I(),p=petOf(u),first=!p||petView(u).egg;if(f&&f.lv<=achFor(u).lv.L){const nm=p&&p.sp===f.sp&&p.name?p.name:f.dn;
@@ -7856,8 +8195,8 @@ const BRW_ST=[["all","Alle"],["neu","✨ Neu im Katalog"],["new","Noch nicht ges
 const BRW_DEC=[[1980,1989,"80er"],[1990,1999,"90er"],[2000,2009,"2000er"],[2010,2019,"2010er"],[2020,2099,"2020er"]];
 const yearOf=m=>+(m.y||YEAR[m.id]||(META[m.id]||{}).y||0)||0;
 const rateOf=m=>+(m.r||(META[m.id]||{}).s||0)||0;
-const brwFresh=()=>({q:"",sort:"r",y0:"",y1:"",rmin:0,tags:[],st:"all",lang:"all",n:60,fo:matchMedia&&matchMedia("(min-width:760px)").matches});
-function brwOpen(){brw=Object.assign(brwFresh(),{back:document.activeElement});document.body.classList.add("brwon");brwRender();const q=$("bwq");if(q)q.focus({preventScroll:true})}
+const brwFresh=()=>({q:"",sort:"r",y0:"",y1:"",rmin:0,tags:[],st:"all",lang:"all",n:60,fo:false});
+function brwOpen(){brw=Object.assign(brwFresh(),{back:document.activeElement});document.body.classList.add("brwon");brwRender();const q=$("bwq");if(q&&fxFine())q.focus({preventScroll:true})}
 function brwClose(){const b=brw&&brw.back;brw=null;document.body.classList.remove("brwon");$("brw").hidden=true;$("brw").innerHTML="";if(b&&document.contains(b))b.focus()}
 // Status eines Titels in der aktuellen Liste
 function brwState(id){const c=C();if(c.list.includes(id))return"wl";if(c.done.some(d=>d.id===id))return"done";if(c.rej.includes(id))return"rej";return"new"}

@@ -346,3 +346,14 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Synchro: aniSearch war nicht erreichbar. `lang:"de"` nur mit Beleg im deutschen Wikipedia-Artikel (185), sonst leer = „Synchro unbekannt“ (neuer Filter beim Stöbern).
 - **Serien** (jetzt 1214): die restlichen 59 Serien aus derselben Auswahl wie oben.
 - sw.js: Cache `jj-watchlist-v29`.
+
+### Redesign „Kino“ (Design + Bedienung überarbeitet)
+- **Wo:** CSS-Block zwischen `/* KINO-START */` und `/* KINO-END */` am Ende des Stylesheets (neue Regeln also dort ergänzen), JS-Block „Redesign: Bewegung“ vor `render()`.
+- **Zwei Ebenen:** Aufbau + Bewegung gelten für alle Designs. Das Aussehen (Farben, Glas, Polarlicht-Hintergrund, Farbverlauf-Knöpfe, Fraunces-Überschriften) gilt nur für Hell/Dunkel über `:where(html:not([data-theme="purple"],[data-theme="baby"]))` (erhöht die Spezifität nicht). Lila und Baby behalten ihren Stil und haben am Blockende eigene Regeln für die neuen Bausteine.
+- **Empfehlung als Bühne** (`.rec`): unscharfes Cover als Hintergrund (`recBg`, nur https), großes Poster, Fortschritts-Punkte (`.rdots`), klarere Knöpfe: „＋ Auf die Liste“, „↻ Anderer Tipp“, „✓ Schon gesehen“, „✕ Nichts für mich“. Beim Wechsel Klasse `swap` (Poster dreht herein).
+- **Karten:** Poster kippt der Maus hinterher (`--rx/--ry/--gx/--gy`, nur mit Maus), Glanzlicht, Schweben; gesehen = Häkchen-Plakette. Freier Platz: „＋ Platz frei“ mit Knopf „Titel aussuchen“ (öffnet Stöbern). Haken heißt „Schon gesehen?“ / „Gesehen“ und ist auf dem Handy wieder beschriftet.
+- **Kurzanleitung** `#howto` (Aussuchen → Schauen → Bewerten), pro Gerät ausblendbar (`wl-howto-hide`).
+- **Handy:** feste Leiste unten `#bnav` (Animes, Filme, Serien, Stöbern, Ich = bisheriger `#accfab`), oben nur noch der Bereichsname (`.cth[data-t]`). Info-Fenster kommt als Blatt von unten. Stöbern öffnet ohne Tastatur, Filter sind anfangs zugeklappt (`fo:false`). Meldungen in voller Breite.
+- **Bewegung:** `fxEnter()` setzt nach Bereichs-/Tab-/Ansichtswechsel kurz `#main.enter` (gestaffeltes Einblenden über `--i`, Balken wachsen, Zahlen zählen hoch `fxCount`). Info-Fenster: Poster fliegt per View Transitions aus der Karte ins Fenster und zurück (`fxOpenInfo`/`fxCloseInfo`, `view-transition-name:poster`); `#modal.opening` nur beim Aufgehen, damit nichts bei jedem Neuzeichnen flackert (gilt jetzt auch für Lila/Baby). Scroll-Einblenden per `animation-timeline:view()` wo unterstützt. Alles aus bei „Bewegung reduzieren“.
+- Wichtig beim Weiterbauen: keine zeitgesteuerten Animationen direkt auf Elemente legen, die `render()` neu aufbaut – immer an `#main.enter`, `.swap` oder `.opening` hängen.
+- sw.js: Cache `jj-watchlist-v30`.
