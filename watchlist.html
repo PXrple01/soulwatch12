@@ -1650,10 +1650,195 @@ html,body{overflow-x:clip}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none}
 }
 /* KINO-END */
+/* EXTRA-START */
+/* =====================================================================
+   Extras: Finder (Zeit + Stimmung), Marathon, Quiz, Landkarte, Poster, Ticket, Regal, Tönung, Rewind-Interaktion
+   ===================================================================== */
+body.xoon{overflow:hidden}
+#xo{position:fixed;inset:0;z-index:9;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+#xo:not([hidden]){animation:brwIn .38s var(--ease)}
+.xoin{max-width:1100px;margin:0 auto;padding:16px 16px 60px}
+.xolead{color:var(--mute);margin:0 0 16px;max-width:70ch}
+.xbtns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+:root[data-theme="purple"] #xo{background:radial-gradient(rgba(169,139,255,.1) 1.2px,transparent 1.4px) 0 0/7px 7px,#0d0a1c}
+/* ---------- Finder ---------- */
+.finctl{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;margin-bottom:14px;align-items:start}
+.finbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:14px 16px;min-width:0}
+.finbox h3{margin:0 0 10px;font-size:1rem;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.finbox h3 b{color:var(--acc);font-weight:700}
+.finrs{margin-left:auto;font-size:.82rem;color:var(--mute);text-decoration:underline}
+#finmin{width:100%;accent-color:var(--acc);margin:4px 0 10px}
+.finhint{margin:10px 0 0}
+.finpad{position:relative;width:min(100%,260px);aspect-ratio:1;margin:6px auto 4px;border-radius:22px;border:1px solid var(--line);cursor:crosshair;touch-action:none;user-select:none;-webkit-user-select:none;background:linear-gradient(var(--line),var(--line)) 50% 0/1px 100% no-repeat,linear-gradient(var(--line),var(--line)) 0 50%/100% 1px no-repeat,radial-gradient(circle at 15% 85%,color-mix(in srgb,#4cc38a 30%,transparent),transparent 55%),radial-gradient(circle at 85% 15%,color-mix(in srgb,#e5484d 30%,transparent),transparent 55%),radial-gradient(circle at 15% 15%,color-mix(in srgb,#f5a623 30%,transparent),transparent 55%),radial-gradient(circle at 85% 85%,color-mix(in srgb,#6f7bf7 32%,transparent),transparent 55%),var(--bg)}
+.finpad:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.fl{position:absolute;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);pointer-events:none}
+.fl.t{top:6px;left:50%;transform:translateX(-50%)}.fl.b{bottom:6px;left:50%;transform:translateX(-50%)}
+.fl.l{left:8px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center;translate:8px 22px}.fl.r{right:8px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:right center;translate:-8px 22px}
+.fdot{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:3px solid var(--panel);background:var(--mute);box-shadow:0 4px 14px rgba(0,0,0,.35);pointer-events:none;opacity:.55;transition:left .25s var(--ease),top .25s var(--ease),background .2s,opacity .2s,transform .3s var(--spring)}
+.fdot.on{background:linear-gradient(135deg,var(--c1),var(--c2));opacity:1;transform:scale(1.15)}
+.fdot.on::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--acc);opacity:.5;animation:finPing 1.8s ease-out infinite}
+@keyframes finPing{0%{transform:scale(.6);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+.finbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:6px 0 12px}
+.finrt{font-weight:700;color:var(--acc);font-size:.78rem;flex-basis:100%}
+/* ---------- Marathon ---------- */
+.marl{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;align-items:start}
+.marc{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;transition:border-color .25s,box-shadow .3s}
+.marc.open{border-color:var(--acc);grid-column:1/-1;box-shadow:var(--shadow,none)}
+.marc.fin .marh b::after{content:" 🏁"}
+.marh{display:flex;align-items:center;gap:14px;width:100%;padding:12px 14px;background:none;border:0;color:var(--ink);text-align:left}
+.marh:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
+.marcv{display:flex;flex:none}.marcv .rwc{width:44px;font-size:1.2rem;padding:0;border-radius:7px;box-shadow:0 4px 10px rgba(0,0,0,.3);border:2px solid var(--panel)}.marcv .rwc+.rwc{margin-left:-22px}
+.marcv .rwc:nth-child(1){z-index:3;transform:rotate(-5deg)}.marcv .rwc:nth-child(2){z-index:2}.marcv .rwc:nth-child(3){z-index:1;transform:rotate(5deg)}
+.marh:hover .marcv .rwc:nth-child(1){transform:rotate(-9deg) translateX(-4px)}.marh:hover .marcv .rwc:nth-child(3){transform:rotate(9deg) translateX(4px)}.marcv .rwc{transition:transform .3s var(--spring)}
+.mart{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}.mart b{font-size:1.05rem}.mart small{color:var(--mute);font-size:.82rem}
+.marp{display:block;height:7px;border-radius:999px;background:color-mix(in srgb,var(--ink) 9%,transparent);overflow:hidden;margin-top:3px}
+.marp i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .6s var(--ease)}
+.marc.open .marh .aca{transform:rotate(180deg)}
+.maro{list-style:none;margin:0;padding:4px 14px 14px;display:flex;flex-direction:column;gap:4px;animation:riseIn .4s var(--ease)}
+.maro li{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:7px 8px;border-radius:12px}
+.maro li.nx{background:color-mix(in srgb,var(--acc) 10%,transparent)}
+.maro li.sn .lnk{color:var(--mute)}
+.maro .gn{margin:0 0 0 auto;white-space:nowrap}
+.marn{width:26px;height:26px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;border:1px solid var(--line);color:var(--mute)}
+.maro li.sn .marn{background:var(--star);border-color:var(--star);color:#1b1407}.maro li.nx .marn{border-color:var(--acc);color:var(--acc)}
+/* ---------- Quiz ---------- */
+.qzbox{max-width:620px;margin:10px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:22px 22px 24px;text-align:center}
+.qzbig{font-size:3.4rem;margin:0 0 6px;line-height:1}.qzbox.end .qzbig{animation:pop .6s var(--spring)}
+.qzbox h3{margin:0 0 10px;font-size:1.3rem;line-height:1.25}
+.qztop{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;color:var(--mute);font-size:.85rem;margin-bottom:16px}.qztop .marp{margin:0}
+.qzp{max-width:260px;margin:14px auto 0}
+.qzcv{display:flex;justify-content:center;margin-bottom:12px}.qzcv .rwc{width:110px;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.4);animation:recPoster .55s var(--ease)}
+.qzq{animation:riseIn .4s var(--ease) both}
+.qzo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 4px}
+.qzb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 10px;border-radius:16px;border:1px solid var(--line);background:color-mix(in srgb,var(--acc) 5%,transparent);color:var(--ink);font-weight:600;font-size:.98rem;line-height:1.25;animation:riseIn .4s var(--ease) both;transition:transform .2s var(--spring),border-color .2s,background .2s}
+.qzb:nth-child(2){animation-delay:.05s}.qzb:nth-child(3){animation-delay:.1s}.qzb:nth-child(4){animation-delay:.15s}
+.qzb:not([disabled]):hover{border-color:var(--acc);transform:translateY(-2px)}.qzb:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.qzb .rwc{width:84px;border-radius:9px}
+.qzb.ok{border-color:#3fb950;background:color-mix(in srgb,#3fb950 20%,transparent);animation:pop .45s var(--spring)}
+.qzb.no{border-color:#e5484d;background:color-mix(in srgb,#e5484d 16%,transparent);animation:qzShake .4s ease}
+.qzb[disabled]:not(.ok):not(.no){opacity:.55}
+@keyframes qzShake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.qzn{margin:12px 0;font-size:.95rem}.qzn.ok{color:#3fb950}.qzn.no{color:var(--mute)}
+/* ---------- Geschmacks-Landkarte ---------- */
+.tmwrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.tmap{width:min(100%,480px);height:auto;flex:none;font-family:inherit;overflow:visible}
+.tmap .tq{opacity:.5}.tmap .q1{fill:color-mix(in srgb,var(--acc) 16%,transparent)}.tmap .q2{fill:color-mix(in srgb,var(--lila) 12%,transparent)}.tmap .q3{fill:color-mix(in srgb,var(--pink) 12%,transparent)}.tmap .q4{fill:color-mix(in srgb,var(--ink) 5%,transparent)}
+.tmap .tql{font-size:10px;font-weight:700;fill:var(--mute);text-transform:uppercase;letter-spacing:.04em}
+.tmap .tdi{stroke:var(--mute);stroke-width:1;stroke-dasharray:4 5;opacity:.6}
+.tmap .ttk{font-size:10px;fill:var(--mute)}
+.tmap .tax{font-size:11px;font-weight:700}.tmap .tax.jos{fill:var(--pink)}.tmap .tax.joh{fill:var(--lila)}
+.tmap .tmb circle{opacity:.85;stroke:var(--panel);stroke-width:1.5;transition:opacity .2s}
+.tmap .tmb text{font-size:11px;font-weight:600;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:3px;stroke-linejoin:round}
+.tmap .tmb:hover circle{opacity:1}
+#main.enter .tmap .tmb{animation:tmIn .6s var(--spring) both;animation-delay:calc(.2s + var(--i)*60ms);transform-box:fill-box;transform-origin:center}
+#main.enter .tmap .tdi{animation:fade 1s ease .2s both}
+@keyframes tmIn{from{opacity:0;transform:scale(.2)}}
+.tmli{flex:1 1 260px;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:.95rem;line-height:1.4}
+/* ---------- Poster ---------- */
+.pstc{margin-bottom:8px}
+.pstbox{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.pstimg{width:min(100%,440px);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.45);animation:modalIn .5s var(--ease)}
+.pstw{padding:40px 0;font-size:1rem}
+/* ---------- Haustier-Sprechblase am Handy ---------- */
+.petbub{display:none}
+@media (max-width:767.98px){.petbub:not([hidden]){display:flex;align-items:center;gap:8px;position:fixed;left:12px;right:auto;max-width:calc(100vw - 24px);top:calc(64px + env(safe-area-inset-top,0px));z-index:8;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:4px 18px 18px 18px;padding:8px 13px 8px 9px;font-size:.86rem;line-height:1.3;box-shadow:0 10px 26px rgba(0,0,0,.3);pointer-events:none;animation:petBubIn .5s var(--spring)}
+  .pbe{font-size:1.5rem;line-height:1;animation:petHop 1.2s ease-in-out infinite}}
+@keyframes petBubIn{from{opacity:0;transform:translateY(-14px) scale(.8)}}
+@keyframes petHop{50%{transform:translateY(-4px) rotate(-6deg)}}
+/* ---------- Seite färbt sich nach dem Titel ---------- */
+#tint{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.4s ease,background-color 1.6s ease;-webkit-mask-image:radial-gradient(95vmax 75vmax at 72% -8%,#000 0,transparent 72%);mask-image:radial-gradient(95vmax 75vmax at 72% -8%,#000 0,transparent 72%)}
+#tint.on{opacity:.3}
+:root[data-theme="light"] #tint.on{opacity:.22}
+:root[data-theme="purple"] #tint,:root[data-theme="baby"] #tint{display:none}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal{background:radial-gradient(120vmax 90vmax at 50% 12%,color-mix(in srgb,var(--tint,transparent) 26%,transparent),transparent 62%),var(--scrim)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal .mbox:not(.sm){box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 150px color-mix(in srgb,var(--tint,transparent) 34%,transparent);border-color:color-mix(in srgb,var(--tint,var(--line)) 34%,var(--line))}
+/* ---------- Kino-Ticket ---------- */
+#ticket{position:fixed;left:50%;top:14vh;z-index:27;transform:translateX(-50%);cursor:pointer;filter:drop-shadow(0 22px 40px rgba(0,0,0,.45));animation:tkIn .7s var(--spring)}
+#ticket.out{animation:tkOut .7s var(--ease) forwards}
+.tkt{display:flex;align-items:stretch;width:min(420px,calc(100vw - 32px));color:#2a1c10;font-family:inherit;text-align:left;border:0;padding:0;background:none}
+.tkm{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding:14px 16px;background:linear-gradient(135deg,#ffe9b8,#ffd27a);border-radius:14px 6px 6px 14px;position:relative}
+.tkm small{font-size:.66rem;font-weight:800;letter-spacing:.16em;color:#9a5b12}
+.tkm b{font-size:1.15rem;line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tkm span{font-size:.82rem;color:#6b4a1f}.tkm .tks{font-weight:700;color:#2a1c10}
+.tkst{flex:none;width:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:linear-gradient(135deg,#ffd27a,#f5b94a);border-radius:6px 14px 14px 6px;border-left:2px dashed rgba(90,50,10,.45);transform-origin:0 100%}
+.tkst span{font-size:.62rem;font-weight:800;letter-spacing:.18em;color:#9a5b12}.tkst b{font-size:1.9rem;line-height:1;color:#2a1c10}.tkst i{font-style:normal;font-size:.68rem;color:#6b4a1f}
+#ticket .tkst{animation:tkTear .8s cubic-bezier(.4,0,.2,1) 1.25s forwards}
+.tkm::before,.tkm::after{content:"";position:absolute;right:-7px;width:14px;height:14px;border-radius:50%;background:var(--bg);z-index:1}.tkm::before{top:-7px}.tkm::after{bottom:-7px}
+#ticket .tkm::before,#ticket .tkm::after{display:none}
+@keyframes tkIn{0%{opacity:0;transform:translate(-50%,-60px) rotate(-8deg) scale(.7)}60%{opacity:1}100%{transform:translate(-50%,0) rotate(0) scale(1)}}
+@keyframes tkTear{0%{transform:none}30%{transform:rotate(4deg)}100%{transform:translate(18px,10px) rotate(13deg)}}
+@keyframes tkOut{to{opacity:0;transform:translate(-50%,40vh) rotate(6deg) scale(.5)}}
+/* ---------- Verlauf: Liste / Regal / Tickets ---------- */
+.hbar{flex-wrap:wrap}
+.hvs{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:999px;margin-right:auto;background:color-mix(in srgb,var(--panel) 70%,transparent)}
+.hvb{background:none;border:0;color:var(--mute);border-radius:999px;padding:6px 13px;font-weight:600;font-size:.88rem;transition:background .25s,color .2s}
+.hvb.on{background:var(--acc);color:var(--accink)}.hvb:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.shelf{display:flex;flex-wrap:wrap;align-items:flex-end;row-gap:20px;padding:6px 0 0}
+.spine{position:relative;flex:none;width:var(--sw);height:230px;padding:0;border:0;background:none;display:flex;align-items:flex-end;justify-content:center;border-bottom:10px solid color-mix(in srgb,var(--ink) 22%,var(--panel));cursor:pointer}
+.spine::before{content:"";position:absolute;left:1px;right:1px;bottom:0;height:var(--sh);border-radius:4px 4px 1px 1px;background:linear-gradient(90deg,hsl(var(--h) 46% 26%),hsl(var(--h) 52% 42%) 22%,hsl(var(--h) 48% 36%) 70%,hsl(var(--h) 46% 24%));box-shadow:inset 0 -18px 0 -12px rgba(255,255,255,.35),inset 0 12px 0 -8px rgba(255,255,255,.25),0 4px 10px rgba(0,0,0,.25);transition:transform .3s var(--spring),filter .2s;transform-origin:50% 100%}
+.spine:hover::before,.spine:focus-visible::before{transform:translateY(-12px) scale(1.04);filter:brightness(1.15)}
+.spine:focus-visible{outline:0}.spine:focus-visible::before{outline:3px solid var(--acc);outline-offset:2px}
+.spt{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);max-height:calc(var(--sh) - 44px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.02em;text-shadow:0 1px 2px rgba(0,0,0,.6);margin-bottom:34px;pointer-events:none;transition:transform .3s var(--spring)}
+.sps{position:absolute;bottom:8px;left:0;right:0;text-align:center;color:#fff;font-size:.68rem;font-weight:800;pointer-events:none;transition:transform .3s var(--spring)}
+.spine:hover .spt,.spine:focus-visible .spt{transform:rotate(180deg) translateY(12px)}.spine:hover .sps,.spine:focus-visible .sps{transform:translateY(-12px)}
+.shhint{flex-basis:100%;margin:0}
+#main.enter .spine{animation:spineIn .5s var(--spring) both;animation-delay:calc(var(--i)*22ms)}
+@keyframes spineIn{from{opacity:0;transform:translateY(-40px) rotate(-6deg)}}
+.tix{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.tkt.mini{width:auto;cursor:pointer;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25));transition:transform .3s var(--spring),filter .3s}
+.tkt.mini:hover,.tkt.mini:focus-visible{transform:translateY(-4px) rotate(-1deg);filter:drop-shadow(0 16px 26px rgba(0,0,0,.35))}
+.tkt.mini:focus-visible{outline:3px solid var(--acc);outline-offset:4px;border-radius:14px}
+.tkt.mini .tkm{background:linear-gradient(135deg,hsl(var(--h) 75% 90%),hsl(var(--h) 70% 80%))}.tkt.mini .tkst{width:64px;background:linear-gradient(135deg,hsl(var(--h) 70% 80%),hsl(var(--h) 65% 70%))}
+.tkt.mini .tkm b{font-size:1rem}.tkt.mini .tkst b{font-size:1.5rem}
+#main.enter .tkt.mini{animation:cardIn .5s var(--ease) both;animation-delay:calc(var(--i)*30ms)}
+/* ---------- Design-Wahl: fünf Knöpfe ---------- */
+.seg{grid-template-columns:repeat(5,1fr)}.seg button{font-size:.8rem}
+/* ---------- Rewind interaktiv ---------- */
+.rwgs{display:grid;grid-template-columns:1fr;gap:10px;width:100%}
+.rwgs.wcv{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rwgb{display:flex;flex-direction:column;align-items:center;gap:8px;padding:13px 10px;border-radius:16px;border:1px solid var(--rln,var(--line));background:var(--rpan,var(--panel));color:inherit;font:inherit;font-weight:700;font-size:1rem;line-height:1.2;cursor:pointer;transition:transform .2s var(--spring),border-color .2s;animation:riseIn .45s var(--ease) both}
+.rwgb:nth-child(2){animation-delay:.07s}.rwgb:nth-child(3){animation-delay:.14s}
+.rwgb .rwc{width:100%;max-width:120px;border-radius:10px}
+.rwgb:not([disabled]):hover{transform:translateY(-3px) scale(1.02);border-color:var(--racc,var(--acc))}.rwgb:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.rwgb.ok{border-color:#58d68d;box-shadow:0 0 0 3px rgba(88,214,141,.35);animation:pop .45s var(--spring)}.rwgb.no{border-color:#ff7b7b;opacity:.75;animation:qzShake .4s ease}
+.rwgb[disabled]:not(.ok):not(.no){opacity:.5}
+.rwgr{font-weight:600}.rwgr.ok{color:#8ff0b4}
+.rwa[data-rwrev]{cursor:pointer;transition:transform .25s var(--spring)}
+.rwa.hid>:not(.rwe){filter:blur(9px);opacity:.35;pointer-events:none;user-select:none}
+.rwa.hid{position:relative}.rwa.hid::after{content:"🎁 Antippen";position:absolute;inset:0;display:grid;place-items:center;font-weight:800;letter-spacing:.04em}
+.rwa.hid:hover{transform:scale(1.02)}.rwa.hid:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.rwrevall{text-align:center}
+.rwreact{display:flex;justify-content:center;gap:8px;padding:4px 0 2px;flex:none}
+.rwrb{background:none;border:0;font-size:1.35rem;line-height:1;padding:6px;border-radius:50%;cursor:pointer;transition:transform .2s var(--spring);filter:saturate(.85)}
+.rwrb:hover,.rwrb:focus-visible{transform:scale(1.35) translateY(-3px);filter:none}.rwrb:active{transform:scale(.85)}.rwrb:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.rwfly{position:fixed;z-index:30;font-size:1.5rem;pointer-events:none;will-change:transform,opacity}
+.rwtally{font-weight:700}
+@media (max-width:767.98px){
+  .finctl{grid-template-columns:1fr}
+  .marl{grid-template-columns:1fr}
+  .xoin{padding:12px 12px 40px}
+  .maro .gn{margin-left:36px;flex-basis:100%;order:3}
+  .xbtns .rollb{flex:1 1 calc(50% - 8px);white-space:normal;text-align:center}
+  .hvs{margin-bottom:6px}.hvb{padding:6px 11px}
+  .rwgs.wcv{gap:7px}.rwgb{padding:9px 6px;font-size:.86rem}
+  .seg button{font-size:.74rem;padding:8px 0}
+  .hbar label{display:none}
+  body.rwon #toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px))}
+}
+@media (prefers-reduced-motion:reduce){
+  #xo:not([hidden]),.fdot.on::after,.maro,.qzbox.end .qzbig,.qzcv .rwc,.qzq,.qzb,.pstimg,.petbub:not([hidden]),.pbe,#ticket,#ticket .tkst,#ticket.out,#main.enter .spine,#main.enter .tkt.mini,#main.enter .tmap .tmb,.rwgb{animation:none}
+  #tint{transition:none}.fdot,.spine::before,.spt,.sps{transition:none}
+  #ticket.out{opacity:0}
+}
+/* Lila: neue Kästen kantig wie der Rest */
+:root[data-theme="purple"] .finbox,:root[data-theme="purple"] .marc,:root[data-theme="purple"] .qzbox,:root[data-theme="purple"] .qzb,:root[data-theme="purple"] .finpad,:root[data-theme="purple"] .hvs,:root[data-theme="purple"] .hvb,:root[data-theme="purple"] .maro li,:root[data-theme="purple"] .petbub:not([hidden]){border-radius:0}
+:root[data-theme="purple"] .finbox,:root[data-theme="purple"] .marc,:root[data-theme="purple"] .qzbox{border:2px solid #30285a}
+:root[data-theme="baby"] .finbox,:root[data-theme="baby"] .marc,:root[data-theme="baby"] .qzbox{border:2px solid #ffd3e8;box-shadow:0 4px 0 #f7c8de}
+/* EXTRA-END */
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Baloo+2:wght@500;700;800&family=Anton&display=swap">
-<script>try{const t=localStorage.getItem("anime-theme-v1");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{const t=localStorage.getItem("anime-theme-v1");if(t==="auto"){const h=new Date().getHours();document.documentElement.dataset.theme=h>=7&&h<19?"light":"dark";document.documentElement.dataset.auto="1"}else if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <div id="bfx" aria-hidden="true"></div>
@@ -1673,10 +1858,10 @@ html,body{overflow-x:clip}
 <p class="ro" id="ro" hidden></p>
 <div id="v-wl"><div class="rwban" id="rwban" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite"></section>
 <button class="todob" id="todob" data-todo="1" hidden></button>
-<div class="bar"><span id="cnt"></span><button class="rollb" id="rollb" data-roll="1">🎲 <span class="lg2">Was schauen wir heute?</span><span class="sm2t">Würfeln</span></button><button class="rollb swb2" id="swb2" data-swipe="1">💞 <span class="lg2">Gemeinsam swipen</span><span class="sm2t">Swipen</span></button></div>
+<div class="bar"><span id="cnt"></span><button class="rollb" id="rollb" data-roll="1">🎲 <span class="lg2">Was schauen wir heute?</span><span class="sm2t">Würfeln</span></button><button class="rollb swb2" id="swb2" data-swipe="1">💞 <span class="lg2">Gemeinsam swipen</span><span class="sm2t">Swipen</span></button><button class="rollb finb" id="finb" data-xo="fin">🧭 <span class="lg2">Zeit &amp; Stimmung</span><span class="sm2t">Finder</span></button></div>
 <div class="grid" id="grid"></div>
 <h2 class="sec" id="doneh">Abgeschlossen</h2><div class="grid small" id="doneg"></div></div>
-<div id="v-hist" hidden><div class="hbar"><label for="hsort">Sortieren:</label> <select id="hsort"></select></div><ul class="hist" id="hist"></ul></div>
+<div id="v-hist" hidden><div class="hbar"><div class="hvs" id="hvs" role="group" aria-label="Darstellung"></div><label for="hsort">Sortieren:</label> <select id="hsort"></select></div><ul class="hist" id="hist"></ul><div class="shelf" id="shelf" hidden></div><div class="tix" id="tix" hidden></div></div>
 <div id="v-stat" hidden></div>
 <div id="v-ach" hidden></div>
 <div id="v-inv" hidden></div>
@@ -1687,13 +1872,16 @@ html,body{overflow-x:clip}
 <nav class="bnav" id="bnav" aria-label="Schnellzugriff"><button class="bnb" data-top="anime"><span class="bni" aria-hidden="true">🌸</span><small>Animes</small></button><button class="bnb" data-top="film"><span class="bni" aria-hidden="true">🎬</span><small>Filme</small></button><button class="bnb" data-top="serie"><span class="bni" aria-hidden="true">📺</span><small>Serien</small></button><button class="bnb" data-brw="1"><span class="bni" aria-hidden="true">🔎</span><small>Stöbern</small></button>
 <button class="accfab" id="accfab" data-sheet="1" aria-expanded="false" aria-controls="sheet"><span class="acv" id="fabv" aria-hidden="true"></span><span class="fabn" id="fabn"></span><span class="aca" aria-hidden="true">▲</span></button></nav>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Ansicht, Statistik und Verlauf" hidden></div>
-<div class="menu" id="menu" hidden><div class="grp"><h4>Design</h4><div class="seg" role="group" aria-label="Design"><button data-th="light">Hell</button><button data-th="dark">Dunkel</button><button data-th="purple">Lila</button><button data-th="baby">Baby</button></div></div>
+<div class="menu" id="menu" hidden><div class="grp"><h4>Design</h4><div class="seg" role="group" aria-label="Design"><button data-th="light">Hell</button><button data-th="dark">Dunkel</button><button data-th="purple">Lila</button><button data-th="baby">Baby</button><button data-th="auto" title="7–19 Uhr hell, sonst dunkel">Auto</button></div></div>
 <div class="grp"><h4>Cloud-Sync</h4><div id="cloudbox"></div></div>
 <div class="grp"><h4>Neuerscheinungen</h4><div id="autobox"></div></div>
 <div class="grp"><h4>Daten</h4><div id="rstbox"></div></div></div>
 <div id="modal" hidden></div>
 <div id="who" hidden></div>
 <div id="sw" hidden role="dialog" aria-modal="true" aria-label="Swipe-Abstimmung"></div>
+<div id="tint" aria-hidden="true"></div>
+<div id="petbub" class="petbub" hidden aria-hidden="true"></div>
+<div id="xo" hidden role="dialog" aria-modal="true" aria-label="Extras"></div>
 <div id="brw" hidden role="dialog" aria-modal="true" aria-label="Alle Titel sortieren und filtern"></div>
 <div id="rw" hidden role="dialog" aria-modal="true" aria-label="Rewind – euer Jahresrückblick"></div>
 <div id="chest" hidden role="dialog" aria-modal="true" aria-labelledby="chh"></div>
@@ -6976,7 +7164,7 @@ function confetti(){
     s.style.left=Math.random()*100+"vw";s.style.setProperty("--x",(Math.random()*160-80)+"px");s.style.setProperty("--r",(Math.random()*720-360)+"deg");s.style.setProperty("--d",(1.6+Math.random()*1.4)+"s");s.style.animationDelay=Math.random()*.3+"s";
     document.body.appendChild(s);setTimeout(()=>s.remove(),3600)}}
 const agreeTag=id=>{const a=rt(id,"jos"),b=rt(id,"joh");if(!a||!b)return"";const d=r1(Math.abs(a-b));return d<=.6?`<span class="pre ag">💞 Einig</span>`:d<=2?`<span class="pre ag">Fast einig</span>`:`<span class="pre dis">Geschmäcker verschieden</span>`};
-const SORTS=[["new","Neueste zuerst"],["old","Älteste zuerst"],["best","Beste Bewertung"],["worst","Schlechteste Bewertung"],["diff","Größte Uneinigkeit"],["az","Titel A–Z"]];
+const SORTS=[["new","Neueste zuerst"],["old","Älteste zuerst"],["best","Beste Bewertung"],["worst","Schlechteste Bewertung"],["diff","Größte Uneinigkeit"],["az","Titel A–Z"],["hue","Nach Farbe (fürs Regal)"]];
 function sortedDone(){const d=C().done.slice(),df=x=>{const a=rt(x.id,"jos"),b=rt(x.id,"joh");return a&&b?Math.abs(a-b):-1};
   const f={new:(a,b)=>b.t-a.t,old:(a,b)=>a.t-b.t,best:(a,b)=>avg(b.id)-avg(a.id)||b.t-a.t,worst:(a,b)=>(avg(a.id)||9)-(avg(b.id)||9)||b.t-a.t,diff:(a,b)=>df(b)-df(a)||b.t-a.t,az:(a,b)=>M[a.id].name.localeCompare(M[b.id].name,"de")}[hsort]||((a,b)=>b.t-a.t);
   return d.sort(f)}
@@ -7009,7 +7197,7 @@ function statHtml(){
   h+=`<h3 class="sth">Meistgeschaute Genres</h3><div class="hb">${gs.map(([t,n])=>`<div class="hr2" title="${L[t]}: ${n} Titel"><span class="hl">${L[t]}</span><span class="ht"><span class="hf" style="width:${n/gm*100}%"></span></span><span class="hv">${n}</span></div>`).join("")}</div>`;
   const cnt=u=>[1,2,3,4,5,6,7,8,9,10].map(i=>D.filter(d=>rt(d.id,u)&&Math.min(10,Math.max(1,Math.round(rt(d.id,u))))===i).length),cj=cnt("jos"),ch=cnt("joh"),sm=Math.max(1,...cj,...ch);
   h+=`<h3 class="sth">Sterne-Verteilung <span class="gn">(auf ganze Sterne gerundet)</span></h3><div class="lg"><span><i class="sw c1"></i>Josefine</span><span><i class="sw c2"></i>Johann</span></div><div class="hb">${[10,9,8,7,6,5,4,3,2,1].map(i=>`<div class="hr2 dbl" title="${i} ${i===1?"Stern":"Sterne"}: Josefine ${cj[i-1]}, Johann ${ch[i-1]}"><span class="hl">${i} ★</span><span class="ht2"><span class="ht"><span class="hf c1" style="width:${cj[i-1]/sm*100}%"></span></span><span class="ht"><span class="hf c2" style="width:${ch[i-1]/sm*100}%"></span></span></span><span class="hv">${cj[i-1]}<br>${ch[i-1]}</span></div>`).join("")}</div>`;
-  return h+rmList}
+  return h+tasteHtml()+rmList}
 function whoHtml(){
   const half=(u,x)=>`<svg viewBox="${x} 1.5 12 21" class="hh" aria-hidden="true"><path fill="var(--${u==="jos"?"pink":"lila"})" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
   return `<div class="whoin"><p class="kick2">Josefines und Johanns Watchlist</p><h2 class="whoh">Wer schaut gerade?</h2><div class="whorow"><button class="whob jos" data-who="jos">${half("jos",0)}<span>Josefine</span></button><button class="whob joh" data-who="joh">${half("joh",12)}<span>Johann</span></button></div><p class="mut whos">Jede und jeder hat eine eigene Watchlist und eigene Sterne. Dazu gibt es die gemeinsame Liste „Zusammen“.</p>${me?`<button class="rej" data-close="1">Abbrechen</button>`:""}</div>`}
@@ -7369,7 +7557,7 @@ function petSay(u){const A=achFor(u),X=A.X,P=petView(u),ls=[];
   const nx=A.list.filter(x=>!x.got&&!x.d.secret&&x.cur/x.d.goal>=.6).sort((a,b)=>b.cur/b.d.goal-a.cur/a.d.goal)[0];if(nx)ls.push(`Fast geschafft: „${nx.d.name}“ (${nx.cur}/${nx.d.goal})`);
   const g=Object.entries(X.tags).sort((a,b)=>b[1].length-a[1].length)[0];if(g)ls.push(`Heute Lust auf ${L[g[0]]}? 😋`);
   const nf=PFORMS.filter(f=>f.lv>A.lv.L).sort((a,b)=>a.lv-b.lv)[0];if(nf)ls.push(`Ab Level ${nf.lv} kommt ${nf.sty?"die Form":"die Art"} „${nf.name}“ dazu 👀`);
-  ls.push(`Als ${esc(P.form)} seh ich gut aus, oder? 😎`,"Popcorn? 🍿","Ich hab dich lieb! 💜","Kuschelzeit auf der Couch?","Was schauen wir heute?",`${A.got} Abzeichen – nicht schlecht!`);
+  ls.push(`Als ${esc(P.form)} seh ich gut aus, oder? 😎`,"Popcorn? 🍿","Ich hab dich lieb! 💜","Kuschelzeit auf der Couch?","Was schauen wir heute?",`${A.got} Abzeichen – nicht schlecht!`);{const f=petFav(u);if(f)ls.push(`Mein Lieblingstitel? „${f}“ – den könnte ich immer wieder sehen! 🍿`,`Schauen wir bald wieder so was wie „${f}“?`)}
   return ls[Math.floor(Math.random()*ls.length)]}
 let petKey="";
 function petHtml(u){const P=petView(u),A=achFor(u);if(u===I())petKey=A.key;
@@ -7765,7 +7953,7 @@ function accPanel(withStat){const c=C(),ls=secLists();
   const tb=(t,ic,lab,x)=>`<button class="atb${tab===t?" on":""}" data-tab="${t}" aria-pressed="${tab===t}"><span class="ai" aria-hidden="true">${ic}</span><span class="atl">${lab}</span>${x||""}</button>`;
   return`<div class="achr"><p class="ach">Ansicht</p><button class="acl" data-gear="1" title="${esc(cloudTxt())} – Einstellungen öffnen" aria-label="${esc(cloudTxt())} – Einstellungen öffnen">${esc(cloudShort())}<span class="acs">${esc(cloudTime())}</span></button></div><div class="avs" role="group" aria-label="Ansicht wählen">${LISTS.map(row).join("")}</div><div class="asep"></div>
 ${withStat?tb("stat","📊","Statistik")+mstHtml()+tb("ach","🏅","Abzeichen",`<span class="lc">Lv ${achFor(I()).lv.L}</span>`)+tb("inv","🎒","Inventar",`<span class="lc">${fmtX(achFor(I()).mult)}</span>`)+(achFor(I()).pend.length?`<button class="atb chpend2" data-chshow="0"><span class="ai" aria-hidden="true">🎁</span><span class="atl">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""):""}${tb("hist","🕘","Verlauf",`<span class="lc">${c.done.length}</span>`)}${tb("wl","📋","Watchlist",`<span class="lc">${c.list.filter(x=>x!=="@").length}/10</span>`)}<div class="asep"></div>
-<p class="ach">Filmabend</p><div class="fabd"><button class="atb ft" data-roll="1"><span class="ai" aria-hidden="true">🎲</span><span class="atl">Würfeln</span></button><button class="atb ft${vHot()?" hot":""}" data-swipe="1"><span class="ai" aria-hidden="true">💞</span><span class="atl">Swipen${vStatus()?`<small>${esc(vStatus())}</small>`:""}</span></button></div><div class="asep"></div>
+<p class="ach">Filmabend</p><div class="fabd"><button class="atb ft" data-roll="1"><span class="ai" aria-hidden="true">🎲</span><span class="atl">Würfeln</span></button><button class="atb ft${vHot()?" hot":""}" data-swipe="1"><span class="ai" aria-hidden="true">💞</span><span class="atl">Swipen${vStatus()?`<small>${esc(vStatus())}</small>`:""}</span></button><button class="atb ft" data-xo="fin"><span class="ai" aria-hidden="true">🧭</span><span class="atl">Zeit &amp; Stimmung</span></button><button class="atb ft" data-xo="mar"><span class="ai" aria-hidden="true">🎞️</span><span class="atl">Marathon</span></button><button class="atb ft" data-xo="quiz"><span class="ai" aria-hidden="true">🧠</span><span class="atl">Quiz</span></button><button class="atb ft" data-xo="poster"><span class="ai" aria-hidden="true">🖼</span><span class="atl">Poster</span></button></div><div class="asep"></div>
 <button class="atb agear" data-gear="2" aria-expanded="${menu}" aria-controls="menu"><span class="ai" aria-hidden="true">⚙️</span><span class="atl">Einstellungen</span></button><button class="atb sm" data-whoopen="1"><span class="ai" aria-hidden="true">🔄</span><span class="atl">Person wechseln<small>angemeldet als ${U[I()].n}</small></span></button>`}
 function renderSide(){const Ly=lay();
   if(layNow&&Ly!==layNow){drawer=false;sheet=false;if(Ly==="t")accOpen=false}layNow=Ly;
@@ -7892,8 +8080,8 @@ function render(){
   const nt=id=>{const n=S.notes[id]||{};return["jos","joh"].filter(u=>n[u]).map(u=>`<p class="hn"><b>${U[u].n}:</b> ${esc(n[u])}</p>`).join("")};
   $("hsort").innerHTML=SORTS.map(x=>`<option value="${x[0]}"${x[0]===hsort?" selected":""}>${x[1]}</option>`).join("");
   $("hist").innerHTML=sortedDone().map(d=>`<li class="${d.id===pp?"pop":""}">${cv(d.id,M[d.id].name)}<div><button class="lnk" data-info="${d.id}"><b>${M[d.id].name}</b></button> ${seaBadge(d.id)}<span class="gn">${fdate(d.t)}</span>${d.pre?`<span class="pre">schon vorher gesehen</span>`:""}${d.via==="both"?`<span class="pre">💞 zusammen gesehen</span>`:""}${agreeTag(d.id)}${rowFor(d.id,"jos")}${rowFor(d.id,"joh")}${nt(d.id)}</div>${ed?`<button class="chk" data-back="${d.id}">Zurück in die Watchlist</button>`:""}</li>`).join("")||`<li class="gn">Noch nichts abgeschlossen.</li>`;
-  if(tab==="stat")$("v-stat").innerHTML=rwStatTile()+statHtml();
-  $("ro").hidden=ed||tab==="stat";$("rollb").hidden=!ed;$("swb2").hidden=!ed;
+  if(tab==="stat")$("v-stat").innerHTML=rwStatTile()+xStatBtns()+statHtml();
+  $("ro").hidden=ed||tab==="stat";$("rollb").hidden=!ed;$("swb2").hidden=!ed;$("finb").hidden=!ed;
   $("v-wl").hidden=tab!=="wl";$("v-hist").hidden=tab!=="hist";$("v-stat").hidden=tab!=="stat";$("v-ach").hidden=tab!=="ach";if(tab==="ach")$("v-ach").innerHTML=achHtml();$("v-inv").hidden=tab!=="inv";if(tab==="inv")$("v-inv").innerHTML=invHtml();
   const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual;if(moWas&&!mo.hidden&&!calm())fxOnce(mo,"opening",620)
   // Beim Tippen einer Notiz das Fenster nicht neu aufbauen, sonst springt der Cursor raus.
@@ -7906,13 +8094,13 @@ function render(){
     else if(dual)mo.innerHTML=dualHtml();}
   const wh=$("who");wh.hidden=!(!me||whoOpen||needCode());if(!wh.hidden&&!(document.activeElement&&document.activeElement.id==="ccin"))wh.innerHTML=needCode()?codeHtml():whoHtml();
   $("menu").hidden=!menu;document.querySelectorAll("[data-gear]").forEach(g=>g.setAttribute("aria-expanded",menu));
-  const th=document.documentElement.dataset.theme||(window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+  const th=document.documentElement.dataset.auto?"auto":document.documentElement.dataset.theme||(window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
   document.querySelectorAll("[data-th]").forEach(b=>{b.classList.toggle("on",b.dataset.th===th);b.setAttribute("aria-pressed",b.dataset.th===th)});
   $("rstbox").innerHTML=impData?`<p class="hint" style="margin:0 0 8px">Backup vom ${fdate(impData.date)} laden? Eure aktuellen Listen werden dadurch ersetzt.</p><div class="btns"><button class="rst warn" data-impy="1">Ja, laden</button><button class="rst" data-impn="1">Abbrechen</button></div>`
     :rstAsk?`<p class="hint" style="margin:0 0 8px">Alle Listen bei Animes, Filmen und Serien, alle Bewertungen, Notizen und Verläufe werden gelöscht. Design und Personenwahl bleiben. Direkt danach könnt ihr es noch rückgängig machen.</p><div class="btns"><button class="rst warn" data-rsty="1">Ja, zurücksetzen</button><button class="rst" data-rstn="1">Abbrechen</button></div>`
     :`<div class="btns"><button class="rst" data-exp="1">Backup speichern</button><button class="rst" data-imp="1">Backup laden</button></div><p class="hint">Speichert alles (Animes, Filme, Serien, alle Listen, Bewertungen, Notizen) als Datei. So geht nichts verloren, wenn der Browser geleert wird.</p><button class="rst" data-rst="1" style="margin-top:12px">Alles zurücksetzen</button><p class="hint">Setzt Animes, Filme und Serien komplett auf den Anfang zurück. Am besten vorher ein Backup speichern.</p>`;
   renderSide();renderToast();showStat();renderSearch();cloudUI();cloudKick();rwBanner();seaBanner();autoUI();
-  fxFlip();
+  fxFlip();histViews();xoRender();tintApply();petBub();
   if(swOpen||!$("sw").hidden)swRender();if(brw)brwResults();clearTimeout(achLast);achLast=setTimeout(achCheck,1500);
 }
 const BKEYS=[SEC.anime.key,SEC.film.key,SEC.serie.key,"anime-theme-v1","wl-hsort"];
@@ -7925,7 +8113,7 @@ const xpTag=x0=>{const d=xpNow()-x0,m=achFor(I()).mult;return d>0?` · +${d} XP$
 // Zeitpunkt jeder Bewertung (für den Rewind): w[id].rt = {jos: ms, joh: ms}. Alte Bewertungen haben keinen.
 const stampR=(s,u)=>{(s.rt||(s.rt={}))[u]=Date.now()},unstampR=(s,u)=>{if(s.rt){delete s.rt[u];if(!Object.keys(s.rt).length)delete s.rt}};
 function complete(id,n,u){const s=S.w[id]||(S.w[id]={}),c=C(),i=c.list.indexOf(id),x0=i>-1?xpNow():0;(s.r||(s.r={}))[u||I()]=n;stampR(s,u||I());
-  if(i>-1){c.seen[id]=true;c.list[i]="@";freshIdx=i;c.done.push({id,t:Date.now()});popId=id;toast(`„${M[id].name}“ abgeschlossen${xpTag(x0)}`)}
+  if(i>-1){c.seen[id]=true;c.list[i]="@";freshIdx=i;c.done.push({id,t:Date.now()});popId=id;toast(`„${M[id].name}“ abgeschlossen${xpTag(x0)}`);ticketShow(id);petReact(id,"done")}
   if(view==="both")syncBoth(topTab);
   if(n>=RMAX)confetti()}
 // 3) Gemeinsames Bewertungsfenster in "Zusammen": beide geben ihre Sterne ein.
@@ -7975,6 +8163,8 @@ document.addEventListener("click",e=>{
 // Alle Aktionen nach data-*-Attributen (auch von der Sternleiste aufgerufen, siehe rateCommit).
 function act(d){
   const c=C(),w=id=>S.w[id]||(S.w[id]={});
+  if(xAct(d))return;
+  if(d.acc||d.sadd)petReact(d.acc||d.sadd,"add");else if(d.info)petReact(d.info,"look");
   if(d.howx){howOff=true;try{localStorage.setItem("wl-howto-hide","1")}catch(e){}render();return}
   if(d.achwho){achWho=d.achwho;render();return}
   if(d.achf){achF=d.achf;render();return}
@@ -8005,7 +8195,7 @@ function act(d){
   else if(d.sheet){if(sheet)closeNav();else{sheet=true;drawer=false;navRet=$("accfab");navFocus="sheet"}}
   else if(d.navx)closeNav();
   else if(d.view){view=d.view;vi=0}
-  else if(d.th){document.documentElement.dataset.theme=d.th;try{localStorage.setItem("anime-theme-v1",d.th)}catch(e){}}
+  else if(d.th){try{localStorage.setItem("anime-theme-v1",d.th)}catch(e){}if(d.th==="auto")themeAuto();else{delete document.documentElement.dataset.auto;document.documentElement.dataset.theme=d.th}}
   else if(d.rst)rstAsk=true;
   else if(d.rstn)rstAsk=false;
   else if(d.rsty){H.push({all:JSON.stringify(ST),sec:topTab,view,label:"Alles zurückgesetzt"});
@@ -8032,7 +8222,7 @@ function act(d){
     c.seen[id]=true;c.rej=c.rej.filter(x=>x!==id);
     if(li>-1){c.list[li]="@";freshIdx=li}
     if(!c.done.some(x=>x.id===id)){c.done.push(pre?{id,t:Date.now(),pre:true}:{id,t:Date.now()});popId=id}
-    syncBoth(topTab);dual=null;vi=0;toast(`„${M[id].name}“ ${pre?"als schon gesehen eingetragen":"abgeschlossen"}${xpTag(x0)}`);if(s.r.jos>=RMAX||s.r.joh>=RMAX)confetti()}
+    syncBoth(topTab);dual=null;vi=0;toast(`„${M[id].name}“ ${pre?"als schon gesehen eingetragen":"abgeschlossen"}${xpTag(x0)}`);if(!pre&&li>-1){ticketShow(id);petReact(id,"done")}if(s.r.jos>=RMAX||s.r.joh>=RMAX)confetti()}
   else if(d.online){onlineSearch();return}
   else if(d.onl){const o=sOnline[+d.onl];if(!o)return;const id=adopt(o);sOnline=[];sq=M[id].name;$("sq").value=sq;sOpen=true;toast(`„${M[id].name}“ übernommen. Jetzt bewerten oder zur Watchlist hinzufügen.`)}
   else if(d.sadd){const id=d.sadd,j=c.list.indexOf("@");
@@ -8567,11 +8757,11 @@ function rewindSlides(D){const S2=[],yl=D.all?"aller Jahre":D.year,nm=D.who==="b
     if(V2&&V2.moty)aw.push(["💞","Match des Jahres",V2.moty,"Gematcht, ausgewählt und dann auch geschaut"]);
     if(V2&&D.who==="both"&&V2.picky){const o=V2.picky==="jos"?"joh":"jos";aw.push(["🙅",`${V2.picky==="jos"?"Die":"Der"} Wählerischste`,null,`${U[V2.picky].n}: nur ${V2.q[V2.picky].p} % Ja beim Swipen (${U[o].n}: ${V2.q[o].p} %)`])}
     if(V2&&V2.eternal)aw.push(["⏳","Der ewige Kandidat",V2.eternal,`${V2.eternal.n}× zur Wahl, nie ein Match`]);
-    if(aw.length)add("awards",`<p class="rwk2">Awards</p><h2 class="rwh">Und der Preis geht an …</h2><div class="rwaw">${aw.map(a=>`<div class="rwa"><span class="rwe">${a[0]}</span>${a[2]?rwCv(a[2].id):""}<div><small>${a[1]}</small>${a[2]?`<b>${esc(a[2].name)}</b>`:""}<span>${a[3]}</span></div></div>`).join("")}</div>`);
+    if(aw.length)add("awards",`<p class="rwk2">Awards</p><h2 class="rwh">Und der Preis geht an …</h2><div class="rwaw">${aw.map((a,ai)=>`<div class="rwa" data-rwrev="${ai}" role="button" tabindex="0"><span class="rwe">${a[0]}</span>${a[2]?rwCv(a[2].id):""}<div><small>${a[1]}</small>${a[2]?`<b>${esc(a[2].name)}</b>`:""}<span>${a[3]}</span></div></div>`).join("")}</div>`);
     if(D.memo.length)add("memo",`<p class="rwk2">Erinnerungen</p><h2 class="rwh">Was ihr notiert habt</h2><div class="rwmemo">${D.memo.map(o=>`<blockquote><p>„${esc(o.n.length>160?o.n.slice(0,157)+"…":o.n)}“</p><cite><b class="rn ${o.u}">${U[o.u].n}</b> zu ${esc(o.x.name)}</cite></blockquote>`).join("")}</div>`);
   }
   const fav=D.who==="both"?(D.togFav||D.shared[0]||D.hi):D.hi;
-  add("ende",`<p class="rwk2">${D.all?"All-Time":"Rewind "+D.year}</p><h2 class="rwh">${D.who==="both"?"Danke für dieses Jahr 💞":"Das war "+esc(nm)+"s Jahr"}</h2><div class="rwsum"><div><b>${n}</b><small>Titel</small></div>${RW_SECS.map(k=>`<div><b>${D.cnt[k]}</b><small>${RW_SN[k][1]}</small></div>`).join("")}<div><b>${D.tog}</b><small>zusammen</small></div></div>${D.vote&&D.vote.n?`<p class="rwsm">💞 ${D.vote.n} ${D.vote.n===1?"Abstimmung":"Abstimmungen"} · ${D.vote.m} ${D.vote.m===1?"Match":"Matches"}</p>`:""}${(D.lvl||[]).length?`<p class="rwsm">🏅 ${D.lvl.map(o=>`${D.who==="both"?U[o.u].n+": ":""}Level ${o.L1}${o.mult>1?" ("+fmtX(o.mult)+")":""}${o.pet?" mit "+o.pet.emo:""}`).join(" · ")}</p>`:""}${fav?`<p class="rwsm">${D.who==="both"?"Euer":"Dein"} Lieblingstitel</p>${rwTitle(D,fav,1)}`:""}<div class="rwbtns"><button class="rwgo" data-rwshare="1">📤 Teilen / Speichern</button><button class="rwghost" data-rwrestart="1">↺ Nochmal ansehen</button><button class="rwghost" data-rwsetup="1">Andere Story</button></div>`);
+  add("ende",`<p class="rwk2">${D.all?"All-Time":"Rewind "+D.year}</p><h2 class="rwh">${D.who==="both"?"Danke für dieses Jahr 💞":"Das war "+esc(nm)+"s Jahr"}</h2><div class="rwsum"><div><b>${n}</b><small>Titel</small></div>${RW_SECS.map(k=>`<div><b>${D.cnt[k]}</b><small>${RW_SN[k][1]}</small></div>`).join("")}<div><b>${D.tog}</b><small>zusammen</small></div></div>${D.vote&&D.vote.n?`<p class="rwsm">💞 ${D.vote.n} ${D.vote.n===1?"Abstimmung":"Abstimmungen"} · ${D.vote.m} ${D.vote.m===1?"Match":"Matches"}</p>`:""}${(D.lvl||[]).length?`<p class="rwsm">🏅 ${D.lvl.map(o=>`${D.who==="both"?U[o.u].n+": ":""}Level ${o.L1}${o.mult>1?" ("+fmtX(o.mult)+")":""}${o.pet?" mit "+o.pet.emo:""}`).join(" · ")}</p>`:""}${fav?`<p class="rwsm">${D.who==="both"?"Euer":"Dein"} Lieblingstitel</p>${rwTitle(D,fav,1)}`:""}<div class="rwbtns"><button class="rwgo" data-rwshare="1">📤 Teilen / Speichern</button><button class="rwghost" data-rwposter="1">🖼 Als Poster</button><button class="rwghost" data-rwrestart="1">↺ Nochmal ansehen</button><button class="rwghost" data-rwsetup="1">Andere Story</button></div>`);
   return S2}
 
 // Aufbau des Overlays. Eigene Ebene über #modal (z10) und #who (z20), unter #toast (z25).
@@ -8579,11 +8769,12 @@ function rwHtml(){const w=rewindWindow(rwNow());
   if(rw.stage==="setup"){const ys=rewindYears().filter(y=>y<=w.year);if(!ys.includes(w.year))ys.unshift(w.year);
     return`<div class="rwin"><div class="rwtop"><span class="rwk">🎆 REWIND</span><button class="rwx" data-rwclose="1" aria-label="Rewind schließen">×</button></div><div class="rwslide rwsetup"><h2 class="rwh">Euer Rewind ${w.year}</h2><p class="rwp">Wessen Jahr wollt ihr sehen?</p><div class="rwchips" role="group" aria-label="Person">${["both","jos","joh"].map(u=>`<button class="rwchip${rw.who===u?" on":""}" data-rwwho="${u}" aria-pressed="${rw.who===u}">${u==="both"?"Gemeinsam 💞":U[u].n}</button>`).join("")}</div><p class="rwp">Welches Jahr?</p><div class="rwchips" role="group" aria-label="Jahr">${ys.map(y=>`<button class="rwchip${rw.year===y?" on":""}" data-rwyear="${y}" aria-pressed="${rw.year===y}">${y}</button>`).join("")}<button class="rwchip${rw.year==="all"?" on":""}" data-rwyear="all" aria-pressed="${rw.year==="all"}">Alle Jahre</button></div><button class="rwgo" data-rwstart="1">Story starten ▶</button></div></div>`}
   const N=rw.slides.length,sl=rw.slides[rw.i];
-  return`<div class="rwin"><div class="rwprog" aria-hidden="true">${rw.slides.map((_,j)=>`<span class="${j<rw.i?"done":j===rw.i?"now":""}"></span>`).join("")}</div><div class="rwtop"><span class="rwk">REWIND ${rw.year==="all"?"ALL-TIME":rw.year} · ${rwWho(rw.who)}</span><button class="rwx" data-rwclose="1" aria-label="Rewind schließen">×</button></div><div class="rwslide s-${sl.id}" data-rwtap="1" aria-live="polite">${sl.h}</div><div class="rwnav"><button class="rwghost" data-rwprev="1"${rw.i?"":" disabled"} aria-label="Vorherige Seite">‹ Zurück</button><span class="rwpos">${rw.i+1} / ${N}</span><button class="rwghost" data-rwnext="1"${rw.i<N-1?"":" disabled"} aria-label="Nächste Seite">Weiter ›</button></div></div>`}
+  return`<div class="rwin"><div class="rwprog" aria-hidden="true">${rw.slides.map((_,j)=>`<span class="${j<rw.i?"done":j===rw.i?"now":""}"></span>`).join("")}</div><div class="rwtop"><span class="rwk">REWIND ${rw.year==="all"?"ALL-TIME":rw.year} · ${rwWho(rw.who)}</span><button class="rwx" data-rwclose="1" aria-label="Rewind schließen">×</button></div><div class="rwslide s-${sl.id}" data-rwtap="1" aria-live="polite">${sl.g?rwGuessHtml(sl):sl.h}</div><div class="rwnav"><button class="rwghost" data-rwprev="1"${rw.i?"":" disabled"} aria-label="Vorherige Seite">‹ Zurück</button><span class="rwpos">${rw.i+1} / ${N}</span><button class="rwghost" data-rwnext="1"${rw.i<N-1?"":" disabled"} aria-label="Nächste Seite">Weiter ›</button></div></div>`}
 function rwRender(){const el=$("rw");if(!rw){el.hidden=true;el.innerHTML="";return}el.hidden=false;el.innerHTML=rwHtml();
   // Zahlen zählen hoch (ohne reduzierte Bewegung).
   if(!calm())el.querySelectorAll("[data-cnt]").forEach(e=>{const to=+e.dataset.cnt,dec=e.dataset.dec,t0=performance.now();if(!to)return;
     const f=n=>{const p=Math.min(1,(n-t0)/900),v=to*(1-Math.pow(1-p,3));e.textContent=dec?rwNum(v):Math.round(v);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)});
+  rwAfter(el);
   const f=el.querySelector(".rwslide .rwgo,[data-rwnext]:not([disabled]),.rwx");if(f)f.focus({preventScroll:true})}
 function rwFireworks(){if(calm())return;const E=["🎆","🎇","✨","🥂","💫","🎉"];
   for(let i=0;i<36;i++){const s=document.createElement("span");s.className="cf";s.textContent=E[i%E.length];s.style.left=Math.random()*100+"vw";
@@ -8593,7 +8784,7 @@ function rwOpen(){const w=rewindWindow(rwNow());if(!w.open){toast("Der Rewind ö
   rwFocus=document.activeElement;rw={stage:"setup",who:me||"both",year:w.year,i:0,slides:[]};document.body.classList.add("rwon");rwRender();rwFireworks()}
 function rwStart(){const w=rewindWindow(rwNow());if(!w.open)return rwClose(true);
   // Einmal beim Start berechnen, nicht bei jedem render().
-  rw.data=rewindData(rw.year,rw.who);rw.slides=rewindSlides(rw.data);rw.i=0;rw.stage="story";rwRender()}
+  rw.data=rewindData(rw.year,rw.who);rw.slides=rewindSlides(rw.data);rwInteractive();rw.i=0;rw.stage="story";rwRender()}
 function rwGo(d){if(!rw)return;if(!rewindWindow(rwNow()).open)return rwClose(true);
   const j=rw.i+d;if(j<0||j>=rw.slides.length)return;rw.i=j;rwRender()}
 function rwClose(expired){rw=null;document.body.classList.remove("rwon");rwRender();
@@ -8606,7 +8797,8 @@ function rwClick(e){const b=e.target.closest&&e.target.closest("button"),d=b?b.d
     if(d.rwopen){rwOpen();return true}
     if(d.rwhide){try{localStorage.setItem("wl-rewind-hide-"+d.rwhide,"1")}catch(x){}render();return true}
     return false}
-  if(!b){const sl=e.target.closest("[data-rwtap]");if(sl&&rw.stage==="story"&&Date.now()-rwSwiped>500&&!e.target.closest("a,blockquote")){const r=sl.getBoundingClientRect();rwGo(e.clientX-r.left<r.width*.35?-1:1)}return true}
+  if(!b){const hid=e.target.closest(".rwa.hid");if(hid&&rw.stage==="story"){rw.rev.add(+hid.dataset.rwrev);hid.classList.remove("hid");hid.classList.add("pop");const r=hid.getBoundingClientRect();rwReact("✨",{getBoundingClientRect:()=>({left:r.left+r.width/2-10,width:20,top:r.top+10})});if(!$("rw").querySelector(".rwa.hid")){const x=$("rw").querySelector(".rwrevall");if(x)x.remove();rwFireworks()}return true}
+    const sl=e.target.closest("[data-rwtap]");if(sl&&rw.stage==="story"&&Date.now()-rwSwiped>500&&!e.target.closest("a,blockquote")){const r=sl.getBoundingClientRect();rwGo(e.clientX-r.left<r.width*.35?-1:1)}return true}
   if(d.rwclose)rwClose();
   else if(d.rwwho){rw.who=d.rwwho;rwRender()}
   else if(d.rwyear){rw.year=d.rwyear==="all"?"all":+d.rwyear;rwRender()}
@@ -8616,8 +8808,13 @@ function rwClick(e){const b=e.target.closest&&e.target.closest("button"),d=b?b.d
   else if(d.rwrestart){rw.i=0;rwRender()}
   else if(d.rwsetup){rw.stage="setup";rwRender()}
   else if(d.rwshare)rwShare();
+  else if(d.rwguess!==undefined){const g=rw.slides[rw.i].g;if(g&&g.pick===null){g.pick=+d.rwguess;if(g.pick===g.ok){rw.gs++;rwFireworks()}rwRender()}}
+  else if(d.rwreact)rwReact(d.rwreact,b);
+  else if(d.rwrevall){const A=$("rw").querySelectorAll(".rwa[data-rwrev]");A.forEach(x=>rw.rev.add(+x.dataset.rwrev));rwRender();rwFireworks()}
+  else if(d.rwposter){const y=rw.year,w=rw.who;rwClose();xoOpen("poster",{year:y,who:w})}
   return true}
 function rwKey(e){if(e.key==="Escape"){e.preventDefault();rwClose();return}
+  if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("rwa")&&e.target.classList.contains("hid")){e.preventDefault();rw.rev.add(+e.target.dataset.rwrev);rwRender();return}
   if(e.key==="ArrowRight"&&rw.stage==="story"){e.preventDefault();rwGo(1)}
   else if(e.key==="ArrowLeft"&&rw.stage==="story"){e.preventDefault();rwGo(-1)}
   else if(e.key==="Tab"){// Fokus bleibt im Overlay
@@ -8666,6 +8863,276 @@ async function rwShare(){const D=rw.data,th=rwTheme(),c=document.createElement("
   const file=new File([blob],name,{type:"image/png"});
   try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:"Unser Rewind"});return}}catch(e){if(e&&e.name==="AbortError")return}
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);toast("Rewind-Karte gespeichert 📸")}
+// EXTRAS-START
+// =====================================================================
+// Extras: Zeit-Budget + Stimmungs-Kompass, Marathon-Planer, Quiz, Geschmacks-Landkarte,
+// Jahres-Poster, Haustier schaut mit, Seite färbt sich nach dem Titel, Kino-Ticket, Regal/Tickets im Verlauf,
+// Tag/Nacht von selbst, interaktiver Rewind. Alles liest nur vorhandene Daten (ST) – nichts Neues in der Cloud.
+// =====================================================================
+// ---------- Laufzeiten (IMDb, Minuten): Filme = Länge, Serien = Länge einer Folge ----------
+const RT={};"0010323:67 0021814:74 0021884:70 0022100:99 0022913:64 0024184:71 0024216:100 0026029:86 0026138:75 0030341:96 0034248:99 0034398:70 0034587:73 0036342:108 0036855:114 0037008:88 0038109:111 0038787:102 0039192:101 0040746:80 0041959:104 0042593:94 0042876:88 0043208:30 0044121:87 0045897:95 0046911:117 0046912:105 0047034:96 0047296:108 0047396:112 0047573:94 0047849:81 0048021:118 0048424:92 0049366:80 0049470:120 0050976:96 0050986:92 0051201:116 0051378:91 0051554:82 0051622:94 0052520:50 0052561:161 0053459:90 0053488:30 0053502:26 0054167:101 0054215:109 0055018:100 0055683:25 0055824:106 0056058:133 0056218:126 0056291:94 0056687:134 0056869:119 0057129:112 0057427:119 0057565:143 0057729:30 0057733:25 0058329:130 0058430:103 0059646:105 0059968:25 0060028:50 0060176:111 0060827:83 0061655:91 0061811:110 0062138:92 0062229:101 0062467:108 0063350:96 0063522:137 0063759:88 0063929:30 0065143:96 0065234:127 0065531:140 0066769:131 0066921:136 0067128:112 0067309:114 0067800:113 0068098:25 0068611:116 0069281:138 0069947:143 0069995:110 0070047:122 0070379:112 0070723:97 0070917:88 0070992:30 0071007:60 0071222:98 0071315:130 0071360:113 0071877:128 0071970:102 0072271:83 0072500:30 0072562:90 0073195:124 0073486:133 0073540:115 0073580:126 0073582:127 0073629:100 0073802:117 0074006:50 0074028:30 0074285:98 0074486:89 0074811:126 0074860:125 0075005:111 0075314:114 0075520:96 0076786:92 0077269:125 0077402:127 0077413:140 0077651:91 0077745:115 0078718:119 0078748:117 0078966:122 0079641:96 0079844:183 0080240:48 0080339:88 0080455:133 0080516:107 0080661:104 0080678:124 0080684:124 0080761:95 0081070:114 0081398:129 0081505:146 0081846:60 0081912:95 0081933:30 0082010:97 0082085:108 0082096:149 0082198:129 0082340:99 0082694:96 0082933:124 0082971:115 0083399:22 0083413:30 0083437:46 0083466:24 0083658:117 0083866:115 0083907:85 0083944:93 0083987:191 0084516:114 0084602:99 0084777:101 0084787:109 0084967:60 0084988:30 0085033:30 0085334:93 0086190:131 0086250:170 0086465:116 0086541:87 0086659:45 0086661:60 0086687:30 0086759:48 0086765:73 0086817:30 0086879:160 0086960:105 0086979:99 0087182:137 0087332:105 0087363:106 0087469:118 0087538:126 0087800:91 0087843:229 0087928:96 0088247:107 0088258:82 0088323:102 0088526:30 0088559:48 0088571:45 0088727:100 0088763:116 0088846:132 0088847:97 0088944:90 0088993:101 0089175:106 0089218:114 0089530:107 0089880:96 0089881:160 0089885:84 0089907:91 0089927:91 0090390:25 0090605:137 0090728:99 0090756:120 0091042:103 0091064:96 0091203:110 0091209:97 0091369:101 0091419:94 0091474:120 0091605:130 0091763:120 0092005:89 0092099:109 0092337:60 0092345:23 0092359:22 0092400:22 0092455:45 0092563:113 0092890:100 0092991:84 0093010:119 0093058:116 0093105:121 0093177:94 0093223:102 0093409:109 0093437:97 0093748:93 0093773:107 0093779:98 0093822:94 0093870:102 0093894:101 0094012:96 0094226:119 0094291:126 0094517:90 0094525:100 0094535:30 0094540:21 0094582:22 0094721:92 0094737:104 0094898:117 0094964:116 0095016:132 0095159:108 0095705:85 0095765:174 0095953:133 0095956:102 0096163:107 0096256:94 0096320:107 0096438:104 0096542:60 0096548:30 0096557:22 0096579:30 0096657:25 0096684:60 0096694:30 0096697:22 0096708:25 0096754:140 0096874:108 0096895:126 0096928:90 0097165:128 0097428:108 0097441:122 0097523:93 0097576:127 0097733:114 0097757:83 0097958:97 0098253:123 0098635:95 0098749:44 0098800:22 0098844:45 0098904:22 0098936:50 0099077:121 0099088:118 0099348:181 0099423:124 0099487:105 0099653:126 0099674:162 0099685:145 0099785:103 0099810:135 0099864:192 0099871:113 0099938:111 0100150:115 0100157:107 0100403:108 0100405:119 0100507:104 0100802:113 0100814:96 0100935:125 0101081:30 0101120:22 0101178:30 0101188:30 0101272:99 0101414:84 0101507:112 0101540:128 0102057:142 0102138:189 0102511:115 0102685:122 0102798:143 0102926:118 0103064:137 0103074:130 0103359:22 0103484:22 0103584:23 0103639:90 0103644:114 0103759:96 0103772:127 0103776:126 0103855:129 0103873:104 0103874:128 0104070:104 0104257:138 0104348:100 0104431:120 0104691:112 0104714:118 0104952:119 0105226:98 0105236:99 0105323:156 0105665:134 0105695:130 0105793:94 0105941:21 0105946:45 0105950:15 0105958:23 0106004:22 0106057:46 0106064:30 0106080:22 0106115:30 0106145:45 0106179:45 0106308:81 0106489:121 0106519:144 0106582:113 0106677:103 0106697:115 0106856:113 0106881:122 0106918:154 0106977:130 0107048:101 0107120:96 0107207:133 0107290:127 0107362:130 0107554:97 0107614:125 0107688:76 0107808:138 0107818:125 0108052:196 0108160:105 0108358:130 0108399:119 0108550:118 0108757:44 0108778:22 0108941:90 0109040:86 0109445:92 0109506:102 0109579:103 0109642:132 0109686:107 0109707:127 0109830:142 0109831:117 0110148:123 0110322:133 0110357:88 0110413:110 0110475:101 0110632:119 0110912:154 0111149:89 0111161:142 0111257:116 0111282:121 0111503:141 0111958:25 0111999:44 0112040:180 0112123:30 0112130:50 0112167:60 0112175:23 0112178:44 0112230:45 0112281:90 0112384:140 0112442:119 0112462:121 0112471:101 0112508:89 0112573:178 0112641:178 0112642:100 0112697:97 0112851:104 0112864:129 0113189:130 0113247:98 0113277:170 0113409:95 0113497:104 0113870:122 0114148:81 0114369:127 0114709:81 0114746:129 0114814:106 0114898:135 0115082:60 0115083:44 0115157:23 0115167:22 0115200:15 0115341:22 0115369:30 0115736:109 0115751:153 0115798:96 0116209:162 0116282:98 0116367:108 0116483:92 0116583:91 0116629:145 0116695:139 0116922:134 0116996:106 0117008:98 0117060:110 0117381:129 0117407:110 0117500:136 0117509:120 0117571:111 0117665:147 0117705:88 0117883:125 0117913:149 0117951:93 0117998:113 0118254:45 0118276:45 0118298:30 0118300:60 0118303:30 0118360:30 0118364:30 0118375:30 0118401:90 0118421:60 0118480:44 0118571:124 0118583:109 0118655:89 0118688:125 0118694:98 0118715:117 0118749:155 0118767:99 0118799:116 0118880:115 0118884:150 0118887:105 0118929:100 0118971:144 0119008:127 0119081:96 0119094:138 0119116:126 0119167:108 0119174:129 0119177:106 0119217:126 0119282:93 0119345:101 0119396:154 0119488:138 0119528:86 0119567:129 0119643:178 0119654:98 0119738:105 0119822:139 0119978:135 0120082:120 0120102:136 0120176:110 0120188:114 0120201:129 0120324:121 0120338:194 0120347:119 0120363:92 0120382:103 0120484:90 0120586:119 0120587:83 0120591:151 0120601:113 0120611:120 0120616:124 0120623:95 0120630:84 0120647:120 0120655:130 0120660:132 0120663:159 0120667:106 0120669:118 0120681:122 0120685:139 0120689:189 0120735:107 0120737:178 0120744:132 0120746:136 0120755:123 0120762:87 0120768:140 0120783:128 0120784:100 0120794:99 0120804:100 0120812:98 0120815:169 0120855:88 0120863:170 0120888:97 0120891:106 0120903:104 0120912:88 0120915:136 0120917:78 0121164:77 0121765:142 0121766:140 0121955:22 0122151:127 0122690:122 0122933:103 0123755:90 0123948:111 0125439:124 0125659:119 0126029:90 0126158:30 0126170:23 0128442:121 0128445:93 0128853:119 0129167:86 0129387:119 0130414:61 0130827:80 0131613:23 0133093:136 0133152:120 0133240:95 0133751:104 0134084:116 0134119:139 0134273:123 0134847:109 0135659:86 0137523:139 0138097:123 0138704:84 0139134:97 0139654:122 0139809:100 0140352:157 0141842:55 0142032:265 0142342:93 0142688:133 0143145:128 0144084:102 0144117:108 0145487:121 0145660:95 0145681:118 0146316:100 0146882:113 0147746:23 0147800:97 0149261:105 0149460:22 0151804:89 0154061:23 0154420:101 0154506:70 0157016:93 0157246:22 0158552:42 0158983:81 0159097:97 0159206:30 0159365:154 0159382:94 0160127:98 0162065:45 0162222:143 0162661:105 0163025:92 0163651:95 0163978:119 0163988:121 0164181:99 0164912:84 0165581:22 0165598:22 0166924:147 0167190:122 0167260:201 0167261:179 0167404:107 0169547:122 0170016:105 0172156:147 0172493:127 0172495:155 0175058:30 0175142:88 0175880:188 0177789:102 0177971:130 0178868:96 0180093:102 0181689:145 0181852:109 0181865:147 0181875:122 0181984:120 0182576:22 0183505:116 0183649:81 0183790:132 0184111:30 0185906:60 0185937:81 0186151:118 0187078:118 0187393:165 0187636:50 0187664:25 0187738:117 0190590:107 0193676:45 0195685:131 0195714:98 0196229:90 0198781:92 0200276:42 0200465:111 0201391:42 0203009:127 0203119:89 0203259:60 0204993:60 0206512:23 0206634:109 0207201:127 0207275:42 0208092:102 0209144:113 0209163:130 0210945:113 0211915:122 0212338:108 0212346:109 0212671:22 0212720:146 0212985:131 0213149:183 0215129:93 0215750:131 0217505:167 0217869:106 0220880:11 0221027:124 0222851:114 0228786:106 0230011:95 0230600:104 0232500:106 0234215:138 0235198:115 0235737:103 0235918:30 0235923:24 0237123:30 0238380:107 0238784:45 0240772:116 0241303:121 0241527:152 0242423:83 0242653:129 0243155:97 0244244:99 0244365:60 0245712:154 0245844:131 0246460:133 0246578:113 0247082:60 0247638:115 0248654:60 0249462:110 0250258:120 0250494:96 0251127:116 0251160:116 0252866:108 0253474:150 0253556:101 0256009:106 0256380:114 0257044:117 0257076:117 0257106:83 0258000:112 0258463:119 0259141:30 0259153:85 0259324:110 0259446:95 0259711:136 0261392:104 0262150:25 0262985:45 0263488:90 0264235:30 0264464:141 0264616:100 0265086:144 0265208:109 0265666:110 0266308:114 0266543:100 0266697:111 0266915:90 0266987:126 0268126:115 0268380:81 0268978:135 0272152:120 0272207:105 0272338:95 0273855:30 0274166:87 0275137:22 0275140:60 0275847:85 0276751:101 0276919:171 0277027:132 0277296:92 0277434:138 0278238:23 0278504:118 0278866:22 0279600:60 0280590:96 0281358:101 0281686:92 0285331:45 0285333:45 0285351:30 0285403:30 0285823:102 0286106:106 0286486:45 0286716:138 0287978:103 0289043:113 0289765:124 0289830:68 0289879:113 0289992:130 0290002:115 0290334:134 0290673:97 0290978:30 0290988:30 0292800:30 0292963:117 0293429:110 0293564:91 0293662:92 0295178:94 0295297:161 0295701:124 0296572:119 0297494:15 0298130:115 0298148:93 0298203:110 0299658:113 0299977:94 0300865:30 0301199:97 0301357:121 0302886:88 0303461:45 0304141:142 0305224:106 0306047:84 0306414:60 0307453:90 0307901:135 0307987:92 0308644:106 0309593:90 0309698:90 0310775:129 0311113:138 0311429:110 0312004:85 0312081:30 0312109:23 0312172:44 0313043:43 0313542:127 0314331:135 0314979:90 0315327:101 0315733:124 0316654:127 0317219:116 0317248:130 0317705:115 0317740:111 0317919:126 0318627:94 0318997:60 0319061:125 0319262:124 0319343:97 0319969:60 0320661:144 0320691:121 0320808:24 0321021:60 0322259:107 0322330:97 0324216:98 0325703:117 0325710:154 0325980:143 0327056:138 0327084:83 0327597:100 0328107:146 0328828:96 0330251:50 0330373:157 0330793:124 0332280:123 0332379:109 0332452:163 0333766:102 0335266:102 0335345:127 0335438:101 0337563:98 0337978:128 0338013:108 0338348:100 0338526:131 0338564:101 0338751:170 0339291:108 0340855:109 0343135:90 0343314:23 0343660:99 0343818:115 0346293:93 0346491:175 0348150:154 0348913:60 0348914:60 0349683:126 0349903:125 0350258:152 0351283:86 0352248:144 0353049:22 0353969:131 0356150:92 0356910:120 0357413:94 0358082:91 0358273:136 0358856:29 0359013:113 0359950:114 0360486:121 0360717:187 0361217:44 0361243:6 0361748:153 0361862:101 0362225:131 0362227:128 0362270:119 0362359:44 0363163:156 0363328:23 0363547:101 0363589:81 0363771:143 0363988:96 0364569:120 0364725:92 0364828:60 0364845:60 0365376:114 0365748:99 0366005:30 0366548:108 0366551:88 0367279:22 0367594:115 0367882:122 0368447:108 0368479:44 0368530:60 0368891:131 0369179:22 0369339:120 0369441:90 0369610:124 0370194:22 0370263:101 0371724:109 0371746:126 0372183:108 0372588:98 0372784:140 0373074:99 0373469:103 0373889:138 0374455:44 0374463:60 0374900:96 0375063:127 0375355:22 0375679:112 0375912:105 0376541:104 0376994:104 0377092:97 0378194:137 0379632:60 0379725:114 0379786:119 0380510:135 0381061:144 0381681:80 0381707:109 0381798:42 0381849:122 0382625:149 0383028:124 0383126:44 0383574:151 0384537:125 0384766:60 0385002:109 0385752:113 0385880:91 0386180:22 0386588:118 0386676:22 0387131:129 0387199:30 0387564:103 0387764:25 0387808:84 0387898:117 0388482:87 0388795:134 0389564:43 0389722:113 0389790:91 0389860:107 0391198:91 0393109:110 0393162:136 0395169:121 0395843:43 0396171:147 0396269:119 0397306:22 0397442:42 0397535:145 0397892:96 0398165:113 0398286:100 0398808:96 0399146:96 0399201:136 0399295:122 0401729:132 0401792:124 0401855:106 0402711:44 0404032:119 0405094:137 0405159:132 0405422:116 0407304:117 0407362:45 0407887:151 0408236:116 0408306:164 0408381:46 0408790:98 0409459:162 0409847:119 0410297:99 0410975:45 0411008:45 0411477:120 0412142:45 0412175:60 0412253:45 0413099:96 0413267:93 0413300:139 0413573:45 0414387:129 0414982:93 0414993:97 0415306:108 0416320:124 0416449:117 0417148:105 0417299:23 0417349:60 0417373:22 0417741:153 0418279:144 0418763:125 0419326:30 0419677:90 0420223:113 0421030:60 0421239:85 0421715:166 0424095:85 0424136:104 0425061:110 0425112:121 0425118:60 0425210:110 0426371:30 0427470:99 0427944:92 0429493:118 0430105:109 0430922:99 0431308:126 0432021:94 0432283:87 0432348:93 0433035:127 0433309:43 0434409:132 0435625:99 0435705:96 0435761:103 0436992:45 0437086:122 0437745:11 0438097:91 0438488:115 0439100:30 0439572:144 0440963:115 0441773:92 0442933:115 0443272:150 0443274:90 0443453:84 0443543:110 0443680:160 0443706:157 0445114:30 0445620:91 0445934:93 0446029:112 0448011:121 0448115:132 0448134:107 0448157:92 0448694:90 0449059:101 0449088:169 0449467:143 0450259:143 0450278:93 0450385:104 0451079:86 0451094:115 0451279:141 0452046:42 0452608:105 0452623:114 0452694:107 0453467:126 0454841:107 0454848:129 0454876:127 0454921:117 0454945:105 0455275:44 0455590:123 0455944:132 0457430:118 0457939:136 0458253:46 0458290:23 0458339:124 0458352:109 0458481:102 0458525:107 0459159:30 0460091:22 0460627:40 0460637:22 0460644:60 0460649:22 0460681:44 0460690:60 0461770:107 0462322:191 0462499:92 0462538:87 0463854:100 0463985:104 0464141:105 0465234:124 0465494:89 0465538:119 0465602:86 0467406:96 0468492:120 0468569:152 0469494:158 0470752:108 0471042:104 0472027:60 0472033:79 0472043:139 0472399:93 0472954:22 0473075:116 0473705:127 0475290:106 0475394:109 0475784:60 0477080:98 0477347:108 0477348:122 0478087:123 0478134:121 0478304:139 0478311:129 0478942:52 0478970:117 0479143:102 0479884:88 0479952:89 0480249:101 0480669:92 0481369:98 0481499:98 0482571:130 0482606:86 0485301:50 0485842:44 0485947:141 0486576:92 0486655:127 0486822:105 0487831:25 0488120:113 0489099:88 0489270:108 0489974:56 0491603:23 0491738:44 0493093:25 0493464:110 0496424:22 0496806:122 0497465:96 0498380:141 0499448:150 0499549:162 0756509:60 0756683:87 0758737:60 0758745:45 0758752:112 0758758:148 0758774:128 0758790:60 0760437:30 0762073:134 0762107:115 0765010:105 0765429:157 0765443:100 0770828:143 0773262:60 0780504:100 0780521:97 0780536:107 0780571:120 0783233:123 0790636:117 0790724:130 0790736:96 0790772:22 0795176:50 0795421:108 0796264:60 0796366:127 0799862:60 0799922:25 0800039:111 0800080:112 0800320:106 0800369:115 0803096:123 0804484:60 0804497:101 0804503:45 0805564:106 0805663:45 0805669:45 0808151:138 0810788:45 0810819:119 0813715:45 0814255:118 0814314:123 0815236:104 0816692:169 0816711:116 0822832:115 0822854:124 0824747:141 0825232:97 0826760:57 0829150:92 0829482:113 0830361:90 0830515:106 0831387:123 0832266:112 0834001:92 0837562:91 0838221:91 0838283:98 0840196:46 0840361:125 0844441:60 0844471:90 0844653:44 0848228:143 0851851:60 0852863:15 0859163:112 0863046:30 0866442:30 0870154:127 0874936:45 0878804:129 0884328:126 0887883:96 0887912:131 0889583:81 0890870:93 0892700:11 0892769:98 0892782:94 0892791:93 0898266:22 0898367:111 0903624:169 0903747:48 0904208:30 0905372:103 0908454:29 0910936:112 0910970:98 0914387:60 0914798:94 0914863:97 0918927:104 0918940:110 0925266:44 0926084:146 0926762:118 0934814:43 0936501:90 0938283:103 0942385:107 0944835:100 0944947:60 0945513:93 0947798:108 0948470:136 0949731:91 0955308:140 0955322:45 0955346:60 0959337:119 0960144:113 0963966:109 0964517:116 0965394:44 0970179:126 0970416:104 0972412:60 0972534:30 0974015:120 0974661:102 0976014:60 0976051:124 0976192:23 0978762:92 0978764:110 0979432:60 0980970:113 0983193:107 0985694:105 0985699:121 0986263:89 0986264:162 0988045:128 0988595:111 0989757:108 0990407:119 0993840:148 0993842:111 0993846:180 0995832:60 1001482:30 1001508:129 1001526:95 10048342:60 10062292:30 1007028:101 10095582:105 1010048:120 1013743:109 1013752:107 1013753:128 1014759:108 10155688:60 10160804:60 1016150:148 10166602:30 10166622:50 10168312:32 1019452:106 10199590:104 1022603:95 10231312:30 10234724:50 1024648:120 10272386:97 1028528:127 1028532:93 10288566:117 1029234:99 10293406:126 10293938:50 10323338:43 10327354:44 1032755:114 10329560:119 10332508:22 1033575:115 1033643:99 1034007:45 1034303:137 10366206:169 10366460:111 10374610:108 1037705:118 1038988:78 10399902:60 10405370:60 1041829:108 1043813:45 1045658:122 1046173:118 10466872:60 1049413:96 1051220:42 1051906:124 10530176:112 10541088:45 10545296:157 1054606:123 10548174:115 1055369:149 10569934:56 10574236:51 10574558:60 1057500:134 10577736:45 1058017:100 1059786:118 1060277:85 1063669:107 10638036:30 10638522:95 10640346:189 10648342:118 1064899:40 1065073:165 10676048:105 10676052:115 1068680:104 1070874:129 10731256:123 1073241:108 1073507:30 1074638:143 1077258:105 1077368:113 1078912:105 10795658:50 1080016:94 10826054:25 10834220:60 10838180:148 10839422:45 10850932:70 10855768:111 10857160:35 10857164:50 1086772:117 10872600:148 10875696:50 10888878:50 1091191:121 1091722:107 10919420:60 10919486:35 1092026:104 1094229:45 10948716:60 10954600:124 10954652:108 10954984:130 10970552:60 10986410:30 1099212:122 1100089:134 11000902:30 11003218:92 11016042:60 1103987:42 1104001:125 11041332:60 11083552:119 11083696:45 1109624:95 1111422:106 11126994:40 11127680:92 11138512:137 11192306:42 1119644:46 1119646:100 11198330:60 11204260:30 1120985:112 11214590:158 1121931:96 11233960:112 11239552:70 1124035:101 1124373:45 11245972:114 11247158:30 1125849:109 11271038:133 1127180:99 11280740:50 11286314:138 11291274:107 1129442:104 1130884:138 11311302:45 11315808:138 1131734:102 11318602:60 1132290:43 11324406:60 1132620:152 1132626:92 11337908:60 1133985:114 1135300:44 1136608:112 1136617:118 11378946:127 11379026:21 11379456:50 11389872:145 1139328:128 1139797:114 11398870:46 1142988:96 1148204:123 1149362:144 11514868:60 1152836:140 11540908:52 1155056:105 1155076:140 1156398:88 11564570:139 11570202:45 1160419:155 11612120:52 11685912:60 11691774:30 1170358:161 11712058:50 1172570:92 11737520:60 11743610:60 11771270:51 11794642:60 11794812:60 1179904:86 1179933:103 11813216:114 11815682:30 11816814:48 1181917:30 11823076:45 1182345:97 1183865:44 11846996:60 11858890:133 11866324:100 1187043:170 1187064:99 1188729:108 1189073:120 1189340:118 1190080:158 1190634:60 1190689:30 1191111:161 1192628:107 1193138:109 1194173:135 1195935:22 1196946:43 1197624:109 1199099:45 1201607:130 12037194:148 12042730:156 1205489:116 1210166:133 1210819:150 1211837:115 1211956:115 1212450:116 1213641:141 1213663:109 1216475:106 1216496:129 1217209:93 1217613:116 1219024:45 1219289:105 12197698:45 1219827:107 1220617:25 1220634:96 1220719:106 12235718:25 1225901:60 12262202:40 1226229:109 12263384:122 1227926:42 1228705:124 1228987:116 1229238:132 1229340:119 1229413:30 12299608:137 12300742:118 12306692:45 1231583:95 1231587:99 1232320:40 12324366:45 12327578:52 1232829:109 1234721:117 1235099:43 1235547:30 12361974:242 1236246:60 12411074:45 1242460:112 1243957:103 12451520:80 1245492:107 1245526:111 12477480:139 1250777:117 1253863:102 1253864:110 1255913:30 1255953:131 12584954:122 12593682:127 1259521:95 1259528:140 1259571:130 1262416:111 1262426:160 12637874:60 1266020:22 1267295:58 1267297:98 1270797:112 1270798:131 12708542:30 1272878:109 12747748:138 12748084:45 1276104:119 1277953:93 12785720:50 1279935:88 12801262:95 1280822:60 12809988:50 1282140:92 12844910:146 1284575:92 1285016:120 1286039:43 1288558:91 1289401:117 1291150:101 1291584:140 12940504:50 1298650:136 1299368:42 1300854:130 13016388:60 1302006:209 1302011:90 1305806:129 1305826:23 13062500:47 13064902:55 1306980:100 1307824:42 13111040:60 13111078:42 1312171:60 1312221:149 1313092:113 13143964:95 13146488:40 1314655:80 13157618:45 13159924:50 1318514:105 1319735:42 1320253:103 13207736:60 13210838:50 1321870:113 1323594:95 13238346:105 1324999:117 1325004:124 13274038:70 1327801:45 13287846:158 13309742:45 13315324:26 13320622:112 1334260:103 13345606:96 1335975:128 13365348:60 13366604:30 1340138:126 13406094:60 1340800:127 1343092:143 1343097:147 13433802:99 13433812:80 1343727:95 1344204:22 13443470:45 1345836:164 1349938:60 1351685:114 13542714:50 1355644:116 1355683:123 13560574:105 1358522:40 1360860:119 13609648:132 13622776:50 13623126:50 13623148:4 13623580:30 13623632:55 13640670:12 13649112:30 13654226:128 1365519:119 13659418:43 13668894:50 1371111:172 13720112:60 13729648:51 1375666:148 1375670:102 1378167:43 1379182:97 13802576:44 13819960:40 13833688:117 13833978:60 1385826:106 1386588:107 1386697:123 1386703:118 13875494:60 1389137:124 1390411:122 13911628:48 13918776:45 1392170:142 1392190:120 1392214:153 1396484:135 13966962:45 1397280:92 1398426:147 1399045:43 1399103:154 13991232:60 1399664:60 1399683:100 1401152:113 14016500:45 1403865:110 1403981:113 14044212:45 1405406:43 14069590:25 1408101:132 1409024:106 1411238:108 1411250:119 14114802:105 1411697:102 14153790:25 1415889:22 14164730:60 1416765:60 14168162:50 14169960:60 14173636:107 14186672:60 14192504:60 14218830:22 14230458:141 1424381:107 14261112:30 14263564:48 14269590:60 1428538:88 1429449:44 1430132:126 1431045:108 1433811:115 14364480:144 1436562:96 14371256:116 1437358:102 14379784:60 1439629:22 1440129:131 14403178:30 1441109:22 1441135:42 1441395:108 1442437:22 1442449:60 1442462:43 1442464:22 1446192:97 1446714:124 14490706:30 14500082:30 14513804:118 14518756:70 1453159:60 1453405:104 1454029:146 1454468:91 1457767:112 1458175:133 14586350:60 1462059:42 1462758:95 1462764:154 1464335:116 1464540:111 1465522:89 1466074:100 14661396:58 14664414:50 14688458:49 1469304:116 1474684:60 1475582:90 1477834:143 1478338:125 1480684:22 14824792:30 1483013:124 14849194:133 1485796:105 1486217:22 14879018:30 1488555:112 1488589:117 1488606:125 1489428:45 1489889:107 1490017:100 1492030:60 1492179:45 1492966:22 14948432:123 1495708:60 1496025:88 14961016:137 14966898:93 1499658:98 15006566:137 1502397:124 1502407:106 1502712:100 1504320:118 15047880:145 1515091:129 1517268:114 1517451:136 1519931:60 1520211:45 15227418:59 15239678:166 1526318:58 1527186:135 1528100:150 15314262:105 15320362:60 15325794:107 1535108:109 1535109:134 15358446:60 15398776:180 1542344:94 15435876:60 15438246:41 15469618:53 15474916:115 1548850:60 1549920:107 1551632:45 1553656:43 15567174:60 15571732:40 15574312:30 15591076:30 1560220:99 1560747:138 1561755:22 1563738:107 1564367:117 15671028:103 1567432:41 15677150:33 1568338:102 1568346:158 1568911:146 1570728:118 1571234:128 15716776:30 1578873:44 15789038:101 15791034:102 1582350:30 1582457:50 1582459:43 1583421:110 15837600:60 1586680:60 1587310:97 1587678:22 1588170:144 1588173:98 1590089:106 1591095:103 1592154:60 1595680:44 1595859:43 1596343:130 1596350:103 1596363:130 1596365:95 1598754:46 1598778:106 1599348:115 1600194:42 1600196:106 1601913:117 16026746:22 16027014:32 16030542:60 1604099:30 1605630:113 1605783:94 1606375:60 1606378:98 1606389:104 1608180:30 1610527:22 1611224:105 1615147:107 1615919:22 1617661:127 1618434:97 1622979:92 1623205:130 16277242:144 1628033:60 16283758:60 16283804:30 16283824:60 1628841:120 16288804:60 16294384:49 1630029:192 16300962:99 16311594:155 1631867:113 1632701:45 1632708:109 1634122:101 16358384:40 16366836:110 1636826:88 1637688:109 1637725:106 1637727:45 1638002:102 1638355:116 1640719:47 1641349:46 1641384:23 16419074:111 16426418:131 16450274:41 1645170:83 1646971:102 1646987:99 1648190:95 1649418:122 1649419:114 1650062:112 1650554:103 1655441:112 1655442:100 1659337:103 1660055:23 1661199:105 1663202:156 1663662:131 1663676:22 1667889:88 1670345:115 1672189:45 1673434:115 1675192:120 1675434:112 1677720:140 1684562:126 1690953:98 1693592:90 1695360:23 16969708:28 1699748:42 1700841:89 17009710:151 17024450:109 1703925:22 1706593:84 1706620:126 1707386:158 1710308:23 1714204:42 1714206:95 1723121:110 1723811:101 1723816:30 1727388:103 1727824:134 17279496:109 1728102:60 1731141:114 1733785:60 1734135:23 17351924:130 1735898:127 1740299:60 1741256:22 1745960:130 1748122:94 17491088:50 1751105:22 17513352:70 1751634:45 17526714:141 17543592:44 1757678:197 1758772:60 1758830:134 1759761:30 1764234:97 1764651:103 17663992:122 1772250:97 1772341:101 1780441:22 1790809:129 1790864:113 1790885:157 1796960:60 1797404:30 1798684:124 1798709:126 1800241:138 18075020:48 1809398:137 1815862:100 1817273:140 1819509:22 1821681:43 1821694:116 1823672:120 1825683:134 1826940:22 1827487:157 1828327:30 1830379:60 1830617:45 1831804:57 1832382:123 1832979:60 18335752:60 18347622:60 1836037:60 1837492:60 1837576:43 1837642:44 1837654:45 1839578:43 1840309:139 18412256:119 1842530:60 1843230:60 1843866:136 1844624:60 1845307:22 1853728:165 18546730:46 18550140:118 1855199:109 1855325:95 1856010:50 1856101:164 1860357:107 1865718:23 1865769:30 1869454:55 1870479:60 1872181:142 1872194:141 1877830:176 1877832:132 1878870:104 1883092:90 1888075:60 18923754:60 18925334:103 1895587:129 1898069:60 1899353:101 1905041:130 1907668:138 1909015:60 1915581:110 1922777:110 1924396:131 1924429:101 19244304:60 1931533:110 1935179:130 1935859:127 1937149:112 19395018:53 1939659:100 1942683:11 1950186:152 1951261:100 1951264:146 1951265:123 1951266:137 1954347:45 1958961:45 1959490:138 1959563:118 1964418:130 1964624:105 1972591:126 1979320:123 1979376:100 1980209:129 1980929:104 1981115:112 1981677:112 1983079:60 19838566:100 1984119:60 1985443:97 19854762:47 1986770:22 1998372:67 2004420:97 2005151:114 20115766:114 2015381:121 2017109:60 20215234:120 2023587:100 2024432:111 2024469:106 2024544:134 2034800:103 2042568:104 2049116:45 2049403:105 2053463:106 2056366:42 20600980:40 2066051:121 2070791:43 2071645:43 2077823:60 2080374:122 2084970:114 2085059:60 20859920:80 20863760:48 20869502:75 2094262:60 2094766:115 2096672:109 2096673:95 20969586:127 2101441:94 2103281:130 21056886:24 2106476:115 21066182:30 2109248:165 21097264:60 21188986:167 2119532:139 2120120:105 2126355:114 21285562:118 21344706:50 2137109:60 21382296:119 2140373:125 2140479:128 2149175:44 2170439:108 2172103:60 2177461:45 2177489:22 2179136:133 2180411:125 21823606:90 2183404:60 2183641:59 2184339:85 2188671:45 2189221:43 2189461:60 2191671:60 2191701:101 2193021:42 2193041:60 2194499:123 2201227:47 22022452:96 2203939:109 22074164:29 22084616:145 22091076:45 2209418:109 2209764:119 2211129:30 22202452:60 2222042:109 2226342:60 2226417:106 2229499:90 2231461:107 2234003:102 2234155:119 2234222:44 2235759:52 22375054:97 2239822:136 2243973:45 2245084:102 2249007:60 2249364:48 2250912:133 2261227:60 2261391:43 2262308:15 2262532:60 2267968:95 2267998:149 2277860:97 2278388:99 2278871:180 2281375:43 2283336:114 2283362:119 2288064:60 2293640:91 2294189:60 2294449:112 2294629:102 2296682:43 2302755:119 2303687:60 2304589:50 23055142:60 2306299:45 2309295:46 2310332:144 2316204:122 2316411:91 2321549:94 2322441:125 23289160:124 2333784:126 2334873:98 2334879:131 2338151:153 2345759:110 23468450:101 23561236:117 2356777:60 2357547:56 2359024:90 2361509:121 2364582:45 23649128:30 2369135:132 2372162:60 2372220:60 23736044:127 2375692:60 2379713:148 2380307:105 2381111:117 2381249:131 2381941:105 2382320:163 2384811:50 2386490:104 23872886:50 2388715:104 2395427:141 2395695:45 2396135:60 2397535:97 2401256:60 2402207:60 2402927:118 2403776:60 2404435:132 2404461:130 2404463:117 2406566:115 24069848:50 2431438:60 2433738:45 2438644:96 2442560:60 2446042:108 2446980:124 2452242:60 2463208:106 2467372:22 2488496:138 2494362:132 2510894:89 2521668:55 2527336:152 2527338:141 2531336:45 2543164:116 2543312:60 2543328:60 2543472:113 2554274:119 2557490:116 2561572:100 2562232:119 2567712:106 2568204:60 2575988:30 2578560:22 2581458:30 2582782:102 2582802:106 2582846:126 2584384:108 26047818:103 2616280:23 2618986:60 26225038:60 2628232:54 2631186:159 26315487:60 2632424:45 2637276:115 2640044:56 26443597:108 26471411:60 2647544:45 2649356:60 26545355:23 2654580:60 26545992:60 2654620:43 26581740:128 26584495:97 2660734:43 2660806:30 2660888:122 2661044:43 26612950:98 26656917:60 26657236:126 26670955:30 26693803:60 2674426:110 2674806:30 26753003:105 2692250:98 2692904:85 26933824:30 2699110:60 2699128:60 2701582:90 2704998:100 2707408:50 2708480:60 2709768:86 2710394:42 2712740:22 2713180:134 27165187:99 2719848:121 2733252:55 27369017:157 2737304:124 27403986:114 2741602:43 27427326:45 27497448:60 27534307:110 27543632:131 27557289:45 2758770:22 2758950:40 27610198:25 27668559:75 2771200:129 2771780:10 27773954:98 27792190:45 27847051:161 2788316:60 2788432:42 2788710:112 27987047:60 2798920:115 27995113:55 27995114:60 28013708:60 28015403:111 2802144:129 2802850:60 2805096:45 28088049:111 28118211:45 2820852:137 2848292:115 28535715:105 2854926:100 28607951:139 2861424:23 2866360:89 2872718:117 2872732:89 2873282:140 2879552:60 2883512:114 2887954:60 2891574:30 2906216:134 2908446:119 2911666:101 29268110:127 2930604:22 2934286:60 29344903:109 2935510:123 29355505:102 2937898:125 2937900:58 2948356:108 2948372:100 2953050:102 29623480:102 2963254:60 29714073:100 2975578:103 2975590:151 2980516:123 3006802:60 3007572:48 3011894:122 3012698:60 30144839:161 30317229:50 3032476:45 30325268:117 3040964:106 30423279:60 3042408:102 30460310:45 3061046:11 3062096:121 3065204:134 30691214:103 3076658:133 3079380:120 3079768:90 31019484:45 31036941:133 3104988:120 3107288:43 3110958:129 31193180:137 31227572:107 31314751:60 3140100:119 31450459:128 3148266:42 31510819:50 3155320:42 31645419:86 3170832:118 31710822:50 31806037:60 3183660:132 3186130:60 31938062:50 31974288:55 31974367:50 3205802:45 32141377:109 32212403:106 32237534:50 32246771:104 32252772:60 32260680:60 32261958:117 32267726:50 32268156:112 32268691:92 3228420:30 3228774:134 3228904:45 3230454:22 3230854:60 3235888:100 32393988:106 32499466:111 3250026:42 3253930:105 32547691:100 32588798:130 3263904:96 32642706:113 3281548:135 3281796:60 3288518:22 3289956:86 32916440:149 32937780:45 3300542:99 33029380:99 33035373:45 33043892:50 3315342:137 3316960:101 33204276:60 33204697:15 3322310:60 3322312:60 3322314:60 3322940:99 33265765:60 33305572:133 33305867:97 3337194:45 3339966:30 33503491:60 33522697:122 3359350:121 3371366:154 33764258:172 3385516:144 3393786:118 3397884:121 3398228:25 3402236:114 3416742:86 34206385:109 3428912:60 3450958:140 3460252:168 3464902:119 3469046:90 3470600:108 3475734:45 34771210:45 3480822:134 34866643:98 3487356:22 3487382:43 34890576:108 3489184:43 34965515:90 3498622:60 3498820:147 3501074:45 3501584:42 3501632:130 3502172:30 3502248:50 3502262:30 3514324:43 3520702:60 3521126:104 3521164:107 35222590:95 3526078:22 35298123:112 3532216:115 35344083:102 35495073:50 3551096:22 35513027:117 35538033:94 3553976:118 3556944:46 3560084:43 3561180:60 3566726:60 3566834:101 3567288:94 3569230:132 3581920:50 3581932:57 35934755:40 3606752:102 3606756:118 3609352:30 36284371:108 3631112:112 36352591:105 3636060:60 3640424:124 36472663:116 3647998:60 36491653:103 3655448:60 36586020:93 3659388:144 36594331:22 3663490:42 36749000:80 3678782:134 3682448:142 36893729:86 36983905:128 36985296:102 37020296:114 3704428:159 3718778:11 37287335:109 37304295:82 3731562:118 3741700:132 3741834:118 3743822:44 3748528:133 3749900:42 37510326:112 3766354:121 3766376:30 3774114:134 3778644:135 37800509:100 37801321:126 37804242:103 3783958:128 37853455:102 3794354:99 3799694:116 3829266:107 3843168:44 38607784:89 3865236:42 3874544:97 3877200:60 38805050:118 38807889:81 38884015:99 3890160:113 3896198:136 39140264:129 3915174:102 3920596:50 3921180:45 39213126:113 39381622:100 39400348:108 3952222:42 3960394:60 3986586:30 4016454:43 4016934:145 40204609:117 4028464:117 4034228:137 40445453:96 4046784:131 4047038:60 4051832:24 4052882:86 4052886:45 40601764:89 4061080:50 4062536:95 4082744:30 4088268:112 4093826:60 4094300:42 4116284:104 4122068:42 4123430:134 4123432:142 4145054:42 4145384:45 4154664:123 4154756:149 4154796:181 4154858:45 4158110:45 4159076:42 41592057:119 4160708:88 4172430:144 4178092:108 4179452:60 4181172:60 4189022:30 4192782:45 41955949:95 4196776:123 4209256:42 4209788:140 4230076:50 4236770:60 42373658:106 4244994:152 4254242:60 4258440:60 4263482:92 4270492:60 4276618:60 4276820:115 4288182:30 4299972:45 4301160:58 4326894:30 4341500:30 4354880:60 43549602:118 43549791:95 43598697:97 43704850:102 43711476:95 43730209:96 4374208:25 4378376:45 4396630:45 4406178:60 4422836:42 4425200:122 4428122:42 4430212:163 44537223:118 4474344:42 4477976:22 4481414:101 4500922:143 4513678:124 4520988:103 4532368:42 4550098:116 4555364:60 4555426:125 4565380:60 4566758:115 4574334:60 4592410:52 4602768:60 4604612:60 4630562:136 4633690:121 4633694:117 4635276:30 4635282:60 4643084:60 4647692:30 4649466:141 4655480:45 4686698:60 4687880:60 4698684:101 4701182:114 4729430:96 4772188:85 4779682:113 4786282:81 4786824:60 4834206:55 4839610:30 4846232:102 4846340:127 4857264:106 4873118:123 4878326:43 4881806:128 4912910:147 4922804:49 4925000:60 4925292:94 4954522:99 4955642:22 4972582:117 4975722:111 4975856:30 4998212:30 4998350:60 5011816:60 5013056:106 5016504:60 5022702:82 5027774:115 5028002:44 5034838:113 5040012:132 5052448:104 5052474:122 5057054:60 5071412:60 5074352:161 5083738:119 5095030:118 5104604:101 5108870:104 5109280:107 5109784:121 5114356:60 5137338:60 5140878:109 5164196:44 5164214:110 5165344:148 5171438:60 5177120:122 5180504:60 5186714:124 5189670:60 5197820:43 5215952:156 5232792:60 5269594:45 5288312:30 5290382:60 5295524:30 5296406:60 5308322:96 5348176:30 5362988:107 5363618:120 5363918:30 5368542:45 5420376:45 5421602:60 5433138:143 5433140:141 5435008:93 5439796:118 5442430:104 5462602:120 5463162:119 5491994:50 5511582:60 5516154:65 5519340:117 5537002:206 5555260:45 5565334:30 5574490:60 5580036:119 5580146:40 5580390:123 5580540:30 5606664:152 5607976:60 5611024:50 5614844:44 5618256:45 5622316:60 5638056:30 5638642:94 5639976:42 5645432:61 5651844:45 5657856:132 5675620:60 5687612:30 5691552:45 5700672:118 5707802:30 5712554:60 5715524:60 5715874:121 5723272:106 5726616:132 5727208:135 5743796:60 5753856:60 5770786:30 5774002:56 5776858:130 5788792:60 5814060:96 5822112:88 5827228:60 5834204:60 5848272:112 5853176:45 5875444:50 5884052:104 5886046:99 5905354:30 5950044:129 5952634:60 5971474:135 5994364:120 6025022:23 6040674:49 6045840:43 6048596:45 6053438:113 6105098:118 6111130:45 6116060:45 6128300:42 6139732:128 6143796:30 6146586:130 6155172:135 6156584:60 6166392:116 6170874:43 6208148:109 6226232:30 6257970:25 6263850:128 6264654:115 6266538:132 6294822:116 6297682:60 6315640:30 6317068:30 6320628:129 6334354:132 6343314:130 6412452:133 6439752:45 6443346:125 6450804:128 6461726:21 6468322:60 6470478:45 6473344:43 6474378:43 6483832:60 6486762:90 6487482:45 6499752:100 6517102:23 6524350:30 6548228:60 6565702:113 6586318:60 6611916:45 6628394:141 6644200:90 6656238:45 6692188:43 6710474:139 6718170:92 6723592:150 6729080:58 6741278:50 6742252:85 6751668:132 6763664:60 6768578:103 6769208:50 6791350:150 6794990:60 6806448:137 6823368:129 6856242:131 6857112:116 6866266:60 6873658:45 6877772:30 6905686:60 6932244:60 6966692:130 7008682:30 7016936:42 7040874:117 7049682:60 7053188:60 7057496:108 7069210:112 7078710:30 7097896:97 7098658:138 7120662:30 7126948:151 7131622:161 7134908:60 7137906:75 7144666:103 7146812:102 7160372:105 7181546:124 7203552:60 7216636:32 7221388:30 7235466:43 7255502:30 7263154:50 7278862:60 7282468:148 7286456:122 7322224:147 7335184:45 7349662:135 7349950:169 7366338:60 7395114:138 7405458:126 7423538:60 7440726:60 7456722:60 7462410:60 7472896:30 7491982:60 7493974:60 7520794:30 7556122:125 7562112:60 7569576:45 7569592:60 7587890:43 7631058:60 7653254:137 7657566:127 7658402:23 7660850:60 7661390:60 7668870:102 7671070:50 7671598:43 7678620:7 7713068:109 7737786:119 7740496:150 7745956:30 7767422:60 7772588:60 7784604:127 7798634:95 7817340:43 7826376:30 7846844:123 7879820:30 7888964:92 7902072:45 7908628:30 7909970:48 7914416:96 7945720:44 7949218:60 7959026:116 7971476:42 7975244:123 7984734:109 7984766:140 7985576:60 7991608:118 8036976:113 8041270:147 8050756:22 8064302:30 8068860:30 8075192:121 8079248:116 8080122:55 8089592:58 8097030:100 8101850:30 8103070:45 8106534:128 8111088:40 8134186:51 8134470:60 8178634:187 8201186:60 8210856:60 8228288:94 8235236:28 8242904:60 8244784:90 8289930:40 8291284:60 8295472:60 8323628:50 8332438:60 8332922:97 8359848:97 8362852:60 8367814:113 8369840:43 8388390:42 8398600:30 8415836:60 8416494:60 8420184:50 8421350:43 8466564:45 8518136:30 8531222:30 8543390:30 8550732:60 8550800:60 8579674:119 8594324:30 8599532:50 8633062:60 8634332:40 8681148:347 8682948:60 8688814:26 8690918:45 8694364:60 8697870:60 8712204:45 8714904:60 8722888:45 8740614:50 8740790:60 8740976:65 8741290:50 8749198:49 8760708:102 8760932:50 8772262:148 8772296:60 8778064:58 8787802:50 8806524:46 8847712:107 8879940:30 8910922:22 8923854:40 8936646:116 8946378:130 8962124:30 8999762:216 9018736:55 9032400:156 9055008:45 9059760:28 9077530:44 9114286:161 9139220:90 9140342:45 9140554:50 9140560:40 9145758:60 9169516:50 9170108:55 9174558:60 9184820:25 9184994:30 9208876:50 9218128:148 9243946:122 9251798:45 9253284:60 9253866:50 9288030:50 9319668:60 9362722:140 9376612:132 9411972:125 9419884:126 9421570:90 9446688:20 9484998:90 9561862:15 9603208:169 9603212:163 9612516:30 9619824:110 9620288:144 9620292:113 9639470:116 9660182:60 9698442:50 9698480:45 9737326:60 9764362:107 9770150:107 9777666:138 9794044:41 9813792:52 9815454:50 9827854:50 9859436:60 9892936:60 9893250:118".split(" ").forEach(x=>{const i=x.indexOf(":");RT["tt"+x.slice(0,i)]=+x.slice(i+1)});
+const runMin=m=>!m?0:m.sec==="anime"?(/^Film/.test(m.fmt||"")?105:24):RT[m.id]||0;
+const fmtMin=n=>n>=60?Math.floor(n/60)+" h"+(n%60?" "+n%60+" min":""):n+" min";
+const xThemed=()=>["purple","baby"].includes(document.documentElement.dataset.theme);
+const xShuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const xRate=(k,id,u)=>(((ST[k].w||{})[id]||{}).r||{})[u]||0;
+
+// ---------- Gemeinsame Ebene für die Extras (#xo, liegt wie „Stöbern“ unter dem Info-Fenster) ----------
+let xo=null;
+const XO_T={fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster"};
+function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
+  xo=Object.assign({k,back:document.activeElement},o||{});
+  if(k==="fin")Object.assign(xo,{min:0,x:0,y:0,set:false});
+  if(k==="quiz")quizStart();
+  document.body.classList.add("xoon");closeNav();render();
+  if(k==="poster")posterMake();
+  const el=$("xo");el.scrollTop=0;const f=el.querySelector(".bwback");if(f)f.focus({preventScroll:true})}
+function xoClose(){const b=xo&&xo.back;if(xo&&xo.url)URL.revokeObjectURL(xo.url);xo=null;document.body.classList.remove("xoon");const el=$("xo");el.hidden=true;el.innerHTML="";render();if(b&&document.contains(b)&&b.getClientRects().length)b.focus()}
+function xoRender(){const el=$("xo");if(!xo){if(!el.hidden){el.hidden=true;el.innerHTML=""}return}el.hidden=false;
+  const body=xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():posterHtml();
+  const st=el.scrollTop;keepFocus(el,()=>el.innerHTML=`<div class="xoin x-${xo.k}"><header class="bwhead"><button class="rst bwback" data-xoclose="1">‹ Zurück</button><h2>${XO_T[xo.k]}</h2></header>${body}</div>`);el.scrollTop=st;
+  if(xo.k==="fin")finResults()}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&xo&&!openId&&!preId&&!rw&&!menu&&$("modal").hidden){e.preventDefault();xoClose()}});
+
+// ---------- Zeit-Budget + Stimmungs-Kompass ----------
+// Jedes Genre hat einen Platz auf zwei Achsen: x = leicht (−1) … schwer (+1), y = ruhig (−1) … aufregend (+1). Ein Titel liegt im Mittel seiner Genres.
+const MOODV={comedy:[-.9,.2],family:[-.8,-.1],animation:[-.5,.1],romance:[-.4,-.5],slice:[-.7,-.8],music:[-.5,0],school:[-.4,-.2],sport:[-.2,.6],adventure:[-.2,.6],action:[0,.9],scifi:[.1,.4],fantasy:[-.1,.4],isekai:[-.3,.4],western:[.2,.3],mystery:[.4,.1],crime:[.5,.3],thriller:[.5,.8],horror:[.7,.9],gore:[.9,.9],dark:[.9,.2],psych:[.8,0],drama:[.6,-.5],war:[.9,.5],history:[.5,-.4],moral:[.7,-.3],slow:[.3,-.9],surreal:[.5,-.1],villain:[.3,.4]};
+const moodC={};
+function moodOf(m){if(moodC[m.id])return moodC[m.id];let x=0,y=0,n=0;for(const t of m.tags||[]){const v=MOODV[t];if(v){x+=v[0];y+=v[1];n++}}
+  const cl=v=>Math.max(-1,Math.min(1,v*1.5));return moodC[m.id]=n?[cl(x/n),cl(y/n)]:[0,0]}
+function finItems(){const c=C(),us=view==="both"?["jos","joh"]:[view],have=new Set(c.done.map(d=>d.id).concat(c.rej));
+  let Lx=Object.values(M).filter(m=>m.sec===topTab&&!m.old&&!have.has(m.id)&&!us.some(u=>rt(m.id,u)));
+  if(xo.min)Lx=Lx.filter(m=>{const r=runMin(m);return r&&r<=xo.min});
+  return Lx.map(m=>{const v=moodOf(m);return{m,d:xo.set?Math.hypot(v[0]-xo.x,v[1]-xo.y):0}}).sort((a,b)=>a.d-b.d-(rateOf(a.m)-rateOf(b.m))*(xo.set?.05:1)||(b.m.v||0)-(a.m.v||0))}
+const finWord=()=>!xo.set?"egal":(xo.x<-.25?"leicht":xo.x>.25?"schwer":"ausgewogen")+" · "+(xo.y>.25?"aufregend":xo.y<-.25?"ruhig":"entspannt");
+const finMinTxt=()=>xo.min?"bis "+fmtMin(xo.min):"egal";
+function finHtml(){const chips=[[0,"Egal"],[30,"30 min"],[45,"45 min"],[90,"1½ h"],[120,"2 h"],[150,"2½ h"],[180,"3 h"]];
+  return`<p class="xolead">Wie viel Zeit habt ihr – und wonach ist euch? Die Vorschläge unten passen sich sofort an.</p>
+  <div class="finctl"><div class="finbox"><h3>⏱ Zeit-Budget <b id="finmv">${finMinTxt()}</b></h3><input type="range" id="finmin" min="0" max="240" step="5" value="${xo.min}" aria-label="Zeit-Budget in Minuten (0 = egal)">
+    <div class="bwchips">${chips.map(c=>`<button class="bwchip${xo.min===c[0]?" on":""}" data-finmin="${c[0]}" aria-pressed="${xo.min===c[0]}">${c[1]}</button>`).join("")}</div>
+    <p class="gn finhint">${topTab==="film"?"Zählt die Laufzeit des Films.":"Zählt die Länge einer Folge – daneben steht, wie viele Folgen passen."}</p></div>
+  <div class="finbox"><h3>🧭 Stimmung <b id="finword">${finWord()}</b>${xo.set?`<button class="lnk finrs" data-finreset="1">zurücksetzen</button>`:""}</h3>
+    <div class="finpad" id="finpad" tabindex="0" role="application" aria-label="Stimmungs-Kompass: links leicht, rechts schwer, oben aufregend, unten ruhig. Antippen oder Pfeiltasten."><span class="fl t">aufregend</span><span class="fl b">ruhig</span><span class="fl l">leicht</span><span class="fl r">schwer</span><i class="fdot${xo.set?" on":""}" id="fdot" style="left:${(xo.x+1)*50}%;top:${(1-xo.y)*50}%"></i></div></div></div>
+  <div class="finbar"><span class="gn" id="fincnt" aria-live="polite"></span><button class="add" data-finrand="1">🎲 Überrasch mich</button></div>
+  <div class="bwgrid" id="finres"></div>`}
+function finCard(m){const r=runMin(m);const t=!r?"":m.sec==="film"?fmtMin(r):xo.min?`${Math.floor(xo.min/r)} ${Math.floor(xo.min/r)===1?"Folge passt":"Folgen passen"}`:r+" min pro Folge";
+  return brwCard(m).replace('<div class="bwmeta">',`<div class="bwmeta">${t?`<span class="finrt">⏱ ${t}</span>`:""}`)}
+function finResults(){const el=$("finres");if(!el||!xo||xo.k!=="fin")return;const Lx=finItems();
+  $("fincnt").textContent=Lx.length?`${Lx.length} ${Lx.length===1?SEC[topTab].one:SEC[topTab].many} passen – die besten ${Math.min(24,Lx.length)}:`:"";
+  el.innerHTML=Lx.length?Lx.slice(0,24).map(o=>finCard(o.m)).join(""):`<p class="gn bwnone">Nichts gefunden. Gebt euch etwas mehr Zeit oder verschiebt den Punkt im Kompass.</p>`}
+function finSet(x,y){xo.x=Math.max(-1,Math.min(1,x));xo.y=Math.max(-1,Math.min(1,y));const was=xo.set;xo.set=true;if(!was){xoRender();return}
+  const d=$("fdot");if(d){d.style.left=(xo.x+1)*50+"%";d.style.top=(1-xo.y)*50+"%";d.classList.add("on")}const w=$("finword");if(w)w.textContent=finWord();finResults()}
+let finDrag=false;
+const finAt=e=>{const r=$("finpad").getBoundingClientRect();finSet((e.clientX-r.left)/r.width*2-1,1-(e.clientY-r.top)/r.height*2)};
+document.addEventListener("pointerdown",e=>{if(xo&&xo.k==="fin"&&e.target.closest&&e.target.closest("#finpad")){finDrag=true;finAt(e);e.preventDefault()}});
+document.addEventListener("pointermove",e=>{if(finDrag&&xo&&$("finpad"))finAt(e)});
+document.addEventListener("pointerup",()=>{finDrag=false});document.addEventListener("pointercancel",()=>{finDrag=false});
+document.addEventListener("keydown",e=>{if(!xo||xo.k!=="fin"||e.target.id!=="finpad")return;const s=.1,k=e.key;
+  if(k==="ArrowLeft")finSet(xo.x-s,xo.y);else if(k==="ArrowRight")finSet(xo.x+s,xo.y);else if(k==="ArrowUp")finSet(xo.x,xo.y+s);else if(k==="ArrowDown")finSet(xo.x,xo.y-s);else return;e.preventDefault();const p=$("finpad");if(p)p.focus()});
+document.addEventListener("input",e=>{if(e.target.id==="finmin"&&xo&&xo.k==="fin"){xo.min=+e.target.value;$("finmv").textContent=finMinTxt();finResults()}});
+
+// ---------- Marathon-Planer: Filmreihen in der richtigen Reihenfolge (aus dem Katalog erkannt, nach Erscheinungsjahr) ----------
+const MARA=[["Der Herr der Ringe","^The Lord of the Rings"],["Der Hobbit","^The Hobbit"],["Harry Potter","^Harry Potter"],["Phantastische Tierwesen","^Fantastic Beasts"],["Star Wars","Star Wars"],["Matrix","^The Matrix"],["The Dark Knight","^(Batman Begins|The Dark Knight)"],["Zurück in die Zukunft","^Back to the Future"],["Alien","^Alien(s|³| 3|: Resurrection|: Covenant|: Romulus)?$|^Prometheus$"],["Terminator","Terminator"],["Jurassic Park","^(Jurassic|The Lost World: Jurassic)"],["Fluch der Karibik","^Pirates of the Caribbean"],["Die Tribute von Panem","^The Hunger Games"],["Indiana Jones","Indiana Jones|Raiders of the Lost Ark"],["Mission: Impossible","^Mission: Impossible"],["John Wick","^John Wick"],["Bourne","Bourne"],["Saw","^Saw( |$)"],["Toy Story","^Toy Story"],["Planet der Affen","Planet of the Apes"],["Mad Max","Mad Max"],["X-Men","^X-Men|^X2|^Logan$|^The Wolverine"],["Avengers","^(The )?Avengers"],["Iron Man","^Iron Man"],["Thor","^Thor"],["Captain America","^Captain America"],["Guardians of the Galaxy","^Guardians of the Galaxy"],["Deadpool","^Deadpool"],["Spider-Man","Spider-Man"],["Fast & Furious","Fast (&|and) |Furious|^Fast Five|^F9|^Fast X"],["James Bond (Daniel Craig)","^(Casino Royale|Quantum of Solace|Skyfall|Spectre|No Time to Die)$"],["Twilight","Twilight"],["Shrek","^Shrek"],["Kill Bill","^Kill Bill"],["Stirb langsam","Die Hard"],["Ocean’s","^Ocean's"],["Hangover","^The Hangover"],["Conjuring","^The Conjuring"],["Scream","^Scream"],["Rocky & Creed","^Rocky|^Creed"],["Transformers","^Transformers"],["Ice Age","^Ice Age"],["Kung Fu Panda","^Kung Fu Panda"],["Drachenzähmen leicht gemacht","^How to Train Your Dragon"],["Dune","^Dune(: Part Two)?$",2021],["Blade Runner","^Blade Runner"],["Maze Runner","Maze Runner"],["Men in Black","^Men in Black"],["Predator","^Predator|^Prey$"],["Final Destination","^Final Destination"],["Insidious","^Insidious"],["Kingsman","Kingsman"],["Sherlock Holmes","^Sherlock Holmes"],["Die Unglaublichen","^(The )?Incredibles"],["Ich – Einfach unverbesserlich","^Despicable Me|^Minions"],["Before-Trilogie","^Before (Sunrise|Sunset|Midnight)$"],["A Quiet Place","^A Quiet Place"],["Avatar","^Avatar"]];
+let maraC=null;
+function maraList(){if(maraC)return maraC;const F=Object.values(M).filter(m=>m.sec==="film"&&!m.old&&!m.custom&&!m.auto);
+  return maraC=MARA.map(([n,re,y0])=>{const r=new RegExp(re);return{n,ids:F.filter(m=>r.test(m.orig||m.name)&&(!y0||+m.y>=y0)).sort((a,b)=>+a.y-+b.y).map(m=>m.id)}}).filter(x=>x.ids.length>=2)}
+// „Gesehen“ aus Sicht der aktuellen Ansicht: im Verlauf dieser Liste oder von der Person bewertet.
+const maraSeen=id=>ST.film.lists[view].done.some(d=>d.id===id)||(view!=="both"?!!xRate("film",id,view):!!(xRate("film",id,"jos")&&xRate("film",id,"joh")));
+function marHtml(){const c=ST.film.lists[view],onL=id=>c.list.includes(id);
+  const Lx=maraList().map(x=>{const s=x.ids.filter(maraSeen).length,tot=x.ids.reduce((a,id)=>a+(RT[id]||0),0),left=x.ids.filter(id=>!maraSeen(id)).reduce((a,id)=>a+(RT[id]||0),0);return Object.assign({s,tot,left},x)})
+    .sort((a,b)=>(b.s>0&&b.s<b.ids.length)-(a.s>0&&a.s<a.ids.length)||(a.s===a.ids.length)-(b.s===b.ids.length)||b.ids.length-a.ids.length);
+  return`<p class="xolead">Filmreihen in der richtigen Reihenfolge – mit Fortschritt für ${view==="both"?"eure gemeinsame Liste":esc(U[view].g)+" Liste"}. Antippen klappt eine Reihe auf.</p>
+  <div class="marl">${Lx.map(x=>{const open=xo.open===x.n,nx=x.ids.find(id=>!maraSeen(id)),done=x.s===x.ids.length;
+    return`<section class="marc${open?" open":""}${done?" fin":""}"><button class="marh" data-mar="${esc(x.n)}" aria-expanded="${open}"><span class="marcv">${x.ids.slice(0,3).map(id=>rwCv(id)).join("")}</span><span class="mart"><b>${esc(x.n)}</b><small>${x.s}/${x.ids.length} gesehen · ${fmtMin(x.tot)} gesamt${done?" · ✓ geschafft":x.s?` · noch ${fmtMin(x.left)}`:""}</small><span class="marp"><i style="width:${x.s/x.ids.length*100}%"></i></span></span><span class="aca" aria-hidden="true">▼</span></button>
+    ${open?`<ol class="maro">${x.ids.map((id,i)=>{const m=M[id],sn=maraSeen(id);return`<li class="${sn?"sn":""}${id===nx?" nx":""}"><span class="marn">${sn?"✓":i+1}</span><button class="lnk" data-info="${id}">${esc(m.name)}</button><span class="gn">${m.y}${RT[id]?" · "+fmtMin(RT[id]):""}</span>${id===nx&&editable()?(onL(id)?`<span class="pre">auf der Liste</span>`:`<button class="slb" data-maradd="${id}">＋ Auf die Liste</button>`):""}</li>`}).join("")}</ol>`:""}</section>`}).join("")}</div>`}
+
+// ---------- Quiz aus eurem Verlauf (erst ab QUIZ_MIN bewerteten Titeln) ----------
+const QUIZ_MIN=8,QUIZ_N=6;
+function quizPool(){const P=[];for(const k of RW_SECS){const s0=ST[k],first={};
+  for(const l of SEC[k].lists)for(const d of s0.lists[l].done){if(!M[d.id])continue;const o=first[d.id];if(!o||(!d.pre&&(o.pre||d.t<o.t)))first[d.id]={t:d.t,pre:!!d.pre}}
+  for(const id in first){const jos=xRate(k,id,"jos"),joh=xRate(k,id,"joh");if(jos||joh)P.push({id,k,name:M[id].name,jos,joh,t:first[id].t,pre:first[id].pre,y:yearOf(M[id])})}}return P}
+function quizMake(P){const Q=[],pick=a=>a[Math.floor(Math.random()*a.length)],two=xShuffle(P);
+  const both=P.filter(x=>x.jos&&x.joh);
+  for(const x of xShuffle(both).slice(0,3)){const e=r1(x.jos)===r1(x.joh);Q.push({t:"who",id:x.id,q:`Wer hat „${x.name}“ mehr Sterne gegeben?`,o:[U.jos.n,U.joh.n,"Beide gleich"],ok:e?2:x.jos>x.joh?0:1,note:`${U.jos.n} ${fmtR(x.jos)} · ${U.joh.n} ${fmtR(x.joh)}`})}
+  const real=P.filter(x=>!x.pre);
+  for(let i=0;i<3&&real.length>1;i++){const a=pick(real),b=pick(real.filter(x=>Math.abs(x.t-a.t)>864e5));if(!b)continue;Q.push({t:"first",ids:[a.id,b.id],q:"Welchen Titel habt ihr zuerst abgeschlossen?",o:[a.name,b.name],ok:a.t<b.t?0:1,note:`${a.t<b.t?a.name:b.name} am ${fdate(Math.min(a.t,b.t))}, ${a.t<b.t?b.name:a.name} am ${fdate(Math.max(a.t,b.t))}`})}
+  for(const x of two.slice(0,4)){const u=x.jos&&x.joh?pick(["jos","joh"]):x.jos?"jos":"joh",v=r1(x[u]),o=new Set([v]);let g=0;while(o.size<4&&g++<40){const c=r1(Math.max(1,Math.min(10,v+pick([-3,-2,-1.5,-1,1,1.5,2,3]))));o.add(c)}
+    const O=xShuffle([...o]);Q.push({t:"stars",id:x.id,q:`Wie viele Sterne hat ${U[u].n} „${x.name}“ gegeben?`,o:O.map(n=>"★ "+fmtR(n)),ok:O.indexOf(v),note:`Es waren ${fmtR(v)} Sterne.`})}
+  for(const u of ["jos","joh"]){const R=P.filter(x=>x[u]);for(let i=0;i<2&&R.length>1;i++){const a=pick(R),b=pick(R.filter(x=>Math.abs(x[u]-a[u])>=1));if(!b)continue;Q.push({t:"better",ids:[a.id,b.id],q:`Welchen Titel fand ${U[u].n} besser?`,o:[a.name,b.name],ok:a[u]>b[u]?0:1,note:`${a.name}: ${fmtR(a[u])} · ${b.name}: ${fmtR(b[u])}`})}}
+  for(const x of two.filter(x=>x.y).slice(0,2)){const o=new Set([x.y]);let g=0;while(o.size<4&&g++<40)o.add(x.y+pick([-6,-4,-3,-2,-1,1,2,3,4]));const O=[...o].sort((a,b)=>a-b);Q.push({t:"year",id:x.id,q:`Aus welchem Jahr ist „${x.name}“?`,o:O.map(String),ok:O.indexOf(x.y),note:`${x.name} ist von ${x.y}.`})}
+  // bunt mischen: möglichst verschiedene Fragearten
+  const out=[],seen={};for(const q of xShuffle(Q)){if((seen[q.t]||0)>=2)continue;seen[q.t]=(seen[q.t]||0)+1;out.push(q);if(out.length>=QUIZ_N)break}return out}
+function quizStart(){const P=quizPool();xo.n=P.length;xo.qs=P.length>=QUIZ_MIN?quizMake(P):[];xo.i=0;xo.score=0;xo.pick=null}
+function quizHtml(){if(xo.n<QUIZ_MIN)return`<div class="qzbox"><p class="qzbig">🔒</p><h3>Das Quiz öffnet nach ${QUIZ_MIN} bewerteten Titeln</h3><p class="gn">Bisher sind es ${xo.n}. Noch ${QUIZ_MIN-xo.n} ${QUIZ_MIN-xo.n===1?"Titel":"Titel"} bewerten – dann entstehen die Fragen aus eurem eigenen Verlauf.</p><span class="marp qzp"><i style="width:${xo.n/QUIZ_MIN*100}%"></i></span></div>`;
+  const N=xo.qs.length;if(!N)return`<div class="qzbox"><p class="gn">Für Fragen braucht es noch etwas mehr Abwechslung im Verlauf.</p></div>`;
+  if(xo.i>=N){const p=xo.score/N,msg=p===1?"Perfekt! Ihr kennt euch in- und auswendig. 💞":p>=.66?"Stark – ihr wisst ziemlich genau, was ihr geschaut habt!":p>=.34?"Solide. Der Verlauf hilft beim Auffrischen. 😉":"Da hilft nur eins: noch mal zusammen schauen! 🍿";
+    return`<div class="qzbox end"><p class="qzbig">${p===1?"🏆":p>=.66?"🎉":"🍿"}</p><h3>${xo.score} von ${N} richtig</h3><p>${msg}</p><div class="btns" style="justify-content:center"><button class="add" data-qzagain="1">Neue Runde</button><button class="rej" data-xoclose="1">Fertig</button></div></div>`}
+  const q=xo.qs[xo.i],done=xo.pick!==null,cv=q.id?`<div class="qzcv">${rwCv(q.id)}</div>`:"";
+  return`<div class="qzbox"><div class="qztop"><span>Frage ${xo.i+1} / ${N}</span><span class="marp"><i style="width:${(xo.i+(done?1:0))/N*100}%"></i></span><span>${xo.score} richtig</span></div>
+  ${cv}<h3 class="qzq">${esc(q.q)}</h3>
+  <div class="qzo${q.ids?" two":""}">${q.o.map((t,i)=>`<button class="qzb${done?(i===q.ok?" ok":i===xo.pick?" no":""):""}" data-qz="${i}"${done?" disabled":""}>${q.ids?rwCv(q.ids[i]):""}<span>${esc(t)}</span></button>`).join("")}</div>
+  ${done?`<p class="qzn ${xo.pick===q.ok?"ok":"no"}" role="status">${xo.pick===q.ok?"✓ Richtig!":"✗ Leider nicht."} ${esc(q.note)}</p><div class="btns" style="justify-content:center"><button class="add" data-qznext="1">${xo.i<N-1?"Weiter ›":"Zum Ergebnis ›"}</button></div>`:""}</div>`}
+
+// ---------- Geschmacks-Landkarte (Statistik): pro Genre der Sterne-Schnitt beider – rechts mag Josefine, oben mag Johann ----------
+function tasteHtml(){const g={};for(const k of RW_SECS){const W=ST[k].w||{};for(const id in W){const m=M[id],r=(W[id]||{}).r;if(!m||!r)continue;for(const t of m.tags){if(!L[t]||["short","long","retro"].includes(t))continue;const o=g[t]||(g[t]={jos:[0,0],joh:[0,0]});for(const u of ["jos","joh"])if(r[u]){o[u][0]+=r[u];o[u][1]++}}}}
+  const P=Object.entries(g).filter(([t,o])=>o.jos[1]>=2&&o.joh[1]>=2).map(([t,o])=>({t,l:L[t],x:o.jos[0]/o.jos[1],y:o.joh[0]/o.joh[1],n:o.jos[1]+o.joh[1]})).sort((a,b)=>b.n-a.n).slice(0,10);
+  const head=`<h3 class="sth">Geschmacks-Landkarte <span class="gn">(alle Bereiche)</span></h3>`;
+  if(P.length<3)return head+`<p class="gn">Die Karte erscheint, sobald ihr beide in mindestens drei Genres je zwei Titel bewertet habt.</p>`;
+  const lo=Math.max(1,Math.floor(Math.min(...P.map(p=>Math.min(p.x,p.y)))-.6)),hi=10,W=460,PAD=44,sc=v=>PAD+(v-lo)/(hi-lo)*(W-2*PAD),X=v=>sc(v),Y=v=>W-sc(v),mid=(lo+hi)/2,mx=Math.max(...P.map(p=>p.n));
+  const col=p=>p.x-p.y>.7?"var(--pink)":p.y-p.x>.7?"var(--lila)":"var(--acc)";
+  const ticks=[];for(let v=Math.ceil(lo);v<=hi;v+=(hi-lo>5?2:1))ticks.push(v);
+  const svg=`<svg class="tmap" viewBox="0 0 ${W} ${W}" role="img" aria-label="Geschmacks-Landkarte: ${P.map(p=>`${p.l}: ${U.jos.n} ${fmtR(p.x)}, ${U.joh.n} ${fmtR(p.y)}`).join("; ")}">
+    <rect class="tq q1" x="${X(mid)}" y="${PAD}" width="${X(hi)-X(mid)}" height="${Y(mid)-PAD}"/><rect class="tq q2" x="${PAD}" y="${PAD}" width="${X(mid)-PAD}" height="${Y(mid)-PAD}"/><rect class="tq q3" x="${X(mid)}" y="${Y(mid)}" width="${X(hi)-X(mid)}" height="${W-PAD-Y(mid)}"/><rect class="tq q4" x="${PAD}" y="${Y(mid)}" width="${X(mid)-PAD}" height="${W-PAD-Y(mid)}"/>
+    <text class="tql" x="${W-PAD-6}" y="${PAD+14}" text-anchor="end">Beide lieben’s</text><text class="tql" x="${PAD+6}" y="${PAD+14}">Eher ${esc(U.joh.g)} Ding</text><text class="tql" x="${W-PAD-6}" y="${W-PAD-7}" text-anchor="end">Eher ${esc(U.jos.g)} Ding</text><text class="tql" x="${PAD+6}" y="${W-PAD-7}">Beide lauwarm</text>
+    <line class="tdi" x1="${X(lo)}" y1="${Y(lo)}" x2="${X(hi)}" y2="${Y(hi)}"/>
+    ${ticks.map(v=>`<text class="ttk" x="${X(v)}" y="${W-PAD+15}" text-anchor="middle">${v}</text><text class="ttk" x="${PAD-8}" y="${Y(v)+4}" text-anchor="end">${v}</text>`).join("")}
+    <text class="tax jos" x="${W/2}" y="${W-6}" text-anchor="middle">${esc(U.jos.g)} Sterne →</text><text class="tax joh" transform="translate(12 ${W/2}) rotate(-90)" text-anchor="middle">${esc(U.joh.g)} Sterne →</text>
+    ${(()=>{const used=[],hit=b=>used.some(u=>b[0]<u[2]&&b[2]>u[0]&&b[1]<u[3]&&b[3]>u[1]);
+      for(const p of P){p.r=6+p.n/mx*9;p.cx=X(p.x);p.cy=Y(p.y);used.push([p.cx-p.r,p.cy-p.r,p.cx+p.r,p.cy+p.r])}
+      return P.map((p,i)=>{const w=p.l.length*6.4+4,h=13,C=[];
+        for(const dy of [0,-14,14,-28,28,-42,42]){C.push(["start",p.cx+p.r+4,p.cy+4+dy,[p.cx+p.r+4,p.cy-9+dy,p.cx+p.r+4+w,p.cy+4+dy]]);C.push(["end",p.cx-p.r-4,p.cy+4+dy,[p.cx-p.r-4-w,p.cy-9+dy,p.cx-p.r-4,p.cy+4+dy]])}
+        const ok=C.find(c=>c[3][0]>PAD-30&&c[3][2]<W-2&&c[3][1]>PAD-4&&c[3][3]<W-PAD+2&&!hit(c[3]))||C[0];used.push(ok[3]);
+        return`<g class="tmb" style="--i:${i}"><circle cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${col(p)}"><title>${esc(p.l)}: ${U.jos.n} ${fmtR(p.x)} · ${U.joh.n} ${fmtR(p.y)} (${p.n} Bewertungen)</title></circle><text x="${ok[1].toFixed(1)}" y="${ok[2].toFixed(1)}" text-anchor="${ok[0]}">${esc(p.l)}</text></g>`}).join("")})()}</svg>`;
+  const love=P.slice().sort((a,b)=>Math.min(b.x,b.y)-Math.min(a.x,a.y))[0],gap=P.slice().sort((a,b)=>Math.abs(b.x-b.y)-Math.abs(a.x-a.y))[0],same=P.slice().sort((a,b)=>Math.abs(a.x-a.y)-Math.abs(b.x-b.y))[0];
+  const li=[`💞 <b>Euer gemeinsames Lieblingsgenre:</b> ${esc(love.l)} (${U.jos.n} ${fmtR(love.x)} · ${U.joh.n} ${fmtR(love.y)})`];
+  if(Math.abs(gap.x-gap.y)>=1)li.push(`⚡ <b>Größter Unterschied:</b> ${esc(gap.l)} – ${gap.x>gap.y?U.jos.n:U.joh.n} mag es ${fmtR(Math.abs(gap.x-gap.y))} Sterne lieber`);
+  if(same.t!==love.t)li.push(`🤝 <b>Am einigsten:</b> ${esc(same.l)} (${Math.abs(same.x-same.y)<.05?"praktisch gleich":"nur "+fmtR(Math.abs(same.x-same.y))+" auseinander"})`);
+  return head+`<div class="tmwrap">${svg}<ul class="tmli">${li.map(x=>`<li>${x}</li>`).join("")}<li class="gn">Jeder Punkt ist ein Genre. Je größer, desto mehr Bewertungen. Auf der gestrichelten Linie seid ihr euch einig.</li></ul></div>`}
+
+// ---------- Jahres-Poster: Cover eurer bestbewerteten Titel als Bild zum Speichern oder Drucken ----------
+const xImg=u=>new Promise(res=>{if(!/^https:\/\//i.test(u||""))return res(null);const im=new Image();im.crossOrigin="anonymous";im.referrerPolicy="no-referrer";const t=setTimeout(()=>res(null),7000);im.onload=()=>{clearTimeout(t);res(im)};im.onerror=()=>{clearTimeout(t);res(null)};im.src=u});
+function posterHtml(){const ys=rewindYears();const y0=new Date().getFullYear();if(!ys.includes(y0))ys.unshift(y0);
+  return`<p class="xolead">Die Cover eurer bestbewerteten Titel als Plakat – zum Speichern, Verschicken oder Ausdrucken.</p>
+  <div class="bwchips pstc" role="group" aria-label="Jahr">${ys.map(y=>`<button class="bwchip${xo.year===y?" on":""}" data-pyear="${y}" aria-pressed="${xo.year===y}">${y}</button>`).join("")}<button class="bwchip${xo.year==="all"?" on":""}" data-pyear="all" aria-pressed="${xo.year==="all"}">Alle Jahre</button></div>
+  <div class="bwchips pstc" role="group" aria-label="Person">${["both","jos","joh"].map(u=>`<button class="bwchip${xo.who===u?" on":""}" data-pwho="${u}" aria-pressed="${xo.who===u}">${u==="both"?"Gemeinsam 💞":U[u].n}</button>`).join("")}</div>
+  <div class="pstbox">${xo.busy?`<p class="gn pstw">🎨 Poster wird gemalt …</p>`:xo.url?`<img class="pstimg" src="${xo.url}" alt="Jahres-Poster ${xo.year==="all"?"aller Jahre":xo.year}"><div class="btns" style="justify-content:center"><button class="add" data-psave="1">📤 Teilen / Speichern</button></div>`:`<p class="gn pstw">${esc(xo.msg||"")}</p>`}</div>`}
+async function posterMake(){if(!xo||xo.k!=="poster")return;const year=xo.year,who=xo.who,D=rewindData(year,who),Lx=D.rated.slice(0,12),job=xo.job=(xo.job||0)+1;
+  if(xo.url){URL.revokeObjectURL(xo.url);xo.url=""}
+  if(Lx.length<3){xo.busy=false;xo.msg=`Für ein Poster braucht es mindestens 3 bewertete Titel${year==="all"?"":" in "+year} – bisher ${Lx.length}.`;xoRender();return}
+  xo.busy=true;xoRender();
+  const th=rwTheme(),P=th==="baby"?{bg:["#ffd6ea","#eadcff","#d6eeff"],ink:"#4a2238",mu:"#8a5670",acc:"#e0559a",f:"'Baloo 2',sans-serif",hf:"800 96px 'Baloo 2',sans-serif"}:th==="purple"?{bg:["#0d0a1c","#1d1240","#0d0a1c"],ink:"#f2edff",mu:"#a69cc8",acc:"#3de8ff",f:"Anton,Impact,sans-serif",hf:"400 104px Anton,Impact,sans-serif"}:{bg:["#1a0f2e","#3a1850","#120d22"],ink:"#ffffff",mu:"#cdbfe6",acc:"#ffc857",f:"'Segoe UI',system-ui,sans-serif",hf:"italic 600 104px Fraunces,Georgia,serif"};
+  try{if(document.fonts)await document.fonts.ready}catch(e){}
+  const imgs=await Promise.all(Lx.map(x=>xImg(covOf(x.id))));if(!xo||xo.job!==job)return;
+  const draw=useImg=>{const W=1240,H=1754,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d");
+    const gr=g.createLinearGradient(0,0,W,H);P.bg.forEach((x,i)=>gr.addColorStop(i/2,x));g.fillStyle=gr;g.fillRect(0,0,W,H);
+    g.globalAlpha=.22;for(let i=0;i<60;i++){g.fillStyle=i%3?"#ffffff":P.acc;g.beginPath();g.arc((i*211)%W,(i*347)%H,1.5+(i%4),0,7);g.fill()}g.globalAlpha=1;
+    g.textAlign="center";g.fillStyle=P.acc;g.font=`700 34px ${P.f}`;g.fillText(year==="all"?"UNSERE WATCHLIST · ALLE JAHRE":"UNSER WATCHLIST-JAHR",W/2,110);
+    g.fillStyle=P.ink;g.font=P.hf;g.fillText(year==="all"?"Best of":String(year),W/2,220);
+    g.font=`600 40px ${P.f}`;g.fillStyle=P.mu;g.fillText(who==="both"?`${U.jos.n} ♥ ${U.joh.n}`:U[who].n,W/2,282);
+    const n=Lx.length,cols=n<=4?2:n<=9?3:4,rows=Math.ceil(n/cols),gx=40,lab=96,top=340,bot=H-170,cw0=(W-170-(cols-1)*gx)/cols,ch0=(bot-top)/rows-lab,cw=Math.min(cw0,ch0*2/3),ch=cw*1.5,gy=lab,gw=cols*cw+(cols-1)*gx,gh=rows*(ch+lab),x0=(W-gw)/2,y0=top+Math.max(0,(bot-top-gh)/2);
+    const rr=(x,y,w,h,r)=>{g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()};
+    Lx.forEach((x,i)=>{const col=i%cols,row=Math.floor(i/cols),inRow=row===rows-1?n-row*cols:cols,off=row===rows-1?(cols-inRow)*(cw+gx)/2:0,px=x0+off+col*(cw+gx),py=y0+row*(ch+gy),im=useImg&&imgs[i];
+      g.save();g.shadowColor="rgba(0,0,0,.45)";g.shadowBlur=30;g.shadowOffsetY=14;rr(px,py,cw,ch,18);g.fillStyle=`hsl(${hue(x.id)} 35% 30%)`;g.fill();g.restore();
+      g.save();rr(px,py,cw,ch,18);g.clip();
+      if(im){const s=Math.max(cw/im.width,ch/im.height),w=im.width*s,h=im.height*s;g.drawImage(im,px+(cw-w)/2,py+(ch-h)/2,w,h)}
+      else{const g2=g.createLinearGradient(px,py,px+cw,py+ch);g2.addColorStop(0,`hsl(${hue(x.id)} 40% 38%)`);g2.addColorStop(1,`hsl(${(hue(x.id)+40)%360} 40% 20%)`);g.fillStyle=g2;g.fillRect(px,py,cw,ch);g.fillStyle="rgba(255,255,255,.9)";g.font=`700 ${Math.round(cw/9)}px ${P.f}`;g.textAlign="center";const ws=x.name.split(" ");let ln="",yy=py+ch/2-20;for(const w of ws){if(g.measureText(ln+" "+w).width>cw-30&&ln){g.fillText(ln,px+cw/2,yy);yy+=cw/7;ln=w}else ln=(ln+" "+w).trim()}g.fillText(ln,px+cw/2,yy)}
+      g.restore();
+      g.fillStyle=P.acc;g.beginPath();g.arc(px+6,py+6,26,0,7);g.fill();g.fillStyle=th==="baby"?"#fff":"#1b1407";g.font=`800 28px ${P.f}`;g.textAlign="center";g.fillText(String(i+1),px+6,py+16);
+      g.fillStyle=P.ink;let fs=Math.max(22,Math.min(30,Math.round(cw/9)));g.font=`700 ${fs}px ${P.f}`;let nm=x.name;while(g.measureText(nm).width>cw+gx-10&&nm.length>4)nm=nm.slice(0,-2);if(nm!==x.name)nm=nm.trim()+"…";g.fillText(nm,px+cw/2,py+ch+fs+10);
+      g.fillStyle=P.acc;g.font=`700 ${Math.round(fs*.9)}px ${P.f}`;g.fillText("★ "+rwNum(D.sc(x)),px+cw/2,py+ch+fs*2+14)});
+    g.textAlign="center";g.fillStyle=P.ink;g.font=`700 38px ${P.f}`;const st=[`${D.items.length} Titel`,D.who==="both"&&D.tog?`${D.tog} zusammen`:"",["jos","joh"].filter(u=>D.av[u]&&(who==="both"||who===u)).map(u=>`${U[u].n} Ø ${rwNum(D.av[u].v)}`).join(" · ")].filter(Boolean).join("   ·   ");g.fillText(st,W/2,H-110);
+    g.fillStyle=P.mu;g.font=`400 30px ${P.f}`;g.fillText("Josefines ♥ Johanns Watchlist",W/2,H-58);return c};
+  let blob=null;for(const useImg of [true,false]){try{const c=draw(useImg);blob=await new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error("leer")),"image/png"));break}catch(e){blob=null}}
+  if(!xo||xo.job!==job)return;xo.busy=false;
+  if(!blob){xo.msg="Das Poster konnte nicht erstellt werden.";xoRender();return}
+  xo.blob=blob;xo.url=URL.createObjectURL(blob);xo.file=`watchlist-poster-${year==="all"?"alle-jahre":year}-${who}.png`;xoRender()}
+async function posterSave(){if(!xo||!xo.blob)return;const file=new File([xo.blob],xo.file,{type:"image/png"});
+  try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:"Unser Watchlist-Poster"});return}}catch(e){if(e&&e.name==="AbortError")return}
+  const a=document.createElement("a");a.href=xo.url;a.download=xo.file;document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),500);toast("Poster gespeichert 🖼")}
+
+// ---------- Haustier schaut mit ----------
+const PETRX=[["horror","😱 Ich versteck mich hinter dem Kissen!"],["gore","🙈 Sag Bescheid, wenn’s vorbei ist …"],["thriller","😬 Ich halt’s jetzt schon kaum aus!"],["romance","🥰 Hach … reichst du mir ein Taschentuch?"],["comedy","😂 Ich kichere schon mal vor."],["scifi","🚀 Anschnallen, wir heben ab!"],["fantasy","🐉 Darf ich den Drachen behalten?"],["sport","💪 Ich feuere mit an!"],["music","🎵 Ich summe schon mal mit."],["slice","🍵 Gemütlich. Genau mein Ding."],["mystery","🔍 Ich hab schon einen Verdacht!"],["war","🪖 Ich bleib ganz dicht bei dir."],["crime","🕵️ Ich pass auf, wer’s war."],["drama","🥺 Das wird bestimmt emotional …"],["action","💥 Popcorn festhalten!"],["adventure","🧭 Los, ich pack schon den Rucksack!"]];
+const petSeenX=new Set();
+function petFav(u){const P=petView(u);if(P.egg)return"";const Lx=[];for(const k of RW_SECS)for(const id in ST[k].w||{})if(M[id]&&xRate(k,id,u)>=7)Lx.push(M[id].name);if(!Lx.length)return"";Lx.sort();return Lx[hue(String(P.nm)+Lx.length)%Lx.length]}
+// ev: "look" (Info geöffnet), "add" (auf die Liste), "done" (abgeschlossen). Setzt nur die Sprechblase; gezeichnet wird beim nächsten render().
+function petReact(id,ev){const u=I(),m=M[id];if(!me||!m)return;let P;try{P=petView(u)}catch(e){return}if(P.egg)return;
+  if(ev==="look"){if(petSeenX.has(id))return;petSeenX.add(id)}
+  let line="";
+  if(ev==="done"){const r=rt(id,u);line=r>=9?"🤩 Das war großartig – gleich nochmal?":r&&r<=4?"😴 Ich bin zwischendurch eingenickt …":m.sec==="film"&&runMin(m)>=150?"😮‍💨 Puh, der war lang – aber wir haben durchgehalten!":"🍿 Schöner Abend! Was kommt als Nächstes?"}
+  else{const t=PETRX.find(x=>(m.tags||[]).includes(x[0]));line=t?t[1]:"";if(ev==="add"&&line)line="📌 Vorgemerkt! "+line;if(ev==="look"&&m.sec==="film"&&runMin(m)>=165)line="😴 "+fmtMin(runMin(m))+"? Ich hol schon mal die Decke.";}
+  if(!line)return;petLine=line;clearTimeout(petT);petT=setTimeout(()=>{petLine="";renderSide();petBub()},6500);petBub()}
+// Auf dem Handy ist die Seitenleiste zu – dort erscheint das Haustier kurz als kleine Sprechblase über der Leiste.
+function petBub(){const el=$("petbub");if(!el)return;let P=null;try{P=me?petView(I()):null}catch(e){}
+  if(!petLine||!P||P.egg||lay()!=="m"){el.hidden=true;return}
+  el.hidden=false;el.innerHTML=`<span class="pbe" aria-hidden="true">${P.emo}</span><span>${esc(petLine)}</span>`}
+
+// ---------- Seite färbt sich nach dem Titel (Hell/Dunkel): Hauptfarbe des Covers für Hintergrund und Info-Fenster ----------
+const tintC=new Map();
+function tintOf(id){if(tintC.has(id))return Promise.resolve(tintC.get(id));const fb=`hsl(${hue(id)} 55% 55%)`;
+  return xImg(covOf(id)).then(im=>{let c=fb;if(im){try{const cv=document.createElement("canvas");cv.width=cv.height=14;const g=cv.getContext("2d",{willReadFrequently:true});g.drawImage(im,0,0,14,14);const d=g.getImageData(0,0,14,14).data;let R=0,G=0,B=0,Wt=0;
+      for(let i=0;i<d.length;i+=4){const mx=Math.max(d[i],d[i+1],d[i+2]),mn=Math.min(d[i],d[i+1],d[i+2]),s=mx?(mx-mn)/mx:0,w=.02+s*s*(mx/255);R+=d[i]*w;G+=d[i+1]*w;B+=d[i+2]*w;Wt+=w}
+      R/=Wt*255;G/=Wt*255;B/=Wt*255;const mx=Math.max(R,G,B),mn=Math.min(R,G,B),dl=mx-mn;let h=0;if(dl>.02){h=mx===R?((G-B)/dl)%6:mx===G?(B-R)/dl+2:(R-G)/dl+4;h=Math.round(h*60+360)%360;c=`hsl(${h} ${Math.round(Math.max(45,Math.min(80,dl/(mx||1)*100)))}% 56%)`}}catch(e){}}
+    tintC.set(id,c);return c})}
+function tintApply(){const el=$("tint");if(!el)return;if(xThemed()){el.classList.remove("on");tintApply.cur="";return}
+  const id=openId||(tab==="wl"&&!$("rec").hidden?$("rec").dataset.k:"")||"";if(id===tintApply.cur)return;tintApply.cur=id;
+  if(!id){el.classList.remove("on");$("modal").style.removeProperty("--tint");return}
+  tintOf(id).then(c=>{if(tintApply.cur!==id)return;el.style.backgroundColor=c;el.classList.add("on");$("modal").style.setProperty("--tint",c)})}
+
+// ---------- Kino-Ticket beim Abschließen ----------
+function ticketShow(id){const m=M[id];if(!m)return;const old=$("ticket");if(old)old.remove();const r=(S.w[id]||{}).r||{},n=C().done.length,t=document.createElement("div");t.id="ticket";t.setAttribute("role","status");
+  t.innerHTML=`<div class="tkt"><div class="tkm"><small>KINO-TICKET · ${esc(SEC[m.sec].one.toUpperCase())}</small><b>${esc(m.name)}</b><span>${fdate(Date.now())} · ${view==="both"?"💞 zusammen":esc(U[view].n)}</span><span class="tks">${["jos","joh"].filter(u=>r[u]).map(u=>`${esc(U[u].n)} ★ ${fmtR(r[u])}`).join(" · ")||"noch ohne Sterne"}</span></div><div class="tkst"><span>ADMIT</span><b>${view==="both"?"2":"1"}</b><i>№ ${String(n).padStart(3,"0")}</i></div></div>`;
+  document.body.appendChild(t);t.addEventListener("click",()=>t.remove());setTimeout(()=>t.classList.add("out"),calm()?2600:3400);setTimeout(()=>t.remove(),4200)}
+
+// ---------- Verlauf: Liste, Regal oder Ticket-Sammlung ----------
+let hview="list";try{hview=localStorage.getItem("wl-hview")||"list"}catch(e){}if(!["list","shelf","tix"].includes(hview))hview="list";
+function histViews(){const hv=$("hvs");if(!hv)return;
+  hv.innerHTML=[["list","☰","Liste"],["shelf","📚","Regal"],["tix","🎟","Tickets"]].map(x=>`<button class="hvb${hview===x[0]?" on":""}" data-hview="${x[0]}" aria-pressed="${hview===x[0]}"><span aria-hidden="true">${x[1]}</span> ${x[2]}</button>`).join("");
+  $("hist").hidden=hview!=="list";const sh=$("shelf"),tx=$("tix");sh.hidden=hview!=="shelf";tx.hidden=hview!=="tix";
+  if(tab!=="hist"){sh.innerHTML="";tx.innerHTML="";return}
+  let D=sortedDone();if(hsort==="hue")D=D.slice().sort((a,b)=>hue(a.id)-hue(b.id));
+  const sc=id=>view==="both"?avg(id):rt(id,view)||avg(id);
+  if(hview==="shelf")sh.innerHTML=D.length?D.map((d,i)=>{const m=M[d.id],s=sc(d.id),h=hue(d.id),len=m.name.length;
+    return`<button class="spine" data-info="${d.id}" style="--h:${h};--sh:${150+Math.round((s||5)*9)}px;--sw:${Math.max(30,Math.min(54,26+len*.9))}px;--i:${Math.min(i,40)}" title="${esc(m.name)}${s?" · ★ "+fmtR(s):""}" aria-label="${esc(m.name)}${s?", "+fmtR(s)+" Sterne":""}"><span class="spt">${esc(m.name)}</span><span class="sps">${s?fmtR(s):"–"}</span></button>`}).join("")+`<p class="gn shhint">Höhe = eure Sterne. Antippen öffnet den Titel.</p>`:`<p class="gn">Noch nichts abgeschlossen – das Regal ist leer.</p>`;
+  else if(hview==="tix")tx.innerHTML=D.length?D.map((d,i)=>{const m=M[d.id],r=(S.w[d.id]||{}).r||{};
+    return`<button class="tkt mini" data-info="${d.id}" style="--h:${hue(d.id)};--i:${Math.min(i,24)}"><span class="tkm"><small>${esc(SEC[m.sec].one.toUpperCase())}${d.via==="both"||view==="both"?" · 💞":""}</small><b>${esc(m.name)}</b><span>${fdate(d.t)}</span><span class="tks">${["jos","joh"].filter(u=>r[u]).map(u=>`${esc(U[u].n)} ★ ${fmtR(r[u])}`).join(" · ")||"ohne Sterne"}</span></span><span class="tkst"><span>ADMIT</span><b>${d.via==="both"||view==="both"?"2":"1"}</b></span></button>`}).join(""):`<p class="gn">Noch keine Tickets – schließt euren ersten Titel ab.</p>`}
+
+// ---------- Tag und Nacht von selbst: 7–19 Uhr hell, sonst dunkel ----------
+const themeAutoOn=()=>{try{return localStorage.getItem("anime-theme-v1")==="auto"}catch(e){return false}};
+function themeAuto(){if(!themeAutoOn())return;const h=new Date().getHours(),t=h>=7&&h<19?"light":"dark",de=document.documentElement;de.dataset.auto="1";if(de.dataset.theme!==t)de.dataset.theme=t}
+setInterval(themeAuto,5*60*1000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)themeAuto()});themeAuto();
+
+// ---------- Rewind interaktiv: Tipp-Fragen vor den Auflösungen, Awards zum Aufdecken, Reaktionen ----------
+function rwInteractive(){const D=rw.data,S2=rw.slides,ins=(before,sl)=>{const i=S2.findIndex(s=>s.id===before);if(i>-1)S2.splice(i,0,sl)},pickN=(a,n)=>xShuffle(a).slice(0,n);
+  rw.rev=new Set();rw.gs=0;rw.gn=0;
+  const G=(id,q,opts,ok,note)=>({id:"tipp",g:{id,q,o:opts,ok,note,pick:null}});
+  if(D.rated.length>=3&&S2.some(s=>s.id==="top")){const best=D.rated[0],oth=pickN(D.rated.slice(1).filter(x=>D.sc(x)<D.sc(best)),2);if(oth.length===2){const O=xShuffle([best].concat(oth));ins("top",G("top",D.who==="both"?"Ratet mal: Welcher Titel hat bei euch die meisten Sterne bekommen?":"Rate mal: Welcher Titel hat die meisten Sterne bekommen?",O.map(x=>({l:x.name,cv:x.id})),O.indexOf(best),`${best.name} mit ${rwNum(D.sc(best))} Sternen.`))}}
+  if(D.av.jos&&D.av.joh&&S2.some(s=>s.id==="geschmack")){const a=D.av.jos.v,b=D.av.joh.v,e=Math.abs(a-b)<.05;ins("geschmack",G("geschmack","Wer von euch hat strenger bewertet?",[{l:U.jos.n},{l:U.joh.n},{l:"Beide gleich"}],e?2:a<b?0:1,`${U.jos.n} Ø ${rwNum(a)} · ${U.joh.n} Ø ${rwNum(b)}`))}
+  if(!D.all&&S2.some(s=>s.id==="monate")){const mx=Math.max(...D.months.map(m=>m.length)),pk=D.months.findIndex(m=>m.length===mx),oth=pickN(D.months.map((m,i)=>i).filter(i=>i!==pk&&D.months[i].length<mx),2);if(mx>0&&oth.length===2){const O=[pk].concat(oth).sort((a,b)=>a-b);ins("monate",G("monate","In welchem Monat habt ihr am meisten abgeschlossen?",O.map(i=>({l:MON[i]})),O.indexOf(pk),`${MON[pk]} mit ${mx} ${mx===1?"Titel":"Titeln"}.`))}}
+  rw.gn=S2.filter(s=>s.g).length}
+function rwGuessHtml(sl){const g=sl.g,done=g.pick!==null;
+  return`<p class="rwk2">Tipp-Runde 🎯</p><h2 class="rwh">${esc(g.q)}</h2><div class="rwgs${g.o[0].cv?" wcv":""}">${g.o.map((o,i)=>`<button class="rwgb${done?(i===g.ok?" ok":i===g.pick?" no":""):""}" data-rwguess="${i}"${done?" disabled":""}>${o.cv?rwCv(o.cv):""}<span>${esc(o.l)}</span></button>`).join("")}</div>
+  ${done?`<p class="rwp rwgr ${g.pick===g.ok?"ok":"no"}" role="status">${g.pick===g.ok?"✓ Richtig getippt!":"✗ Knapp daneben."} ${esc(g.note)}</p><button class="rwgo" data-rwnext="1">Zur Auflösung ▶</button>`:`<p class="rwsm">Tippt eine Antwort an – oder wischt einfach weiter.</p>`}`}
+// Nach jedem Zeichnen des Rewinds: Aufdeck-Zustand der Awards, Tipp-Bilanz und Reaktionsleiste.
+function rwAfter(el){if(!rw||rw.stage!=="story")return;
+  el.querySelectorAll(".rwa[data-rwrev]").forEach(x=>{const on=rw.rev.has(+x.dataset.rwrev);x.classList.toggle("hid",!on);x.setAttribute("aria-label",on?"":"Award aufdecken")});
+  const sl=rw.slides[rw.i],box=el.querySelector(".rwslide");if(!box)return;
+  if(sl.id==="awards"&&el.querySelector(".rwa.hid")&&!el.querySelector(".rwrevall")){const p=document.createElement("p");p.className="rwsm rwrevall";p.innerHTML=`Antippen deckt einen Award auf. <button class="rwghost" data-rwrevall="1">Alle aufdecken</button>`;box.appendChild(p)}
+  if(sl.id==="ende"&&rw.gn){const d=rw.slides.filter(s=>s.g&&s.g.pick!==null).length;if(d){const p=document.createElement("p");p.className="rwsm rwtally";p.textContent=`🎯 Tipp-Runde: ${rw.gs} von ${d} richtig geraten.`;const b=box.querySelector(".rwbtns");box.insertBefore(p,b||null)}}
+  if(!el.querySelector(".rwreact")&&sl.id!=="intro"){const r=document.createElement("div");r.className="rwreact";r.setAttribute("role","group");r.setAttribute("aria-label","Reaktion");r.innerHTML=["❤️","😂","😮","🥹","🔥"].map(e=>`<button class="rwrb" data-rwreact="${e}" aria-label="Reaktion ${e}">${e}</button>`).join("");const nav=el.querySelector(".rwnav");if(nav)nav.parentNode.insertBefore(r,nav)}}
+function rwReact(e,b){if(calm())return;const r=b.getBoundingClientRect();for(let i=0;i<7;i++){const s=document.createElement("span");s.className="rwfly";s.textContent=e;s.style.left=r.left+r.width/2+"px";s.style.top=r.top+"px";document.body.appendChild(s);
+  s.animate([{transform:"translate(-50%,0) scale(.6)",opacity:1},{transform:`translate(calc(-50% + ${(Math.random()-.5)*160}px),${-180-Math.random()*220}px) scale(${1+Math.random()}) rotate(${(Math.random()-.5)*60}deg)`,opacity:0}],{duration:1100+Math.random()*700,easing:"cubic-bezier(.2,.7,.3,1)",delay:i*45}).onfinish=()=>s.remove()}}
+
+// Einstiege im Statistik-Tab
+const xStatBtns=()=>`<div class="xbtns"><button class="rollb" data-xo="poster">🖼 Jahres-Poster</button><button class="rollb" data-xo="quiz">🧠 Quiz aus eurem Verlauf</button><button class="rollb" data-xo="mar">🎞️ Marathon-Planer</button><button class="rollb" data-xo="fin">🧭 Zeit &amp; Stimmung</button></div>`;
+// ---------- Aktionen der Extras (wird am Anfang von act() gefragt) ----------
+function xAct(d){
+  if(d.xo){xoOpen(d.xo,d.xo==="poster"?{year:new Date().getFullYear(),who:"both"}:null);return true}
+  if(d.xoclose){xoClose();return true}
+  if(d.hview){hview=d.hview;try{localStorage.setItem("wl-hview",hview)}catch(e){}fxEnter("tab");render();return true}
+  if(!xo)return false;
+  if(d.finmin!==undefined){xo.min=+d.finmin;xoRender();return true}
+  if(d.finreset){xo.set=false;xo.x=0;xo.y=0;xoRender();return true}
+  if(d.finrand){const Lx=finItems().slice(0,10);if(Lx.length)act({info:Lx[Math.floor(Math.random()*Lx.length)].m.id});else toast("Dazu passt gerade nichts.");return true}
+  if(d.mar){xo.open=xo.open===d.mar?"":d.mar;xoRender();return true}
+  if(d.maradd){if(topTab!=="film")act({top:"film"});act({sadd:d.maradd});return true}
+  if(d.qz!==undefined&&xo.k==="quiz"&&xo.pick===null){xo.pick=+d.qz;const q=xo.qs[xo.i];if(xo.pick===q.ok){xo.score++;const b=document.querySelector(`.qzb[data-qz="${q.ok}"]`);if(b){const r=b.getBoundingClientRect();fxBurst(r.left+r.width/2,r.top+r.height/2,10)}}xoRender();return true}
+  if(d.qznext){xo.i++;xo.pick=null;xoRender();if(xo.i>=xo.qs.length&&xo.score/xo.qs.length>=.8)confetti();$("xo").scrollTop=0;return true}
+  if(d.qzagain){quizStart();xoRender();return true}
+  if(d.pyear){xo.year=d.pyear==="all"?"all":+d.pyear;posterMake();return true}
+  if(d.pwho){xo.who=d.pwho;posterMake();return true}
+  if(d.psave){posterSave();return true}
+  return false}
+// EXTRAS-END
 chReset();   // einmaliger Kisten-Neustart (siehe CH_RESET)
 render();
 babySky();barColor();rwLastOpen=rewindWindow(rwNow()).open;
