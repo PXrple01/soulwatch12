@@ -320,3 +320,10 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Die große Überschrift („Serien“ usw.) ist weg; `#cth` bleibt nur für Screenreader (`.sr`, gegen Theme-Regeln abgesichert). Der Untertitel nennt die Liste und ggf. den Tab („Johanns Liste · Inventar“).
 - Seitenleiste: Titel, dann Statistik, Abzeichen, Inventar, Haustier, Plätze (Trennlinie über der Statistik).
 - sw.js: Cache `jj-watchlist-v25`.
+
+### Update: Folgen korrigieren
+- Auf der Karte neben „✓ E…“: **−** nimmt die zuletzt gesehene Folge zurück (`data-epback`), **✎** öffnet das Info-Fenster direkt bei den Folgen (`data-epjump`) und setzt den Fokus ins Zahlenfeld.
+- Im Info-Fenster: Feld „Gesehen bis Folge [n] / max“ je Staffel (`data-epto`, übernommen bei Enter/Verlassen). 0 setzt die Staffel zurück.
+- Antippen einer früheren Folge im Raster setzt den Stand dorthin (wie bisher). Alle drei Wege laufen über denselben Code im `act()`-Zweig `d.ep||d.epback||d.epto`, mit Rückgängig.
+- Sicherheit: Fremde Titel (eigene, Neuerscheinungen, Cloud) werden beim Laden bereinigt (`cleanTitle`/`loadExt`), das Info-Fenster für Filme/Serien maskiert alle Werte.
+- sw.js: Cache `jj-watchlist-v27`.

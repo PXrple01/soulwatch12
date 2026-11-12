@@ -259,7 +259,9 @@ h1{font-weight:500;letter-spacing:-.01em}
 .mbox .sea{margin:10px 0}.mbox .sea .sb{flex-direction:column}.mbox .sea button{text-align:left}
 /* Folgen abhaken */
 .epnx{align-self:flex-start;margin-top:5px;padding:3px 9px;border-radius:999px;border:1px solid var(--acc);background:none;color:var(--acc);font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap}
-.epnx small{font-weight:500;opacity:.7;margin-left:1px}.epnx:hover{background:var(--acc);color:var(--accink)}
+.epnx small{font-weight:500;opacity:.7;margin-left:1px}
+.epw{display:inline-flex;gap:4px;align-self:flex-start;align-items:center}.epw .epnx{align-self:auto}.epnx.epm{padding:3px 8px;min-width:28px;opacity:.85}
+.epto{display:flex;align-items:center;gap:6px;margin:6px 0 8px;font-size:.85rem}.epto input{width:5.5em;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}.epnx:hover{background:var(--acc);color:var(--accink)}
 .eps{margin:12px 0;padding-top:10px;border-top:1px solid var(--line)}
 .epsh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}.epsh .mut{font-size:.8rem}
 .epss{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px;scrollbar-width:thin}
@@ -4228,7 +4230,8 @@ const epCount=(id,s)=>((EPS[id]||[])[s-1]||{}).n||0;
 const epSeen=(id,s)=>{const c=epCount(id,s);return prog(id)>=s?c:Math.min(epMap(id)[s]||0,c)};
 function epNext(id){const L=EPS[id];if(!L)return null;for(let s=1;s<=L.length;s++){const c=L[s-1].n;if(!c)continue;const k=epSeen(id,s);if(k<c)return{s,e:k+1,c,t:L[s-1].t&&L[s-1].t[k]?L[s-1].t[k][0]:""}}return null}
 const epBtn=id=>{const x=epNext(id);if(!x||!editable())return"";const one=(EPS[id]||[]).length<2;
-  return`<button class="epnx" data-ep="${id}:${x.s}:${x.e}" title="${esc(x.t?"Folge "+x.e+": "+x.t:"Folge "+x.e)} abhaken" aria-label="Nächste Folge abhaken: ${one?"":"Staffel "+x.s+", "}Folge ${x.e}">✓ ${one?"":"S"+x.s+" · "}E${x.e}<small>/${x.c}</small></button>`};
+  const any=(EPS[id]||[]).some((y,i)=>epSeen(id,i+1)>0);
+  return`<span class="epw">${any?`<button class="epnx epm" data-epback="${id}" title="Letzte Folge zurücknehmen" aria-label="Letzte gesehene Folge zurücknehmen">−</button>`:""}<button class="epnx" data-ep="${id}:${x.s}:${x.e}" title="${esc(x.t?"Folge "+x.e+": "+x.t:"Folge "+x.e)} abhaken" aria-label="Nächste Folge abhaken: ${one?"":"Staffel "+x.s+", "}Folge ${x.e}">✓ ${one?"":"S"+x.s+" · "}E${x.e}<small>/${x.c}</small></button><button class="epnx epm" data-info="${id}" data-epjump="1" title="Folge auswählen" aria-label="Folge auswählen">✎</button></span>`};
 function epHtml(id){const L=EPS[id];if(!L||!L.some(x=>x.n))return EPS[id]===undefined&&M[id]&&M[id].sec!=="film"?`<p class="mut eph">${sFail[id]&&!sAsked.has(id)?"Folgen gerade nicht abrufbar – später nochmal versuchen.":"Folgen werden geladen …"}</p>`:"";
   const nx=epNext(id),sel=Math.min(epSel[id]||(nx?nx.s:L.length),L.length),c=L[sel-1].n,ed=editable(),seen=epSeen(id,sel),T=L[sel-1].t;
   const PG=100,pages=Math.ceil(c/PG),pg=Math.min(epPg[id+":"+sel]??Math.floor(Math.min(seen,c-1)/PG),Math.max(0,pages-1)),a=pg*PG+1,b=Math.min(c,a+PG-1);
@@ -4236,9 +4239,10 @@ function epHtml(id){const L=EPS[id];if(!L||!L.some(x=>x.n))return EPS[id]===unde
   const rows=[];for(let e=a;e<=b;e++){const on=e<=seen,t=T&&T[e-1];rows.push(T?`<button class="epr${on?" on":""}" data-ep="${id}:${sel}:${e}" aria-pressed="${on}"${ed?"":" disabled"}><span class="epn">${on?"✓":e}</span><span class="ept">${esc(t&&t[0]||"Folge "+e)}</span>${t&&t[1]?`<span class="epd">${fdate(t[1])}</span>`:""}</button>`
     :`<button class="epc${on?" on":""}" data-ep="${id}:${sel}:${e}" aria-pressed="${on}" aria-label="Folge ${e}"${ed?"":" disabled"}>${on?"✓":e}</button>`)}
   return`<div class="eps"><div class="epsh"><b>Folgen</b><span class="mut">${totS}/${tot} gesehen</span></div>
+  ${ed&&c?`<label class="epto">${L.length>1?"Staffel "+sel+": g":"G"}esehen bis Folge <input type="number" inputmode="numeric" min="0" max="${c}" value="${seen}" data-epto="${id}:${sel}" aria-label="Gesehen bis Folge (0 bis ${c})"><span class="mut">/ ${c}</span></label>`:""}
   ${L.length>1?`<div class="epss" role="group" aria-label="Staffel wählen">${L.map((x,i)=>`<button class="${i+1===sel?"on":""}${epSeen(id,i+1)>=x.n&&x.n?" full":""}" data-epsel="${id}:${i+1}" aria-pressed="${i+1===sel}">S${i+1}<small>${epSeen(id,i+1)}/${x.n}</small></button>`).join("")}</div>`:""}
   ${pages>1?`<div class="epss pg">${Array.from({length:pages},(_,i)=>`<button class="${i===pg?"on":""}" data-eppg="${id}:${sel}:${i}">${i*PG+1}–${Math.min(c,(i+1)*PG)}</button>`).join("")}</div>`:""}
-  <div class="${T?"epl":"epg"}">${rows.join("")||`<p class="mut">Für diese Staffel sind noch keine Folgen erschienen.</p>`}</div>${ed&&nx&&nx.s===sel?`<p class="mut eph">Tipp: Antippen hakt alle Folgen bis dahin ab, nochmal antippen nimmt die letzte zurück.</p>`:""}</div>`}
+  <div class="${T?"epl":"epg"}">${rows.join("")||`<p class="mut">Für diese Staffel sind noch keine Folgen erschienen.</p>`}</div>${ed&&nx&&nx.s===sel?`<p class="mut eph">Tipp: Antippen hakt alle Folgen bis dahin ab, Antippen einer früheren Folge setzt den Stand dorthin zurück. Oder oben die Zahl eintragen.</p>`:""}</div>`}
 // Leiste mit S1, S2 … – Klick auf eine Staffel hakt alle bis dahin ab, erneuter Klick nimmt sie zurück.
 function seaHtml(id,big){const L=SEA[id];if(!L||L.length<2)return"";const p=prog(id),ed=editable();
   return `<div class="sea"><span class="sl2">Staffeln: ${Math.min(p,L.length)}/${L.length} gesehen</span><div class="sb">${L.map((t,i)=>`<button data-sea="${id}:${i+1}" class="${p>i?"on":""}" title="${esc(t)}" aria-pressed="${p>i}"${ed?"":" disabled"}>${p>i?"✓ ":""}${big?`S${i+1} · ${esc(t)}`:"S"+(i+1)}</button>`).join("")}</div></div>`}
@@ -5436,7 +5440,7 @@ function act(d){
   else if(d.rsrc){if(spinning)return;rollSrc=d.rsrc;rollId=null}
   else if(d.mood){if(spinning)return;mood=d.mood;rollId=null}
   else if(d.spin){spin();return}
-  else if(d.info){openId=d.info;seaNeed(openId);rollOn=false;rmAsk=null;if(META[openId]===undefined&&!Q.includes(openId)){Q.unshift(openId);covFetch()}}
+  else if(d.info){if(d.epjump)setTimeout(()=>{const x=document.querySelector("#modal .eps");if(x){x.scrollIntoView({block:"start",behavior:"smooth"});const i=x.querySelector("[data-epto]");if(i)i.focus({preventScroll:true})}},60);openId=d.info;seaNeed(openId);rollOn=false;rmAsk=null;if(META[openId]===undefined&&!Q.includes(openId)){Q.unshift(openId);covFetch()}}
   else if(d.close){openId=null;preId=null;rollOn=false;whoOpen=false;rmAsk=null;swapId=null;dual=null}
   else if(d.dclr)dual.r[d.dclr]=undefined;
   else if(d.rstep){const[ctx,id,dl]=d.rstep.split("|"),cur=ctx.startsWith("dr:")?dual.r[ctx.slice(3)]:rt(id,I());if(!cur)return;rateCommit(ctx,id,cur+(+dl)/10);return}
@@ -5485,8 +5489,12 @@ function act(d){
     const EQ=((S.ep||{})[view]||{})[id];if(EQ){for(const s in EQ)if(+s<=nv||(nv<p&&+s>nv))delete EQ[s];if(!Object.keys(EQ).length)delete S.ep[view][id]}}
   else if(d.epsel){const[id,s]=d.epsel.split(":");epSel[id]=+s;render();return}
   else if(d.eppg){const[id,s,g]=d.eppg.split(":");epPg[id+":"+s]=+g;render();return}
-  else if(d.ep){const[id,ss,ee]=d.ep.split(":"),s=+ss,e=+ee,c=epCount(id,s);if(!c)return;
-    const P=(S.prog||(S.prog={}))[view]||(S.prog[view]={}),E=(S.ep||(S.ep={}))[view]||(S.ep[view]={}),Q=E[id]||(E[id]={}),cur=epSeen(id,s),p0=P[id]||0,nv=cur===e?e-1:e;
+  else if(d.ep||d.epback||d.epto){let id,s,nv;
+    if(d.ep){const[a,ss,ee]=d.ep.split(":");id=a;s=+ss;const e=+ee;nv=epSeen(id,s)===e?e-1:e}
+    else if(d.epback){id=d.epback;const L=EPS[id]||[];s=0;for(let k=L.length;k>=1;k--)if(epSeen(id,k)>0){s=k;break}if(!s)return;nv=epSeen(id,s)-1}
+    else{const[a,ss,v]=d.epto.split(":");id=a;s=+ss;nv=Math.max(0,Math.min(epCount(id,s),Math.round(+v)||0));if(nv===epSeen(id,s)){render();return}}
+    if(!editable()||!epCount(id,s))return;
+    const P=(S.prog||(S.prog={}))[view]||(S.prog[view]={}),E=(S.ep||(S.ep={}))[view]||(S.ep[view]={}),Q=E[id]||(E[id]={}),p0=P[id]||0;
     snap(`Folgen bei „${M[id].name}“`);
     if(p0>=s){for(let k=s+1;k<=p0;k++)Q[k]=epCount(id,k);P[id]=s-1}   // abgehakte Staffel wird zum Teilstand, spätere bleiben voll gesehen
     Q[s]=nv;
@@ -5513,6 +5521,7 @@ document.addEventListener("input",e=>{if(e.target.id==="sq"){sq=e.target.value;s
 document.addEventListener("focusin",e=>{if(e.target.id==="sq"&&sq.trim().length>1){sOpen=true;renderSearch()}});
 document.addEventListener("input",e=>{const id=e.target.dataset&&e.target.dataset.note;if(!id)return;(S.notes[id]||(S.notes[id]={}))[I()]=e.target.value;save()});
 document.addEventListener("change",e=>{
+  if(e.target.dataset&&e.target.dataset.epto){const[a,ss]=e.target.dataset.epto.split(":");act({epto:a+":"+ss+":"+e.target.value});return}
   if(e.target.id==="petnm"){const p=petOf(I()),f=p&&pForm(pKey(p));if(f){petSet(I(),{name:e.target.value.trim().slice(0,20)||f.dn});render()}return}
   if(e.target.id==="hsort"){hsort=e.target.value;try{localStorage.setItem("wl-hsort",hsort)}catch(x){}render()}
   else if(e.target.id==="impf"){const f=e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();
