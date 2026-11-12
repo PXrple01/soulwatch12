@@ -333,3 +333,16 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - **Serien** (jetzt 1160): 555 weitere Serien/Miniserien nach IMDb-Stimmen (≥ 22 Tsd.), ohne Talk-/Reality-/Game-Shows, Dokus, japanische Animation, indische/türkische Serien, nur mit deutschem Wikipedia-Artikel. Angehängt am Ende von `SERIES` (für `fillSerie` also nach den bisherigen).
 - Daten: IMDb-Datensätze (Wertung, Stimmen, Laufzeit, Genres), Wikidata (dewiki-Artikel, FSK, Herkunftsland), deutscher Titel = dewiki-Artikelname ohne Klammerzusatz, Kurztext = Anfang des Abschnitts „Handlung“ (sonst Einleitung) der deutschen Wikipedia, Filmplakate aus der englischen Wikipedia, Serien-Cover + TVmaze-ID von TVmaze. Genre (`gl`) und Tags automatisch aus den IMDb-Genres (90er-Look 1990–2002, kurz ≤ 95 min, lang ≥ 150 min, „düster“ bei Horror bzw. Krimi-Thriller).
 - sw.js: Cache `jj-watchlist-v28`.
+
+### Update: Bewertungen jetzt 1–10 Sterne
+- Skala 1,0–10,0 in 0,1er-Schritten (`RMIN=1`, `RMAX=10`). Sternleiste mit 10 Sternen (★/✦/💖, CSS `.rate .rbg/.rfg` mit `font-size:.66em`, damit sie etwa so breit bleibt wie vorher). Umschalt+Pfeil = ±1.
+- **Umrechnung:** `mig()` verdoppelt einmalig alle Werte in `w[id].r` (0,5→1, 3,7→7,4, 5→10) und setzt `r10:1` im Bereich; `fresh()` setzt `r10` gleich. Gilt für Browser-Speicher, Cloud-Stände und Backups (alte Backups werden beim Laden umgerechnet).
+- Alles angepasst: Konfetti/Einhorn/„ドン!!“ bei 10 Sternen („MEISTERWERK · 10/10“), Einigkeit (Einig ≤ 0,6, Fast einig ≤ 2,0; Statistik, Mini-Statistik und Rewind „einig“ ≤ 2,0, kontrovers > 2,0), Sterne-Verteilung 1–10, Geschmacksprofil (`(r-6)/4`), Staffel-Hinweise ab 6 Sternen, Rewind-Überraschung direkt gegen IMDb/AniList, Abzeichen (10 Sterne, ≤ 2 Sterne, ≥ 6 auseinander, ≥ 8 Sterne usw. – gleiche Abzeichen wie vorher, nur umgerechnet).
+- Achtung: Beide Geräte einmal neu laden, damit keines mehr die alte Version benutzt (die würde neue Bewertungen noch auf 5 Sterne speichern).
+
+### Update: +500 Animes, +59 Serien
+- **Animes** (jetzt 1499): 500 der beliebtesten AniList-Titel (ab 1980, TV/Film/ONA/TV-Kurz), die noch fehlten, ohne Fortsetzungen, ohne Erotik (gleicher Filter wie bisher), Namens-Dubletten aussortiert. Angehängt an `ANIME2`, zwei neue Felder am Zeilenende: `dsrc` (Quelle der Beschreibung) und `dew` (dewiki-Artikel).
+- Beschreibung: 201 auf Deutsch aus der deutschen Wikipedia (Abschnitt Handlung), 299 auf Englisch von AniList („Inhaltsangabe: AniList (englisch)“).
+- Synchro: aniSearch war nicht erreichbar. `lang:"de"` nur mit Beleg im deutschen Wikipedia-Artikel (185), sonst leer = „Synchro unbekannt“ (neuer Filter beim Stöbern).
+- **Serien** (jetzt 1214): die restlichen 59 Serien aus derselben Auswahl wie oben.
+- sw.js: Cache `jj-watchlist-v29`.
