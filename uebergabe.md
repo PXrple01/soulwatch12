@@ -327,3 +327,9 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Antippen einer früheren Folge im Raster setzt den Stand dorthin (wie bisher). Alle drei Wege laufen über denselben Code im `act()`-Zweig `d.ep||d.epback||d.epto`, mit Rückgängig.
 - Sicherheit: Fremde Titel (eigene, Neuerscheinungen, Cloud) werden beim Laden bereinigt (`cleanTitle`/`loadExt`), das Info-Fenster für Filme/Serien maskiert alle Werte.
 - sw.js: Cache `jj-watchlist-v27`.
+
+### Update: Katalog erweitert (+999 Filme, +555 Serien)
+- **Filme** (jetzt 1978 aktive): die nächsten 999 Filme ab 1980 nach IMDb-Stimmenzahl (≥ 150 Tsd. Stimmen), ohne Genre-Grenze, ohne Dokus und japanische Animationsfilme, nur mit deutschem Wikipedia-Artikel. Angehängt am Ende von `FILMS`.
+- **Serien** (jetzt 1160): 555 weitere Serien/Miniserien nach IMDb-Stimmen (≥ 22 Tsd.), ohne Talk-/Reality-/Game-Shows, Dokus, japanische Animation, indische/türkische Serien, nur mit deutschem Wikipedia-Artikel. Angehängt am Ende von `SERIES` (für `fillSerie` also nach den bisherigen).
+- Daten: IMDb-Datensätze (Wertung, Stimmen, Laufzeit, Genres), Wikidata (dewiki-Artikel, FSK, Herkunftsland), deutscher Titel = dewiki-Artikelname ohne Klammerzusatz, Kurztext = Anfang des Abschnitts „Handlung“ (sonst Einleitung) der deutschen Wikipedia, Filmplakate aus der englischen Wikipedia, Serien-Cover + TVmaze-ID von TVmaze. Genre (`gl`) und Tags automatisch aus den IMDb-Genres (90er-Look 1990–2002, kurz ≤ 95 min, lang ≥ 150 min, „düster“ bei Horror bzw. Krimi-Thriller).
+- sw.js: Cache `jj-watchlist-v28`.
