@@ -4063,11 +4063,22 @@ function fillSerie(st){if(st.filled)return false;st.filled=1;let ch=false;
     const free=pool.filter(id=>!skip.has(id));
     x.list=x.list.map(i=>i==="@"&&free.length?(ch=true,free.shift()):i)}
   return ch}
+// Sicherheit: Fremde Titel (eigene, Neuerscheinungen, Cloud-Stände) werden vor dem Anzeigen bereinigt:
+// keine HTML-Sonderzeichen in Texten, Bilder nur über https, keine IDs mit Sonderzeichen.
+const ID_BAD=/[<>"'`&\\\s]/;
+function cleanStr(v){return v.replace(/[<>`]/g,"").replace(/"/g,"'")}
+function cleanTitle(o){if(!o||typeof o!=="object")return null;
+  for(const f in o){const v=o[f];if(typeof v==="string")o[f]=cleanStr(v);else if(Array.isArray(v))o[f]=v.filter(x=>typeof x==="string").map(cleanStr);else if(v&&typeof v==="object")delete o[f]}
+  if(o.cov&&!/^https:\/\//i.test(o.cov))o.cov="";
+  if(!Array.isArray(o.tags))o.tags=[];
+  return o}
+function loadExt(k,box,pred){const B=ST[k][box];if(!B||typeof B!=="object")return;
+  for(const id in B){const o=ID_BAD.test(id)?null:cleanTitle(B[id]);if(!o){delete B[id];continue}if(!pred||pred(id))M[id]=Object.assign(o,{id,sec:k})}}
 for(const k in SEC){let r=null;try{r=JSON.parse(localStorage.getItem(SEC[k].key))}catch(e){}
   // Leerer Film-Speicherstand (vor der Filmliste) soll neue Start-Titel nicht verdecken.
   if(r&&r.list&&r.list.every(x=>x==="@")&&!(r.done||[]).length&&SEC[k].start.length)r=null;
   ST[k]=r&&(r.list||r.lists)?mig(r,k):fresh(k);
-  for(const id in ST[k].custom||{})M[id]=Object.assign(ST[k].custom[id],{sec:k});
+  loadExt(k,"custom");
   autoLoad(k);
   for(const l of LISTS){const x=ST[k].lists[l];x.list=x.list.map(i=>i==="@"||M[i]?i:"@");x.done=x.done.filter(d=>M[d.id]);x.rej=x.rej.filter(i=>M[i])}
   if(k==="serie"&&fillSerie(ST[k]))try{localStorage.setItem(SEC[k].key,JSON.stringify(ST[k]))}catch(e){}
@@ -4236,7 +4247,7 @@ const YEAR={berserk:1997,claymore:2007,fmab:2009,pingpong:2014,ippo:2000,lain:19
 const icon=id=>{const t=(M[id]||{}).tags||[];const f=ICONS.find(x=>t.includes(x[0]));return f?f[1]:"🎬"};
 const cv=(id,t)=>{const u=COV[id]||(M[id]||{}).cov;
   if(!(M[id]||{}).cov&&COV[id]===undefined&&!asked.has(id)){asked.add(id);Q.push(id);setTimeout(covFetch,0)}
-  return `<div class="cv ico" style="background:linear-gradient(160deg,hsl(calc(var(--cvh) + ${hue(id)%40}) 28% 32%),hsl(calc(var(--cvh) + ${hue(id)%40}) 25% 16%))" aria-hidden="true">${icon(id)}${u?`<img src="${u}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</div>`};
+  return `<div class="cv ico" style="background:linear-gradient(160deg,hsl(calc(var(--cvh) + ${hue(id)%40}) 28% 32%),hsl(calc(var(--cvh) + ${hue(id)%40}) 25% 16%))" aria-hidden="true">${icon(id)}${u?`<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}</div>`};
 const votes=v=>v>=1e6?(v/1e6).toFixed(1).replace(".",",")+" Mio.":Math.round(v/1000)+" Tsd.";
 const startDe=m=>m.start&&Date.parse(m.start)>Date.now()-864e5?"🎬 ab "+m.start.slice(8,10)+"."+m.start.slice(5,7)+"."+(m.start.slice(0,4)==String(new Date().getFullYear())?"":m.start.slice(0,4))+" im Kino":"";
 const fmeta=m=>[m.y,startDe(m),m.r?(m.rsrc||"IMDb")+" "+String(m.r).replace(".",",")+" / 10":"",m.fsk?"FSK "+m.fsk:""].filter(Boolean).join(" · ");
@@ -4252,7 +4263,7 @@ const trailerHtml=id=>{const n=esc(M[id].name);return`<div class="trls"><a class
 function modalHtml(){
   const m=M[openId],x=META[openId]||{};
   if(m.sec!=="anime"){const w=x.syn||"";
-    return `<div class="mbox" role="dialog" aria-label="${m.name}"><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${m.cov}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${m.name}</h3><p class="meta">${m.orig&&m.orig!==m.name?m.orig+" · ":""}${fmeta(m)}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${m.gl} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${m.plot}</p>${w?`<p class="syn">${w.slice(0,1400)}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
   // Animes: Jahr/Wertung/Sprache aus dem Katalog (AniList/aniSearch), sonst aus den online geladenen Infos.
   const t=m.desc||PLOT[openId]||m.plot||x.syn||"",y=m.y||x.y||YEAR[openId],r=m.r||x.s,cu=covOf(openId);
   const meta=[y||"Jahr unbekannt",r?"AniList "+String(r).replace(".",",")+" / 10":"",m.fmt||"",m.lang==="de"?"🇩🇪 Deutsche Synchro":m.lang==="omu"?"🇯🇵 Nur OmU (Untertitel)":""].filter(Boolean).join(" · ");
@@ -4316,7 +4327,7 @@ async function onlineSearch(){
   sBusy=false;renderSearch()}
 // Online-Treffer als eigenen Titel im Bereich speichern.
 function adopt(o){const id="c_"+o.key;
-  if(!M[id]){const x={id,name:o.name,orig:o.orig,y:String(o.y||""),r:o.r,v:0,fsk:"",cov:o.c,tags:o.tags.length?o.tags:["drama"],gl:"Eigener Titel",plot:o.plot,dew:o.dew||"",g:"Eigener Titel",sec:topTab,custom:1,at:Date.now()};M[id]=x;(S.custom||(S.custom={}))[id]=x}
+  if(!M[id]){const x={id,name:o.name,orig:o.orig,y:String(o.y||""),r:o.r,v:0,fsk:"",cov:o.c,tags:o.tags.length?o.tags:["drama"],gl:"Eigener Titel",plot:o.plot,dew:o.dew||"",g:"Eigener Titel",sec:topTab,custom:1,at:Date.now()};cleanTitle(x);M[id]=x;(S.custom||(S.custom={}))[id]=x}
   else if(!(S.custom||{})[id])(S.custom||(S.custom={}))[id]=M[id];
   return id}
 function swapHtml(){const c=C();
@@ -5536,7 +5547,7 @@ async function rpc(fn,args){
   if(!res.ok){const m=(j&&(j.message||j.hint))||("HTTP "+res.status),e=new Error(m);e.code=/invalid_code/.test(m)?"code":/conflict/.test(m)?"conflict":"http";throw e}
   return j}
 function applyRemote(k,row){
-  ST[k]=mig(row.data,k);if(k==="serie")fillSerie(ST[k]);for(const id in ST[k].custom||{})M[id]=Object.assign(ST[k].custom[id],{sec:k});autoLoad(k);
+  ST[k]=mig(row.data,k);if(k==="serie")fillSerie(ST[k]);loadExt(k,"custom");autoLoad(k);
   for(const l of LISTS){const x=ST[k].lists[l];x.list=x.list.map(i=>i==="@"||M[i]?i:"@");x.done=x.done.filter(d=>M[d.id]);x.rej=x.rej.filter(i=>M[i])}
   seed(k);syncBoth(k);if(k==="film")chReset();cSync[k]={ts:row.updated_at,h:hsh(JSON.stringify(row.data))};
   try{localStorage.setItem(SEC[k].key,JSON.stringify(ST[k]))}catch(e){}
@@ -5596,7 +5607,7 @@ const AUTO_DAYS=1,AUTO_MAX=60,AUTO_BACK=180,AUTO_AHEAD=14,DAY=864e5;
 const AUTO_GDE={Action:"Action",Adventure:"Abenteuer",Comedy:"Komödie",Drama:"Drama",Fantasy:"Fantasy",Horror:"Horror",Mystery:"Mystery",Psychological:"Psycho",Romance:"Romanze","Sci-Fi":"Sci-Fi","Slice of Life":"Alltag",Sports:"Sport",Thriller:"Thriller",Music:"Musik",Mecha:"Mecha",Supernatural:"Übernatürlich"};
 let autoBusy=false,autoMsg="";
 const autoNew=m=>!!m&&!!m.auto&&Date.now()-(m.at||0)<30*DAY;
-function autoLoad(k){for(const id in (ST[k]&&ST[k].auto)||{})if(!M[id]||M[id].auto)M[id]=Object.assign(ST[k].auto[id],{sec:k})}
+function autoLoad(k){if(ST[k])loadExt(k,"auto",id=>!M[id]||M[id].auto)}
 const autoKnown=(k,ids,name)=>{const n=nrm(name);return Object.values(M).some(m=>m.sec===k&&(ids.includes(m.id)||(m.al&&ids.includes("al"+m.al))||nrm(m.name)===n||(m.orig&&nrm(m.orig)===n)))};
 const iso=t=>new Date(t).toISOString().slice(0,10);
 // Wikidata-Abfrage per POST, bei Fehler/abgebrochener Antwort ein zweiter Versuch.
