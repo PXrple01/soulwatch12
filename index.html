@@ -1262,6 +1262,8 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
    Regeln mit :where(html:not(purple,baby)) treffen nur Hell/Dunkel, ohne die Spezifität zu erhöhen.
    ===================================================================== */
 :root{--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1);--rad:18px}
+/* Nichts darf die Seite seitlich verschiebbar machen (fliegende Effekte, lange Knöpfe) */
+html,body{overflow-x:clip}
 /* ---------- Farben Hell / Dunkel ---------- */
 :root,:root[data-theme="light"]{--bg:#f6f3fb;--panel:#ffffff;--ink:#221c33;--mute:#6d6685;--line:#e6e0f1;--star:#e99a0c;--acc:#6f4fd8;--accink:#fff;--off:#d9d3e6;--glass:rgba(255,255,255,.74);--shadow:0 12px 34px rgba(64,42,128,.12);--glow1:rgba(217,87,155,.20);--glow2:rgba(124,92,191,.22);--scrim:rgba(30,22,52,.42)}
 @media (prefers-color-scheme:dark){:root:not([data-theme]){--bg:#0b0a11;--panel:#16141f;--ink:#f3f0fa;--mute:#a29db6;--line:#2a2738;--star:#ffc857;--acc:#b7a2ff;--accink:#120f1f;--off:#3b3750;--glass:rgba(22,20,31,.68);--shadow:0 16px 44px rgba(0,0,0,.5);--glow1:rgba(240,140,192,.15);--glow2:rgba(140,118,238,.20);--scrim:rgba(6,5,12,.62)}}
@@ -1383,6 +1385,9 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) .bar #cnt{margin-right:auto}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb{padding:9px 16px;background:var(--glass);border-color:var(--line)}
 .rollb{white-space:nowrap}
+/* Abgeschlossene Titel kleiner als die Watchlist (am Desktop waren sie gleich groß) */
+.grid.small{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}
+#main[data-ro="1"] .sub{display:none}
 .grid>p.gn{grid-column:1/-1;margin:0}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) .sec{font-size:1.5rem;margin:38px 0 14px;display:flex;align-items:center;gap:14px}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
@@ -1451,10 +1456,6 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) .epc:hover{transform:scale(1.12)}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) #main:not([data-tab="wl"]) .sub{display:none}
 :where(html:not([data-theme="purple"],[data-theme="baby"])) #who{background:radial-gradient(60vmax 50vmax at 28% 18%,var(--glow1),transparent 62%),radial-gradient(60vmax 50vmax at 76% 84%,var(--glow2),transparent 62%),var(--bg)}
-:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>*{animation:riseIn .6s var(--ease) both}
-:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>:nth-child(2){animation-delay:.08s}
-:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>:nth-child(3){animation-delay:.16s}
-:where(html:not([data-theme="purple"],[data-theme="baby"])) .whoin>:nth-child(n+4){animation-delay:.24s}
 /* ---------- Meldung ---------- */
 :where(html:not([data-theme="purple"],[data-theme="baby"])) #toast{background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-color:color-mix(in srgb,var(--acc) 50%,var(--line));box-shadow:var(--shadow);animation:toastIn .5s var(--spring)}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,24px) scale(.92)}to{opacity:1;transform:translate(-50%,0)}}
@@ -1495,7 +1496,8 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv{float:left;width:104px;height:156px;border-radius:12px;margin:0 14px 8px 0}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .tx{min-width:0}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec h2{font-size:1.35rem}
-  .rec .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rec .btns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .rec .btns button{white-space:normal;min-width:0}
   .rec .btns .add,.rec .btns .rno{grid-column:1/-1}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .btns{clear:both;padding-top:6px}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .btns button{padding:11px 10px;font-size:.92rem}
@@ -1504,7 +1506,9 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
   /* Der Gesehen-Haken behält auf dem Handy seine Beschriftung (vorher nur ein Kästchen) */
   .card .chk{font-size:.82rem;gap:7px;padding:6px 11px 6px 7px}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .rollb{padding:8px 13px}
-  :where(html:not([data-theme="purple"],[data-theme="baby"])) .bar{flex-wrap:nowrap}
+  .bar{flex-wrap:wrap;gap:8px;align-items:center}
+  .grid.small{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .bar #cnt{margin-right:auto}
   #toast{width:calc(100vw - 24px);max-width:none;border-radius:20px;justify-content:space-between}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .card{padding:7px 7px 10px;border-radius:16px}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot{min-height:220px}
@@ -1519,6 +1523,93 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) #modal h3{font-size:1.5rem}
   #modal .fm{gap:14px}
 }
+/* =====================================================================
+   Animationen, Runde 2
+   ===================================================================== */
+/* Sternenhimmel über dem Polarlicht */
+:root,:root[data-theme="light"]{--spark:rgba(124,92,191,.28)}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--spark:rgba(255,255,255,.6)}}
+:root[data-theme="dark"]{--spark:rgba(255,255,255,.6)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(1.2px 1.2px at 12% 18%,var(--spark),transparent 60%),radial-gradient(1px 1px at 68% 9%,var(--spark),transparent 60%),radial-gradient(1.4px 1.4px at 86% 34%,var(--spark),transparent 60%),radial-gradient(1px 1px at 34% 46%,var(--spark),transparent 60%),radial-gradient(1.3px 1.3px at 52% 72%,var(--spark),transparent 60%),radial-gradient(1px 1px at 8% 82%,var(--spark),transparent 60%),radial-gradient(1.2px 1.2px at 92% 88%,var(--spark),transparent 60%),radial-gradient(1px 1px at 24% 64%,var(--spark),transparent 60%);background-size:420px 380px,360px 440px,500px 420px,380px 360px,460px 480px,340px 400px,520px 460px,400px 340px;animation:kTwinkle 7s ease-in-out infinite alternate}
+@keyframes kTwinkle{0%{opacity:.35}50%{opacity:.9}100%{opacity:.5}}
+/* Gleitende Markierung hinter dem aktiven Reiter */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs{position:relative}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs::before{content:"";position:absolute;top:5px;bottom:5px;left:0;width:var(--iw,0px);transform:translateX(var(--ix,0px));border-radius:999px;background:linear-gradient(120deg,var(--c1),var(--c2));box-shadow:0 6px 18px color-mix(in srgb,var(--c2) 45%,transparent);opacity:0}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs.ink::before{opacity:1;transition:transform .55s var(--spring),width .4s var(--ease),opacity .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs .ttab{position:relative;z-index:1}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs.ink .ttab.on{background:none;box-shadow:none}
+@media (max-width:767.98px){
+  .bnav::before{content:"";position:absolute;top:6px;bottom:6px;left:0;width:var(--iw,0px);transform:translateX(var(--ix,0px));border-radius:18px;background:color-mix(in srgb,var(--acc) 20%,transparent);opacity:0;pointer-events:none}
+  .bnav.ink::before{opacity:1;transition:transform .55s var(--spring),width .4s var(--ease),opacity .2s}
+  .bnav>*{position:relative;z-index:1}
+  .bnav .accfab{position:relative;left:auto;bottom:auto}
+  :root .bnav.ink .bnb.on,:root[data-theme] .bnav.ink .bnb.on{background:none}
+  :root[data-theme="purple"] .bnav::before{border-radius:0;background:rgba(139,92,255,.3)}
+  :root[data-theme="baby"] .bnav::before{border-radius:20px;background:#ffe0ee}
+  .bnb.on .bni{animation:navPop .5s var(--spring)}
+}
+@keyframes navPop{0%{transform:translateY(4px) scale(.7)}}
+/* Bereichswechsel: Inhalt gleitet aus der Richtung des gewählten Reiters herein */
+#main.enter-sec #v-main{animation:secIn .5s var(--ease) both}
+@keyframes secIn{from{opacity:0;transform:translateX(calc(var(--dir,1)*46px))}}
+/* Bühne: Poster schwebt leicht, Hauptknopf schimmert */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv{animation:kBob 6s ease-in-out infinite}
+@keyframes kBob{50%{translate:0 -7px}}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .add,:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb{position:relative;overflow:hidden}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .add::after,:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb::after{content:"";position:absolute;top:0;bottom:0;left:0;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-140%) skewX(-20deg);animation:kShine 5s ease-in-out infinite}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb::after{animation-delay:1.2s}
+@keyframes kShine{0%,55%{transform:translateX(-140%) skewX(-20deg)}85%,100%{transform:translateX(340%) skewX(-20deg)}}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .newg{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--acc) 0%,transparent);transform:scale(1.06)}0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 55%,transparent)}}
+/* Karten: Lichtkegel folgt der Maus */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .grid>.card.tilt:not(.slot),:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc.tilt{background-image:radial-gradient(260px circle at var(--gx,50%) var(--gy,50%),color-mix(in srgb,var(--acc) 20%,transparent),transparent 70%)}
+/* Freier Platz atmet */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot .slp{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 12px color-mix(in srgb,var(--acc) 0%,transparent)}0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 35%,transparent)}}
+/* Einmal-Effekte: Haken gesetzt, Folge abgehakt */
+.card.fx-seen .box{animation:pop .5s var(--spring)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.fx-seen .cv::before{animation:badgeIn .7s var(--spring)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.fx-seen::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;animation:ring .8s ease-out forwards}
+@keyframes badgeIn{0%{transform:scale(0) rotate(-120deg)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--star) 70%,transparent)}100%{box-shadow:0 0 0 22px transparent}}
+.card.fx-ep .epnx:not(.epm){animation:tick .55s var(--spring)}
+.card.fx-ep .sea .sb .on:last-of-type{animation:tick .55s var(--spring)}
+@keyframes tick{0%{transform:scale(.8)}45%{transform:scale(1.18);background:var(--acc);color:var(--accink)}}
+/* Sterne: Vorschau unter der Maus + Funken */
+.rate.hov:not(.drag)::after{content:attr(data-tip);position:absolute;left:var(--hv,50%);bottom:calc(100% + 4px);transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:.78rem;font-weight:700;letter-spacing:0;padding:2px 7px;border-radius:8px;pointer-events:none;animation:tipIn .18s var(--ease)}
+@keyframes tipIn{from{opacity:0;transform:translate(-50%,4px)}}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .rate[data-rate].hov:not(.drag) .rbg{color:transparent;background:linear-gradient(90deg,color-mix(in srgb,var(--star) 48%,var(--off)) var(--hv,0%),var(--off) var(--hv,0%));-webkit-background-clip:text;background-clip:text}
+.fxp{position:fixed;z-index:40;pointer-events:none;color:var(--star);font-size:1.1rem;line-height:1;text-shadow:0 0 10px color-mix(in srgb,var(--star) 70%,transparent);will-change:transform,opacity}
+/* Info-Fenster: Inhalt staffelt herein */
+#modal.opening .fm>div>*{animation:riseIn .5s var(--ease) both}
+#modal.opening .fm>div>:nth-child(2){animation-delay:.05s}
+#modal.opening .fm>div>:nth-child(3){animation-delay:.1s}
+#modal.opening .fm>div>:nth-child(4){animation-delay:.15s}
+#modal.opening .fm>div>:nth-child(n+5){animation-delay:.2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal.opening .mhero{animation:bgIn 1s ease both}
+/* Blatt unten (Handy): Zeilen staffeln beim Öffnen */
+.sheet.opening>*{animation:riseIn .45s var(--ease) both}
+.sheet.opening>:nth-child(2){animation-delay:.04s}
+.sheet.opening>:nth-child(3){animation-delay:.08s}
+.sheet.opening>:nth-child(4){animation-delay:.12s}
+.sheet.opening>:nth-child(5){animation-delay:.16s}
+.sheet.opening>:nth-child(6){animation-delay:.2s}
+.sheet.opening>:nth-child(n+7){animation-delay:.24s}
+/* Meldung fängt keine Klicks auf darunterliegende Sterne ab (nur ihr Knopf bleibt klickbar) */
+#toast{pointer-events:none}
+@media (max-width:767.98px){body:has(#modal:not([hidden])) #toast,body:has(.sheet:not([hidden])) #toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px))}}
+#toast button,#toast a{pointer-events:auto}
+/* Stöbern öffnet weich */
+#brw:not([hidden]){animation:brwIn .38s var(--ease)}
+@keyframes brwIn{from{opacity:0;transform:translateY(22px) scale(.99)}}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwadd{transition:transform .3s var(--spring),background .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwadd:hover{transform:scale(1.18) rotate(90deg)}
+/* Punkte der Empfehlung, Mini-Statistik, Abzeichen-Kacheln */
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .favb .cv{transition:transform .35s var(--spring)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .hist li:hover .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .favb:hover .cv{transform:scale(1.08) rotate(-2deg)}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .lnk{transition:color .2s}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .todob{border-radius:16px;animation:nudge 2.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:none}50%{transform:translateX(4px)}}
 /* ---------- Lila und Baby: neue Bausteine im jeweiligen Stil ---------- */
 :root[data-theme="purple"] #modal:not(.opening) .mbox,:root[data-theme="baby"] #modal:not(.opening) .mbox{animation:none}
 :root[data-theme="purple"] .howto{border-radius:0;border:2px solid #30285a;background:#17122b}
@@ -1546,10 +1637,14 @@ html:root[data-theme="purple"] .side{background:#0f0c20}
   :root[data-theme="purple"] #modal.opening .mbox,:root[data-theme="baby"] #modal.opening .mbox{animation:sheetup .42s var(--ease)}
   :root[data-theme="purple"] #modal .mbox,:root[data-theme="baby"] #modal .mbox{border-bottom-left-radius:0;border-bottom-right-radius:0}
 }
+@media (max-width:380px){:root[data-theme="baby"] .card .rate{font-size:.98rem}:root[data-theme="purple"] .rec .btns button{font-size:.8rem;padding-left:6px;padding-right:6px}}
 @media (max-width:420px){.bnb small,.bnav .fabn{font-size:.62rem}}
 @media (prefers-reduced-motion:reduce){
-  :where(html:not([data-theme="purple"],[data-theme="baby"])) body::before{animation:none}
-  #main.enter .grid>.card,#main.enter .rec,#main.enter .bar,#main.enter .hist li,#main.enter .tile,#main.enter .fav,#main.enter .hf,#main.enter .cb,#main.enter .hows li,#main.enter-sec .cth::before,.rec.swap .cv,.rec.swap .tx>*,.rec.swap .recbg,#modal.opening .mbox,#modal:not([hidden]),.whoin>*,.rwrap.rpop .rnum,.rwrap.rpop .rfg{animation:none}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) body::before,:where(html:not([data-theme="purple"],[data-theme="baby"])) body::after,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .add::after,:where(html:not([data-theme="purple"],[data-theme="baby"])) .slb::after,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .newg,:where(html:not([data-theme="purple"],[data-theme="baby"])) .card.slot .slp,:where(html:not([data-theme="purple"],[data-theme="baby"])) .todob,:where(html:not([data-theme="purple"],[data-theme="baby"])) #modal.opening .mhero{animation:none}
+  #main.enter-sec #v-main,.card.fx-seen .box,.card.fx-ep .epnx,.card.fx-ep .sea .sb .on,#modal.opening .fm>div>*,.sheet.opening>*,#brw:not([hidden]),.bnb.on .bni,.rate.hov::after{animation:none}
+  :where(html:not([data-theme="purple"],[data-theme="baby"])) .ctabs.ink::before{transition:none}
+  .bnav.ink::before{transition:none}
+  #main.enter .grid>.card,#main.enter .rec,#main.enter .bar,#main.enter .hist li,#main.enter .tile,#main.enter .fav,#main.enter .hf,#main.enter .cb,#main.enter .hows li,#main.enter-sec .cth::before,.rec.swap .cv,.rec.swap .tx>*,.rec.swap .recbg,#modal.opening .mbox,#modal:not([hidden]),.rwrap.rpop .rnum,.rwrap.rpop .rfg{animation:none}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) #toast{animation:none}
   :where(html:not([data-theme="purple"],[data-theme="baby"])) .card,:where(html:not([data-theme="purple"],[data-theme="baby"])) .card .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .rec .cv,:where(html:not([data-theme="purple"],[data-theme="baby"])) .bwc,:where(html:not([data-theme="purple"],[data-theme="baby"])) .snb,:where(html:not([data-theme="purple"],[data-theme="baby"])) .ttab,:where(html:not([data-theme="purple"],[data-theme="baby"])) .add{transition:none}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none}
@@ -7678,7 +7773,7 @@ function renderSide(){const Ly=lay();
   $("acv").innerHTML=avHtml(view);$("acnm").textContent=vtitle(view);$("acsub").textContent="angemeldet als "+U[I()].n;
   const ab=$("accb");ab.setAttribute("aria-expanded",accOpen);ab.setAttribute("aria-label",`Account: Ansicht ${vtitle(view)}, angemeldet als ${U[I()].n} – ${accOpen?"zuklappen":"aufklappen"}`);
   const p=$("accp");p.hidden=!accOpen;if(accOpen){const o=p.querySelector(".accs"),st=o?o.scrollTop:0;keepFocus(p,()=>p.innerHTML=`<div class="accs">${accPanel()}</div>`);p.firstChild.scrollTop=st}else p.innerHTML="";
-  const sh=$("sheet");sh.hidden=!sheet;if(sheet)keepFocus(sh,()=>sh.innerHTML=`<div class="shh"><span class="shg" aria-hidden="true"></span><button class="navx" data-navx="1" aria-label="Schließen">×</button></div>`+accPanel(true));else sh.innerHTML="";
+  const sh=$("sheet"),shWas=sh.hidden;sh.hidden=!sheet;if(shWas&&sheet&&!calm())fxOnce(sh,"opening",700);if(sheet)keepFocus(sh,()=>sh.innerHTML=`<div class="shh"><span class="shg" aria-hidden="true"></span><button class="navx" data-navx="1" aria-label="Schließen">×</button></div>`+accPanel(true));else sh.innerHTML="";
   const ss=$("sstat");keepFocus(ss,()=>ss.innerHTML=`<button class="snb sstb${tab==="stat"?" act":""}" data-tab="stat" aria-pressed="${tab==="stat"}"><span class="si" aria-hidden="true">📊</span><span class="st">Statistik</span></button>${mstHtml()}<button class="snb sstb${tab==="ach"?" act":""}" data-tab="ach" aria-pressed="${tab==="ach"}"><span class="si" aria-hidden="true">🏅</span><span class="st">Abzeichen</span><span class="lvt">Lv ${achFor(I()).lv.L}</span></button><button class="snb sstb${tab==="inv"?" act":""}" data-tab="inv" aria-pressed="${tab==="inv"}"><span class="si" aria-hidden="true">🎒</span><span class="st">Inventar</span><span class="lvt">${fmtX(achFor(I()).mult)}</span></button>${petHtml(I())}${eqBar()}${achFor(I()).pend.length?`<button class="chpend" data-chshow="0" aria-label="${achFor(I()).pend.length===1?"Eine Kiste":achFor(I()).pend.length+" Kisten"} öffnen"><span aria-hidden="true">🎁</span><span class="st">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""}`);
   $("accb").classList.toggle("vhot",vHot());$("accfab").classList.toggle("vhot",vHot());
   $("fabv").innerHTML=avHtml(view);$("fabn").textContent=vtitle(view);const fb=$("accfab");fb.setAttribute("aria-expanded",sheet);fb.setAttribute("aria-label",`Ansicht ${vtitle(view)} – Ansicht, Statistik und Verlauf öffnen`);
@@ -7690,9 +7785,9 @@ function renderSide(){const Ly=lay();
   // Für die Themes: Bereich/Tab/Ansicht am Inhalt; im Manga-Theme beim Bereichswechsel ein Eyecatch-Wischer wie zwischen zwei Folgen
   const mn=$("main"),kana={anime:"アニメ",film:"エイガ",serie:"シリーズ"}[topTab];
   if(mn.dataset.sec&&mn.dataset.sec!==topTab&&document.documentElement.dataset.theme==="purple"&&!calm()){mn.classList.remove("eyec");void mn.offsetWidth;mn.classList.add("eyec");clearTimeout(renderSide.ey);renderSide.ey=setTimeout(()=>mn.classList.remove("eyec"),800)}
-  if(mn.dataset.sec!==topTab||mn.dataset.tab!==tab||mn.dataset.view!==view)fxEnter(mn.dataset.sec!==undefined&&mn.dataset.sec!==topTab?"sec":"tab");
-  mn.dataset.sec=topTab;mn.dataset.tab=tab;mn.dataset.view=view;mn.dataset.kana=kana;mn.querySelector(".ctop").dataset.kana=kana;mn.querySelector(".cth").dataset.t=SEC[topTab].many;
-  accScroll();
+  if(mn.dataset.sec!==topTab||mn.dataset.tab!==tab||mn.dataset.view!==view){const O=["anime","film","serie"];fxEnter(mn.dataset.sec!==undefined&&mn.dataset.sec!==topTab?"sec":"tab",O.indexOf(topTab)<O.indexOf(mn.dataset.sec)?-1:1)}
+  mn.dataset.sec=topTab;mn.dataset.tab=tab;mn.dataset.view=view;mn.dataset.ro=editable()?"0":"1";mn.dataset.kana=kana;mn.querySelector(".ctop").dataset.kana=kana;mn.querySelector(".cth").dataset.t=SEC[topTab].many;
+  accScroll();fxInk();
   if(navFocus){const box=$(navFocus);navFocus="";setTimeout(()=>{const b=box.querySelector(".navx");if(b)b.focus()},40)}}
 // Passt der Reiter nicht in die Höhe, scrollt nur er: unten ausblenden als Hinweis, aktiven Punkt beim Öffnen/Wechsel ins Bild holen
 let accSeen="";
@@ -7709,15 +7804,45 @@ document.addEventListener("keydown",e=>{if(e.key!=="Tab"||!(drawer||sheet))retur
 let rsT=0;addEventListener("resize",()=>{clearTimeout(rsT);rsT=setTimeout(()=>{if(lay()!==layNow)render()},120)});
 // ---------- Redesign: Bewegung ----------
 // fxEnter: gestaffeltes Einblenden nach einem Wechsel von Bereich/Tab/Ansicht (nicht bei jedem render()).
-function fxEnter(kind){if(calm())return;const m=$("main");m.classList.remove("enter","enter-sec");void m.offsetWidth;m.classList.add("enter");if(kind==="sec")m.classList.add("enter-sec");
-  clearTimeout(fxEnter.t);fxEnter.t=setTimeout(()=>m.classList.remove("enter","enter-sec"),1300);
+function fxEnter(kind,dir){if(calm())return;const m=$("main");m.classList.remove("enter","enter-sec");void m.offsetWidth;m.style.setProperty("--dir",dir||1);fxOnce(m,kind==="sec"?"enter enter-sec":"enter",1300);
   if(tab==="stat")setTimeout(fxCount,30)}
+// Einmal-Klassen (enter, swap, opening): gelten nur für das DOM des Zeichnens, das sie gesetzt hat – beim nächsten render() fliegen sie raus, sonst würde die Animation neu starten.
+let fxGen=0;const fxLive=new Map();
+function fxOnce(el,cls,ms){el.classList.add(...cls.split(" "));fxLive.set(el,{cls,g:fxGen});clearTimeout(el._fxT);el._fxT=setTimeout(()=>{el.classList.remove(...cls.split(" "));fxLive.delete(el)},ms)}
+function fxTidy(){fxGen++;for(const [el,o] of [...fxLive])if(o.g<fxGen){clearTimeout(el._fxT);el.classList.remove(...o.cls.split(" "));fxLive.delete(el)}}
+// FLIP: Karten gleiten an ihren neuen Platz – vom Tipp in die Liste, von der Liste zu „Abgeschlossen“, beim Nachrücken.
+let fxRects=null;
+function fxSnap(){fxRects=null;if(calm()||tab!=="wl"||$("v-wl").hidden)return;const R={};let n=0;
+  document.querySelectorAll("#grid .card[data-k],#doneg .card[data-k]").forEach(el=>{if(n++>60)return;const c=el.querySelector(".cv");if(c)R[el.dataset.k]=c.getBoundingClientRect()});
+  const rc=document.querySelector("#rec .cv"),rk=$("rec").dataset.k;if(rc&&rk&&!R[rk]){R[rk]=rc.getBoundingClientRect();R[rk].hero=1}
+  R._n=n;fxRects=R}
+function fxFlip(){const R=fxRects;fxRects=null;if(!R||tab!=="wl"||$("main").classList.contains("enter"))return;let n=0;const E="cubic-bezier(.2,.8,.2,1)";
+  document.querySelectorAll("#grid .card[data-k],#doneg .card[data-k]").forEach(el=>{if(n++>60)return;const o=R[el.dataset.k],c=el.querySelector(".cv");if(!c)return;const r=c.getBoundingClientRect();if(!r.width)return;
+    if(!o){if(R._n)el.animate([{opacity:0,transform:"scale(.82)"},{opacity:1,transform:"none"}],{duration:460,easing:E});return}
+    if(!o.width)return;const dx=o.left-r.left,dy=o.top-r.top,sc=o.width/r.width;if(Math.abs(dx)<2&&Math.abs(dy)<2&&Math.abs(sc-1)<.02)return;
+    const far=Math.hypot(dx,dy)>260||o.hero;el.style.zIndex=4;
+    const a=el.animate([{transform:`translate(${dx}px,${dy}px) scale(${sc})`,transformOrigin:"0 0",boxShadow:far?"0 30px 60px rgba(0,0,0,.45)":"none"},{transform:"none",transformOrigin:"0 0",boxShadow:"none"}],{duration:far?720:480,easing:E});
+    a.onfinish=a.oncancel=()=>{el.style.zIndex=""}})}
+// Funken beim Bewerten (Hell/Dunkel; Lila und Baby haben eigene Effekte).
+function fxBurst(x,y,n){if(calm()||["purple","baby"].includes(document.documentElement.dataset.theme))return;
+  for(let i=0;i<n;i++){const p=document.createElement("span");p.className="fxp";p.textContent=i%3?"★":"✦";p.style.left=x+"px";p.style.top=y+"px";document.body.appendChild(p);
+    const a=Math.random()*Math.PI*2,d=40+Math.random()*70,sz=.7+Math.random()*.9;
+    p.animate([{transform:"translate(-50%,-50%) scale(.2)",opacity:1},{transform:`translate(calc(-50% + ${Math.cos(a)*d}px),calc(-50% + ${Math.sin(a)*d-30}px)) scale(${sz}) rotate(${(Math.random()-.5)*220}deg)`,opacity:0}],{duration:700+Math.random()*400,easing:"cubic-bezier(.15,.8,.3,1)"}).onfinish=()=>p.remove()}}
+// Gleitende Markierung hinter dem aktiven Reiter (oben am Desktop, unten am Handy).
+function fxInk(){for(const [box,sel] of [[".ctabs",".ttab.on"],["#bnav",".bnb.on"]]){const b=document.querySelector(box),a=b&&b.querySelector(sel);if(!b)continue;
+  if(a&&a.offsetWidth){b.style.setProperty("--ix",a.offsetLeft+"px");b.style.setProperty("--iw",a.offsetWidth+"px");if(!b.classList.contains("ink"))requestAnimationFrame(()=>b.classList.add("ink"))}else b.classList.remove("ink")}}
+addEventListener("resize",()=>fxInk());if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fxInk());
+// Merker für kleine Einmal-Effekte auf einer Karte (Haken gesetzt, Folge/Staffel abgehakt).
+let fxMark=null;
 // Zahlen in der Statistik zählen hoch.
 function fxCount(){document.querySelectorAll("#v-stat .tile b").forEach(b=>{const m=b.textContent.match(/^(\d+(?:,\d)?)(.*)$/);if(!m)return;const to=parseFloat(m[1].replace(",",".")),dec=m[1].includes(",")?1:0,rest=m[2],t0=performance.now();if(!to)return;
   const step=t=>{const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);if(!b.isConnected)return;b.textContent=(to*e).toFixed(dec).replace(".",",")+rest;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)})}
 // Poster kippen der Maus hinterher (nur mit Maus, nur helles/dunkles Design).
 const fxFine=()=>window.matchMedia&&matchMedia("(hover:hover) and (pointer:fine)").matches;
-let fxTiltEl=null,fxRaf=0;
+let fxTiltEl=null,fxRaf=0,fxHovEl=null;
+document.addEventListener("pointermove",e=>{if(!fxFine()||rDrag)return;const rt0=e.target.closest&&e.target.closest(".rate[data-rate]"),ok=rt0&&rateOk(rt0)?rt0:null;
+  if(ok!==fxHovEl){if(fxHovEl)fxHovEl.classList.remove("hov");fxHovEl=ok;if(ok)ok.classList.add("hov")}
+  if(ok){const v=rateAt(ok,e.clientX);ok.style.setProperty("--hv",v/RMAX*100+"%");ok.dataset.tip=fmtR(v)}},{passive:true});
 document.addEventListener("pointermove",e=>{if(!fxFine()||calm()||rDrag)return;const el=e.target.closest&&e.target.closest("#grid .card:not(.slot),#doneg .card,.bwc,.rec");
   if(el!==fxTiltEl){if(fxTiltEl){fxTiltEl.style.removeProperty("--rx");fxTiltEl.style.removeProperty("--ry");fxTiltEl.classList.remove("tilt")}fxTiltEl=el;if(el)el.classList.add("tilt")}
   if(!el)return;cancelAnimationFrame(fxRaf);fxRaf=requestAnimationFrame(()=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height,k=el.classList.contains("rec")?2.2:7;
@@ -7739,13 +7864,16 @@ function howRender(){const h=$("howto");if(!h)return;const show=!howOff&&tab==="
   if(show&&!h.firstChild)h.innerHTML=`<ol class="hows"><li><span class="hwi" aria-hidden="true">🍿</span><b>Aussuchen</b><small>Tipp annehmen oder Titel suchen</small></li><li><span class="hwi" aria-hidden="true">📺</span><b>Schauen</b><small>Folgen und Staffeln abhaken</small></li><li><span class="hwi" aria-hidden="true">⭐</span><b>Bewerten</b><small>Sterne geben – fertig</small></li></ol><button class="howx" data-howx="1" aria-label="Kurzanleitung ausblenden">Verstanden</button>`}
 function render(){
   if(rDrag)return;
+  fxTidy();fxSnap();const fm=fxMark,fmc=id=>fm&&fm.id===id?" fx-"+fm.k:"";fxMark=null;
   const c=C(),ed=editable(),R=rank(),F=five(R),pp=popId,fi=freshIdx;popId=null;freshIdx=-1;
   $("ro").hidden=ed;$("ro").innerHTML=ed?"":`Das ist ${U[view].g} Liste. Ansehen geht, bearbeiten kann sie nur ${U[view].n}. <button class="lnk" data-whoopen="1">Person wechseln</button>`;
   $("cnt").textContent=c.list.filter(x=>x!=="@").length+" aktiv, "+c.done.length+" abgeschlossen";
+  // Freie Plätze: nur eine Karte mit der Anzahl – die übrigen leeren Plätze bleiben im Raster unsichtbar (.more).
+  const nfree=c.list.filter(x=>x==="@").length,f1=c.list.indexOf("@");
   $("grid").innerHTML=c.list.map((id,i)=>{
-    if(id==="@")return `<article class="card slot${i===fi?" fresh":""}" style="--i:${i}"><span class="slp" aria-hidden="true">＋</span><div class="nm">Platz frei</div>${ed?`<button class="slb" data-brw="1">Titel aussuchen</button><p class="gn">oder oben den Tipp annehmen</p>`:`<p class="gn">Noch leer.</p>`}</article>`;
+    if(id==="@")return i!==f1?`<article class="card slot slmore" hidden></article>`:`<article class="card slot${fi>-1?" fresh":""}${ed?"":" slro"}" style="--i:${i}">${ed?`<span class="slp" aria-hidden="true">＋</span>`:""}<div class="nm">${nfree===1?"1 Platz frei":nfree+" Plätze frei"}</div>${ed?`<button class="slb" data-brw="1">Titel aussuchen</button><p class="gn">oder oben den Tipp annehmen</p>`:`<p class="gn">Noch leer.</p>`}</article>`;
     const m=M[id],sn=!!c.seen[id],o=rt(id,O());
-    return `<article class="card${sn?" seen":""}" style="--i:${i}">${cv(id,m.name)}<button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`<button class="chk" data-seen="${id}" aria-pressed="${sn}"><span class="box">${sn?"✓":""}</span>${sn?"Gesehen":"Schon gesehen?"}</button><div class="stars" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(id)}</div>${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
+    return `<article class="card${sn?" seen":""}${fmc(id)}" data-k="${id}" style="--i:${i}">${cv(id,m.name)}<button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`<button class="chk" data-seen="${id}" aria-pressed="${sn}"><span class="box">${sn?"✓":""}</span>${sn?"Gesehen":"Schon gesehen?"}</button><div class="stars" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(id)}</div>${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
   }).join("");
   const box=$("rec"),free=c.list.includes("@");
   vi=F.length?((vi%F.length)+F.length)%F.length:0;
@@ -7753,12 +7881,12 @@ function render(){
   if(!ed)box.innerHTML="";
   else if(!r0)box.innerHTML=`<div class="tx"><p class="k">Keine Empfehlung</p><p class="why">${Object.values(M).some(m=>m.sec===topTab&&!m.old)?"Alle passenden Titel sind schon in der Liste, bewertet oder abgelehnt.":topTab!=="anime"?`Noch keine ${SEC[topTab].many} im Katalog. Die Liste wird bald ergänzt.`:"Der Katalog ist leer."}</p></div>`;
   else box.innerHTML=`${recBg(r0.m.id)}${cv(r0.m.id,r0.m.name)}<div class="tx"><p class="k">💡 ${view==="both"?"Tipp für euch":"Tipp für dich"} <span class="rdots" role="img" aria-label="Tipp ${vi+1} von ${F.length}">${F.map((_,i)=>`<i class="${i===vi?"on":""}"></i>`).join("")}</span>${r0.nw?` <span class="newg">Neu</span>`:""}${autoNew(r0.m)?` <span class="newg">✨ Neu erschienen</span>`:""}</p>${info(r0)}<div class="btns">${free?`<button class="add" data-acc="${r0.m.id}"><span aria-hidden="true">＋</span> Auf die Liste</button>`:""}<button class="rej" data-skip="1"><span aria-hidden="true">↻</span> Anderer Tipp</button><button class="rej" data-pre="${r0.m.id}"><span aria-hidden="true">✓</span> Schon gesehen</button>${free?`<button class="rej rno" data-rej="${r0.m.id}"><span aria-hidden="true">✕</span> Nichts für mich</button>`:""}</div>${free?"":`<p class="why">Liste voll – erst einen Titel bewerten.</p>`}</div>`;
-  {const k=r0&&ed?r0.m.id:"";if(k!==recLast){if(recLast!==null&&k&&!calm()){box.classList.remove("swap");void box.offsetWidth;box.classList.add("swap")}recLast=k}}
+  {const k=r0&&ed?r0.m.id:"";box.dataset.k=k;if(k!==recLast){if(recLast!==null&&k&&!calm()){box.classList.remove("swap");void box.offsetWidth;fxOnce(box,"swap",950)}recLast=k}}
   howRender();
   // Abgeschlossen: eigene Sterne anklickbar. In "Zusammen" kann die zweite Person nachträglich bewerten.
   const owner=view==="both"?I():view,todo=view==="both"?c.done.filter(d=>!rt(d.id,I())):[];
   $("doneg").innerHTML=c.done.map((d,di)=>{const mine=rt(d.id,owner),o=rt(d.id,O()),miss=view==="both"&&!mine;
-    return `<article class="card${d.id===pp?" pop":""}${miss?" todo":""}" id="dn-${d.id}" style="--i:${Math.min(di,14)}">${cv(d.id,M[d.id].name)}<button class="nm lnk" data-info="${d.id}">${M[d.id].name}</button>${seaBadge(d.id)}${miss?`<span class="todo-l">Deine Bewertung fehlt</span>`:""}${ed?`<div class="stars sm2" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(d.id)}</div>`:`<div class="num">${sst(mine)}</div>`}<div class="oth">${U[O()].n}: ${o?sst(o):"–"}</div></article>`}).join("")||`<p class="gn">Noch nichts abgeschlossen.</p>`;
+    return `<article class="card${d.id===pp?" pop":""}${miss?" todo":""}" id="dn-${d.id}" data-k="${d.id}" style="--i:${Math.min(di,14)}">${cv(d.id,M[d.id].name)}<button class="nm lnk" data-info="${d.id}">${M[d.id].name}</button>${seaBadge(d.id)}${miss?`<span class="todo-l">Deine Bewertung fehlt</span>`:""}${ed?`<div class="stars sm2" aria-label="Deine Bewertung, ${U[I()].n}">${liveStars(d.id)}</div>`:`<div class="num">${sst(mine)}</div>`}<div class="oth">${U[O()].n}: ${o?sst(o):"–"}</div></article>`}).join("")||`<p class="gn">Noch nichts abgeschlossen.</p>`;
   const tb=$("todob");tb.hidden=!todo.length;tb.textContent=todo.length?`⭐ ${todo.length} ${todo.length===1?"Titel wartet":"Titel warten"} auf deine Bewertung, ${U[I()].n}`:"";
   const rowFor=(id,u)=>`<div class="rr"><span class="rn ${u}">${U[u].n}</span>${u===I()&&ed?`<span class="stars sm2">${liveStars(id)}${rt(id,u)?`<button class="rsb rclr" data-rclr="${id}" aria-label="Deine Bewertung entfernen">×</button>`:""}</span>`:sst(rt(id,u))}</div>`;
   const nt=id=>{const n=S.notes[id]||{};return["jos","joh"].filter(u=>n[u]).map(u=>`<p class="hn"><b>${U[u].n}:</b> ${esc(n[u])}</p>`).join("")};
@@ -7767,7 +7895,7 @@ function render(){
   if(tab==="stat")$("v-stat").innerHTML=rwStatTile()+statHtml();
   $("ro").hidden=ed||tab==="stat";$("rollb").hidden=!ed;$("swb2").hidden=!ed;
   $("v-wl").hidden=tab!=="wl";$("v-hist").hidden=tab!=="hist";$("v-stat").hidden=tab!=="stat";$("v-ach").hidden=tab!=="ach";if(tab==="ach")$("v-ach").innerHTML=achHtml();$("v-inv").hidden=tab!=="inv";if(tab==="inv")$("v-inv").innerHTML=invHtml();
-  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual;if(moWas&&!mo.hidden&&!calm()){mo.classList.add("opening");clearTimeout(mo._t);mo._t=setTimeout(()=>mo.classList.remove("opening"),520)}
+  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual;if(moWas&&!mo.hidden&&!calm())fxOnce(mo,"opening",620)
   // Beim Tippen einer Notiz das Fenster nicht neu aufbauen, sonst springt der Cursor raus.
   if(!(ae&&ae.dataset&&ae.dataset.note&&mo.contains(ae))&&!(spinning&&rollOn&&$("reel")&&$("reel").children.length>1)){
     if(openId)mo.innerHTML=modalHtml();
@@ -7784,6 +7912,7 @@ function render(){
     :rstAsk?`<p class="hint" style="margin:0 0 8px">Alle Listen bei Animes, Filmen und Serien, alle Bewertungen, Notizen und Verläufe werden gelöscht. Design und Personenwahl bleiben. Direkt danach könnt ihr es noch rückgängig machen.</p><div class="btns"><button class="rst warn" data-rsty="1">Ja, zurücksetzen</button><button class="rst" data-rstn="1">Abbrechen</button></div>`
     :`<div class="btns"><button class="rst" data-exp="1">Backup speichern</button><button class="rst" data-imp="1">Backup laden</button></div><p class="hint">Speichert alles (Animes, Filme, Serien, alle Listen, Bewertungen, Notizen) als Datei. So geht nichts verloren, wenn der Browser geleert wird.</p><button class="rst" data-rst="1" style="margin-top:12px">Alles zurücksetzen</button><p class="hint">Setzt Animes, Filme und Serien komplett auf den Anfang zurück. Am besten vorher ein Backup speichern.</p>`;
   renderSide();renderToast();showStat();renderSearch();cloudUI();cloudKick();rwBanner();seaBanner();autoUI();
+  fxFlip();
   if(swOpen||!$("sw").hidden)swRender();if(brw)brwResults();clearTimeout(achLast);achLast=setTimeout(achCheck,1500);
 }
 const BKEYS=[SEC.anime.key,SEC.film.key,SEC.serie.key,"anime-theme-v1","wl-hsort"];
@@ -7810,7 +7939,7 @@ function dualHtml(){const m=M[dual.id],row=u=>`<div class="drow"><span class="rn
 function rateCommit(ctx,id,v){v=rclamp(v);rFocus=ctx+"|"+id;
   if(ctx==="n")act({n:String(v),id});else if(ctx==="pr")act({pr:String(v)});
   else if(ctx.startsWith("dr:")){dual.r[ctx.slice(3)]=v;render()}
-  const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null;if(f&&!calm())f.parentNode.classList.add("rpop")}
+  const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null;if(f&&!calm()){f.parentNode.classList.add("rpop");const r=f.getBoundingClientRect();if(r.width)fxBurst(r.left+r.width*Math.min(1,v/RMAX),r.top+r.height/2,v>=8?16:v>=5?9:5)}}
 function ratePreview(el,v){el.querySelector(".rfg").style.width=v/RMAX*100+"%";el.classList.remove("empty");el.dataset.tip=fmtR(v);
   el.setAttribute("aria-valuenow",v);el.setAttribute("aria-valuetext",fmtR(v)+" von 10 Sternen");const n=el.parentNode.querySelector(".rnum");if(n)n.textContent=fmtR(v)}
 const rateAt=(el,x)=>{const r=el.getBoundingClientRect(),f=(x-r.left)/r.width;return f>=.985?RMAX:rclamp(f*RMAX)};
@@ -7943,7 +8072,7 @@ function act(d){
     const EQ=((S.ep||{})[view]||{})[id];if(EQ){for(const s in EQ)if(+s<=nv||(nv<p&&+s>nv))delete EQ[s];if(!Object.keys(EQ).length)delete S.ep[view][id]}}
   else if(d.epsel){const[id,s]=d.epsel.split(":");epSel[id]=+s;render();return}
   else if(d.eppg){const[id,s,g]=d.eppg.split(":");epPg[id+":"+s]=+g;render();return}
-  else if(d.ep||d.epback||d.epto){let id,s,nv;
+  else if(d.ep||d.epback||d.epto){let id,s,nv;fxMark={k:"ep",id:(d.ep||d.epback||d.epto).split(":")[0]};
     if(d.ep){const[a,ss,ee]=d.ep.split(":");id=a;s=+ss;const e=+ee;nv=epSeen(id,s)===e?e-1:e}
     else if(d.epback){id=d.epback;const L=EPS[id]||[];s=0;for(let k=L.length;k>=1;k--)if(epSeen(id,k)>0){s=k;break}if(!s)return;nv=epSeen(id,s)-1}
     else{const[a,ss,v]=d.epto.split(":");id=a;s=+ss;nv=Math.max(0,Math.min(epCount(id,s),Math.round(+v)||0));if(nv===epSeen(id,s)){render();return}}
@@ -7957,7 +8086,7 @@ function act(d){
     for(const k in Q)if(+k<=pn||!Q[k])delete Q[k];if(pn)P[id]=pn;else delete P[id];if(!Object.keys(Q).length)delete E[id];
     const PT=(S.progT||(S.progT={}))[view]||(S.progT[view]={}),q=PT[id]||(PT[id]={});for(let i=p0+1;i<=pn;i++)q[i]=Date.now();for(const i in q)if(+i>pn)delete q[i];if(!Object.keys(q).length)delete PT[id];
     if(pn>p0)toast(`✓ ${pn-p0>1?"Staffeln "+(p0+1)+"–"+pn:EPS[id].length>1?"Staffel "+pn:"Alle Folgen"} von „${M[id].name}“ gesehen`)}
-  else if(d.seen){const x0=xpNow(),on=!c.seen[d.seen];snap(`Haken bei „${M[d.seen].name}“`);if(on)c.seen[d.seen]=true;else delete c.seen[d.seen];
+  else if(d.seen){const x0=xpNow(),on=!c.seen[d.seen];if(on)fxMark={k:"seen",id:d.seen};snap(`Haken bei „${M[d.seen].name}“`);if(on)c.seen[d.seen]=true;else delete c.seen[d.seen];
     toast(on?`👀 „${M[d.seen].name}“ gesehen${xpTag(x0)} – fehlen nur noch die Sterne`:`Haken bei „${M[d.seen].name}“ entfernt${xpTag(x0)}`)}
   else if(d.acc){snap(`„${M[d.acc].name}“ angenommen`);c.list[c.list.indexOf("@")]=d.acc;vi=0;toast(`„${M[d.acc].name}“ zur Liste ${vname(view)} hinzugefügt`)}
   else if(d.skip)vi++;
