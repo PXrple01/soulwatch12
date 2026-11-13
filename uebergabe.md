@@ -320,3 +320,76 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Die große Überschrift („Serien“ usw.) ist weg; `#cth` bleibt nur für Screenreader (`.sr`, gegen Theme-Regeln abgesichert). Der Untertitel nennt die Liste und ggf. den Tab („Johanns Liste · Inventar“).
 - Seitenleiste: Titel, dann Statistik, Abzeichen, Inventar, Haustier, Plätze (Trennlinie über der Statistik).
 - sw.js: Cache `jj-watchlist-v25`.
+
+### Update: Folgen korrigieren
+- Auf der Karte neben „✓ E…“: **−** nimmt die zuletzt gesehene Folge zurück (`data-epback`), **✎** öffnet das Info-Fenster direkt bei den Folgen (`data-epjump`) und setzt den Fokus ins Zahlenfeld.
+- Im Info-Fenster: Feld „Gesehen bis Folge [n] / max“ je Staffel (`data-epto`, übernommen bei Enter/Verlassen). 0 setzt die Staffel zurück.
+- Antippen einer früheren Folge im Raster setzt den Stand dorthin (wie bisher). Alle drei Wege laufen über denselben Code im `act()`-Zweig `d.ep||d.epback||d.epto`, mit Rückgängig.
+- Sicherheit: Fremde Titel (eigene, Neuerscheinungen, Cloud) werden beim Laden bereinigt (`cleanTitle`/`loadExt`), das Info-Fenster für Filme/Serien maskiert alle Werte.
+- sw.js: Cache `jj-watchlist-v27`.
+
+### Update: Katalog erweitert (+999 Filme, +555 Serien)
+- **Filme** (jetzt 1978 aktive): die nächsten 999 Filme ab 1980 nach IMDb-Stimmenzahl (≥ 150 Tsd. Stimmen), ohne Genre-Grenze, ohne Dokus und japanische Animationsfilme, nur mit deutschem Wikipedia-Artikel. Angehängt am Ende von `FILMS`.
+- **Serien** (jetzt 1160): 555 weitere Serien/Miniserien nach IMDb-Stimmen (≥ 22 Tsd.), ohne Talk-/Reality-/Game-Shows, Dokus, japanische Animation, indische/türkische Serien, nur mit deutschem Wikipedia-Artikel. Angehängt am Ende von `SERIES` (für `fillSerie` also nach den bisherigen).
+- Daten: IMDb-Datensätze (Wertung, Stimmen, Laufzeit, Genres), Wikidata (dewiki-Artikel, FSK, Herkunftsland), deutscher Titel = dewiki-Artikelname ohne Klammerzusatz, Kurztext = Anfang des Abschnitts „Handlung“ (sonst Einleitung) der deutschen Wikipedia, Filmplakate aus der englischen Wikipedia, Serien-Cover + TVmaze-ID von TVmaze. Genre (`gl`) und Tags automatisch aus den IMDb-Genres (90er-Look 1990–2002, kurz ≤ 95 min, lang ≥ 150 min, „düster“ bei Horror bzw. Krimi-Thriller).
+- sw.js: Cache `jj-watchlist-v28`.
+
+### Update: Bewertungen jetzt 1–10 Sterne
+- Skala 1,0–10,0 in 0,1er-Schritten (`RMIN=1`, `RMAX=10`). Sternleiste mit 10 Sternen (★/✦/💖, CSS `.rate .rbg/.rfg` mit `font-size:.66em`, damit sie etwa so breit bleibt wie vorher). Umschalt+Pfeil = ±1.
+- **Umrechnung:** `mig()` verdoppelt einmalig alle Werte in `w[id].r` (0,5→1, 3,7→7,4, 5→10) und setzt `r10:1` im Bereich; `fresh()` setzt `r10` gleich. Gilt für Browser-Speicher, Cloud-Stände und Backups (alte Backups werden beim Laden umgerechnet).
+- Alles angepasst: Konfetti/Einhorn/„ドン!!“ bei 10 Sternen („MEISTERWERK · 10/10“), Einigkeit (Einig ≤ 0,6, Fast einig ≤ 2,0; Statistik, Mini-Statistik und Rewind „einig“ ≤ 2,0, kontrovers > 2,0), Sterne-Verteilung 1–10, Geschmacksprofil (`(r-6)/4`), Staffel-Hinweise ab 6 Sternen, Rewind-Überraschung direkt gegen IMDb/AniList, Abzeichen (10 Sterne, ≤ 2 Sterne, ≥ 6 auseinander, ≥ 8 Sterne usw. – gleiche Abzeichen wie vorher, nur umgerechnet).
+- Achtung: Beide Geräte einmal neu laden, damit keines mehr die alte Version benutzt (die würde neue Bewertungen noch auf 5 Sterne speichern).
+
+### Update: +500 Animes, +59 Serien
+- **Animes** (jetzt 1499): 500 der beliebtesten AniList-Titel (ab 1980, TV/Film/ONA/TV-Kurz), die noch fehlten, ohne Fortsetzungen, ohne Erotik (gleicher Filter wie bisher), Namens-Dubletten aussortiert. Angehängt an `ANIME2`, zwei neue Felder am Zeilenende: `dsrc` (Quelle der Beschreibung) und `dew` (dewiki-Artikel).
+- Beschreibung: 201 auf Deutsch aus der deutschen Wikipedia (Abschnitt Handlung), 299 auf Englisch von AniList („Inhaltsangabe: AniList (englisch)“).
+- Synchro: aniSearch war nicht erreichbar. `lang:"de"` nur mit Beleg im deutschen Wikipedia-Artikel (185), sonst leer = „Synchro unbekannt“ (neuer Filter beim Stöbern).
+- **Serien** (jetzt 1214): die restlichen 59 Serien aus derselben Auswahl wie oben.
+- sw.js: Cache `jj-watchlist-v29`.
+
+### Redesign „Kino“ (Design + Bedienung überarbeitet)
+- **Wo:** CSS-Block zwischen `/* KINO-START */` und `/* KINO-END */` am Ende des Stylesheets (neue Regeln also dort ergänzen), JS-Block „Redesign: Bewegung“ vor `render()`.
+- **Zwei Ebenen:** Aufbau + Bewegung gelten für alle Designs. Das Aussehen (Farben, Glas, Polarlicht-Hintergrund, Farbverlauf-Knöpfe, Fraunces-Überschriften) gilt nur für Hell/Dunkel über `:where(html:not([data-theme="purple"],[data-theme="baby"]))` (erhöht die Spezifität nicht). Lila und Baby behalten ihren Stil und haben am Blockende eigene Regeln für die neuen Bausteine.
+- **Empfehlung als Bühne** (`.rec`): unscharfes Cover als Hintergrund (`recBg`, nur https), großes Poster, Fortschritts-Punkte (`.rdots`), klarere Knöpfe: „＋ Auf die Liste“, „↻ Anderer Tipp“, „✓ Schon gesehen“, „✕ Nichts für mich“. Beim Wechsel Klasse `swap` (Poster dreht herein).
+- **Karten:** Poster kippt der Maus hinterher (`--rx/--ry/--gx/--gy`, nur mit Maus), Glanzlicht, Schweben; gesehen = Häkchen-Plakette. Freier Platz: „＋ Platz frei“ mit Knopf „Titel aussuchen“ (öffnet Stöbern). Haken heißt „Schon gesehen?“ / „Gesehen“ und ist auf dem Handy wieder beschriftet.
+- **Kurzanleitung** `#howto` (Aussuchen → Schauen → Bewerten), pro Gerät ausblendbar (`wl-howto-hide`).
+- **Handy:** feste Leiste unten `#bnav` (Animes, Filme, Serien, Stöbern, Ich = bisheriger `#accfab`), oben nur noch der Bereichsname (`.cth[data-t]`). Info-Fenster kommt als Blatt von unten. Stöbern öffnet ohne Tastatur, Filter sind anfangs zugeklappt (`fo:false`). Meldungen in voller Breite.
+- **Bewegung:** `fxEnter()` setzt nach Bereichs-/Tab-/Ansichtswechsel kurz `#main.enter` (gestaffeltes Einblenden über `--i`, Balken wachsen, Zahlen zählen hoch `fxCount`). Info-Fenster: Poster fliegt per View Transitions aus der Karte ins Fenster und zurück (`fxOpenInfo`/`fxCloseInfo`, `view-transition-name:poster`); `#modal.opening` nur beim Aufgehen, damit nichts bei jedem Neuzeichnen flackert (gilt jetzt auch für Lila/Baby). Scroll-Einblenden per `animation-timeline:view()` wo unterstützt. Alles aus bei „Bewegung reduzieren“.
+- Wichtig beim Weiterbauen: keine zeitgesteuerten Animationen direkt auf Elemente legen, die `render()` neu aufbaut – immer an `#main.enter`, `.swap` oder `.opening` hängen.
+- sw.js: Cache `jj-watchlist-v30`.
+
+### Update: Animationen Runde 2 + Fehlerdurchgang
+- **Karten gleiten (FLIP):** `fxSnap()` merkt sich vor dem Zeichnen die Poster-Positionen (`data-k` an den Karten, `#rec[data-k]`), `fxFlip()` animiert danach per Web Animations API. Dadurch fliegt der angenommene Tipp aus der Bühne in die Liste, eine bewertete Karte von der Liste zu „Abgeschlossen“, und die übrigen rücken weich nach. Nur im Watchlist-Tab, höchstens 60 Karten.
+- **Einmal-Klassen:** `fxOnce(el,klasse,ms)` + `fxTidy()` – `enter`, `swap`, `opening` gelten nur für das DOM des Zeichnens, das sie gesetzt hat; beim nächsten `render()` werden sie entfernt (sonst startet die Animation neu).
+- **Sterne:** Vorschau unter der Maus (`.rate.hov`, `--hv`, Wert als Blase), Funken beim Speichern (`fxBurst`, nur Hell/Dunkel), Zahl ploppt.
+- **Navigation:** gleitende Markierung hinter dem aktiven Reiter oben und in der Handy-Leiste (`fxInk()` setzt `--ix/--iw`), Bereichswechsel gleitet aus der Richtung des Reiters herein (`--dir`).
+- **Sonst:** Sternenhimmel über dem Polarlicht, Poster der Bühne schwebt, Hauptknopf schimmert, freier Platz „atmet“, Haken-Plakette dreht herein (`fx-seen`), Folgen-Knopf hüpft (`fx-ep`), Info-Fenster und Handy-Blatt staffeln ihren Inhalt, Stöbern öffnet weich.
+- **Bedienung:** Leere Plätze sind zu einer Karte „N Plätze frei“ zusammengefasst (übrige `.slmore`, hidden). Abgeschlossene Titel am Desktop kleiner (`.grid.small` 132 px). Meldungen fangen keine Klicks mehr ab und rücken auf dem Handy nach oben, wenn unten ein Fenster offen ist. In fremden Listen keine Bedienhinweise (`#main[data-ro]`).
+- **Behobene Fehler:** seitliches Verschieben auf schmalen Handys (Würfeln/Swipen-Knöpfe, Tipp-Knöpfe in Lila, Herzchen in Baby; zusätzlich `html,body{overflow-x:clip}`); Namens-Kollision bei `@keyframes` (meine `shine/bob/twinkle` überschrieben gleichnamige Theme-Animationen → Empfehlung im Baby-Design rutschte aus dem Bild; jetzt `kShine/kBob/kTwinkle`); Klasse `.ro` kollidierte mit dem Hinweisfeld (jetzt `.slro`).
+- **Merke:** Neue `@keyframes`- und Klassennamen vorher im Stylesheet suchen – es gibt viele kurze Namen aus den Themes.
+- sw.js: Cache `jj-watchlist-v31`.
+
+### Neu: Extras (Finder, Marathon, Quiz, Landkarte, Poster, Ticket, Regal, Tönung, Auto-Design) + interaktiver Rewind
+- **Wo:** JS zwischen `// EXTRAS-START` und `// EXTRAS-END` (vor `chReset()`), CSS zwischen `/* EXTRA-START */` und `/* EXTRA-END */` (nach dem Kino-Block). Alles liest nur vorhandene Daten aus `ST` – es gibt keine neuen Cloud-Felder.
+- **Gemeinsame Ebene `#xo`** (wie Stöbern unter dem Info-Fenster, z9): `xoOpen(art)`, `xoRender()`, `xoClose()`; Arten `fin`, `mar`, `quiz`, `poster`. Aktionen laufen über `xAct(d)`, das am Anfang von `act()` gefragt wird. Einstiege: Knopf „🧭 Zeit & Stimmung“ neben Würfeln/Swipen, Abschnitt „Filmabend“ im Reiter, Knopfzeile im Statistik-Tab (`xStatBtns`).
+- **Zeit-Budget + Stimmungs-Kompass (`fin`):** Laufzeiten in `RT` (IMDb-Minuten, Filme = Länge, Serien = Folgenlänge; Animes pauschal 24 min pro Folge, Filme 105). Kompass: jedes Genre hat in `MOODV` einen Platz auf „leicht–schwer“ und „ruhig–aufregend“, ein Titel liegt im Mittel seiner Genres (`moodOf`). Ergebnis: die 24 nächstgelegenen, noch nicht gesehenen Titel des Bereichs.
+- **Marathon-Planer (`mar`):** Reihen in `MARA` als Muster auf den Originaltitel, sortiert nach Jahr; nur Reihen mit ≥ 2 Filmen im Katalog (derzeit 57). Fortschritt aus Sicht der aktuellen Ansicht (`maraSeen`), „＋ Auf die Liste“ für den nächsten Film. Öffnen wechselt in den Film-Bereich.
+- **Quiz (`quiz`):** erst ab `QUIZ_MIN=8` bewerteten Titeln (über alle Bereiche). Fragearten: wer gab mehr Sterne, was zuerst gesehen, wie viele Sterne, welcher Titel besser, aus welchem Jahr. 6 Fragen pro Runde, höchstens 2 je Art.
+- **Geschmacks-Landkarte** (`tasteHtml`, im Statistik-Tab): pro Genre der Sterne-Schnitt beider (je ≥ 2 Bewertungen), als Punktwolke mit ausweichenden Beschriftungen; dazu gemeinsames Lieblingsgenre, größter Unterschied, größte Einigkeit.
+- **Jahres-Poster (`poster`):** Canvas 1240×1754 mit den Covern der bis zu 12 bestbewerteten Titel (`rewindData`), Jahr/Person wählbar, Teilen oder Speichern. Cover werden mit `crossOrigin` geladen (Wikimedia, IMDb, TVmaze, AniList erlauben das); schlägt das fehl, wird ohne Bilder gezeichnet.
+- **Haustier schaut mit:** `petReact(id, "look"|"add"|"done")` setzt die Sprechblase passend zum Genre bzw. zur Bewertung; `petFav(u)` ist sein Lieblingstitel (fester Griff in eure Titel ab 7 Sternen). Am Handy erscheint die Blase kurz oben (`#petbub`). Nur mit geschlüpftem Haustier.
+- **Seite färbt sich nach dem Titel:** `tintOf(id)` liest die Hauptfarbe des Covers (14×14-Canvas, sonst Farbe aus der ID), `tintApply()` färbt `#tint` (Hintergrund, folgt dem aktuellen Tipp) und `--tint` am Info-Fenster. Nur Hell/Dunkel.
+- **Kino-Ticket:** `ticketShow(id)` beim Abschließen aus der Watchlist (nicht bei „schon gesehen“). **Verlauf** hat drei Darstellungen (`hview`, pro Gerät `wl-hview`): Liste, Regal (`.spine`, Höhe = Sterne, Sortierung „Nach Farbe“ neu) und Tickets (`.tkt.mini`).
+- **Tag/Nacht von selbst:** Design „Auto“ (`anime-theme-v1="auto"`, `data-auto` am `<html>`): 7–19 Uhr hell, sonst dunkel; geprüft beim Start, alle 5 Minuten und beim Zurückkehren in den Tab.
+- **Rewind interaktiv:** `rwInteractive()` fügt bis zu drei Tipp-Fragen vor die Auflösungen ein (Top-Titel, wer war strenger, stärkster Monat; Slide-ID `tipp`, Zustand in `slide.g`), Awards werden einzeln aufgedeckt (`rw.rev`, „Alle aufdecken“), Reaktions-Emojis auf jeder Slide (`rwReact`), Tipp-Bilanz auf der Schluss-Slide, Knopf „🖼 Als Poster“.
+- Testhinweis: Bei vielen Testbewertungen geht das Kisten-Fenster auf und fängt Klicks ab – im Test `chShow=()=>{}` setzen.
+- sw.js: Cache `jj-watchlist-v32`.
+
+### Update: Bewertung als Zahl mit Regler, Weiterschauen, Empfehlungen, Glocke
+- **Bewerten:** `rateHtml` zeigt jetzt große Zahl, Wort (`rWord`, „schwach“ … „Meisterwerk“) und einen Regler, der sich von Rot nach Grün färbt (`.rwrap.r2`, CSS-Variable `--rv` = Wert/10). Die Technik dahinter ist unverändert (`.rate[data-rate]`, Ziehen/Tippen, −/+, Tastatur). **Anzeigen:** `sst()` und `rwSt()` zeigen einen Stern mit Zahl („★ 7,4“; Lila ✦, Baby 💖). Die Zehn-Sterne-Leiste gibt es nicht mehr.
+- **Weiterschauen** (`contHtml`, `#cont` über der Empfehlung): bis zu drei angefangene Serien/Animes der aktuellen Liste mit „✓ Folge n“ (nutzt die bestehende Aktion `data-ep`).
+- **Empfehlungen:** im Info-Fenster „💌 … empfehlen“ mit optionaler Nachricht. Liegt in `ST.film.x.recs` (`{id,k,from,to,msg,t,st:"new"|"ok"|"no",at}`, höchstens 60) und wird mit dem Film-Bereich über die Cloud geteilt. Die andere Person sieht oben eine Karte (`recInHtml`, `#recin`): Auf meine Liste / Später / Nein danke.
+- **Wer ist dran:** `ST.film.x.turn={last,t}`; wer in „Zusammen“ einen Titel auf die Liste setzt, hat gewählt (`xTurn`). In der gemeinsamen Ansicht steht, wer als Nächstes aussuchen darf, mit „tauschen“.
+- **Glocke** (`#bell`, Ebene `news`): `newsList()` sammelt Bewertungen der anderen Person (aus `w[id].rt`, letzte 45 Tage, nur Titel, die einen betreffen), Empfehlungen und Antworten darauf, neue Staffeln, offene gemeinsame Bewertungen und wartende Swipe-Abstimmungen. „Neu“ = neuer als der letzte Blick (pro Gerät und Person: `wl-news-<person>`). Kommt beim Abgleich etwas dazu, erscheint eine Meldung und die Glocke läutet.
+- **Nicht enthalten:** Mitteilungen aufs gesperrte Handy. Dafür bräuchte es einen Versand über den Server (Supabase) – die Glocke zeigt Neues nur, wenn die Seite geöffnet wird.
+- sw.js: Cache `jj-watchlist-v33`.
