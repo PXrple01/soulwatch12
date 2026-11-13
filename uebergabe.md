@@ -28,7 +28,7 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - **Speicherung:** Browser (`anime-watchlist-v3`, `film-watchlist-v1`, `serie-watchlist-v1`, Datenformat `v:2` mit `lists.jos/joh/both`, `w` = Bewertungen, `notes`, `custom`) plus Cloud.
 
 ## Cloud (Supabase)
-- Projekt-URL: `https://fotnvxalffqrlsltyazc.supabase.co`, öffentlicher Schlüssel steht in `const CLOUD` in der Seite.
+- Projekt-URL: `https://inqhfkoxmftyellmrxop.supabase.co` (seit 13.11.2026; vorher fotnvxalffqrlsltyazc), öffentlicher Schlüssel steht in `const CLOUD` in der Seite.
 - Tabelle `wl_state` (ein Eintrag pro Bereich), Zugriff nur über die Funktionen `wl_get` / `wl_put` mit Haushalts-Code. Tabellen sind von außen gesperrt (geprüft).
 - Pro Gerät einmal den Haushalts-Code eingeben (Pflicht, keine lokale Option mehr). Abgleich nach Änderungen, beim Öffnen, beim Zurückwechseln in den Tab und alle 30 Sekunden. Bei gleichzeitigen Änderungen gewinnt der zuerst gespeicherte Stand.
 - Kostenlose Projekte pausieren nach ca. 1 Woche ohne Nutzung → im Dashboard „Restore“.
@@ -393,3 +393,8 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - **Glocke** (`#bell`, Ebene `news`): `newsList()` sammelt Bewertungen der anderen Person (aus `w[id].rt`, letzte 45 Tage, nur Titel, die einen betreffen), Empfehlungen und Antworten darauf, neue Staffeln, offene gemeinsame Bewertungen und wartende Swipe-Abstimmungen. „Neu“ = neuer als der letzte Blick (pro Gerät und Person: `wl-news-<person>`). Kommt beim Abgleich etwas dazu, erscheint eine Meldung und die Glocke läutet.
 - **Nicht enthalten:** Mitteilungen aufs gesperrte Handy. Dafür bräuchte es einen Versand über den Server (Supabase) – die Glocke zeigt Neues nur, wenn die Seite geöffnet wird.
 - sw.js: Cache `jj-watchlist-v33`.
+
+### Update: Neues Supabase-Projekt
+- Cloud läuft jetzt über `https://inqhfkoxmftyellmrxop.supabase.co` (neuer Account). Einrichtung mit `supabase-setup.sql` (Haushalts-Code dort nur als Platzhalter; echten Code nie ins Repo).
+- Beim ersten Start nach dem Wechsel setzt die Seite den Abgleich-Stand zurück (`wl-cloud-proj`) und lädt den Stand des Geräts hoch. Das zuerst geöffnete Gerät legt den Cloud-Stand an, weitere Geräte übernehmen ihn.
+- sw.js: Cache `jj-watchlist-v34`.
