@@ -2009,7 +2009,7 @@ html.thsw::view-transition-new(root){z-index:2}
 @keyframes dcSweepB{from{transform:rotate(28deg)}to{transform:rotate(-22deg)}}
 .dc-foot{left:0;right:0;bottom:-40px;height:240px;background:radial-gradient(ellipse 60% 100% at 50% 100%,rgba(255,186,90,.24),transparent 70%);animation:dcFoot 7s ease-in-out infinite}
 @keyframes dcFoot{50%{opacity:.55}}
-.dc-cur{top:-2vh;bottom:-2vh;width:clamp(38px,4.6vw,76px);transform-origin:50% 0;animation:dcSway 11s ease-in-out infinite}
+.dc-cur{top:-2vh;bottom:-2vh;width:clamp(36px,3.2vw,64px);transform-origin:50% 0;animation:dcSway 11s ease-in-out infinite}
 .dc-cur.l{left:var(--sw,0px)}
 .dc-cur.r{right:0;animation-delay:-5.5s}
 .dc-cur b{position:absolute;inset:0;background:linear-gradient(90deg,transparent 40%,rgba(0,0,0,.38)),var(--velvet);clip-path:polygon(0 0,100% 0,97% 7%,90% 18%,79% 31%,66% 44%,55% 54%,50% 58%,53% 61%,61% 69%,70% 79%,77% 90%,81% 100%,0 100%)}
@@ -2496,7 +2496,7 @@ body:has(#modal:not([hidden]),#brw:not([hidden]),#xo:not([hidden]),#rw:not([hidd
    Handy und reduzierte Bewegung
    ===================================================================== */
 @media (max-width:767.98px){
-  :root[data-theme="deco"] .rec{padding:22px 18px}
+  :root[data-theme="deco"] .rec{padding:24px 24px}
   :root[data-theme="deco"] .rec .mq{inset:7px}
   :root[data-theme="deco"] :is(.add,.slb){padding:11px 20px 9px;letter-spacing:.09em}
   :root[data-theme="deco"] .ctabs::after{display:none}
@@ -9945,7 +9945,7 @@ function seaScene(f,o,m,c){
   const nr=m?4:6;let h=`<div class="se-sky"></div><div class="se-rays">`;
   for(let i=0;i<nr;i++)h+=`<i style="${thVar(["x",((i+.5)*100/nr+thR(-5,5)).toFixed(1)+"%"],["w",(thR(90,220)|0)+"px"],["r",(thR(-16,16)|0)+"deg"],["t",thR(7,13).toFixed(1)+"s"],["dl","-"+thR(0,10).toFixed(1)+"s"])}"></i>`;
   h+=`</div><div class="se-caus"><i></i></div><div class="se-snow"></div>`;
-  const nj=m?2:4;for(let i=0;i<nj;i++){const s=thR(.55,1.15);h+=`<div class="se-jf" style="${thVar(["x",(6+i*(84/Math.max(1,nj-1))+thR(-5,5)).toFixed(1)+"%"],["s",s.toFixed(2)],["t",(thR(48,82)|0)+"s"],["dl","-"+(thR(0,70)|0)+"s"],["h",SE_H[i%SE_H.length]],["jsw",thR(8,14).toFixed(1)+"s"])};opacity:${(.45+s*.42).toFixed(2)}"><div class="se-jw"><div class="se-jb"></div><div class="se-jt">${seaTent()}</div></div></div>`}
+  const nj=m?2:4;for(let i=0;i<nj;i++){const s=thR(.55,1.15);h+=`<div class="se-jf" style="${thVar(["x",(6+i*(84/Math.max(1,nj-1))+thR(-5,5)).toFixed(1)+"%"],["s",s.toFixed(2)],["t",(thR(48,82)|0)+"s"],["dl","-"+(thR(0,70)|0)+"s"],["h",SE_H[i%SE_H.length]],["jsw",thR(8,14).toFixed(1)+"s"])};opacity:${(.35+s*.35).toFixed(2)}"><div class="se-jw"><div class="se-jb"></div><div class="se-jt">${seaTent()}</div></div></div>`}
   for(let i=0;i<(m?9:18);i++)h+=`<i class="se-bb" style="${thVar(["x",thR(0,100).toFixed(1)+"%"],["d",(thR(4,16)|0)+"px"],["t",thR(11,24).toFixed(1)+"s"],["dl","-"+thR(0,24).toFixed(1)+"s"],["wx",(thR(6,18)|0)+"px"])}"></i>`;
   h+=`<div class="se-floor">${seaFloor(m)}</div>`;
   f.innerHTML=h;
