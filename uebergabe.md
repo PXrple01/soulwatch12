@@ -1,6 +1,6 @@
 # Übergabe: Josefines und Johanns Watchlist
 
-Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
+Stand: 14.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 
 ## Dateien in diesem Ordner
 - `watchlist.html` – die Seite (Hauptdatei, hier wird gearbeitet)
@@ -9,7 +9,7 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 
 ## Aufbau der Seite
 - **Kopf:** Überschrift „Josefines ♥ Johanns“ (Herz halb pink, halb lila, schlägt), rechts Cloud-Symbol (☁️/⏳/⚠️), Personen-Chip, Zahnrad.
-- **Zahnrad-Menü:** Design (Hell, Dunkel, Lila, Baby mit Einhörnern), Cloud-Sync (Status, „Jetzt abgleichen“, „Gerät abmelden“), Backup speichern/laden, „Alles zurücksetzen“ (alle Bereiche, mit Rückgängig).
+- **Zahnrad-Menü:** Design (Hell, Dunkel, Lila, Baby mit Einhörnern, Kinopalast, Tiefsee, Origami, Auto), Cloud-Sync (Status, „Jetzt abgleichen“, „Gerät abmelden“), Backup speichern/laden, „Alles zurücksetzen“ (alle Bereiche, mit Rückgängig).
 - **Reiter:** Animes, Filme, Serien.
 - **Listen pro Bereich:** Josefine, Johann, 💞 Zusammen. Bei Animes keine Josefine-Liste (sie schaut Animes nicht allein). Fremde Liste nur ansehen. Eigene Listen starten mit den Titeln aus „Zusammen“.
 - **Unterreiter:** Watchlist, Verlauf (sortierbar), Statistik. Rechts daneben eine **Suchleiste** (Katalog + Online-Suche: AniList für Animes, deutsche Wikipedia für Filme/Serien; Treffer bewerten, zur Watchlist hinzufügen oder gegen einen Titel tauschen; übernommene Titel werden als `custom` im Bereich gespeichert).
@@ -398,3 +398,21 @@ Stand: 20.10.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Cloud läuft jetzt über `https://inqhfkoxmftyellmrxop.supabase.co` (neuer Account). Einrichtung mit `supabase-setup.sql` (Haushalts-Code dort nur als Platzhalter; echten Code nie ins Repo).
 - Beim ersten Start nach dem Wechsel setzt die Seite den Abgleich-Stand zurück (`wl-cloud-proj`) und lädt den Stand des Geräts hoch. Das zuerst geöffnete Gerät legt den Cloud-Stand an, weitere Geräte übernehmen ihn.
 - sw.js: Cache `jj-watchlist-v34`.
+
+### Neu: Drei Designs „Kinopalast“, „Tiefsee“, „Origami“
+- **Wo:** CSS zwischen `/* THEMES-START */` und `/* THEMES-END */` (ganz am Ende des Stylesheets, nach dem Extras-Block), JS zwischen `// THEMES-START` und `// THEMES-END` (nach dem Extras-Block, vor `chReset()`). Werte `data-theme="deco"`, `"sea"`, `"paper"` am `<html>`, gespeichert wie bisher in `anime-theme-v1`.
+- **Auswahl:** Das Menü „Design“ ist jetzt ein Raster mit Vorschau-Kugeln (`.seg.thseg`, `.thp.p-…`, Plakette „Neu“ = `.thn`). Gewechselt wird über `thSwitch(t)`: Die neuen Designs spielen ihr Intro, alle anderen blenden per View Transition als Kreis vom Tipp-Punkt aus auf (`html.thsw`).
+- **Bühne:** zwei feste Ebenen ohne Klicks: `#tfx` (Szene hinter dem Inhalt, z-index −1; funktioniert nur, solange `<html>` keinen eigenen Hintergrund hat) und `#tfo` (Effekte darüber, z 28). `thScene()` baut die Szene neu, wenn sich Design, Handy/Desktop oder „Bewegung reduzieren“ ändern (MutationObserver auf `data-theme`). Wiederkehrende Effekte laufen über `thEvery()` (pausiert bei verstecktem Tab) und werden mit `thClear()` beendet. Beim Scrollen setzt `thScroll()` die Variablen `--depth` und `--sy` an `#tfx`.
+- **Kinopalast (`deco`):** Art-déco-Kino mit Strahlenkranz, Fächermuster, Suchscheinwerfern, gerafften Samtvorhängen mit Kordel und Quaste, Staub im Licht, Filmkorn und Kratzern. Die Reiter sind ein Leuchtschild mit Lauflichtern, die Tipp-Bühne hat einen Glühbirnen-Rahmen (`.rec .mq`). Überschriften in Goldfolie (Limelight), Plaketten-Knöpfe, Poster in Sepia, die beim Zeigen farbig werden. Intro: Filmstart-Countdown 3-2-1, dann geht der Vorhang auf. Bereichswechsel: Vorhang öffnet sich. Konfetti: Spotlights, Goldflitter und „Bravo!“.
+- **Tiefsee (`sea`):** Biolumineszenz mit Lichtstrahlen und Kaustik von oben, Meeresschnee, Quallen, Blasen, Fischschwärmen, Seegras und Anemonen am Grund. Je tiefer man scrollt, desto dunkler wird es; der Tiefenmesser unten rechts zeigt beim Scrollen Meter und Zone. Glasflächen, schwebende Karten (sie halten an, sobald man darauf zeigt), Plankton folgt der Maus, Tippen macht Ringe und Blasen. Intro: Abtauchen durch die Wasseroberfläche. Bereichswechsel: Blasenwand. Konfetti: Wal, Blasen und bunte Schnipsel.
+- **Origami (`paper`):** Washi-Papier, Fuji mit Torii und Hokusai-Wellen (Parallaxe beim Scrollen, dabei geht die Sonne unter), Wolken, Kirschblüten und vorbeifliegende Papierkraniche. Karten mit Eselsohr, Hanko-Stempel 見 für „gesehen“, Washi-Klebeband an der Bühne, Reiter als Karteikarten, Regler mit Stern. Intro: Eine Klappkarte öffnet sich, Kraniche fliegen heraus. Bereichswechsel: Die Seite blättert um (Stempel 動/映/続). Konfetti: Papierschnipsel und Kraniche.
+- **Anschlüsse im bestehenden Code:** `fxEnter()` ruft `thEnter()` auf, `fxBurst()` gibt in Tiefsee und Origami an `thBurst()` ab, und `confetti()` fragt zuerst `thConfetti()`. Rewind, Teilen-Bild (`rwShare`) und Jahres-Poster (`posterMake`) haben eigene Farben pro Design. `xThemed()` (Extras) zählt die neuen Designs mit, deshalb gibt es dort keine Seitentönung und keine Funken.
+- **Intro:** höchstens einmal am Tag beim Öffnen (`wl-th-intro`) und immer beim Wechsel ins Design. Jeder Tipp bricht es ab.
+- **Bewegung reduzieren:** Die Szene steht still, es gibt kein Intro, kein Konfetti und keine Übergänge.
+- **Schriften:** Limelight, Jost und Josefin Sans (Kinopalast), Quicksand (Tiefsee), Shippori Mincho, Zen Maru Gothic und Caveat (Origami), alle über denselben Google-Fonts-Link. Browser laden nur die Schriften, die ein Design wirklich benutzt.
+- **Merke:**
+  - Die Klassen-Präfixe `dc-`, `se-`, `pp-` und `th-` sind reserviert.
+  - Pseudo-Elemente nie in `:is()` schreiben, dort wirken sie nicht.
+  - Weichzeichner (`filter: blur`) nicht auf bewegte, große Flächen legen, weiche Kanten lieber mit Verläufen oder Masken bauen. Das spart viel Rechenzeit.
+  - In der Tiefsee schweben die Karten. Playwright-Tests brauchen dort `#grid .card{animation:none}`, sonst gelten Knöpfe als „nicht stabil“.
+- sw.js: Cache `jj-watchlist-v35`.
