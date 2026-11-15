@@ -23,6 +23,7 @@ Stand: 15.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - **Sonst:** Rückgängig (Meldung unten + Strg+Z), Konfetti bei 5 Sternen, Handy-Ansicht verdichtet (CSS-Block `/* Handy: … */` steht am Ende des Stylesheets).
 
 ## Daten
+- **Stand 15.11.2026:** 4.697 aktive Filme, 2.835 Serien, 2.550 Animes. Die Zahlen darunter sind der ursprüngliche Stand; die Erweiterungen stehen in den „Update“-Abschnitten.
 - **Animes:** ca. 243 Titel (`BASE`, `CAND`, `BULK`), Cover/Infos online (AniList → Kitsu → Jikan).
 - **Filme:** 500 Realfilme (Horror, Thriller, Psycho, Mystery) in `FILMS`. Format pro Zeile: `IMDb-ID|Titel|Original|Jahr|IMDb|Stimmen|FSK|Cover|Tags|Genre|Beschreibung|de-Wikipedia-Artikel`. Alle mit belegter deutscher Synchro (Synchronkartei, Wikipedia oder deutscher Originalfilm). Start-Filme in `FILM_START`.
 - **Serien:** 600 beliebte Serien (Top nach IMDb-Stimmen, ohne japanische Animes, indische/türkische Serien und Talkshows) in `SERIES`. Format wie `FILMS` plus 13. Feld = TVmaze-ID. Wertung/Stimmen aus den IMDb-Datensätzen (Okt. 2026), Cover von TVmaze, deutsche Titel aus TVmaze-AKAs bzw. Handarbeit, Beschreibungen selbst geschrieben. FSK und Wikipedia-Artikel leer (Wikipedia-Text wird per Suche „Titel Fernsehserie Jahr“ gefunden). Start-Serien in `SERIE_START`.
@@ -430,3 +431,12 @@ Stand: 15.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - **Umzug:** siehe „Hosting“. Neu im Repo: App-Symbole, Manifest, `.nojekyll`; `sw.js` speichert jede Datei einzeln und startet bei Server-Fehlern die gespeicherte Version.
 - Testhinweis: Die Geschenk-Kiste geht nach dem Laden von selbst auf – in Browser-Tests nach `goto` `chShow=()=>{}` setzen und ein offenes Popup schließen (`chOn=false;chRender()`).
 - sw.js: Cache `jj-watchlist-v36`.
+
+### Update: Katalog stark erweitert (+2.798 Filme, +1.621 Serien, +1.051 Animes)
+- **Filme** (jetzt 4.697 aktive): die nächsten Filme ab 1980 nach IMDb-Stimmen bis etwa 42 Tsd. Stimmen, ohne Dokus und japanische Animationsfilme, nur mit deutschem Wikipedia-Artikel. 2.771 mit Plakat (englische Wikipedia), 27 ohne.
+- **Serien** (jetzt 2.835): Serien/Miniserien nach IMDb-Stimmen bis etwa 4.700 Stimmen, ohne Talk-/Reality-/Game-Shows, Nachrichten, Dokus, japanische Animation, indische/türkische Serien, nur mit deutschem Wikipedia-Artikel. Cover + TVmaze-ID von TVmaze (25 ohne Cover).
+- **Animes** (jetzt 2.550): die nächsten beliebtesten AniList-Titel (bis etwa 9.500 Mitglieder), ohne Fortsetzungen und Erotik, ohne Doppelte (AniList-ID auch aus der Zusatztabelle der älteren Animes, sonst Name). 300 mit deutscher Beschreibung aus Wikipedia, 751 mit englischer von AniList; 259 mit Beleg für deutsche Synchro (`lang:"de"`), sonst „Synchro unbekannt“. Lange Beschreibung hier höchstens 600 Zeichen.
+- Format und Quellen wie bei den letzten Erweiterungen (deutscher Titel = Artikelname ohne Klammerzusatz, Text = Anfang von „Handlung“, sonst Einleitung; Genre/Tags aus IMDb bzw. AniList). Angehängt am Ende von `FILMS`, `SERIES`, `ANIME2`. Laufzeiten für das Zeit-Budget (`RT`, IMDb-Minuten) für alle neuen Filme und Serien ergänzt (jetzt 7.598).
+- **Wikipedia-Abruf:** Die API (`api.php`) war stark gebremst (Fehler 429). Texte und Infobox-Bildnamen kamen deshalb über `Spezial:Exportieren` (60–100 Artikel pro Anfrage); Plakat-Adressen werden aus dem Dateinamen über den MD5-Pfad gebaut und per HEAD auf upload.wikimedia.org geprüft (erst `en`, sonst `commons`).
+- **Größe:** `index.html` ist jetzt ca. 6,2 MB (vorher 3,5 MB); GitHub Pages überträgt sie komprimiert. Laden dauert dadurch etwa doppelt so lang (lokal gemessen 0,6 s statt 0,3 s, auf gedrosseltem Handy-Profil 2,0 s statt 1,0 s), fast nur durch das Einlesen der Datei.
+- sw.js: Cache `jj-watchlist-v37`.
