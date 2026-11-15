@@ -14003,7 +14003,7 @@ function petHtml(u){const P=petView(u),A=achFor(u);if(u===I())petKey=A.key;
   <span class="petinfo"><b>${P.nm}</b><small>${P.form?esc(P.form)+" · Lv "+P.L:"Level "+P.L+" · "+rankOf(P.L)}</small><span class="xpbar" aria-hidden="true"><i style="width:${Math.round(A.lv.cur/A.lv.need*100)}%"></i></span></span>
   ${petLine&&u===I()?`<span class="petsay" role="status">${esc(petLine)}</span>`:""}</button>`}
 // Neue Abzeichen/Level feiern (nur eigene Person); beim allerersten Mal still übernehmen
-let achWho="",achF="open",achLast=0;
+let achWho="",achF="open",achLast=0,achT0=0;
 function achCheck(){const u=I(),A=achFor(u),kS="wl-ach-seen-"+u,kL="wl-ach-lvl-"+u;let seen=null,lv=0;
   // Leiste wurde mit älterem Stand gezeichnet (Cache): neu zeichnen, damit Level und Haustier sofort stimmen
   if(A.key!==petKey)setTimeout(()=>{renderSide();if(tab==="ach"||tab==="inv")render()},0);
@@ -14657,7 +14657,7 @@ function render(){
     :`<div class="btns"><button class="rst" data-exp="1">Backup speichern</button><button class="rst" data-imp="1">Backup laden</button></div><p class="hint">Speichert alles (Animes, Filme, Serien, alle Listen, Bewertungen, Notizen) als Datei. So geht nichts verloren, wenn der Browser geleert wird.</p><button class="rst" data-rst="1" style="margin-top:12px">Alles zurücksetzen</button><p class="hint">Setzt Animes, Filme und Serien komplett auf den Anfang zurück. Am besten vorher ein Backup speichern.</p>`;
   renderSide();renderToast();showStat();renderSearch();cloudUI();cloudKick();rwBanner();seaBanner();autoUI();
   fxFlip();histViews();x2Render();xoRender();tintApply();petBub();
-  if(swOpen||!$("sw").hidden)swRender();if(brw)brwResults();clearTimeout(achLast);achLast=setTimeout(achCheck,1500);
+  if(swOpen||!$("sw").hidden)swRender();if(brw)brwResults();clearTimeout(achLast);if(!achT0)achT0=Date.now();achLast=setTimeout(()=>{achT0=0;achCheck()},Math.max(0,Math.min(1500,4000-(Date.now()-achT0))));
 }
 const BKEYS=[SEC.anime.key,SEC.film.key,SEC.serie.key,"anime-theme-v1","wl-hsort"];
 function doExport(){save();const data={};for(const k of BKEYS){try{const v=localStorage.getItem(k);if(v!==null)data[k]=v}catch(e){}}
