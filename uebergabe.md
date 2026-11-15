@@ -1,11 +1,12 @@
 # Übergabe: Josefines und Johanns Watchlist
 
-Stand: 14.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
+Stand: 15.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 
 ## Dateien in diesem Ordner
-- `watchlist.html` – die Seite (Hauptdatei, hier wird gearbeitet)
-- `watchlist-web/index.html` – Kopie zum Hochladen bei Netlify (nach jeder Änderung neu kopieren: `cp watchlist.html watchlist-web/index.html`)
-- `supabase-setup.sql` – Einrichtungs-Skript für die Datenbank. **Enthält den Haushalts-Code, nicht weitergeben, nicht hochladen.**
+- `index.html` – die Seite (wird von GitHub Pages ausgeliefert); `watchlist.html` ist eine identische Kopie (nach Änderungen `cp index.html watchlist.html`)
+- `sw.js`, `manifest.webmanifest`, `icon-180.png`, `icon-192.png`, `icon-512.png` – Home-Bildschirm-App und Offline-Start
+- `.nojekyll` – GitHub Pages liefert alle Dateien unverändert aus (ohne Jekyll)
+- `supabase-setup.sql` – Einrichtungs-Skript für die Datenbank, im Repo nur mit Platzhalter. **Den echten Haushalts-Code nie eintragen und hochladen.**
 
 ## Aufbau der Seite
 - **Kopf:** Überschrift „Josefines ♥ Johanns“ (Herz halb pink, halb lila, schlägt), rechts Cloud-Symbol (☁️/⏳/⚠️), Personen-Chip, Zahnrad.
@@ -34,7 +35,9 @@ Stand: 14.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Kostenlose Projekte pausieren nach ca. 1 Woche ohne Nutzung → im Dashboard „Restore“.
 
 ## Hosting
-- Netlify (Konto anlegen, „Deploy manually“, Ordner `watchlist-web` hineinziehen). Bei Änderungen erneut hochladen.
+- **GitHub Pages** (seit 14.11.2026): https://pxrple01.github.io/soulwatch12/ – wird bei jedem Push auf `main` automatisch neu veröffentlicht (1–2 Minuten). Kostenlos und ohne Kontingent pro Veröffentlichung, solange das Repo öffentlich ist. Einstellung: Repo → Settings → Pages → „Deploy from a branch“, `main`, `/ (root)`.
+- Netlify (soulwatch.netlify.app) wird nicht mehr benutzt: Das kostenlose Kontingent war aufgebraucht („Usage exceeded“, Fehler 503). Dort die Builds stoppen oder die Seite löschen, sonst verbraucht jeder Push weiter Kontingent.
+- Neue Adresse = neuer Speicher im Browser: auf jedem Gerät einmal Person wählen und den Haushalts-Code eingeben (die Daten kommen aus der Cloud) und das Home-Bildschirm-Symbol neu anlegen.
 
 ## Bekannte Fallen
 - Keine Variable `top` auf oberster Ebene (das ist `window.top`). Heißt `topTab`.
@@ -57,9 +60,9 @@ Stand: 14.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
 - Baby-Design stark erweitert (CSS-Block „Baby-Design“ vor dem Handy-Block, JS-Block „Baby-Design: Himmel, Glitzer, Einhorn“ vor `confetti()`): Schrift Baloo 2, Einhorn-Cursor, ziehende Wolken, aufsteigende Blasen/Herzen, Nachtmodus (20–7 Uhr: Mond, Sterne, schlafendes Einhorn), Regenbogen-Titel, Einhorn neben dem Titel (antippen = Herzchen + Sprechblase), Glitzerspur hinter der Maus, Herzchen-Explosion bei Klicks, Herzen statt Sterne, 🎀 auf gesehenen Karten, Teddy in freien Plätzen, Regenbogen-Rahmen, galoppierendes Einhorn bei 5 Sternen. Alles mit `prefers-reduced-motion` abschaltbar.
 
 ## Neu: Als iPhone-App (Home-Bildschirm)
-- Im Ordner `watchlist-web` liegen jetzt zusätzlich `manifest.webmanifest`, `sw.js` (Offline-Start, lädt immer zuerst aus dem Netz) und die App-Symbole `icon-180/192/512.png`. Alle zusammen bei Netlify hochladen.
-- iPhone: Netlify-Adresse in Safari öffnen → Teilen → „Zum Home-Bildschirm“. Die App hat einen eigenen Speicher, darum dort einmal Person wählen und den Haushalts-Code eingeben.
-- Bei neuer Cache-Version `CACHE` in `sw.js` hochzählen ist nicht nötig (Netz zuerst), nur bei geänderten Datei-Namen.
+- Im Repo liegen `manifest.webmanifest`, `sw.js` (Offline-Start, lädt immer zuerst aus dem Netz; ohne Netz oder bei Server-Fehlern ab 500 startet die zuletzt gespeicherte Version) und die App-Symbole `icon-180/192/512.png` (Herz halb pink, halb lila mit Play-Zeichen).
+- iPhone: https://pxrple01.github.io/soulwatch12/ in Safari öffnen → Teilen → „Zum Home-Bildschirm“. Die App hat einen eigenen Speicher, darum dort einmal Person wählen und den Haushalts-Code eingeben.
+- `CACHE` in `sw.js` hochzählen ist nicht nötig (Netz zuerst), nur bei geänderten Datei-Namen. Die Installation speichert jede Datei einzeln, eine fehlende Datei bricht sie also nicht mehr ab.
 
 ## Neu: Designs pro Person
 - **Dunkel** ist jetzt ein neutraler Dark Mode (Grau/Schwarz, Akzent sanftes Lila, Sterne gold). Gilt auch automatisch, wenn kein Design gewählt ist und das Gerät dunkel eingestellt ist.
@@ -416,3 +419,14 @@ Stand: 14.11.2026. Eine einzelne HTML-Datei, Sprache Deutsch.
   - Weichzeichner (`filter: blur`) nicht auf bewegte, große Flächen legen, weiche Kanten lieber mit Verläufen oder Masken bauen. Das spart viel Rechenzeit.
   - In der Tiefsee schweben die Karten. Playwright-Tests brauchen dort `#grid .card{animation:none}`, sonst gelten Knöpfe als „nicht stabil“.
 - sw.js: Cache `jj-watchlist-v35`.
+
+### Neu: Kiste neu inszeniert, Geschenk-Kisten, Umzug auf GitHub Pages
+- **Wo:** JS zwischen `// KISTE-START` und `// KISTE-END` (ersetzt das frühere Kisten-Popup, gleiche Namen: `chShow`, `chOpen`, `chOpenAll`, `chNext`, `chClose`, `chRender`, `chClick`, `chKey`), CSS zwischen `/* KISTE-START */` und `/* KISTE-END */` (ganz am Ende, nach dem Themes-Block). Klassen-Präfix `kx-`.
+- **Ablauf:** Die Kiste fällt mit Gewicht auf die Bühne (Stauchen, Staub, Kamera wackelt) → wartet (atmet, rüttelt alle 3,6 s, Licht dringt aus der Fuge) → Antippen lädt auf (Rütteln per Web Animations immer stärker, Funken werden angesogen, ab gut der Hälfte nimmt das Licht die Farbe der Seltenheit an) → Deckel springt in 3D auf (Blitz, Druckwellen, Funkenregen mit echter Wurfparabel, Lichtsäule; ab Legendär fliegt der Deckel weg) → der Gegenstand dreht sich aus der Kiste nach oben (Lichtkranz, „Neu“-Stempel) → Karte mit Seltenheit (Rauten), Wirkung, Set-Plätzen (das neue Teil springt in seinen Platz) und Ausrüstung. Je seltener, desto länger das Aufladen (1,05 s + 0,26 s pro Stufe über Ungewöhnlich) und desto wuchtiger der Knall. Ab Episch Konfettiregen in den Farben der Seltenheit (in Kinopalast, Tiefsee und Origami zusätzlich deren eigenes Fest, ohne „Bravo!“), Mythisch mit Feuerwerk.
+- **Alle öffnen:** Karten drehen sich nacheinander um, die beste zuletzt (mit Funken und pulsierendem Rahmen).
+- **Bewegung reduzieren:** Klasse `still`, sofort die Karte, keine Effekte. Die Bühne ist in allen Designs dunkel; die Schrift folgt dem Design (`--kxf`).
+- **Leiste:** Der Knopf „Kiste öffnen“ glänzt und das Geschenk rüttelt (`.chpend`, `.chpend2`).
+- **Geschenk-Kisten** (`// GESCHENK-START` … `// GESCHENK-END`, vor `chList`): `CH_GIFTS=[["g1",Zeit,"Geschenk"]]` gibt beiden Personen eine Kiste – mindestens episch, bevorzugt fehlende Teile begonnener Sets, nie schon Vorhandenes. Sie liegt außerhalb der Ziehungs-Reihe, ändert also keinen bisher gezogenen Gegenstand. Gezogen wird mit dem Besitz zum Zeitpunkt des Öffnens; geöffnet wird wie jede Kiste über `ST.film.pets[u].ch.g1` (synchronisiert, also nicht pro Gerät doppelt). Die Kiste trägt eine rote Schleife, die beim Öffnen wegfliegt. Weiteres Geschenk: neuen Eintrag mit neuer id anhängen.
+- **Umzug:** siehe „Hosting“. Neu im Repo: App-Symbole, Manifest, `.nojekyll`; `sw.js` speichert jede Datei einzeln und startet bei Server-Fehlern die gespeicherte Version.
+- Testhinweis: Die Geschenk-Kiste geht nach dem Laden von selbst auf – in Browser-Tests nach `goto` `chShow=()=>{}` setzen und ein offenes Popup schließen (`chOn=false;chRender()`).
+- sw.js: Cache `jj-watchlist-v36`.
