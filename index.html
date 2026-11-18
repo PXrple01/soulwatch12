@@ -2807,11 +2807,11 @@ body.xoon{overflow:hidden}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- Kilometerzähler (26) ---------- */
-.odo{display:inline-flex;align-items:flex-start;font-variant-numeric:tabular-nums;line-height:1.2;vertical-align:-.2em}
-.odo .c{display:inline-block;height:1.2em;overflow:hidden;transition:width var(--d3) var(--e-out)}
+.odo{display:inline-flex;align-items:flex-start;font-variant-numeric:tabular-nums;line-height:var(--lh,1.2em);vertical-align:top}
+.odo .c{display:inline-block;height:var(--lh,1.2em);overflow:hidden;transition:width var(--d3) var(--e-out)}
 .odo .s{display:flex;flex-direction:column;transition:transform var(--dsp) var(--e-spring)}
-.odo .s span{display:block;height:1.2em;line-height:1.2em;text-align:center}
-.odo .p{display:inline-block;height:1.2em;line-height:1.2em}
+.odo .s span{display:block;height:var(--lh,1.2em);line-height:var(--lh,1.2em);text-align:center}
+.odo .p{display:inline-block;height:var(--lh,1.2em);line-height:var(--lh,1.2em)}
 .odo.fast .s{transition:transform 190ms var(--e-out)!important;transition-delay:0ms!important}
 
 /* ---------- Startseite: Filmabend-Knopf, Listen-Kopf, große Tipp-Bühne weg ---------- */
@@ -2907,13 +2907,6 @@ body.xoon{overflow:hidden}
 .rdone{display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 80%,transparent);font:inherit;font-size:.82rem;color:var(--ink);cursor:pointer}
 .rdone.miss{border-style:dashed;color:var(--acc)}
 
-/* ---------- Filmabend-Auswahl (vorläufig, bis Phase 2) ---------- */
-.fam .fal{display:flex;flex-direction:column;gap:10px;margin-top:14px;text-align:left}
-.fao{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;align-items:center;width:100%;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 85%,transparent);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
-.fao .fai{grid-row:span 2;font-size:1.7rem;line-height:1}
-.fao b{font-size:1rem}
-.fao small{color:var(--mute);font-size:.82rem;line-height:1.35}
-.fao:hover{border-color:var(--acc)}
 
 /* ---------- Symbole: Emoji oder Linien ---------- */
 .ic{position:relative;display:inline-grid;place-items:center;width:1.25em;height:1.25em;line-height:1;vertical-align:-.2em}
@@ -3037,6 +3030,138 @@ mark.mvm{background:color-mix(in srgb,var(--star,#e99a0c) 38%,transparent);color
   .card.fx-seen .ck,.card.fx-seen .ck .tick,.ghost.gin .cv,.ghost.gin .nm,.ghost.gin .gl,.cv .cvs,.pet.mvhop .petemo,.petbub.mvhop,mark.mvm,#mvptr.spin svg,.cst.sync .ar{animation:none}
   .cv img{transition:none;filter:none;scale:1;opacity:1}
 }
+
+/* ---------- Phase 2: rollender Text ---------- */
+.mvrt{display:inline-grid;overflow:hidden;vertical-align:bottom;line-height:inherit}
+.mvrt>span{grid-area:1/1;white-space:nowrap}
+#ctv .mvrt,#lsthint .mvrt{vertical-align:top}
+
+/* ---------- Info-Fenster: Hauptaktion ---------- */
+.mvacts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.mvacts .add{flex:1 1 auto;justify-content:center;min-height:44px}
+
+/* ---------- Banner oben: Heute Abend / Auf drei! ---------- */
+#mvtn{display:flex;flex-direction:column;gap:10px;margin:0 0 16px}
+#mvtn[hidden]{display:none}
+.mvtnc{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr);grid-template-areas:"p t" "p b";align-items:center;column-gap:12px;row-gap:8px;padding:12px;border-radius:var(--rad,18px);background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid color-mix(in srgb,var(--acc) 35%,var(--line));box-shadow:0 10px 26px color-mix(in srgb,var(--acc) 16%,transparent);animation:mvTnIn var(--dsp) var(--e-spring) both}
+@keyframes mvTnIn{from{opacity:0;transform:translateY(-10px) scale(.97)}}
+.mvtnc.hasx{padding-right:46px}
+.mvtnc>.cv{grid-area:p;align-self:start;width:46px;padding:0;border-radius:8px;aspect-ratio:2/3}
+.mvtnt{grid-area:t;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mvtnt small{font-size:.72rem;font-weight:800;letter-spacing:.06em;color:var(--acc)}
+.mvtnt b,.mvtnt .lnk{font-weight:700;text-align:left;line-height:1.25;padding:0;overflow-wrap:anywhere;text-wrap:balance}
+.mvtnt .gn{font-size:.78rem;line-height:1.3}
+.mvtnb{grid-area:b;display:flex;align-items:center;gap:6px;justify-self:start}
+.mvtnb .add{white-space:nowrap;padding:9px 16px;min-height:40px}
+.mvtnx{position:absolute;top:6px;right:6px;width:36px;height:36px;border-radius:50%;border:0;background:none;color:var(--mute);font-size:1.2rem;line-height:1;cursor:pointer}
+.mvtnx:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+@media (min-width:640px){.mvtnc{grid-template-columns:46px minmax(0,1fr) auto;grid-template-areas:"p t b"}.mvtnc>.cv{align-self:center}.mvtnb{justify-self:end}}
+.mvtday{position:absolute;z-index:3;top:7px;right:7px;padding:3px 9px;border-radius:999px;background:#fff;color:#2a1f45;font:800 .7rem/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+.mvbl{position:absolute;z-index:3;left:6px;right:52px;bottom:9px;padding:4px 8px;border-radius:10px;background:rgba(15,10,30,.62);color:#fff;font-size:.68rem;font-weight:700;line-height:1.25;pointer-events:none}
+
+/* ---------- Auf drei! ---------- */
+.mvblind .mvbl-t{margin:6px 0 12px;color:var(--mute);font-size:.92rem;text-align:center}
+.mvbl-ch{display:flex;flex-direction:column;gap:10px}
+.mvbl-ch>*{justify-content:center;min-height:48px}
+.mvhand{text-align:center;padding:8px 0 4px}
+.mvhand-i{font-size:3.2rem;line-height:1}
+.mvhand h3{margin:10px 0 4px}
+.mvp3{display:flex;justify-content:center;gap:16px;margin:14px 0 16px;perspective:900px}
+.mvp3c{position:relative;width:128px;height:164px;transform-style:preserve-3d}
+.mvp3c.up{transform:rotateY(180deg)}
+.mvfc{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 14px 30px rgba(20,10,50,.2)}
+.mvp3c.jos{--c:var(--pink)}.mvp3c.joh{--c:var(--lila)}
+.mvbk{background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--c) 82%,#000) 0 10px,var(--c) 10px 20px);color:#fff}
+.mvbk b{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);font:800 1.5rem/1 system-ui,sans-serif;border:2px solid rgba(255,255,255,.6)}
+.mvbk small{font-weight:700;font-size:.8rem}
+.mvfr{background:var(--panel);border:2px solid var(--c);transform:rotateY(180deg)}
+.mvfr .n{font-size:2.6rem;font-weight:800;line-height:1;color:var(--c);font-variant-numeric:tabular-nums}
+.mvfr small{color:var(--mute);font-weight:700;font-size:.8rem}
+.mvmeter{position:relative;height:52px;margin:0 10px 6px}
+.mvmeter .mt{position:absolute;left:0;right:0;top:24px;height:6px;border-radius:3px;background:var(--line)}
+.mvmeter .gap{position:absolute;top:24px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--pink),var(--lila));opacity:0;transform-origin:center}
+.mvmeter .mvmk{position:absolute;top:12px;width:30px;height:30px;margin-left:-15px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 .75rem/1 system-ui,sans-serif;box-shadow:0 0 0 3px var(--panel),0 6px 14px rgba(0,0,0,.2);opacity:0}
+.mvmeter .mvmk.jos{background:var(--pink)}.mvmeter .mvmk.joh{background:var(--lila)}
+.mvmeter.up .mvmk,.mvmeter.up .gap{opacity:1}
+.mvverd{display:flex;justify-content:center;min-height:50px;margin-bottom:8px}
+.mvverd span{padding:8px 16px;border-radius:14px;border:3px solid currentColor;font-weight:800;font-size:1.2rem;transform:rotate(-5deg)}
+.mvverd .v1{color:color-mix(in srgb,#1f9d6b 76%,var(--ink))}.mvverd .v2{color:color-mix(in srgb,#c98a06 68%,var(--ink))}.mvverd .v3{color:color-mix(in srgb,#e5484d 80%,var(--ink))}
+.mvblind .btns{justify-content:center}
+.mvcd{position:fixed;inset:0;z-index:80;display:grid;place-items:center;pointer-events:none;font:800 7rem/1 "Fraunces",Georgia,serif;color:var(--ink);text-shadow:0 10px 40px rgba(0,0,0,.25)}
+
+/* ---------- Filmabend als Programmheft ---------- */
+.mvfa{max-width:620px}
+.mvfa-k{margin:2px 0 0;font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--mute)}
+.mvfa h3{margin:16px 0 8px;font-size:1.25rem}
+.mvfa h3:focus,.mvlo h3:focus{outline:none}
+.mvfa h3:focus-visible,.mvlo h3:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
+:where(html:not([data-theme="purple"],[data-theme="baby"])) .mvfa h3{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;font-size:1.45rem}
+.mvfach{display:flex;flex-wrap:wrap;gap:8px}
+.mvfach .bwchip{min-height:40px;padding:8px 14px;font-size:.92rem}
+.mvfa .fab2{margin-top:22px}
+.mvcands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0 16px}
+@media (min-width:700px){.mvcands{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.mvcand{position:relative;display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:16px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 85%,transparent);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:box-shadow var(--d3) var(--e-out),border-color var(--d2),translate var(--dsp) var(--e-spring)}
+.mvcand .cv{padding:0}
+.mvcand b{font-size:.92rem;line-height:1.25}
+.mvcand small{color:var(--mute);font-size:.78rem}
+.mvcand.hot{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc),0 16px 30px color-mix(in srgb,var(--acc) 35%,transparent);translate:0 -4px}
+.mvcand .who{position:absolute;z-index:3;left:14px;top:14px;display:flex;gap:3px}
+.mvcand .who i{width:13px;height:13px;border-radius:50%;border:2px solid #fff}
+.mvcand .who i.jos{background:var(--pink)}.mvcand .who i.joh{background:var(--lila)}.mvcand .who i.both{background:linear-gradient(90deg,var(--pink) 50%,var(--lila) 50%)}
+.mvfa-b{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mvfa-b .add{margin-left:auto}
+.mvlegend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 0 0;color:var(--mute);font-size:.78rem;font-weight:600}
+.mvlegend span{display:inline-flex;align-items:center;gap:6px}
+.mvlegend i{width:11px;height:11px;border-radius:50%;box-shadow:0 0 0 2px color-mix(in srgb,var(--panel) 80%,#fff)}
+.mvlegend i.jos{background:var(--pink)}.mvlegend i.joh{background:var(--lila)}.mvlegend i.both{background:linear-gradient(90deg,var(--pink) 50%,var(--lila) 50%)}
+.mvdock{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:4;padding:10px;border-radius:20px;background:color-mix(in srgb,var(--panel) 82%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);border:1px solid color-mix(in srgb,var(--line) 80%,transparent);box-shadow:0 18px 40px rgba(0,0,0,.2)}
+.mvdock>*{justify-content:center;min-height:42px;margin:0}
+.mvdock>.rej{flex:1 1 0;min-width:0;white-space:nowrap}
+.mvdock>.add{flex:1 1 100%;margin-left:0;max-width:100%}
+.mvpkn{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (min-width:560px){.mvdock>.rej{flex:0 0 auto}.mvdock>.add{flex:0 0 auto;margin-left:auto}}
+.mvvt{view-transition-name:mvsel}
+::view-transition-group(mvsel){animation-duration:.5s;animation-timing-function:var(--e-spring,cubic-bezier(.3,1.35,.5,1))}
+.mvleaf{pointer-events:none;box-shadow:12px 0 40px rgba(0,0,0,.25)}
+.mvleaf::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.22))}
+
+/* Kleine Zusatztexte: etwas kräftiger als --mute, damit sie in allen Designs AA erreichen */
+.mvfa-k,.mvlegend,.mvfa .mut,.mvcand small,.mvtnt .gn,.mvblind .mvbl-t,.mvblind .mut,.mvfr small{color:color-mix(in srgb,var(--mute) 70%,var(--ink))}
+.mvtnt small{color:color-mix(in srgb,var(--acc) 70%,var(--ink))}
+
+/* ---------- „Heute läuft …“ (Licht aus) ---------- */
+.mvlo{position:fixed;inset:0;z-index:11;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));background:#07060b;color:#f3f0fa;text-align:center;overflow:hidden}
+.mvlo::before{content:"";position:absolute;inset:-10% -10% auto;height:85%;background:radial-gradient(55% 60% at 50% 0%,rgba(255,236,200,.32),transparent 72%);opacity:0;transition:opacity 1.4s var(--e-out);pointer-events:none}
+.mvlo.on::before{opacity:1}
+.mvlo::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
+.mvlo>*{position:relative;z-index:1}
+.mvlo-k{margin:0;font-size:.82rem;font-weight:700;letter-spacing:.14em;color:#d8c9a6}
+.mvlo-p{width:min(46vw,200px)}
+.mvlo-p .cv{padding:0;border-radius:14px;box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 60px rgba(255,220,170,.18)}
+.mvlo h3{margin:4px 0 0;font:600 italic 1.9rem/1.12 "Fraunces",Georgia,serif;color:#fff;text-wrap:balance}
+.mvlo-m{margin:0;color:#b9b2cc;font-size:.9rem;text-wrap:balance}
+.mvlo-m span{white-space:nowrap}
+.mvlo-b{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+:root .mvlo .mvlo-b .rej{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;box-shadow:none}
+:root .mvlo .mvlo-b .rej:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+/* eigene Note je Design */
+.mvlo[data-th="deco"]{background:#14060a}
+.mvlo[data-th="deco"]::before{background:radial-gradient(55% 60% at 50% 0%,rgba(255,214,120,.38),transparent 72%)}
+.mvlo[data-th="deco"] h3{font-family:"Limelight",Georgia,serif;font-style:normal;color:#f2d38a}
+.mvlo[data-th="sea"]{background:#020d16}
+.mvlo[data-th="sea"]::before{background:radial-gradient(55% 60% at 50% 0%,rgba(120,235,255,.30),transparent 72%)}
+.mvlo[data-th="sea"] h3{font-family:"Quicksand",sans-serif;font-style:normal;font-weight:700;color:#bff4ff}
+.mvlo[data-th="paper"]{background:#1d1712}
+.mvlo[data-th="paper"]::before{background:radial-gradient(55% 60% at 50% 0%,rgba(255,226,190,.34),transparent 72%)}
+.mvlo[data-th="paper"] h3{font-family:"Shippori Mincho",serif;font-style:normal;font-weight:800}
+.mvlo[data-th="purple"]{background:#0b0718}
+.mvlo[data-th="purple"]::before{background:repeating-conic-gradient(from 0deg at 50% 38%,rgba(127,211,230,.10) 0 2deg,transparent 2deg 9deg);inset:0;height:auto}
+.mvlo[data-th="purple"] h3{font-family:"Anton",Impact,sans-serif;font-style:normal;font-weight:400;text-transform:uppercase;letter-spacing:.02em}
+.mvlo[data-th="baby"]{background:#2a1430}
+.mvlo[data-th="baby"]::before{background:radial-gradient(55% 60% at 50% 0%,rgba(255,170,220,.38),transparent 72%)}
+.mvlo[data-th="baby"] h3{font-family:"Baloo 2",sans-serif;font-style:normal;font-weight:800;color:#ffd6ec}
+@media (prefers-reduced-motion:reduce){.mvtnc{animation:none}.mvlo::before{transition:none}}
 /* BEWEGUNG-END */
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3059,7 +3184,7 @@ mark.mvm{background:color-mix(in srgb,var(--star,#e99a0c) 38%,transparent);color
 <div class="howto" id="howto" hidden></div>
 <p class="sub">Gesehen? <b>Haken antippen</b> und bewerten – fertig. ✨</p>
 <p class="ro" id="ro" hidden></p>
-<div id="v-wl"><div class="rwban" id="rwban" hidden></div><div id="recin" hidden></div><div id="cont" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite" hidden></section><div class="fabar" id="fabar"><button class="add fab2" id="fabtn" data-fa="1"><span data-mvi="popcorn" aria-hidden="true">🍿</span> Filmabend starten</button></div>
+<div id="v-wl"><div class="rwban" id="rwban" hidden></div><div id="recin" hidden></div><div id="mvtn" hidden></div><div id="cont" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite" hidden></section><div class="fabar" id="fabar"><button class="add fab2" id="fabtn" data-fa="1"><span data-mvi="popcorn" aria-hidden="true">🍿</span> Filmabend starten</button></div>
 <button class="todob" id="todob" data-todo="1" hidden></button>
 <div class="bar"><h2 class="lsth" id="lsth">Deine Liste</h2><span class="lstc" id="cnt"></span><span class="lsthint" id="lsthint"></span><button class="rollb" id="rollb" data-roll="1">🎲 <span class="lg2">Was schauen wir heute?</span><span class="sm2t">Würfeln</span></button><button class="rollb swb2" id="swb2" data-swipe="1">💞 <span class="lg2">Gemeinsam swipen</span><span class="sm2t">Swipen</span></button><button class="rollb finb" id="finb" data-xo="fin">🧭 <span class="lg2">Zeit &amp; Stimmung</span><span class="sm2t">Finder</span></button></div>
 <div class="grid" id="grid"></div>
@@ -13607,7 +13732,7 @@ const epSeen=(id,s)=>{const c=epCount(id,s);return prog(id)>=s?c:Math.min(epMap(
 function epNext(id){const L=EPS[id];if(!L)return null;for(let s=1;s<=L.length;s++){const c=L[s-1].n;if(!c)continue;const k=epSeen(id,s);if(k<c)return{s,e:k+1,c,t:L[s-1].t&&L[s-1].t[k]?L[s-1].t[k][0]:""}}return null}
 const epBtn=id=>{const x=epNext(id);if(!x||!editable())return"";const one=(EPS[id]||[]).length<2;
   const any=(EPS[id]||[]).some((y,i)=>epSeen(id,i+1)>0);
-  return`<span class="epw">${any?`<button class="epnx epm" data-epback="${id}" title="Letzte Folge zurücknehmen" aria-label="Letzte gesehene Folge zurücknehmen">−</button>`:""}<button class="epnx" data-ep="${id}:${x.s}:${x.e}" title="${esc(x.t?"Folge "+x.e+": "+x.t:"Folge "+x.e)} abhaken" aria-label="Nächste Folge abhaken: ${one?"":"Staffel "+x.s+", "}Folge ${x.e}">✓ ${one?"":"S"+x.s+" · "}E${x.e}<small>/${x.c}</small></button><button class="epnx epm" data-info="${id}" data-epjump="1" title="Folge auswählen" aria-label="Folge auswählen">✎</button></span>`};
+  return`<span class="epw">${any?`<button class="epnx epm" data-epback="${id}" title="Letzte Folge zurücknehmen" aria-label="Letzte gesehene Folge zurücknehmen">−</button>`:""}<button class="epnx" data-ep="${id}:${x.s}:${x.e}" title="${esc(x.t?"Folge "+x.e+": "+x.t:"Folge "+x.e)} abhaken" aria-label="Nächste Folge abhaken: ${one?"":"Staffel "+x.s+", "}Folge ${x.e}">✓ ${one?"":"S"+x.s+" · "}E<span data-odo="eb-${id}">${x.e}</span><small>/${x.c}</small></button><button class="epnx epm" data-info="${id}" data-epjump="1" title="Folge auswählen" aria-label="Folge auswählen">✎</button></span>`};
 function epHtml(id){const L=EPS[id];if(!L||!L.some(x=>x.n))return EPS[id]===undefined&&M[id]&&M[id].sec!=="film"?`<p class="mut eph">${sFail[id]&&!sAsked.has(id)?"Folgen gerade nicht abrufbar – später nochmal versuchen.":"Folgen werden geladen …"}</p>`:"";
   const nx=epNext(id),sel=Math.min(epSel[id]||(nx?nx.s:L.length),L.length),c=L[sel-1].n,ed=editable(),seen=epSeen(id,sel),T=L[sel-1].t;
   const PG=100,pages=Math.ceil(c/PG),pg=Math.min(epPg[id+":"+sel]??Math.floor(Math.min(seen,c-1)/PG),Math.max(0,pages-1)),a=pg*PG+1,b=Math.min(c,a+PG-1);
@@ -13647,11 +13772,11 @@ const trailerHtml=id=>{const n=esc(M[id].name);return`<div class="trls"><a class
 function modalHtml(){
   const m=M[openId],x=META[openId]||{};
   if(m.sec!=="anime"){const w=x.syn||"";
-    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${mvModalActs(openId)}${trailerHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
   // Animes: Jahr/Wertung/Sprache aus dem Katalog (AniList/aniSearch), sonst aus den online geladenen Infos.
   const t=m.desc||PLOT[openId]||m.plot||x.syn||"",y=m.y||x.y||YEAR[openId],r=m.r||x.s,cu=covOf(openId);
   const meta=[y||"Jahr unbekannt",r?"AniList "+String(r).replace(".",",")+" / 10":"",m.fmt||"",m.lang==="de"?"🇩🇪 Deutsche Synchro":m.lang==="omu"?"🇯🇵 Nur OmU (Untertitel)":""].filter(Boolean).join(" · ");
-  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${trailerHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${mvModalActs(openId)}${trailerHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
 const rt=(id,u)=>((S.w[id]||{}).r||{})[u];
 const avg=id=>{const v=Object.values((S.w[id]||{}).r||{});return v.length?v.reduce((a,b)=>a+b,0)/v.length:0};
 // ---------- Bewertung mit Kommastelle: 1 bis 10 Sterne in 0,1er-Schritten ----------
@@ -13714,7 +13839,7 @@ function adopt(o){const id="c_"+o.key;
   else if(!(S.custom||{})[id])(S.custom||(S.custom={}))[id]=M[id];
   return id}
 function swapHtml(){const c=C();
-  return `<div class="mbox sm" role="dialog" aria-label="Titel austauschen"><button class="x" data-close="1" aria-label="Schließen">×</button><h3>Die Watchlist ist voll</h3><p class="mut">Gegen welchen Titel soll „${M[swapId].name}“ getauscht werden?</p><div class="swg">${c.list.filter(x=>x!=="@").map(x=>`<button class="swb" data-swap="${x}">${cv(x,M[x].name)}<span>${M[x].name}</span></button>`).join("")}</div><p class="why" style="font-size:.8rem;margin:12px 0 0">Der ausgetauschte Titel kann später wieder empfohlen werden.</p></div>`}
+  return `<div class="mbox sm" role="dialog" aria-label="Titel austauschen"><button class="x" data-close="1" aria-label="Schließen">×</button><h3>Die Watchlist ist voll</h3><p class="mut">${mvSwapBack===swapId?`„${M[swapId].name}“ kommt aus dem Verlauf zurück. Welcher Titel macht dafür Platz?`:`Gegen welchen Titel soll „${M[swapId].name}“ getauscht werden?`}</p><div class="swg">${c.list.filter(x=>x!=="@").map(x=>`<button class="swb" data-swap="${x}">${cv(x,M[x].name)}<span>${M[x].name}</span></button>`).join("")}</div><p class="why" style="font-size:.8rem;margin:12px 0 0">Der ausgetauschte Titel kann später wieder empfohlen werden.</p></div>`}
 function five(R){
   const c=C(),top=R.slice(0,3),used=new Set(top.map(r=>r.m.id));
   const rec=c.done.slice(-3).map(d=>d.id),src=rec.length?rec:c.list.filter(x=>x!=="@");
@@ -14259,7 +14384,7 @@ let petKey="";
 function petHtml(u){const P=petView(u),A=achFor(u);if(u===I())petKey=A.key;
   return`<button class="pet${P.egg?" egg":""}${P.legend?" leg":""}" data-pet="${u}" aria-label="Haustier ${P.nm}${P.form?" ("+esc(P.form)+")":""}, Level ${P.L}. Antippen zum Streicheln">
   <span class="pethab"${P.aura?` style="background:${P.aura}"`:""}><span class="petemo${P.rgb?" rgb":""}" style="--ps:${P.size}${P.flt?";filter:"+P.flt:""}">${P.emo}</span>${P.acc?`<span class="petacc">${P.acc}</span>`:""}${P.fx?`<span class="petfx" aria-hidden="true">${P.fx}</span>`:""}<span class="petsh"></span></span>
-  <span class="petinfo"><b>${P.nm}</b><small>${P.form?esc(P.form)+" · Lv "+P.L:"Level "+P.L+" · "+rankOf(P.L)}</small><span class="xpbar" aria-hidden="true"><i style="width:${Math.round(A.lv.cur/A.lv.need*100)}%"></i></span></span>
+  <span class="petinfo"><b>${P.nm}</b><small>${P.form?esc(P.form)+` · Lv <span data-odo="pl-${u}">${P.L}</span>`:`Level <span data-odo="pl-${u}">${P.L}</span> · `+rankOf(P.L)}</small><span class="xpbar" aria-hidden="true"><i data-bar="px-${u}" style="width:${Math.round(A.lv.cur/A.lv.need*100)}%"></i></span></span>
   ${petLine&&u===I()?`<span class="petsay" role="status">${esc(petLine)}</span>`:""}</button>`}
 // Neue Abzeichen/Level feiern (nur eigene Person); beim allerersten Mal still übernehmen
 let achWho="",achF="open",achLast=0,achT0=0;
@@ -14518,7 +14643,7 @@ function achHtml(){const u=achWho||I(),A=achFor(u),P=petView(u),pet=petOf(u),o=u
   const hidden=A.list.filter(x=>x.d.secret&&!x.got).length;
   return`<div class="achtop"><div class="achme">
     <div class="achwho" role="group" aria-label="Person">${["jos","joh"].map(v=>`<button class="chip${v===u?" on":""}" data-achwho="${v}" aria-pressed="${v===u}">${U[v].n}${v===I()?" (du)":""}</button>`).join("")}</div>
-    <div class="achlv"><span class="achbig">${A.lv.L}</span><div><b>Level ${A.lv.L} · ${rankOf(A.lv.L)}</b><span class="xpbar big"><i style="width:${Math.round(A.lv.cur/A.lv.need*100)}%"></i></span><small>${A.lv.cur} / ${A.lv.need} XP bis Level ${A.lv.L+1} · insgesamt ${A.xp.toLocaleString("de-DE")} XP</small></div></div>
+    <div class="achlv"><span class="achbig"><span data-odo="aL-${u}">${A.lv.L}</span></span><div><b>Level ${A.lv.L} · ${rankOf(A.lv.L)}</b><span class="xpbar big"><i data-bar="ax-${u}" style="width:${Math.round(A.lv.cur/A.lv.need*100)}%"></i></span><small><span data-odo="axp-${u}">${A.lv.cur}</span> / ${A.lv.need} XP bis Level ${A.lv.L+1} · insgesamt ${A.xp.toLocaleString("de-DE")} XP</small></div></div>
     <div class="achsum"><div><b>${A.got}</b><small>von ${A.list.length} Abzeichen</small></div>${["b","s","g","p","l"].map(t=>`<div class="ts-${t}"><b>${tc(t)}</b><small>${ACH_TIER[t][0]}</small></div>`).join("")}</div>
     <p class="mut achhow">XP gibt es für Abzeichen (Bronze 25 · Silber 50 · Gold 100 · Platin 200 · Legendär 400) und fürs Dabeisein: 10 pro geschautem Titel (schon der Gesehen-Haken zählt), 5 pro „schon vorher gesehen“, 2 pro Bewertung, 3 pro Notiz, 5 pro Abstimmung, 1 pro Staffel, doppelt gezogene Gegenstände 25–800 – mal eurem Kisten-Multiplikator. Was ihr in „Zusammen“ abschließt, bringt euch beiden XP. Holt ihr einen Titel aus dem Verlauf zurück, sind seine XP wieder weg. ${U[o].n}: Level ${B.lv.L}, ${B.got} Abzeichen.</p></div>
    <div class="achpet">${petHtml(u).replace('class="pet','class="pet big')}
@@ -14612,7 +14737,7 @@ function vLog(){if(!VOTE||!VOTE.id||!vBoth()||VOTE.cancel)return;const T=ST[VOTE
   if(VOTE.pick&&e.pick!==VOTE.pick){e.pick=VOTE.pick;ch=true}
   if(ch){try{localStorage.setItem(SEC[VOTE.sec].key,JSON.stringify(T))}catch(x){}cloudKick()}
   VOTE.logged=true}
-function vPick(id,quiet){VOTE.pick=id;VOTE.pickT=Date.now();vLog();vSave();vQueue();if(!quiet){toast(`🏆 Heute schaut ihr „${M[id].name}“`);confetti()}}
+function vPick(id,quiet){VOTE.pick=id;VOTE.pickT=Date.now();vLog();vSave();vQueue();try{mvSetTonight(id,VOTE.sec)}catch(e){}if(!quiet){toast(`🏆 Heute schaut ihr „${M[id].name}“`);confetti()}}
 function vEnd(cancel){if(!VOTE)return;const id=VOTE.id;if(!cancel)vLog();
   if(cancel&&VOTE.mode==="two"){VOTE.cancel=true;VOTE.cancelBy=I();clearTimeout(vPushT);vPush().then(()=>{vGone.push(id);if(VOTE&&VOTE.id===id)VOTE=null;vSave();swRender();render()});return}
   vGone.push(id);VOTE=null;vSave()}
@@ -14765,10 +14890,10 @@ function mstTick(){if(!accShown()||document.hidden||calm()||document.querySelect
 function accPanel(withStat){const c=C(),ls=secLists();
   const row=l=>{if(!ls.includes(l))return"";
     const n=S.lists[l].list.filter(x=>x!=="@").length;
-    return`<button class="avr${l===view?" on":""}" data-view="${l}" aria-pressed="${l===view}">${avHtml(l)}<span class="avn">${vtitle(l)}${l===I()?" <small>(du)</small>":""}</span><span class="avc" aria-label="${n} von 10 Plätzen belegt">${n}/10</span></button>`};
+    return`<button class="avr${l===view?" on":""}" data-view="${l}" aria-pressed="${l===view}">${avHtml(l)}<span class="avn">${vtitle(l)}${l===I()?" <small>(du)</small>":""}</span><span class="avc" aria-label="${n} von 10 Plätzen belegt"><span data-odo="avc-${l}">${n}</span>/10</span></button>`};
   const tb=(t,ic,lab,x)=>`<button class="atb${tab===t?" on":""}" data-tab="${t}" aria-pressed="${tab===t}"><span class="ai" aria-hidden="true">${mvIcE(ic)}</span><span class="atl">${lab}</span>${x||""}</button>`;
   return`<div class="achr"><p class="ach">Ansicht</p><button class="acl" data-gear="1" title="${esc(cloudTxt())} – Einstellungen öffnen" aria-label="${esc(cloudTxt())} – Einstellungen öffnen">${esc(cloudShort())}<span class="acs">${esc(cloudTime())}</span></button></div><div class="avs" role="group" aria-label="Ansicht wählen">${LISTS.map(row).join("")}</div><div class="asep"></div>
-${withStat?tb("stat","📊","Statistik")+mstHtml()+tb("ach","🏅","Abzeichen",`<span class="lc">Lv ${achFor(I()).lv.L}</span>`)+tb("inv","🎒","Inventar",`<span class="lc">${fmtX(achFor(I()).mult)}</span>`)+(achFor(I()).pend.length?`<button class="atb chpend2" data-chshow="0"><span class="ai" aria-hidden="true">${mvIcE("🎁")}</span><span class="atl">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""):""}${tb("hist","🕘","Verlauf",`<span class="lc">${c.done.length}</span>`)}${tb("wl","📋","Watchlist",`<span class="lc">${c.list.filter(x=>x!=="@").length}/10</span>`)}<div class="asep"></div>
+${withStat?tb("stat","📊","Statistik")+mstHtml()+tb("ach","🏅","Abzeichen",`<span class="lc">Lv <span data-odo="alv">${achFor(I()).lv.L}</span></span>`)+tb("inv","🎒","Inventar",`<span class="lc">${fmtX(achFor(I()).mult)}</span>`)+(achFor(I()).pend.length?`<button class="atb chpend2" data-chshow="0"><span class="ai" aria-hidden="true">${mvIcE("🎁")}</span><span class="atl">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""):""}${tb("hist","🕘","Verlauf",`<span class="lc"><span data-odo="ahc">${c.done.length}</span></span>`)}${tb("wl","📋","Watchlist",`<span class="lc"><span data-odo="awc">${c.list.filter(x=>x!=="@").length}</span>/10</span>`)}<div class="asep"></div>
 <p class="ach">Filmabend</p><div class="fabd"><button class="atb ft" data-roll="1"><span class="ai" aria-hidden="true">${mvIcE("🎲")}</span><span class="atl">Würfeln</span></button><button class="atb ft${vHot()?" hot":""}" data-swipe="1"><span class="ai" aria-hidden="true">${mvIcE("💞")}</span><span class="atl">Swipen${vStatus()?`<small>${esc(vStatus())}</small>`:""}</span></button><button class="atb ft" data-xo="fin"><span class="ai" aria-hidden="true">${mvIcE("🧭")}</span><span class="atl">Zeit &amp; Stimmung</span></button><button class="atb ft" data-xo="mar"><span class="ai" aria-hidden="true">${mvIcE("🎞️")}</span><span class="atl">Marathon</span></button><button class="atb ft" data-xo="quiz"><span class="ai" aria-hidden="true">${mvIcE("🧠")}</span><span class="atl">Quiz</span></button><button class="atb ft" data-xo="poster"><span class="ai" aria-hidden="true">${mvIcE("🖼")}</span><span class="atl">Poster</span></button></div><div class="asep"></div>
 <button class="atb agear" data-gear="2" aria-expanded="${menu}" aria-controls="menu"><span class="ai" aria-hidden="true">${mvIcE("⚙️")}</span><span class="atl">Einstellungen</span></button><button class="atb sm" data-whoopen="1"><span class="ai" aria-hidden="true">${mvIcE("🔄")}</span><span class="atl">Person wechseln<small>angemeldet als ${U[I()].n}</small></span></button>`}
 function renderSide(){const Ly=lay();
@@ -14778,14 +14903,14 @@ function renderSide(){const Ly=lay();
   const ab=$("accb");ab.setAttribute("aria-expanded",accOpen);ab.setAttribute("aria-label",`Account: Ansicht ${vtitle(view)}, angemeldet als ${U[I()].n} – ${accOpen?"zuklappen":"aufklappen"}`);
   const p=$("accp");p.hidden=!accOpen;if(accOpen){const o=p.querySelector(".accs"),st=o?o.scrollTop:0;keepFocus(p,()=>p.innerHTML=`<div class="accs">${accPanel()}</div>`);p.firstChild.scrollTop=st}else p.innerHTML="";
   const sh=$("sheet"),shWas=sh.hidden;sh.hidden=!sheet;if(shWas&&sheet&&!calm())fxOnce(sh,"opening",700);if(sheet)keepFocus(sh,()=>sh.innerHTML=`<div class="shh"><span class="shg" aria-hidden="true"></span><button class="navx" data-navx="1" aria-label="Schließen">×</button></div>`+accPanel(true));else sh.innerHTML="";
-  const ss=$("sstat");keepFocus(ss,()=>ss.innerHTML=`<button class="snb sstb${tab==="stat"?" act":""}" data-tab="stat" aria-pressed="${tab==="stat"}"><span class="si" aria-hidden="true">${mvIcE("📊")}</span><span class="st">Statistik</span></button>${mstHtml()}<button class="snb sstb${tab==="ach"?" act":""}" data-tab="ach" aria-pressed="${tab==="ach"}"><span class="si" aria-hidden="true">${mvIcE("🏅")}</span><span class="st">Abzeichen</span><span class="lvt">Lv ${achFor(I()).lv.L}</span></button><button class="snb sstb${tab==="inv"?" act":""}" data-tab="inv" aria-pressed="${tab==="inv"}"><span class="si" aria-hidden="true">${mvIcE("🎒")}</span><span class="st">Inventar</span><span class="lvt">${fmtX(achFor(I()).mult)}</span></button>${petHtml(I())}${eqBar()}${achFor(I()).pend.length?`<button class="chpend" data-chshow="0" aria-label="${achFor(I()).pend.length===1?"Eine Kiste":achFor(I()).pend.length+" Kisten"} öffnen"><span aria-hidden="true">🎁</span><span class="st">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""}`);
+  const ss=$("sstat");keepFocus(ss,()=>ss.innerHTML=`<button class="snb sstb${tab==="stat"?" act":""}" data-tab="stat" aria-pressed="${tab==="stat"}"><span class="si" aria-hidden="true">${mvIcE("📊")}</span><span class="st">Statistik</span></button>${mstHtml()}<button class="snb sstb${tab==="ach"?" act":""}" data-tab="ach" aria-pressed="${tab==="ach"}"><span class="si" aria-hidden="true">${mvIcE("🏅")}</span><span class="st">Abzeichen</span><span class="lvt">Lv <span data-odo="slv">${achFor(I()).lv.L}</span></span></button><button class="snb sstb${tab==="inv"?" act":""}" data-tab="inv" aria-pressed="${tab==="inv"}"><span class="si" aria-hidden="true">${mvIcE("🎒")}</span><span class="st">Inventar</span><span class="lvt"><span data-odo="smx">${fmtX(achFor(I()).mult)}</span></span></button>${petHtml(I())}${eqBar()}${achFor(I()).pend.length?`<button class="chpend" data-chshow="0" aria-label="${achFor(I()).pend.length===1?"Eine Kiste":achFor(I()).pend.length+" Kisten"} öffnen"><span aria-hidden="true">🎁</span><span class="st">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""}`);
   $("accb").classList.toggle("vhot",vHot());$("accfab").classList.toggle("vhot",vHot());
   $("fabv").innerHTML=avHtml(view);$("fabn").textContent=vtitle(view);const fb=$("accfab");fb.setAttribute("aria-expanded",sheet);fb.setAttribute("aria-label",`Ansicht ${vtitle(view)} – Ansicht, Statistik und Verlauf öffnen`);
   const sd=$("side");sd.classList.toggle("open",drawer);sd.classList.toggle("popen",accOpen&&Ly==="t");$("hamb").setAttribute("aria-expanded",drawer);
   sd.inert=Ly==="m"&&!drawer;$("main").inert=drawer||sheet;$("mtop").inert=drawer||sheet;fb.inert=drawer||sheet;$("bnav").inert=drawer||sheet;
   const sc=$("scrim");sc.hidden=!(drawer||sheet||(accOpen&&Ly==="t"));sc.classList.toggle("clear",!drawer&&!sheet);
   document.documentElement.classList.toggle("navlock",drawer||sheet);
-  $("cth").textContent=SEC[topTab].many+(tab==="hist"?" · Verlauf":tab==="stat"?" · Statistik":tab==="ach"?" · Abzeichen":tab==="inv"?" · Inventar":"");$("ctv").textContent=vlong(view)+(tab==="hist"?" · Verlauf":tab==="stat"?" · Statistik":tab==="ach"?" · Abzeichen":tab==="inv"?" · Inventar":"");
+  $("cth").textContent=SEC[topTab].many+(tab==="hist"?" · Verlauf":tab==="stat"?" · Statistik":tab==="ach"?" · Abzeichen":tab==="inv"?" · Inventar":"");mvRollTxt($("ctv"),vlong(view)+(tab==="hist"?" · Verlauf":tab==="stat"?" · Statistik":tab==="ach"?" · Abzeichen":tab==="inv"?" · Inventar":""));
   // Für die Themes: Bereich/Tab/Ansicht am Inhalt; im Manga-Theme beim Bereichswechsel ein Eyecatch-Wischer wie zwischen zwei Folgen
   const mn=$("main"),kana={anime:"アニメ",film:"エイガ",serie:"シリーズ"}[topTab];
   if(mn.dataset.sec&&mn.dataset.sec!==topTab&&document.documentElement.dataset.theme==="purple"&&!calm()){mn.classList.remove("eyec");void mn.offsetWidth;mn.classList.add("eyec");clearTimeout(renderSide.ey);renderSide.ey=setTimeout(()=>mn.classList.remove("eyec"),800)}
@@ -14924,13 +15049,13 @@ const MV_R=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.
 const MV_DIG="<span>&nbsp;</span>"+"0123456789".split("").map(d=>`<span>${d}</span>`).join("");
 function mvOdo(el,txt,from){if(!el)return;txt=String(txt);
   if(from==null&&el.dataset.cur===txt&&el.querySelector(".c,.p"))return;
-  const prev=from!=null?String(from):(el.dataset.cur!=null?el.dataset.cur:txt);el.classList.add("odo");
+  const prev=from!=null?String(from):(el.dataset.cur!=null?el.dataset.cur:txt);if(!el.dataset.lh){const cs=getComputedStyle(el);let lh=parseFloat(cs.lineHeight);if(!lh||cs.lineHeight==="normal")lh=parseFloat(cs.fontSize)*1.2;el.dataset.lh=lh.toFixed(2)}el.style.setProperty("--lh",el.dataset.lh+"px");const LH=+el.dataset.lh;el.classList.add("odo");
   const n=Math.max(txt.length,prev.length),a=prev.padStart(n," "),b=txt.padStart(n," "),isD=c=>/[0-9 ]/.test(c);
   el.innerHTML=`<span class="sr">${esc(txt)}</span>`+[...b].map((c,i)=>isD(c)&&isD(a[i])?`<span class="c" aria-hidden="true"><span class="s">${MV_DIG}</span></span>`:`<span class="p" aria-hidden="true">${c===" "?"":esc(c)}</span>`).join("");
   const cols=[...el.children].slice(1);
   const put=(i,c,now)=>{const col=cols[i];if(!col||!col.classList.contains("c"))return;const s=col.firstChild;
     if(now){s.style.transition="none";col.style.transition="none"}else{s.style.transition="";col.style.transition="";s.style.transitionDelay=((n-1-i)*35)+"ms"}
-    s.style.transform=`translateY(${-(c===" "?0:+c+1)*1.2}em)`;col.style.width=c===" "?"0px":"1ch"};
+    s.style.transform=`translateY(${-(c===" "?0:+c+1)*LH}px)`;col.style.width=c===" "?"0px":"1ch"};
   [...b].forEach((c,i)=>put(i,a[i],true));el.dataset.cur=txt;
   if(a===b||calm()){[...b].forEach((c,i)=>put(i,c,true));return}
   void el.offsetWidth;[...b].forEach((c,i)=>put(i,c,false))}
@@ -14989,12 +15114,6 @@ function mvRateNum(n,v,w){if(n.dataset.cur==null){const t0=n.textContent.trim();
 function mvShine(n){if(calm())return;const s=document.createElement("span");s.className="shn";s.setAttribute("aria-hidden","true");s.textContent=n.dataset.cur||n.textContent;n.style.position="relative";n.appendChild(s);
   mvDone(mvA(s,[{webkitMaskPosition:"100% 0",WebkitMaskPosition:"100% 0",maskPosition:"100% 0"},{webkitMaskPosition:"0% 0",WebkitMaskPosition:"0% 0",maskPosition:"0% 0"}],{duration:900,easing:MV_EZ.io,fill:"forwards"})).then(()=>s.remove())}
 
-// ---------- Filmabend: ein Knopf statt drei (bis zum geführten Ablauf in Phase 2) ----------
-function faHtml(){const vs=vStatus();return`<div class="mbox sm fam" role="dialog" aria-label="Filmabend"><button class="x" data-close="1" aria-label="Schließen">×</button><h3>${mvIc("popcorn")} Filmabend</h3><p class="mut">Wie wollt ihr heute aussuchen?</p><div class="fal">
-<button class="fao" data-roll="1"><span class="fai" aria-hidden="true">${mvIc("dice")}</span><b>Würfeln</b><small>Der Zufall entscheidet – aus der Watchlist oder aus allem, auf Wunsch nach Stimmung.</small></button>
-<button class="fao${vHot()?" hot":""}" data-swipe="1"><span class="fai" aria-hidden="true">${mvIc("heart")}</span><b>Gemeinsam swipen</b><small>${vs?esc(vs):"Ihr wischt beide durch dieselben Titel – was ihr beide wollt, ist ein Match."}</small></button>
-<button class="fao" data-xo="fin"><span class="fai" aria-hidden="true">${mvIc("mood")}</span><b>Zeit &amp; Stimmung</b><small>Wie viel Zeit habt ihr, worauf habt ihr Lust? Passende Titel kommen sofort.</small></button></div></div>`}
-
 // ---------- Tipp im freien Platz (B1) ----------
 let mvGhostN=0;
 function mvGhostHtml(r0,i){const m=r0.m,id=m.id;
@@ -15007,7 +15126,7 @@ function mvGhostOut(b,fn){const g=b.closest(".ghost"),c=g&&g.querySelector(".cv"
 
 // ---------- Nach jedem Zeichnen: kleine Einmal-Effekte ----------
 let mvXpPend=null,mvDropId=null,mvStamp=null,mvViewFrom=null,mvPrevG=null,mvHold=false,mvMissed=false;
-function mvAfter(){const mt=$("mts");if(mt)mt.textContent=SEC[topTab].many;
+function mvAfter(){const mt=$("mts");if(mt)mvRollTxt(mt,SEC[topTab].many);
   const gs=[...document.querySelectorAll("#grid .card.ghost")],cur=new Set(gs.map(g=>g.dataset.k));
   if(mvPrevG&&!calm())gs.forEach(g=>{if(!mvPrevG.has(g.dataset.k))fxOnce(g,"gin",900)});mvPrevG=cur;
   if(mvDropId){const el=document.querySelector(`#grid .card[data-k="${CSS.escape(mvDropId)}"]`);mvDropId=null;
@@ -15019,7 +15138,7 @@ function mvAfter(){const mt=$("mts");if(mt)mt.textContent=SEC[topTab].many;
         mvDone(mvA(s,[{opacity:0,scale:"1.9",rotate:"-26deg"},{opacity:1,scale:"1",rotate:"-9deg",offset:.4},{opacity:1,scale:"1",rotate:"-9deg",offset:.8},{opacity:0,scale:"1.04",rotate:"-9deg"}],{duration:1500,easing:MV_EZ.out,fill:"forwards"})).then(()=>s.remove())}}}
   if(mvXpPend){const p=mvXpPend;mvXpPend=null;setTimeout(()=>{let g=0;try{g=xpNow()-p.x0}catch(e){}if(g>0)mvFlyXp(p.r,g)},60)}
   if(mvViewFrom){const f=mvViewFrom;mvViewFrom=null;setTimeout(()=>mvFlyAv(f),40)}
-  mvIconsFill();mvMenuSync()}
+  mvIconsFill();mvMenuSync();mvAfter2()}
 function mvFlyAv(f){if(calm())return;const tg=lay()==="m"?$("fabv"):$("acv");if(!tg||!tg.getClientRects().length)return;const b=tg.getBoundingClientRect(),a=f.r;
   const c=document.createElement("div");c.innerHTML=f.h;const el=c.firstElementChild;if(!el)return;el.style.cssText=`position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;margin:0;z-index:71;display:grid;place-items:center`;mvFlyBox().appendChild(el);
   mvDone(mvA(el,[{transform:"none"},{transform:`translate(${(b.left-a.left)*.5}px,${(b.top-a.top)*.5-30}px) scale(1.15)`,offset:.5},{transform:`translate(${b.left-a.left}px,${b.top-a.top}px) scale(${b.width/a.width})`}],{duration:MV_D.sp,easing:MV_EZ.io,fill:"forwards"})).then(()=>{el.remove();tg.classList.remove("mvgulp");void tg.offsetWidth;tg.classList.add("mvgulp")})}
@@ -15164,10 +15283,185 @@ function mvSetup(){
   // große Überschrift am Handy wandert beim Scrollen in die Kopfzeile (1)
   let sf=0;addEventListener("scroll",()=>{if(sf)return;sf=requestAnimationFrame(()=>{sf=0;document.documentElement.style.setProperty("--mvp",Math.max(0,Math.min(1,(scrollY-10)/56)).toFixed(3))})},{passive:true});
   mvCardsSetup();mvPullSetup();mvToastSetup();
-  mvSheetDrag($("modal"),()=>$("modal").querySelector(".mbox"),()=>{openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;render()});
+  mvSheetDrag($("modal"),()=>$("modal").querySelector(".mbox"),()=>{if(blind&&blind.anim)return;if(mvBlKeep())return;openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;render()});
   mvSheetDrag($("sheet"),()=>$("sheet"),()=>{closeNav();render()});
   mvEdge($("brw"),()=>{brwClose();render()});mvEdge($("xo"),()=>xoClose());
   mvIconsFill();mvMenuSync()}
+
+// ---------- Rollende Zahlen überall (Kilometerzähler mit Gedächtnis) + rollende Beschriftungen ----------
+// <span data-odo="schlüssel">12</span> rollt beim nächsten Zeichnen vom alten zum neuen Wert, auch wenn render() das Element neu baut.
+const MV_ODO={},MV_BAR={};
+function mvOdoKeys(r){(r||document).querySelectorAll("[data-odo]").forEach(el=>{const k=el.dataset.odo;if(el.dataset.cur!=null&&el.querySelector(".c,.p")){MV_ODO[k]=el.dataset.cur;return}
+  const v=el.textContent.trim(),p=MV_ODO[k];MV_ODO[k]=v;mvOdo(el,v,p!=null&&p!==v?p:null)})}
+// Balken gleiten vom alten zum neuen Stand: <i data-bar="schlüssel" style="width:40%">
+function mvBars(r){(r||document).querySelectorAll("[data-bar]").forEach(el=>{if(el._mvb)return;el._mvb=1;const k=el.dataset.bar,w=el.style.width,p=MV_BAR[k];MV_BAR[k]=w;
+  if(p&&p!==w&&!calm())mvA(el,[{width:p},{width:w}],{duration:MV_D.sp,easing:MV_EZ.spring})})}
+const mvNum=(s,k)=>{let i=0;return esc(s).replace(/\d+/g,n=>`<span data-odo="${k}${i++}">${n}</span>`)};
+// Text wechselt mit kleinem Rollen: alter Text nach oben raus, neuer von unten rein
+function mvRollTxt(el,txt){if(!el)return;txt=String(txt);const cur=el.dataset.rt!=null?el.dataset.rt:el.textContent;if(cur===txt&&el.dataset.rt!=null)return;el.dataset.rt=txt;
+  if(calm()||!cur||cur===txt){el.textContent=txt;return}
+  el.innerHTML=`<span class="mvrt" aria-hidden="true"><span>${esc(cur)}</span><span>${esc(txt)}</span></span><span class="sr">${esc(txt)}</span>`;
+  const w=el.querySelector(".mvrt");mvA(w.firstChild,[{transform:"translateY(0)",opacity:1},{transform:"translateY(-90%)",opacity:0}],{duration:MV_D[3],easing:MV_EZ.in,fill:"forwards"});
+  mvDone(mvA(w.lastChild,[{transform:"translateY(90%)",opacity:0},{transform:"translateY(0)",opacity:1}],{duration:MV_D.sp,easing:MV_EZ.spring,delay:70,fill:"backwards"})).then(()=>{if(el.dataset.rt===txt&&el.querySelector(".mvrt"))el.textContent=txt})}
+
+// ---------- Info-Fenster: Hauptaktion (Gesehen – bewerten bzw. Zurück in die Watchlist) ----------
+function mvModalActs(id){if(!editable())return"";const c=C();
+  if(c.list.includes(id))return`<div class="mvacts"><button class="add" data-ck="${id}" data-closeinfo="1"><span aria-hidden="true">✓</span> ${c.seen[id]?"Jetzt bewerten":"Gesehen – jetzt bewerten"}</button></div>`;
+  if(c.done.some(d=>d.id===id))return`<div class="mvacts"><button class="add" data-back="${id}" data-closeinfo="1"><span aria-hidden="true">↩</span> Zurück in die Watchlist</button></div>`;
+  return""}
+
+// ---------- Heute Abend (geteilt über ST.film.x.tonight) ----------
+const mvTonight=()=>{let x;try{x=xData()}catch(e){return null}const n=x.tonight;if(!n||!M[n.id]||Date.now()-n.t>20*3600e3)return null;return n};
+function mvSetTonight(id,k){const x=xData();x.tonight={id,sec:k||M[id].sec,t:Date.now(),by:I()};xSave()}
+function mvTonightClear(){const x=xData();if(x.tonight){x.tonight=null;xSave()}}
+
+// ---------- „Auf drei!“: verdeckt bewerten, gemeinsam aufdecken ----------
+// ST[k].blind[id] = {r:{jos?,joh?}, t, by, done?, rev:{jos?,joh?}} – wird mit dem Bereich geteilt. Erst wenn beide bewertet haben, wird aufgedeckt.
+let blind=null;
+const mvBl=k=>ST[k].blind||(ST[k].blind={});
+function mvSaveSec(k){if(k===topTab){save();return}try{localStorage.setItem(SEC[k].key,JSON.stringify(ST[k]))}catch(e){}cloudKick()}
+const mvBlFor=(k,id)=>(ST[k].blind||{})[id]||null;
+function mvBlindOpen(id,k){k=k||M[id].sec;const e=mvBlFor(k,id),u=I(),o=O();
+  if(e&&e.done){blind={id,k,step:"reveal",view:1,v:{jos:e.r.jos,joh:e.r.joh}};return}
+  if(e&&e.r&&e.r[o]!=null&&e.r[u]==null){blind={id,k,step:"rate",who:u,mode:"finish",v:{[o]:e.r[o]}};return}
+  if(e&&e.r&&e.r[u]!=null&&e.r[o]==null){blind={id,k,step:"wait",v:{[u]:e.r[u]}};return}
+  blind={id,k,step:"mode",v:{}}}
+function blindHtml(){const b=blind,m=M[b.id];if(!m){blind=null;return""}const u=I(),o=O(),nm=x=>U[x].n;
+  const head=`<button class="x" data-close="1" aria-label="Schließen">×</button><div class="rsht">${cv(b.id,m.name)}<div><h3>${esc(m.name)}</h3><p class="mut">Auf drei! · gemeinsam bewerten</p></div></div>`;
+  let body="";
+  if(b.step==="mode")body=`<p class="mvbl-t">Ihr bewertet verdeckt und deckt dann gemeinsam auf.</p><div class="mvbl-ch"><button class="add" data-bl="one"><span aria-hidden="true">🤝</span> Wir sind beide hier</button><button class="rej" data-bl="two"><span aria-hidden="true">📱</span> Ich jetzt, ${esc(nm(o))} am eigenen Handy</button></div>`;
+  else if(b.step==="rate"){const w=b.who,v=b.v[w]||0;body=`<p class="mvbl-t">${esc(nm(w))}, deine Zahl. ${esc(nm(w==="jos"?"joh":"jos"))} sieht sie erst beim Aufdecken.</p><div class="pst">${rateHtml(b.id,v,"bl:"+w,nm(w))}</div><div class="btns"><button class="add" data-bl="save"${v?"":" disabled"}><span aria-hidden="true">🙈</span> Verdeckt speichern</button></div>`}
+  else if(b.step==="hand")body=`<div class="mvhand"><div class="mvhand-i" aria-hidden="true">🤝</div><h3>Jetzt ${esc(nm(b.who))}</h3><p class="mut">Gib das Handy weiter – ${esc(nm(b.who==="jos"?"joh":"jos"))}s Zahl bleibt verdeckt.</p></div><div class="btns"><button class="add" data-bl="iam">Ich bin ${esc(nm(b.who))}</button></div>`;
+  else if(b.step==="wait")body=`<div class="mvhand"><div class="mvhand-i" aria-hidden="true">🙈</div><h3>Deine Zahl ist verdeckt gespeichert</h3><p class="mut">Sobald ${esc(nm(o))} bewertet hat, deckt ihr auf. Du bekommst eine Nachricht in der Glocke.</p></div><div class="btns"><button class="rej" data-bl="redo">Meine Zahl ändern</button><button class="add" data-close="1">Okay</button></div>`;
+  else{const fin=b.step==="result",d=fin?Math.abs(b.v.jos-b.v.joh):0;
+    const card=x=>`<div class="mvp3c ${x}${fin?" up":""}"><div class="mvfc mvbk"><b>${U[x].n[0]}</b><small>${esc(nm(x))}</small></div><div class="mvfc mvfr"><span class="n"><span data-odo="p3-${x}">${fin?b.v[x].toFixed(1).replace(".",","):"0,0"}</span></span><small>${fin?rWord(b.v[x]):""}</small></div></div>`;
+    const X=v=>((v-1)/9*100).toFixed(2)+"%",lo=Math.min(b.v.jos||0,b.v.joh||0),hi=Math.max(b.v.jos||0,b.v.joh||0);
+    body=`<div class="mvp3">${card("jos")}${card("joh")}</div><div class="mvmeter${fin?" up":""}" aria-hidden="true"><i class="mt"></i><i class="gap" style="left:${X(lo)};width:calc(${X(hi)} - ${X(lo)})"></i><span class="mvmk jos" style="left:${X(b.v.jos||1)}">${U.jos.n[0]}</span><span class="mvmk joh" style="left:${X(b.v.joh||1)}">${U.joh.n[0]}</span></div>
+<div class="mvverd" aria-live="polite">${fin?mvVerdict(d):""}</div><div class="btns">${fin?(b.view?`<button class="add" data-bl="seen">Schön!</button>`:`<button class="add" data-bl="done"><span aria-hidden="true">✓</span> Speichern</button>`):`<button class="add" data-bl="go">Auf drei aufdecken</button>`}</div>`}
+  return`<div class="mbox sm rsh mvblind" role="dialog" aria-label="Auf drei: ${esc(m.name)}">${head}${body}</div>`}
+const mvVerdict=d=>d<=.6?`<span class="v1">💞 Einig!</span>`:d<=2?`<span class="v2">Fast einig</span>`:`<span class="v3">Geschmäcker verschieden</span>`;
+async function mvReveal(){const b=blind;if(!b||b.anim)return;b.anim=true;const box=$("modal").querySelector(".mvblind");if(!box){b.anim=false;return}
+  const go=box.querySelector('[data-bl="go"]');if(go)go.disabled=true;
+  if(!calm())for(const n of ["3","2","1"]){const c=document.createElement("div");c.className="mvcd";c.textContent=n;document.body.appendChild(c);
+    mvDone(mvA(c,[{opacity:0,transform:"scale(.4)"},{opacity:1,transform:"scale(1.1)",offset:.45},{opacity:0,transform:"scale(1.5)"}],{duration:520,easing:MV_EZ.out,fill:"forwards"})).then(()=>c.remove());await mvT(380)}
+  box.querySelectorAll(".mvp3c").forEach(c=>{const x=c.classList.contains("jos")?"jos":"joh";c.querySelector(".mvfr small").textContent=rWord(b.v[x]);
+    mvA(c,[{transform:"rotateY(0)"},{transform:"rotateY(90deg) translateZ(40px) scale(1.06)",offset:.5},{transform:"rotateY(180deg)"}],{duration:760,easing:MV_EZ.io,fill:"forwards"});
+    const o=c.querySelector("[data-odo]");setTimeout(()=>{mvOdo(o,b.v[x].toFixed(1).replace(".",","),"0,0");MV_ODO[o.dataset.odo]=o.dataset.cur},420)});
+  const mt=box.querySelector(".mvmeter");if(mt){mt.classList.add("up");mt.querySelectorAll(".mvmk").forEach((k,i)=>mvA(k,[{left:i?"100%":"0%",opacity:0},{opacity:1}],{duration:900,delay:650,easing:MV_EZ.spring}));mvA(mt.querySelector(".gap"),[{opacity:0,transform:"scaleX(0)"},{opacity:1,transform:"none"}],{duration:MV_D[4],delay:1300})}
+  await mvT(1500);const d=Math.abs(b.v.jos-b.v.joh),vd=box.querySelector(".mvverd");if(vd){vd.innerHTML=mvVerdict(d);mvA(vd.firstChild,[{opacity:0,transform:"rotate(-14deg) scale(1.9)"},{opacity:1,transform:"rotate(-5deg) scale(1)"}],{duration:MV_D.sp,easing:MV_EZ.bounce})}
+  if(d<=.6&&!calm())mvConfetti(vd,24);
+  await mvT(350);b.step="result";b.anim=false;render();
+  if(b.view){const e=mvBlFor(b.k,b.id);if(e){(e.rev||(e.rev={}))[I()]=1;if(e.rev.jos&&e.rev.joh)delete mvBl(b.k)[b.id];mvSaveSec(b.k)}}}
+function mvBlindSave(){const b=blind;if(!b)return;const id=b.id,k=b.k,r={jos:b.v.jos,joh:b.v.joh};
+  if(topTab!==k){topTab=k;S=ST[k];vi=0;tab="wl"}view="both";fixView();
+  const st=ST[k],c=st.lists.both,s=st.w[id]||(st.w[id]={}),li=c.list.indexOf(id),x0=xpNow();mvXpPend={r:mvRect(id),x0};
+  snap(`„${M[id].name}“ auf drei bewertet`);s.r=s.r||{};for(const u of ["jos","joh"]){s.r[u]=r[u];stampR(s,u)}
+  c.seen[id]=true;c.rej=c.rej.filter(x=>x!==id);if(li>-1){c.list[li]="@";freshIdx=li}
+  if(!c.done.some(x=>x.id===id)){c.done.push({id,t:Date.now()});popId=id}
+  syncBoth(k);mvLocMark(k,id);const e=mvBl(k);if(b.mode==="one")delete e[id];else e[id]={r,t:Date.now(),done:1,rev:{[I()]:1}};
+  const tn=mvTonight();if(tn&&tn.id===id)mvTonightClear();
+  blind=null;vi=0;toast(`„${M[id].name}“ abgeschlossen – auf drei bewertet${xpTag(x0)}`);ticketShow(id);petReact(id,"done");if(r.jos>=RMAX||r.joh>=RMAX)confetti();save();render()}
+function mvBlindAct(a){const b=blind;if(!b)return;const u=I(),o=O();
+  if(a==="one"){b.mode="one";b.step="rate";b.who=u}
+  else if(a==="two"){b.mode="two";b.step="rate";b.who=u}
+  else if(a==="save"){const w=b.who,v=b.v[w];if(!v)return;
+    if(b.mode==="one"){if(w===u){b.step="hand";b.who=o}else b.step="reveal"}
+    else if(b.mode==="finish"){const e=mvBl(b.k)[b.id]||{};b.v[o]=b.v[o]!=null?b.v[o]:(e.r||{})[o];b.step="reveal"}
+    else{mvBl(b.k)[b.id]={r:{[u]:v},t:Date.now(),by:u};mvSaveSec(b.k);blind=null;toast(`🙈 Verdeckt gespeichert – ${U[o].n} ist dran`)}}
+  else if(a==="iam")b.step="rate";
+  else if(a==="redo"){b.mode="two";b.step="rate";b.who=u}
+  else if(a==="go"){mvReveal();return}
+  else if(a==="done"){mvBlindSave();return}
+  else if(a==="seen"){blind=null}
+  render()}
+// Gemeinsam aufgedeckte Bewertungen sind auf diesem Gerät keine „Neuigkeit“ für die Glocke
+const MVLOC_K="wl-mvbl-seen";
+const mvLocAll=()=>{try{return JSON.parse(localStorage.getItem(MVLOC_K)||"{}")||{}}catch(e){return{}}};
+function mvLocMark(k,id){try{const o=mvLocAll();o[k+":"+id]=Date.now();const ks=Object.keys(o).sort((a,b)=>o[a]-o[b]);for(const x of ks.slice(0,Math.max(0,ks.length-80)))delete o[x];localStorage.setItem(MVLOC_K,JSON.stringify(o))}catch(e){}}
+function mvBlKeep(){if(blind&&blind.step==="result"&&!blind.view&&!blind.anim){mvBlindSave();return true}return false}
+// Karte in „Zusammen“: wartet auf eine verdeckte Bewertung?
+function mvBlBadge(id){const e=mvBlFor(topTab,id);if(!e||e.done||!e.r)return"";const by=Object.keys(e.r)[0];if(!by)return"";return`<span class="mvbl">🙈 ${by===I()?"Du hast verdeckt bewertet":esc(U[by].n)+" hat verdeckt bewertet"}</span>`}
+function mvBlPending(){const out=[];for(const k of Object.keys(SEC)){const B=ST[k]&&ST[k].blind;if(!B)continue;for(const id in B){const e=B[id];if(!M[id]||!e||!e.r)continue;
+  if(e.done&&!(e.rev||{})[I()])out.push({k,id,t:e.t,kind:"rev"});else if(!e.done&&e.r[O()]!=null&&e.r[I()]==null)out.push({k,id,t:e.t,kind:"turn"})}}return out}
+
+// ---------- Banner oben: Heute Abend / Wie war's? / Aufdecken ----------
+function mvTopRender(){let el=$("mvtn");if(!el)return;if(tab!=="wl"||!me){el.hidden=true;return}const n=mvTonight(),P=mvBlPending();let h="";
+  if(n){const m=M[n.id],late=Date.now()-n.t>90*60e3;h+=`<div class="mvtnc hasx">${cv(n.id,m.name)}<div class="mvtnt"><small>${late?"Wie war's?":"Heute Abend"}</small><button class="lnk" data-info="${n.id}">${esc(m.name)}</button><span class="gn">${SEC[n.sec].one} · ${n.by===I()?"du hast ausgesucht":esc(U[n.by].n)+" hat ausgesucht"}</span></div><div class="mvtnb"><button class="add" data-mvhow="1">${late?"Auf drei!":"Fertig? Auf drei!"}</button></div><button class="mvtnx" data-mvtnx="1" aria-label="Heute-Abend-Hinweis entfernen">×</button></div>`}
+  for(const p of P.slice(0,2)){const m=M[p.id];h+=`<div class="mvtnc">${cv(p.id,m.name)}<div class="mvtnt"><small>${p.kind==="rev"?"Aufgedeckt":"Du bist dran"}</small><b>${esc(m.name)}</b><span class="gn">${p.kind==="rev"?esc(U[O()].n)+" hat aufgedeckt":esc(U[O()].n)+" hat verdeckt bewertet"}</span></div><div class="mvtnb"><button class="add" data-mvbl="${p.k}:${p.id}">${p.kind==="rev"?"Ansehen":"Auf drei!"}</button></div></div>`}
+  if(el._h!==h){el.innerHTML=h;el._h=h}el.hidden=!h}
+
+// ---------- Filmabend als Programmheft (Phase 2): Zeit & Stimmung → Kandidaten → würfeln/wählen → „Heute läuft …“ ----------
+const FA_TIME={film:[["egal","Egal"],["kurz","Bis 1¾ Std."],["lang","Ganzer Abend"]],x:[["egal","Egal"],["kurz","Kurze Folgen"],["lang","Lange Folgen"]]};
+function faCands(){const k=topTab,st=ST[k],done=new Set(),seen=new Set();for(const l of LISTS)if(st.lists[l])for(const d of st.lists[l].done)done.add(d.id);
+  let P=[];if(xo.src==="all"){for(const m of Object.values(M))if(m.sec===k&&!m.old&&!done.has(m.id))P.push(m.id)}
+  else for(const l of LISTS){const L=st.lists[l];if(!L)continue;for(const id of L.list)if(id!=="@"&&M[id]&&!seen.has(id)&&!done.has(id)){seen.add(id);P.push(id)}}
+  const md=MOODS.find(x=>x[0]===xo.mood);if(md&&md[2].length){const f=P.filter(id=>(M[id].tags||[]).some(t=>md[2].includes(t)));if(f.length>=2)P=f}
+  if(xo.time!=="egal"){const film=k==="film",f=P.filter(id=>{const r=runMin(M[id]);if(!r)return true;return xo.time==="kurz"?r<=(film?105:30):r>=(film?120:45)});if(f.length>=2)P=f}
+  const on=(u,id)=>!!(st.lists[u]&&st.lists[u].list.includes(id));
+  const sc=id=>{const m=M[id];let s=(+m.r||6.5)+Math.random()*2.2;if(on("both",id))s+=2;if(on("jos",id))s+=1.1;if(on("joh",id))s+=1.1;return s};
+  return P.map(id=>({id,s:sc(id)})).sort((a,b)=>b.s-a.s).slice(0,4).map(x=>x.id)}
+function faHtml2(){const k=topTab,st=ST[k],step=xo.step||1;
+  if(step===1){const T=FA_TIME[k==="film"?"film":"x"],ch=(key,opts)=>`<div class="bwchips mvfach" role="group">${opts.map(([v,l])=>`<button class="bwchip${xo[key]===v?" on":""}" data-fa${key}="${v}" aria-pressed="${xo[key]===v}">${l}</button>`).join("")}</div>`;
+    return`<div class="mvfa"><p class="mvfa-k">Programmheft · Seite 1</p><h3>Wie viel Zeit habt ihr?</h3>${ch("time",T)}<h3>Worauf habt ihr Lust?</h3>${ch("mood",MOODS.filter(x=>x[0]!=="kurz").map(x=>[x[0],x[1]]))}<h3>Woher?</h3>${ch("src",[["lists","Aus euren Listen"],["all",`Aus allen ${k==="film"?"Filmen":SEC[k].many}`]])}
+<button class="add fab2" data-fastep="2"><span aria-hidden="true">${mvIc("popcorn")}</span> Vorschläge zeigen</button></div>`}
+  if(step===2){const C2=xo.cands||[],on=(u,id)=>!!(st.lists[u]&&st.lists[u].list.includes(id));
+    return`<div class="mvfa"><p class="mvfa-k">Programmheft · Seite 2</p><h3>${C2.length?(C2.length===1?"Einer":C2.length===2?"Zwei":C2.length===3?"Drei":"Vier")+" für heute Abend":"Dazu passt gerade nichts"}</h3><p class="mut">${C2.length?"Antippen zum Auswählen – oder würfeln.":"Lockert Zeit oder Stimmung – oder sucht aus allen Titeln."}</p>
+${C2.some(id=>on("jos",id)||on("joh",id)||on("both",id))?`<p class="mvlegend" aria-hidden="true"><span><i class="jos"></i>${esc(U.jos.n)}</span><span><i class="joh"></i>${esc(U.joh.n)}</span><span><i class="both"></i>Zusammen</span></p>`:""}
+<div class="mvcands">${C2.map(id=>{const m=M[id],r=runMin(m),wh=[on("jos",id)&&U.jos.n,on("joh",id)&&U.joh.n,on("both",id)&&"Zusammen"].filter(Boolean);return`<button class="mvcand${xo.pick===id?" hot":""}" data-facand="${id}" aria-pressed="${xo.pick===id}">${wh.length?`<span class="who" role="img" aria-label="Auf der Liste: ${esc(wh.join(", "))}.">${on("jos",id)?`<i class="jos"></i>`:""}${on("joh",id)?`<i class="joh"></i>`:""}${on("both",id)?`<i class="both"></i>`:""}</span>`:""}${cv(id,m.name)}<b>${esc(m.name)}</b><small>${[m.y||YEAR[id]||"",r?fmtMin(r):""].filter(Boolean).join(" · ")}</small></button>`}).join("")}</div>
+<div class="mvfa-b mvdock"><button class="rej" data-fastep="1">‹ Anders</button>${C2.length>1?`<button class="rej" data-fadice="1"><span aria-hidden="true">${mvIc("dice")}</span> Würfeln</button>`:""}<button class="rej" data-faswipe="1"><span aria-hidden="true">${mvIc("heart")}</span> Swipen</button><button class="add mvpick" data-fapick="1"${xo.pick?"":" disabled"}>${mvPickLbl(xo.pick&&M[xo.pick])}</button></div></div>`}
+  const m=M[xo.pick];if(!m)return"";const r=runMin(m),now=new Date();
+  return`<div class="mvlo${xo.lit?" on":""}" data-th="${esc(document.documentElement.dataset.theme||"")}"><p class="mvlo-k">Heute läuft</p><div class="mvlo-p">${cv(m.id,m.name)}</div><h3>${esc(m.name)}</h3><p class="mvlo-m">${[m.y||YEAR[m.id]||"",r?fmtMin(r):"",esc(U.jos.n)+" & "+esc(U.joh.n),"heute, "+now.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})].filter(Boolean).map(x=>`<span>${x}</span>`).join(" · ")}</p>
+<div class="mvlo-b"><button class="rej" data-fastep="2">Doch was anderes</button><button class="add" data-fastart="1"><span aria-hidden="true">▶</span> Los geht's</button></div></div>`}
+const mvPickLbl=m=>m?`<span class="mvpkn">„${esc(m.name)}“</span> nehmen wir`:"Erst einen antippen";
+// Hauptknopf folgt der Auswahl: der Titel rollt herein
+function mvPickSync(){const p=document.querySelector("#xo [data-fapick]");if(!p)return;const m=xo&&xo.pick&&M[xo.pick];p.disabled=!m;const n=p.querySelector(".mvpkn");if(m&&n)mvRollTxt(n,`„${m.name}“`);else p.innerHTML=mvPickLbl(m)}
+function mvFaFocus(){const h=document.querySelector("#xo .mvfa h3,#xo .mvlo h3");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+// Seite umblättern (19): die alte Seite dreht sich wie ein Blatt weg
+function mvTurnPage(fn,back){const el=$("xo"),inn=el&&el.querySelector(".xoin");if(calm()||!inn||el.hidden){fn();return}
+  const r=inn.getBoundingClientRect(),cs=getComputedStyle(el),leaf=inn.cloneNode(true);leaf.classList.add("mvleaf");leaf.setAttribute("aria-hidden","true");leaf.querySelectorAll("[id]").forEach(x=>x.removeAttribute("id"));
+  leaf.style.cssText=`position:fixed;left:${r.left}px;top:${Math.max(0,r.top)}px;width:${r.width}px;height:${Math.min(r.height,innerHeight-Math.max(0,r.top))}px;overflow:hidden;margin:0;z-index:12;transform-origin:${back?"100%":"0"} 50%;background:${cs.backgroundColor==="rgba(0, 0, 0, 0)"?getComputedStyle(document.body).backgroundColor:cs.backgroundColor};background-image:${cs.backgroundImage}`;
+  document.body.appendChild(leaf);fn();mvDone(mvA(leaf,[{transform:"perspective(1600px) rotateY(0)",opacity:1},{transform:`perspective(1600px) rotateY(${back?100:-100}deg)`,opacity:.4}],{duration:680,easing:MV_EZ.io,fill:"forwards"})).then(()=>leaf.remove())}
+async function faDice(){const cs=[...document.querySelectorAll("#xo .mvcand")];if(cs.length<2)return;const tgt=Math.floor(Math.random()*cs.length),total=calm()?0:12+tgt+cs.length*2;let i=0;
+  for(let s=0;s<=total;s++){i=s%cs.length;cs.forEach((x,j)=>x.classList.toggle("hot",j===i));await mvT(55+Math.pow(s/Math.max(total,1),2.4)*330)}
+  const w=cs[calm()?tgt:i];cs.forEach(x=>x.classList.toggle("hot",x===w));mvA(w,[{transform:"scale(1.08)"},{transform:"none"}],{duration:MV_D.sp,easing:MV_EZ.bounce});xo.pick=w.dataset.facand;mvPickSync()}
+// „Heute läuft …“ (20): Licht aus, Spot an, das Poster kommt groß, dazu die eigene Note des Designs
+function faLightsOut(from){const lo=document.querySelector("#xo .mvlo");if(!lo)return;if(calm()){xo.lit=true;lo.classList.add("on");return}const th=document.documentElement.dataset.theme||"",nm=(M[xo.pick]||{}).name||"",k=topTab;
+  mvA(lo,[{opacity:0},{opacity:1}],{duration:700,easing:MV_EZ.io});setTimeout(()=>{if(xo)xo.lit=true;const l2=document.querySelector("#xo .mvlo");if(l2)l2.classList.add("on")},450);
+  const p=lo.querySelector(".mvlo-p");if(from&&p){const b=p.getBoundingClientRect();mvA(p,[{transform:`translate(${from.left-b.left}px,${from.top-b.top}px) scale(${from.width/b.width})`,opacity:.3},{transform:"none",opacity:1}],{duration:950,easing:MV_EZ.soft,delay:150})}
+  lo.querySelectorAll(".mvlo-k,h3,.mvlo-m,.mvlo-b").forEach((x,i)=>mvA(x,[{opacity:0,transform:"translateY(16px)"},{opacity:1,transform:"none"}],{duration:MV_D[4],delay:700+i*120,easing:MV_EZ.out}));
+  const pr=p?p.getBoundingClientRect():null,cx=pr?pr.left+pr.width/2:innerWidth/2,cy=pr?pr.top+pr.height/2:innerHeight/2;
+  setTimeout(()=>{try{if(th==="deco")decoCurtain(.9);else if(th==="sea")seaWave();else if(th==="paper"){const o=$("tfo");if(o)thFx("pp-page",null,`<div class="pp-pg"><div class="pp-pgi"><i class="pp-hk">${PP_KANJI[k]||"映"}</i><b>${esc(nm)}</b></div></div>`,1400,o)}else if(th==="purple")impact(cx,cy);else if(th==="baby"){gallop();hearts(cx,cy,14)}}catch(e){}},500)}
+function faAct(d){if(!xo||xo.k!=="fa")return false;
+  for(const key of ["time","mood","src"]){const v=d["fa"+key];if(v===undefined)continue;if(xo[key]===v)return true;mvChipGo(key,()=>{xo[key]=v;xoRender()});return true}
+  if(d.fastep){const n=+d.fastep,back=n<(xo.step||1);if(n===2&&(xo.step||1)===1){xo.cands=faCands();xo.pick=null}mvTurnPage(()=>{xo.step=n;xoRender();$("xo").scrollTop=0;mvFaFocus();if(n===2&&!back)mvStag(document.querySelectorAll("#xo .mvcand"),160,70,22)},back);return true}
+  if(d.facand){xo.pick=xo.pick===d.facand?null:d.facand;document.querySelectorAll("#xo .mvcand").forEach(x=>{const on=x.dataset.facand===xo.pick;x.classList.toggle("hot",on);x.setAttribute("aria-pressed",on)});mvPickSync();return true}
+  if(d.fadice){faDice();return true}
+  if(d.faswipe){rollSrc=xo.src==="all"?"all":"wl";mood=xo.mood||"egal";const was=xo;xoClose();view="both";fixView();act({swipe:"1"});void was;return true}
+  if(d.fapick){if(!xo.pick)return true;const c=document.querySelector(`#xo [data-facand="${CSS.escape(xo.pick)}"] .cv`),from=c?c.getBoundingClientRect():null;xo.step=3;xo.lit=false;xoRender();$("xo").scrollTop=0;mvFaFocus();faLightsOut(from);return true}
+  if(d.fastart){const id=xo.pick,k=topTab;mvSetTonight(id,k);xoClose();toast(`🍿 Viel Spaß mit „${M[id].name}“! Danach: Auf drei!`);return true}
+  return false}
+// Gewählter Chip: die Auswahl gleitet zum neuen Chip (View Transition, wo der Browser sie kann)
+function mvChipGo(key,fn){const q=()=>document.querySelector(`#xo [data-fa${key}].on`),o=q();if(!fxVT()||!o){fn();return}
+  o.classList.add("mvvt");try{const t=document.startViewTransition(()=>{o.classList.remove("mvvt");fn();const n=q();if(n)n.classList.add("mvvt")});t.finished.finally(()=>document.querySelectorAll(".mvvt").forEach(x=>x.classList.remove("mvvt")))}catch(e){o.classList.remove("mvvt");fn()}}
+// Elemente gestaffelt hereinkommen lassen (einmalig, nicht bei jedem Neuzeichnen)
+function mvStag(els,d,st,y){if(calm())return;[...els].forEach((x,i)=>mvA(x,[{opacity:0,transform:`translateY(${y||14}px) scale(.97)`},{opacity:1,transform:"none"}],{duration:MV_D.sp,easing:MV_EZ.spring,delay:(d||0)+i*(st||50),fill:"backwards"}))}
+// Watchlist voll: „Zurück in die Watchlist“ geht über die Tausch-Auswahl
+let mvSwapBack=null;
+function mvBackOut(c,id){c.done=c.done.filter(x=>x.id!==id);delete c.seen[id];const s=S.w[id]||(S.w[id]={});for(const u of view==="both"?["jos","joh"]:[view]){if(s.r)delete s.r[u];if(s.pre)delete s.pre[u];unstampR(s,u)}if(view==="both")unsyncBoth(topTab,id)}
+// Auf drei!: Schrittwechsel gleiten herein; Weitergeben und Warten bekommen eine kleine Geste
+let mvBlLast="";
+function mvBlFx(){const box=$("modal")&&$("modal").querySelector(".mvblind"),k=blind&&box?blind.step+(blind.who||""):"";if(k===mvBlLast)return;const was=mvBlLast;mvBlLast=k;
+  if(!k||!was||calm()||blind.step==="result")return;
+  box.querySelectorAll(".mvbl-t,.mvbl-ch>*,.pst,.mvhand>*,.mvp3,.mvmeter,.btns").forEach((x,i)=>mvA(x,[{opacity:0,transform:"translateX(22px)"},{opacity:1,transform:"none"}],{duration:MV_D[4],easing:MV_EZ.out,delay:i*45,fill:"backwards"}));
+  const ic=box.querySelector(".mvhand-i");if(ic)mvA(ic,blind.step==="hand"?[{transform:"translateX(-46px) rotate(-16deg)",opacity:0},{transform:"translateX(10px) rotate(7deg)",opacity:1,offset:.62},{transform:"none"}]:[{transform:"scale(.5)",opacity:0},{transform:"scale(1.14)",opacity:1,offset:.6},{transform:"none"}],{duration:900,easing:MV_EZ.out,delay:120,fill:"backwards"})}
+// „Heute“-Abzeichen: einmal kurz aufploppen, wenn es neu auf einer Karte erscheint
+let mvTdayDone="";
+function mvTdayFx(){const td=document.querySelector("#grid .mvtday"),id=td&&td.closest("[data-k]")?td.closest("[data-k]").dataset.k:"";if(!id||id===mvTdayDone)return;mvTdayDone=id;
+  if(!calm())mvA(td,[{transform:"scale(.3)",opacity:0},{transform:"scale(1.15)",opacity:1,offset:.6},{transform:"none"}],{duration:MV_D.sp,easing:MV_EZ.out,delay:300,fill:"backwards"})}
+// ---------- Rollende Zahlen & Banner nach jedem Zeichnen ----------
+function mvAfter2(){try{mvTopRender()}catch(e){}mvOdoKeys(document);mvBars(document);try{mvBlFx();mvTdayFx()}catch(e){}}
+// Leiste und Handy-Blatt werden auch ohne render() neu gezeichnet (Haustier, Kisten): Zahlen und Balken dort ebenfalls rollen lassen
+{const o=renderSide;renderSide=function(){o.apply(this,arguments);try{const sd=$("side"),sh=$("sheet");mvOdoKeys(sd);mvBars(sd);if(sh&&!sh.hidden){mvOdoKeys(sh);mvBars(sh)}}catch(e){}}}
 // BEWEGUNG-END
 
 function render(){
@@ -15176,18 +15470,18 @@ function render(){
   const c=C(),ed=editable(),R=rank(),F=five(R),pp=popId,fi=freshIdx;popId=null;freshIdx=-1;
   $("ro").hidden=ed;$("ro").innerHTML=ed?"":`Das ist ${U[view].g} Liste. Ansehen geht, bearbeiten kann sie nur ${U[view].n}. <button class="lnk" data-whoopen="1">Person wechseln</button>`;
   {const nA=c.list.filter(x=>x!=="@").length,nF=c.list.filter(x=>x==="@").length,cn=$("cnt");if(!$("cntn"))cn.innerHTML=`<b><span id="cntn"></span></b> von 10`;mvOdo($("cntn"),nA);
-   $("lsth").textContent=view==="both"?"Eure Liste":ed?"Deine Liste":U[view].g+" Liste";$("lsthint").textContent=(nF?(nF===1?"1 Platz frei":nF+" Plätze frei"):"Liste voll")+(ed&&nA>1?(fxFine()?" · ziehen zum Sortieren":" · lang drücken zum Sortieren"):"");
+   mvRollTxt($("lsth"),view==="both"?"Eure Liste":ed?"Deine Liste":U[view].g+" Liste");mvRollTxt($("lsthint"),(nF?(nF===1?"1 Platz frei":nF+" Plätze frei"):"Liste voll")+(ed&&nA>1?(fxFine()?" · ziehen zum Sortieren":" · lang drücken zum Sortieren"):""));
    mvOdo($("dcnt"),c.done.length);$("fabar").hidden=!ed}
   // Freie Plätze: nur eine Karte mit der Anzahl – die übrigen leeren Plätze bleiben im Raster unsichtbar (.more).
   const nfree=c.list.filter(x=>x==="@").length,f1=c.list.indexOf("@");
   // Freie Plätze zeigen direkt einen Tipp (B1); gibt es mehr Plätze als Tipps, steht danach „Platz frei“
-  const TIPS=ed?F:[];let gi=0,fv=false;mvGhostN=0;
+  const TIPS=ed?F:[];let gi=0,fv=false;mvGhostN=0;const TN=mvTonight();
   $("grid").innerHTML=c.list.map((id,i)=>{
     if(id==="@"){if(ed&&gi<TIPS.length){const r0=TIPS[(vi+gi++)%TIPS.length];mvGhostN++;return mvGhostHtml(r0,i)}
       if(fv)return `<article class="card slot slmore" hidden></article>`;fv=true;const rest=nfree-gi;
       return `<article class="card slot${fi>-1?" fresh":""}${ed?"":" slro"}" style="--i:${i}">${ed?`<span class="slp" aria-hidden="true">＋</span>`:""}<div class="nm">${rest===1?"1 Platz frei":rest+" Plätze frei"}</div>${ed?`<button class="slb" data-brw="1">Titel aussuchen</button>`:`<p class="gn">Noch leer.</p>`}</article>`}
     const m=M[id],sn=!!c.seen[id],o=rt(id,O());
-    return `<article class="card${sn?" seen":""}${fmc(id)}" data-k="${id}" style="--i:${i}"><div class="cvw">${cv(id,m.name)}${ed?`<button class="ck${sn?" on":""}" data-ck="${id}" aria-label="${sn?"Gesehen – jetzt bewerten":"Gesehen? Haken setzen und bewerten"}: ${esc(m.name)}">${MV_CK}</button>`:""}</div><button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
+    return `<article class="card${sn?" seen":""}${fmc(id)}" data-k="${id}" style="--i:${i}"><div class="cvw">${cv(id,m.name)}${ed?`<button class="ck${sn?" on":""}" data-ck="${id}" aria-label="${sn?"Gesehen – jetzt bewerten":"Gesehen? Haken setzen und bewerten"}: ${esc(m.name)}">${MV_CK}</button>`:""}${TN&&TN.id===id?`<span class="mvtday">Heute</span>`:""}${view==="both"?mvBlBadge(id):""}</div><button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
   }).join("");
   const box=$("rec"),free=c.list.includes("@");
   vi=F.length?((vi%F.length)+F.length)%F.length:0;
@@ -15209,9 +15503,9 @@ function render(){
   if(tab==="stat")$("v-stat").innerHTML=rwStatTile()+xStatBtns()+statHtml();
   $("ro").hidden=ed||tab==="stat";$("rollb").hidden=!ed;$("swb2").hidden=!ed;$("finb").hidden=!ed;
   $("v-wl").hidden=tab!=="wl";$("v-hist").hidden=tab!=="hist";$("v-stat").hidden=tab!=="stat";$("v-ach").hidden=tab!=="ach";if(tab==="ach")$("v-ach").innerHTML=achHtml();$("v-inv").hidden=tab!=="inv";if(tab==="inv")$("v-inv").innerHTML=invHtml();
-  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual&&!rateId&&!faOn;if(moWas&&!mo.hidden&&!calm())fxOnce(mo,"opening",620)
+  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual&&!rateId&&!faOn&&!blind;if(moWas&&!mo.hidden&&!calm())fxOnce(mo,"opening",620)
   // Beim Tippen einer Notiz das Fenster nicht neu aufbauen, sonst springt der Cursor raus.
-  if(!(ae&&ae.dataset&&ae.dataset.note&&mo.contains(ae))&&!(spinning&&rollOn&&$("reel")&&$("reel").children.length>1)){
+  if(!(ae&&ae.dataset&&ae.dataset.note&&mo.contains(ae))&&!(spinning&&rollOn&&$("reel")&&$("reel").children.length>1)&&!(blind&&blind.anim)){
     if(openId)mo.innerHTML=modalHtml();
     else if(preId){const st=rateHtml(preId,0,"pr");
       mo.innerHTML=`<div class="mbox sm" role="dialog" aria-label="Schon gesehen"><button class="x" data-close="1" aria-label="Schließen">×</button><h3>${M[preId].name}</h3><p class="mut">Schon gesehen, ${U[I()].n}? Wie hat es dir gefallen?</p><div class="pst">${st}</div><p class="why" style="font-size:.8rem;margin:0">Diese Bewertung zählt für die Empfehlungen stärker als Titel aus der Watchlist.</p></div>`}
@@ -15219,7 +15513,7 @@ function render(){
     else if(swapId)mo.innerHTML=swapHtml();
     else if(dual)mo.innerHTML=dualHtml();
     else if(rateId)mo.innerHTML=rateSheetHtml();
-    else if(faOn)mo.innerHTML=faHtml();}
+    else if(blind)mo.innerHTML=blindHtml();}
   const wh=$("who");wh.hidden=!(!me||whoOpen||needCode());if(!wh.hidden&&!(document.activeElement&&document.activeElement.id==="ccin"))wh.innerHTML=needCode()?codeHtml():whoHtml();
   $("menu").hidden=!menu;document.querySelectorAll("[data-gear]").forEach(g=>g.setAttribute("aria-expanded",menu));
   const th=document.documentElement.dataset.auto?"auto":document.documentElement.dataset.theme||(window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -15257,6 +15551,7 @@ function rateCommit(ctx,id,v){v=rclamp(v);rFocus=ctx+"|"+id;
   if(ctx==="n")act({n:String(v),id});else if(ctx==="pr")act({pr:String(v)});
   else if(ctx.startsWith("dr:")){dual.r[ctx.slice(3)]=v;render()}
   else if(ctx==="rs"){const first=!rsV;rsV=v;if(first)render();else{const sb=document.querySelector("#modal [data-rsave]");if(sb)sb.disabled=false}}
+  else if(ctx.startsWith("bl:")&&blind){const w=ctx.slice(3),first=!blind.v[w];blind.v[w]=v;if(first)render();else{const sb=document.querySelector('#modal [data-bl="save"]');if(sb)sb.disabled=false}}
   const f=document.querySelector(`.rate[data-rate="${ctx}"][data-id="${CSS.escape(id)}"]`);if(f&&rFocus)f.focus({preventScroll:true});rFocus=null;if(f&&!calm()){(f.closest(".rwrap")||f.parentNode).classList.add("rpop");const r=f.getBoundingClientRect();if(r.width)fxBurst(r.left+r.width*Math.min(1,v/RMAX),r.top+r.height/2,v>=8?16:v>=5?9:5)}}
 function ratePreview(el,v){el.querySelector(".rfg").style.width=v/RMAX*100+"%";el.classList.remove("empty");el.dataset.tip=fmtR(v);
   el.setAttribute("aria-valuenow",v);el.setAttribute("aria-valuetext",fmtR(v)+" von 10, "+rWord(v));const w=el.closest(".rwrap");if(w){w.style.setProperty("--rv",v/RMAX);w.classList.remove("emp");const n=w.querySelector(".rnum");if(n)mvRateNum(n,v,w);const t=w.querySelector(".rword");if(t&&t.textContent!==rWord(v)){const was=t.textContent;t.textContent=rWord(v);if(was&&!calm())mvA(t,[{opacity:0,transform:"translateY(8px) scale(.9)"},{opacity:1,transform:"translateY(-2px) scale(1.04)",offset:.6},{opacity:1,transform:"none"}],{duration:MV_D.sp})}}}
@@ -15282,7 +15577,7 @@ document.addEventListener("click",e=>{
   if(brwClick(e))return;
   {const ob=e.target.closest&&e.target.closest("[data-brw]");if(ob){brwOpen();return}}
   if(e.target.id==="scrim"){closeNav();render();return}
-  if(e.target.id==="modal"){fxCloseInfo(()=>{openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;render()});return}
+  if(e.target.id==="modal"){if(blind&&blind.anim)return;if(mvBlKeep())return;fxCloseInfo(()=>{openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;render()});return}
   if(sOpen&&!e.target.closest("#srch,#modal,#toast")){sOpen=false;renderSearch()}
   const b=e.target.closest("button");
   if(menu&&!e.target.closest("#menu,[data-gear]")){menu=false;rstAsk=false;impData=null;if(!b){render();return}}
@@ -15294,6 +15589,11 @@ document.addEventListener("click",e=>{
 function act(d){
   const c=C(),w=id=>S.w[id]||(S.w[id]={});
   if(faOn&&(d.roll||d.swipe||d.xo))faOn=false;
+  if(faAct(d))return;
+  if(d.bl){mvBlindAct(d.bl);return}
+  if(d.mvhow){const n=mvTonight();if(n){if(topTab!==n.sec){topTab=n.sec;S=ST[topTab];vi=0}tab="wl";mvBlindOpen(n.id,n.sec);render()}return}
+  if(d.mvtnx){mvTonightClear();render();return}
+  if(d.mvbl){const[k,id]=d.mvbl.split(":");if(xo)xoClose();if(!SEC[k]||!M[id])return;if(topTab!==k){topTab=k;S=ST[k];vi=0}tab="wl";mvBlindOpen(id,k);render();return}
   if(xAct(d))return;
   if(d.acc||d.sadd)petReact(d.acc||d.sadd,"add");else if(d.info)petReact(d.info,"look");
   if(d.howx){howOff=true;try{localStorage.setItem("wl-howto-hide","1")}catch(e){}render();return}
@@ -15345,9 +15645,9 @@ function act(d){
   else if(d.mood){if(spinning)return;mood=d.mood;rollId=null}
   else if(d.spin){spin();return}
   else if(d.info){if(d.epjump)setTimeout(()=>{const x=document.querySelector("#modal .eps");if(x){x.scrollIntoView({block:"start",behavior:"smooth"});const i=x.querySelector("[data-epto]");if(i)i.focus({preventScroll:true})}},60);openId=d.info;seaNeed(openId);rollOn=false;rmAsk=null;if(META[openId]===undefined&&!Q.includes(openId)){Q.unshift(openId);covFetch()}}
-  else if(d.close){openId=null;preId=null;rollOn=false;whoOpen=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0}
+  else if(d.close){if(mvBlKeep())return;openId=null;preId=null;rollOn=false;whoOpen=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;if(!(blind&&blind.anim))blind=null}
   else if(d.dclr)dual.r[d.dclr]=undefined;
-  else if(d.rstep){const[ctx,id,dl]=d.rstep.split("|"),cur=ctx.startsWith("dr:")?dual.r[ctx.slice(3)]:ctx==="rs"?rsV:rt(id,I());if(!cur)return;rateCommit(ctx,id,cur+(+dl)/10);return}
+  else if(d.rstep){const[ctx,id,dl]=d.rstep.split("|"),cur=ctx.startsWith("dr:")?dual.r[ctx.slice(3)]:ctx==="rs"?rsV:ctx.startsWith("bl:")?(blind&&blind.v[ctx.slice(3)]):rt(id,I());if(!cur)return;rateCommit(ctx,id,cur+(+dl)/10);return}
   else if(d.dsave){const {id,pre}=dual,s=w(id),li=c.list.indexOf(id),x0=xpNow();mvXpPend={r:mvRect(id),x0};snap(`„${M[id].name}“ zusammen bewertet`);s.r=s.r||{};
     for(const u of ["jos","joh"]){if(dual.r[u]){if(s.r[u]!==dual.r[u])stampR(s,u);s.r[u]=dual.r[u]}else{delete s.r[u];unstampR(s,u)}if(pre&&dual.r[u])(s.pre||(s.pre={}))[u]=true}
     c.seen[id]=true;c.rej=c.rej.filter(x=>x!==id);
@@ -15357,9 +15657,9 @@ function act(d){
   else if(d.online){onlineSearch();return}
   else if(d.onl){const o=sOnline[+d.onl];if(!o)return;const id=adopt(o);sOnline=[];sq=M[id].name;$("sq").value=sq;sOpen=true;toast(`„${M[id].name}“ übernommen. Jetzt bewerten oder zur Watchlist hinzufügen.`)}
   else if(d.sadd){const id=d.sadd,j=c.list.indexOf("@");
-    if(j>-1){snap(`„${M[id].name}“ hinzugefügt`);c.list[j]=id;c.rej=c.rej.filter(x=>x!==id);xTurn();toast(`„${M[id].name}“ zur Watchlist „${vname(view)}“ hinzugefügt`)}else{swapId=id;rollOn=false}}
-  else if(d.swap){const id=swapId,i=c.list.indexOf(d.swap);if(!id||i<0)return;snap(`„${M[d.swap].name}“ gegen „${M[id].name}“ getauscht`);
-    c.list[i]=id;delete c.seen[d.swap];c.rej=c.rej.filter(x=>x!==id);swapId=null;toast(`„${M[id].name}“ ersetzt „${M[d.swap].name}“`)}
+    if(j>-1){snap(`„${M[id].name}“ hinzugefügt`);c.list[j]=id;c.rej=c.rej.filter(x=>x!==id);xTurn();toast(`„${M[id].name}“ zur Watchlist „${vname(view)}“ hinzugefügt`)}else{swapId=id;mvSwapBack=null;rollOn=false}}
+  else if(d.swap){const id=swapId,i=c.list.indexOf(d.swap);if(!id||i<0)return;snap(`„${M[d.swap].name}“ gegen „${M[id].name}“ getauscht`);const bk=mvSwapBack===id&&c.done.some(x=>x.id===id);if(bk)mvBackOut(c,id);mvSwapBack=null;
+    c.list[i]=id;delete c.seen[d.swap];c.rej=c.rej.filter(x=>x!==id);swapId=null;toast(bk?`„${M[id].name}“ ist zurück in der Watchlist – statt „${M[d.swap].name}“`:`„${M[id].name}“ ersetzt „${M[d.swap].name}“`)}
   else if(d.rmask)rmAsk=d.rmask;
   else if(d.rmno)rmAsk=null;
   else if(d.rmyes){const id=d.rmyes,i=c.list.indexOf(id);let from="list";snap(`„${M[id].name}“ entfernt`);
@@ -15407,19 +15707,19 @@ function act(d){
     for(const k in Q)if(+k<=pn||!Q[k])delete Q[k];if(pn)P[id]=pn;else delete P[id];if(!Object.keys(Q).length)delete E[id];
     const PT=(S.progT||(S.progT={}))[view]||(S.progT[view]={}),q=PT[id]||(PT[id]={});for(let i=p0+1;i<=pn;i++)q[i]=Date.now();for(const i in q)if(+i>pn)delete q[i];if(!Object.keys(q).length)delete PT[id];
     if(pn>p0)toast(`✓ ${pn-p0>1?"Staffeln "+(p0+1)+"–"+pn:EPS[id].length>1?"Staffel "+pn:"Alle Folgen"} von „${M[id].name}“ gesehen`)}
-  else if(d.ck){const id=d.ck;if(!c.list.includes(id))return;const sn=!!c.seen[id];
+  else if(d.ck){const id=d.ck;if(!c.list.includes(id))return;const sn=!!c.seen[id];if(d.closeinfo){openId=null;rmAsk=null}
     if(!sn){const x0=xpNow();fxMark={k:"seen",id};snap(`Haken bei „${M[id].name}“`);c.seen[id]=true;mvStamp=id;toast(`👀 „${M[id].name}“ gesehen${xpTag(x0)} – jetzt noch bewerten`)}
-    const go=()=>{if(!C().list.includes(id))return;if(view==="both")openDual(id,false);else{rateId=id;rsV=0}render()};
+    const go=()=>{if(!C().list.includes(id))return;if(view==="both")mvBlindOpen(id,topTab);else{rateId=id;rsV=0}render()};
     if(sn||calm())go();else setTimeout(go,650)}
   else if(d.rsave){const id=rateId,v=rsV;if(!id||!v)return;rateId=null;rsV=0;act({n:String(v),id});return}
   else if(d.rate1){const id=d.rate1;if(view==="both")openDual(id,false);else{rateId=id;rsV=rt(id,I())||0}}
-  else if(d.fa)faOn=true;
+  else if(d.fa){xoOpen("fa",{step:1,time:"egal",mood:"egal",src:"lists"});mvStag(document.querySelectorAll("#xo .mvfa>*"),90,40,12);return}
   else if(d.seen){if(rateId===d.seen)rateId=null;const x0=xpNow(),on=!c.seen[d.seen];if(on)fxMark={k:"seen",id:d.seen};snap(`Haken bei „${M[d.seen].name}“`);if(on)c.seen[d.seen]=true;else delete c.seen[d.seen];
     toast(on?`👀 „${M[d.seen].name}“ gesehen${xpTag(x0)} – fehlen nur noch die Sterne`:`Haken bei „${M[d.seen].name}“ entfernt${xpTag(x0)}`)}
   else if(d.acc){mvDropId=d.acc;snap(`„${M[d.acc].name}“ angenommen`);c.list[c.list.indexOf("@")]=d.acc;vi=0;xTurn();toast(`„${M[d.acc].name}“ zur Liste ${vname(view)} hinzugefügt`)}
   else if(d.skip)vi+=Math.max(1,mvGhostN);
   else if(d.rej){snap(`„${M[d.rej].name}“ abgelehnt`);c.rej.push(d.rej);vi=0;toast(`„${M[d.rej].name}“ abgelehnt`)}
-  else if(d.back){snap(`„${M[d.back].name}“ zurückgeholt`);c.done=c.done.filter(x=>x.id!==d.back);delete c.seen[d.back];
+  else if(d.back){if(d.closeinfo){openId=null;rmAsk=null}if(!c.list.includes(d.back)&&c.list.indexOf("@")<0){openId=null;rmAsk=null;swapId=d.back;mvSwapBack=d.back;render();return}snap(`„${M[d.back].name}“ zurückgeholt`);c.done=c.done.filter(x=>x.id!==d.back);delete c.seen[d.back];
     const s=w(d.back);for(const u of view==="both"?["jos","joh"]:[view]){if(s.r)delete s.r[u];if(s.pre)delete s.pre[u];unstampR(s,u)}
     if(view==="both")unsyncBoth(topTab,d.back);
     const j=c.list.indexOf("@");if(j>-1)c.list[j]=d.back;else c.list.push(d.back);toast(`„${M[d.back].name}“ ist wieder in der Watchlist`)}
@@ -15445,7 +15745,8 @@ document.addEventListener("keydown",e=>{
   const typing=/^(TEXTAREA|INPUT|SELECT)$/.test((e.target.tagName||""));
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"&&!typing&&H.length){e.preventDefault();undo();return}
   if(e.key!=="Escape")return;
-  if(openId||preId||rollOn||swapId||dual||rateId||faOn){openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0}else if(brw){brwClose();return}else if(whoOpen&&me)whoOpen=false;else if(menu){menu=false;rstAsk=false;impData=null;([...document.querySelectorAll(".agear")].find(g=>g.getClientRects().length)||(lay()==="m"?$("hamb"):$("accb"))).focus()}else if(drawer||sheet||(accOpen&&lay()==="t"))closeNav();else if(accOpen&&lay()==="d"){accOpen=false;$("accb").focus()}else return;render()});
+  if(blind&&blind.anim)return;if(mvBlKeep())return;
+  if(openId||preId||rollOn||swapId||dual||rateId||faOn||blind){openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null}else if(brw){brwClose();return}else if(whoOpen&&me)whoOpen=false;else if(menu){menu=false;rstAsk=false;impData=null;([...document.querySelectorAll(".agear")].find(g=>g.getClientRects().length)||(lay()==="m"?$("hamb"):$("accb"))).focus()}else if(drawer||sheet||(accOpen&&lay()==="t"))closeNav();else if(accOpen&&lay()==="d"){accOpen=false;$("accb").focus()}else return;render()});
 // Desktop und Drawer: Klick außerhalb schließt den schwebenden Reiter (nach dem eigentlichen Klick, damit der nicht verloren geht)
 let accDown=false;document.addEventListener("pointerdown",e=>{accDown=!!(e.target.closest&&e.target.closest("#acc,#menu"))},true);
 document.addEventListener("click",e=>{if(!accOpen||lay()==="t")return;const inside=e.detail===0?!document.contains(e.target)||!!(e.target.closest&&e.target.closest("#acc,#menu")):accDown;if(inside)return;accOpen=false;try{localStorage.setItem("wl-acc-open","0")}catch(x){}render()});
@@ -15680,7 +15981,7 @@ function brwCard(m){const y=yearOf(m),r=rateOf(m),st=brwState(m.id),ed=editable(
     ${ed&&st==="new"?`<button class="bwadd" data-sadd="${m.id}" aria-label="${esc(m.name)} zur Watchlist „${vname(view)}“ hinzufügen" title="Zur Watchlist">＋</button>`:""}</article>`}
 function brwResults(){if(!brw)return;const L=brwItems(),n=Math.min(brw.n,L.length);
   const el=$("bwres");if(!el)return;
-  $("bwcnt").textContent=`${L.length} ${L.length===1?SEC[topTab].one:SEC[topTab].many}`;
+  $("bwcnt").innerHTML=`<span data-odo="bwc">${L.length}</span> ${L.length===1?SEC[topTab].one:SEC[topTab].many}`;mvOdoKeys($("bwcnt"));
   const R0=new Map();if(!calm())el.querySelectorAll(".bwc[data-k]").forEach((x,i)=>{if(i<80)R0.set(x.dataset.k,x.getBoundingClientRect())});
   el.innerHTML=L.length?L.slice(0,n).map(brwCard).join(""):`<p class="gn bwnone">Keine Treffer. Lockere die Filter oder <button class="lnk" data-bwreset="1">setze sie zurück</button>.</p>`;
   const mo=$("bwmore");mo.hidden=n>=L.length;mo.textContent=`Mehr anzeigen (${L.length-n} weitere)`;
@@ -15974,12 +16275,12 @@ function rwBanner(){const el=$("rwban");if(!el)return;const w=rewindWindow(rwNow
 const rwLeft=ms=>{const m=Math.max(0,Math.floor(ms/60000)),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mi=m%60;return d?`${d} ${d===1?"Tag":"Tage"}, ${h} Std.`:`${h} Std., ${mi} Min.`};
 function rwStatTile(){const w=rewindWindow(rwNow());
   return w.open?`<div class="rwtile open"><div><b>🎆 Euer Rewind ${w.year}</b><span>Das Jahr in Titeln, Sternen und Awards – noch bis 14. Januar.</span></div><button class="add" data-rwopen="1">Rewind ansehen</button></div>`
-    :`<div class="rwtile"><div><b>🔒 Euer Rewind kommt an Silvester!</b><span id="rwcd">Noch ${rwLeft(w.opensAt-rwNow())} bis zum Rewind ${w.year}.</span></div></div>`}
+    :`<div class="rwtile"><div><b>🔒 Euer Rewind kommt an Silvester!</b><span id="rwcd">${mvNum(`Noch ${rwLeft(w.opensAt-rwNow())} bis zum Rewind ${w.year}.`,"rwcd")}</span></div></div>`}
 // Regelmäßig prüfen: Fenster auf/zu, offene Story ggf. freundlich beenden, Countdown aktualisieren.
 function rwTick(force){const w=rewindWindow(rwNow());
   if(rw&&!w.open)rwClose(true);
   else if(force||w.open!==rwLastOpen){rwLastOpen=w.open;render()}
-  const cd=$("rwcd");if(cd&&!w.open)cd.textContent=`Noch ${rwLeft(w.opensAt-rwNow())} bis zum Rewind ${w.year}.`}
+  const cd=$("rwcd");if(cd&&!w.open){cd.innerHTML=mvNum(`Noch ${rwLeft(w.opensAt-rwNow())} bis zum Rewind ${w.year}.`,"rwcd");mvOdoKeys(cd)}}
 setInterval(()=>rwTick(),15000);
 // Teilen/Speichern: Karte per Canvas, ohne externe Cover (die würden den Canvas für den Export sperren).
 async function rwShare(){const D=rw.data,th=rwTheme(),c=document.createElement("canvas");c.width=1080;c.height=1920;const g=c.getContext("2d");
@@ -16023,7 +16324,7 @@ const xRate=(k,id,u)=>(((ST[k].w||{})[id]||{}).r||{})[u]||0;
 
 // ---------- Gemeinsame Ebene für die Extras (#xo, liegt wie „Stöbern“ unter dem Info-Fenster) ----------
 let xo=null;
-const XO_T={fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster",news:"🔔 Neuigkeiten"};
+const XO_T={fa:"🍿 Filmabend",fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster",news:"🔔 Neuigkeiten"};
 function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   xo=Object.assign({k,back:document.activeElement},o||{});
   if(k==="fin")Object.assign(xo,{min:0,x:0,y:0,set:false});
@@ -16033,7 +16334,7 @@ function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   const el=$("xo");el.scrollTop=0;const f=el.querySelector(".bwback");if(f)f.focus({preventScroll:true})}
 function xoClose(){const b=xo&&xo.back;if(xo&&xo.url)URL.revokeObjectURL(xo.url);xo=null;document.body.classList.remove("xoon");const el=$("xo");el.hidden=true;el.innerHTML="";render();if(b&&document.contains(b)&&b.getClientRects().length)b.focus()}
 function xoRender(){const el=$("xo");if(!xo){if(!el.hidden){el.hidden=true;el.innerHTML=""}return}el.hidden=false;
-  const body=xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():posterHtml();
+  const body=xo.k==="fa"?faHtml2():xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():posterHtml();
   const st=el.scrollTop;keepFocus(el,()=>el.innerHTML=`<div class="xoin x-${xo.k}"><header class="bwhead"><button class="rst bwback" data-xoclose="1">‹ Zurück</button><h2>${XO_T[xo.k]}</h2></header>${body}</div>`);el.scrollTop=st;
   if(xo.k==="fin")finResults()}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&xo&&!openId&&!preId&&!rw&&!menu&&$("modal").hidden){e.preventDefault();xoClose()}});
@@ -16290,7 +16591,7 @@ function contHtml(){if(topTab==="film"||tab!=="wl"||!editable())return"";const c
   const it=c.list.filter(id=>id!=="@"&&M[id]).map(id=>({id,nx:epNext(id),st:(P[id]||0)>0||Object.keys(E[id]||{}).length>0})).filter(o=>o.nx&&o.st).slice(0,3);
   if(!it.length)return"";
   return`<h2 class="conth">▶ Weiterschauen</h2><div class="contl">${it.map(o=>{const m=M[o.id],Lx=EPS[o.id]||[],tot=Lx.reduce((a,x)=>a+x.n,0),sn=Lx.reduce((a,x,i)=>a+epSeen(o.id,i+1),0),one=Lx.length<2;
-    return`<div class="contc">${cv(o.id,m.name)}<div class="contt"><button class="lnk" data-info="${o.id}">${esc(m.name)}</button><small>${one?"":"Staffel "+o.nx.s+" · "}Folge ${o.nx.e} von ${o.nx.c}${o.nx.t?" – "+esc(o.nx.t):""}</small><span class="marp" title="${sn} von ${tot} Folgen gesehen"><i style="width:${tot?sn/tot*100:0}%"></i></span></div><button class="add contb" data-ep="${o.id}:${o.nx.s}:${o.nx.e}" aria-label="Folge ${o.nx.e} von ${esc(m.name)} abhaken">✓ <span>Folge ${o.nx.e}</span></button></div>`}).join("")}</div>`}
+    return`<div class="contc">${cv(o.id,m.name)}<div class="contt"><button class="lnk" data-info="${o.id}">${esc(m.name)}</button><small>${one?"":"Staffel "+o.nx.s+" · "}Folge <span data-odo="ce-${o.id}">${o.nx.e}</span> von ${o.nx.c}${o.nx.t?" – "+esc(o.nx.t):""}</small><span class="marp" title="${sn} von ${tot} Folgen gesehen"><i data-bar="cb-${o.id}" style="width:${tot?sn/tot*100:0}%"></i></span></div><button class="add contb" data-ep="${o.id}:${o.nx.s}:${o.nx.e}" aria-label="Folge ${o.nx.e} von ${esc(m.name)} abhaken">✓ <span>Folge <span data-odo="cn-${o.id}">${o.nx.e}</span></span></button></div>`}).join("")}</div>`}
 
 // ---------- Empfehlungen an die andere Person + „Wer ist dran“ (liegt in ST.film.x und wird mit der Cloud geteilt) ----------
 const xData=()=>{const x=ST.film.x||(ST.film.x={});if(!Array.isArray(x.recs))x.recs=[];return x};
@@ -16311,9 +16612,9 @@ function xTurn(){if(view!=="both"||!me)return;xData().turn={last:I(),t:Date.now(
 // ---------- Neuigkeiten (Glocke): was seit dem letzten Blick passiert ist ----------
 const newsKey=()=>"wl-news-"+I();
 const newsSeen=()=>{try{return +localStorage.getItem(newsKey())||0}catch(e){return 0}};
-function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=Date.now()-45*864e5,x=xData();
+function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=Date.now()-45*864e5,x=xData(),mvL=mvLocAll();
   for(const k of RW_SECS){const s0=ST[k],mine=new Set();for(const l of [u,"both"])if(s0.lists[l]){for(const d of s0.lists[l].done)mine.add(d.id);for(const id of s0.lists[l].list)mine.add(id)}
-    for(const id in s0.w||{}){const w=s0.w[id],t=(w.rt||{})[o],r=(w.r||{})[o];if(!M[id]||!t||!r||t<t30||!(mine.has(id)||(w.r||{})[u]))continue;
+    for(const id in s0.w||{}){const w=s0.w[id],t=(w.rt||{})[o],r=(w.r||{})[o];if(!M[id]||!t||!r||t<t30||!(mine.has(id)||(w.r||{})[u])||(mvL[k+":"+id]&&t<=mvL[k+":"+id]+60e3))continue;
       N.push({t,ic:"⭐",h:`${esc(U[o].n)} hat <b>${esc(M[id].name)}</b> mit ${fmtR(r)} bewertet${(w.r||{})[u]?` <span class="gn">(du: ${fmtR(w.r[u])})</span>`:" – deine Bewertung fehlt noch"}`,go:k+":"+id})}
     const todo=s0.lists.both?s0.lists.both.done.filter(d=>M[d.id]&&!xRate(k,d.id,u)).length:0;if(todo)N.push({t:0,ic:"✍️",h:`<b>${todo}</b> gemeinsam ${todo===1?"gesehener Titel wartet":"gesehene Titel warten"} bei ${SEC[k].many} auf deine Bewertung`,top:k})}
   for(const r of x.recs){if(!M[r.id])continue;
@@ -16321,14 +16622,16 @@ function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=D
     if(r.from===u&&r.st!=="new"&&r.at)N.push({t:r.at,ic:r.st==="ok"?"💚":"🙅",h:`${esc(U[r.to].n)} hat deine Empfehlung <b>${esc(M[r.id].name)}</b> ${r.st==="ok"?"auf die Liste gesetzt":"abgelehnt"}`,go:r.k+":"+r.id})}
   for(const k of ["anime","serie"]){let H=[];try{H=seaHints(k)}catch(e){}for(const h of H.filter(h=>h.t==="new").slice(0,4))if(M[h.id])N.push({t:0,pin:1,ic:"🆕",h:`${esc(seaHintTxt(h))} · <b>${esc(M[h.id].name)}</b>`,go:k+":"+h.id})}
   try{if(vHot())N.push({t:0,pin:1,ic:"💞",h:`Swipe-Abstimmung: ${esc(vStatus()||"du bist dran")}`,swipe:1})}catch(e){}
+  try{for(const p of mvBlPending())N.push(p.kind==="rev"?{t:p.t,ic:"🎴",rev:1,h:`Aufgedeckt: <b>${esc(M[p.id].name)}</b> – schau, wie einig ihr seid`,bl:p.k+":"+p.id}:{t:p.t,pin:1,ic:"🙈",h:`${esc(U[o].n)} hat <b>${esc(M[p.id].name)}</b> verdeckt bewertet – du bist dran`,bl:p.k+":"+p.id});
+    const tn=mvTonight();if(tn&&tn.by!==u)N.push({t:tn.t,ic:"🍿",h:`${esc(U[tn.by].n)} hat <b>${esc(M[tn.id].name)}</b> für heute Abend ausgesucht`,go:tn.sec+":"+tn.id})}catch(e){}
   for(const n of N)n.neu=n.t>seen;
   return N.sort((a,b)=>(b.neu-a.neu)||(!!b.pin-!!a.pin)||b.t-a.t).slice(0,40)}
 const newsCount=()=>newsList().filter(n=>n.neu).length;
 function newsHtml(){const N=xo.list||(xo.list=newsList());
-  return`<p class="xolead">Was seit deinem letzten Blick passiert ist. Die Glocke zählt nur Neues.</p>${N.length?`<ul class="newsl">${N.map(n=>`<li class="${n.neu?"neu":""}"><span class="nwi" aria-hidden="true">${n.ic}</span><span class="nwt">${n.h}${n.t?`<small>${fdate(n.t)}</small>`:""}</span>${n.go?`<button class="rej" data-newsgo="${n.go}">Ansehen</button>`:n.top?`<button class="rej" data-newstop="${n.top}">Öffnen</button>`:n.swipe?`<button class="rej" data-newsswipe="1">Swipen</button>`:""}</li>`).join("")}</ul>`:`<div class="qzbox"><p class="qzbig">🔕</p><h3>Nichts Neues</h3><p class="gn">Hier erscheinen Bewertungen von ${esc(U[O()].n)}, Empfehlungen, neue Staffeln und offene Abstimmungen.</p></div>`}
+  return`<p class="xolead">Was seit deinem letzten Blick passiert ist. Die Glocke zählt nur Neues.</p>${N.length?`<ul class="newsl">${N.map(n=>`<li class="${n.neu?"neu":""}"><span class="nwi" aria-hidden="true">${n.ic}</span><span class="nwt">${n.h}${n.t?`<small>${fdate(n.t)}</small>`:""}</span>${n.bl?`<button class="rej" data-mvbl="${n.bl}">${n.rev?"Ansehen":"Auf drei!"}</button>`:n.go?`<button class="rej" data-newsgo="${n.go}">Ansehen</button>`:n.top?`<button class="rej" data-newstop="${n.top}">Öffnen</button>`:n.swipe?`<button class="rej" data-newsswipe="1">Swipen</button>`:""}</li>`).join("")}</ul>`:`<div class="qzbox"><p class="qzbig">🔕</p><h3>Nichts Neues</h3><p class="gn">Hier erscheinen Bewertungen von ${esc(U[O()].n)}, Empfehlungen, neue Staffeln und offene Abstimmungen.</p></div>`}
   <p class="gn newsnote">Hinweis: Die Glocke zeigt Neues, sobald du die Seite öffnest. Mitteilungen aufs gesperrte Handy gibt es noch nicht.</p>`}
 let newsPrev=null;
-function xBell(){const b=$("bell");if(!b)return;const n=me?newsCount():0,bd=$("belln");bd.hidden=!n;bd.textContent=n>9?"9+":n;b.classList.toggle("has",!!n);b.setAttribute("aria-label",n?`Neuigkeiten: ${n} neu`:"Neuigkeiten");
+function xBell(){const b=$("bell");if(!b)return;const n=me?newsCount():0,bd=$("belln");bd.hidden=!n;mvOdo(bd,String(n>9?"9+":n));b.classList.toggle("has",!!n);b.setAttribute("aria-label",n?`Neuigkeiten: ${n} neu`:"Neuigkeiten");
   if(newsPrev!==null&&n>newsPrev&&!(xo&&xo.k==="news")){const x=newsList().find(y=>y.neu);if(x){const d=document.createElement("div");d.innerHTML=x.h;toast("🔔 "+d.textContent);if(!calm()){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}}}
   newsPrev=n}
 // Wird in render() aufgerufen: Streifen, Empfehlungen, Glocke
