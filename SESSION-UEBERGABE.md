@@ -1,6 +1,6 @@
 # Übergabe für eine neue Session – Josefines ♥ Johanns Watchlist
 
-Stand: 18.11.2026. Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
+Stand: 18.11.2026 (nach Phase 1 des UX-Umbaus). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
 
 ## 1. Was das Projekt ist
 - Private PWA-Watchlist für zwei Personen (Josefine = `jos`, Johann = `joh`, gemeinsam = `both`), Sprache Deutsch.
@@ -9,10 +9,10 @@ Stand: 18.11.2026. Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lese
 
 ## 2. Repo, Branches, Hosting
 - Repo: `PXrple01/soulwatch12` (öffentlich – muss für kostenloses GitHub Pages öffentlich bleiben).
-- Arbeits-Branch: `claude/gallant-pasteur-7en1qv`. Der Nutzer hat erlaubt, **direkt auf `main` zu pushen** (`git push origin claude/gallant-pasteur-7en1qv:main`), damit Änderungen sofort live sind.
+- Arbeits-Branch dieser Session: `claude/relaxed-thompson-jsh0v5` (vorher `claude/gallant-pasteur-7en1qv`). Auf `main` kommt eine Änderung erst, wenn der Nutzer sie freigegeben hat (bei größeren Umbauten zuerst eine Vorschau-Seite als Artifact zeigen); dann `git push origin <branch>:main`.
 - **Live: GitHub Pages** https://pxrple01.github.io/soulwatch12/ – jeder Push auf `main` ist nach 1–2 Min. online (Prüfen: `curl` auf die Seite, z. B. nach einem neuen String oder `jj-watchlist-vNN` in `sw.js`).
 - Netlify (soulwatch.netlify.app) ist **tot** (kostenloses Kontingent aufgebraucht, „Usage exceeded“). Der Nutzer sollte dort Builds stoppen/Seite löschen – das kann Claude nicht.
-- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v37`**, bei Releases hochzählen), `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
+- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v38`**, bei Releases hochzählen), `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
 - Commit-Nachrichten auf Deutsch, enden mit den Attribution-Zeilen aus dem System-Hinweis. Keine Modellnamen in Commits/Code.
 
 ## 3. Cloud (Supabase) – Sicherheit!
@@ -27,12 +27,14 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 - CSS `/* THEMES-START */…` + JS `// THEMES-START…` (Designs Kinopalast `deco`, Tiefsee `sea`, Origami `paper`; Szenen-Ebenen `#tfx` hinter, `#tfo` über dem Inhalt; `thSwitch`, `thIntro`, `thConfetti` …)
 - CSS `/* KISTE-START */…` + JS `// KISTE-START…` (inszeniertes Kisten-Öffnen, Präfix `kx-`)
 - JS `// GESCHENK-START…` vor `chList` (Geschenk-Kisten `CH_GIFTS`, aktuell `g1` für beide)
+- CSS `/* BEWEGUNG-START */…` (ganz am Ende) + JS `// BEWEGUNG-START…// BEWEGUNG-END` (direkt vor `render()`): Bewegungs-System, Startseite mit Tipps im freien Platz, Karten mit Haken + Bewertungs-Blatt, Gesten, Animationen 1–31 (außer 16/19/20), Symbole Emoji/Linien, Ruhige Szene. Details in `uebergabe.md` (Abschnitt „Phase 1“).
 - **Wichtig:** Die Quelldateien (kino.css, extras.css/js, themes.css/js, kiste.css/js, gift.js, Build-Skripte `build_all.sh`, `apply*.py`, Katalog-Pipeline `cat2/*`) lagen nur im Scratchpad der alten Session und sind **nicht** im Repo. In einer neuen Session direkt in `index.html` zwischen den Markern arbeiten (Marker beibehalten!).
 - Designs: light, dark, purple (Johann/Manga), baby (Josefine/Einhorn), deco, sea, paper, auto.
 - Bewertungen 1–10 (`RMIN=1`, `RMAX=10`), Kisten/Gegenstände/Sets/XP/Haustier, Rewind, Swipen, Glocke, Empfehlungen, Weiterschauen – Details in `uebergabe.md`.
+- Bewerten auf der Watchlist: Haken auf dem Cover (`.ck`) → Bewertungs-Blatt (`rateId`, Kontext `"rs"`), in „Zusammen“ das gemeinsame Fenster. Keine Regler mehr auf den Karten.
 
 ## 5. Bekannte Fallen
-- Neue Klassen/`@keyframes` vorher suchen (viele kurze Namen; reservierte Präfixe `dc- se- pp- th- kx-`).
+- Neue Klassen/`@keyframes` vorher suchen (viele kurze Namen; reservierte Präfixe `dc- se- pp- th- kx- mv`; vergeben sind z. B. `.ttl`, `.ok`, `.cl`, `.done`, `.turn`).
 - Pseudo-Elemente nie in `:is()`.
 - Keine Variable `top` (heißt `topTab`). Kein Hintergrund am `<html>` (sonst ist `#tfx` unsichtbar).
 - Bei `prefers-reduced-motion` muss alles ruhig bleiben (`calm()`).
@@ -47,7 +49,13 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 - Parallel laufende Browser-Tests führen zu Zeitüberschreitungen – nacheinander ausführen.
 - Prüfen: keine `pageerror`, kein seitliches Scrollen (390/340 px), alle 8 Designs, Handy + Desktop.
 
-## 7. Offene Punkte / Ideen
+## 7. UX-Umbau: nächste Schritte (vom Nutzer so bestellt)
+- Phase 1 (fertig): Bewegungs-System, Startseite, Karten ohne Regler, Animationen.
+- **Phase 2:** geführter Filmabend (Zeit & Stimmung → Kandidaten aus beiden Listen → swipen/würfeln → „Heute läuft …“ mit Licht-aus-Moment je Design → später „Wie war's?“) und „Auf drei!“ (verdeckt bewerten, beide Karten drehen sich gleichzeitig um, Einigkeits-Anzeige). Ersetzt das vorläufige Filmabend-Fenster `faHtml()`.
+- **Phase 3:** Reaktionen/Einladungen zwischen den beiden (über `ST.film.x` wie Empfehlungen), Kalender-Termin (.ics) statt Push + Ansicht „Demnächst“, Verlauf mit ⋯-Menü statt kleiner −/+/×, Glocke als Blatt, eine Navigation am Handy (Hamburger weg), Spiel-Ecke in der Leiste bündeln, ein einheitliches Fenster-System, Haptik-Experiment (iOS-Schalter-Trick).
+- Die Vorschau-Seite (Artifact „Watchlist-Vorschau“) zeigt alle Animationen und Abläufe als Referenz.
+
+## 8. Offene Punkte / Ideen
 - Nutzer: neue Adresse auf allen Geräten öffnen, Person + Haushalts-Code eingeben, Home-Bildschirm-Symbol neu anlegen; Netlify abschalten.
 - Seite ist 6,2 MB (2,1 MB komprimiert), Laden ~2× langsamer als vorher. Mögliche Optimierung: Katalog auslagern/nachladen, Cover-URL-Präfixe kürzen, bei Animes `plot` aus `desc` ableiten.
 - 751 neue Animes haben nur englische Beschreibung (AniList).
