@@ -1,6 +1,6 @@
 # Übergabe für eine neue Session – Josefines ♥ Johanns Watchlist
 
-Stand: 19.11.2026 (Phase 3 des UX-Umbaus auf dem Branch, wartet auf Freigabe für `main`). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
+Stand: 19.11.2026 (nach Phase 3 des UX-Umbaus, live auf `main`). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
 
 ## 1. Was das Projekt ist
 - Private PWA-Watchlist für zwei Personen (Josefine = `jos`, Johann = `joh`, gemeinsam = `both`), Sprache Deutsch.
@@ -12,7 +12,7 @@ Stand: 19.11.2026 (Phase 3 des UX-Umbaus auf dem Branch, wartet auf Freigabe fü
 - Arbeits-Branch dieser Session: `claude/relaxed-thompson-jsh0v5` (vorher `claude/gallant-pasteur-7en1qv`). Auf `main` kommt eine Änderung erst, wenn der Nutzer sie freigegeben hat (bei größeren Umbauten zuerst eine Vorschau-Seite als Artifact zeigen); dann `git push origin <branch>:main`.
 - **Live: GitHub Pages** https://pxrple01.github.io/soulwatch12/ – jeder Push auf `main` ist nach 1–2 Min. online (Prüfen: `curl` auf die Seite, z. B. nach einem neuen String oder `jj-watchlist-vNN` in `sw.js`).
 - Netlify (soulwatch.netlify.app) ist **tot** (kostenloses Kontingent aufgebraucht, „Usage exceeded“). Der Nutzer sollte dort Builds stoppen/Seite löschen – das kann Claude nicht.
-- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v40`** auf dem Branch, `v39` auf `main`; bei Releases hochzählen), `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
+- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v40`**, bei Releases hochzählen), `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
 - Commit-Nachrichten auf Deutsch, enden mit den Attribution-Zeilen aus dem System-Hinweis. Keine Modellnamen in Commits/Code.
 
 ## 3. Cloud (Supabase) – Sicherheit!
@@ -56,7 +56,7 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 ## 7. UX-Umbau: nächste Schritte (vom Nutzer so bestellt)
 - Phase 1 (fertig): Bewegungs-System, Startseite, Karten ohne Regler, Animationen.
 - Phase 2 (fertig): Filmabend als Programmheft (Zeit & Stimmung → Kandidaten → würfeln/swipen → „Heute läuft …“ mit Licht-aus je Design → Banner „Heute Abend“/„Wie war's?“), „Auf drei!“ (ein oder zwei Handys), „Zurück in die Watchlist“ im Info-Fenster (mit Tausch bei voller Liste), rollende Zahlen und Beschriftungen an vielen Stellen.
-- Phase 3 (fertig auf dem Branch, Freigabe für `main` steht aus): ein Fenster-System, eine Navigation am Handy, Spiel-Ecke, Verlauf mit ⋯-Menü, Reaktionen, Einladungen, Kalender (.ics), „Demnächst“, Haptik-Experiment, Kleinkram. Vorschau-Artifact „Watchlist – Vorschau Phase 3“ (Demo-Daten, Cloud aus).
+- Phase 3 (fertig, live seit 19.11.2026): ein Fenster-System, eine Navigation am Handy, Spiel-Ecke, Verlauf mit ⋯-Menü, Reaktionen, Einladungen, Kalender (.ics), „Demnächst“, Haptik-Experiment, Kleinkram. Vorschau-Artifact „Watchlist – Vorschau Phase 3“ (Demo-Daten, Cloud aus).
 - Nicht gewünscht: Live-Anzeige „X ist gerade da“ (hat der Nutzer ausdrücklich abgelehnt).
 - **Phase 3:** Reaktionen/Einladungen zwischen den beiden (über `ST.film.x` wie Empfehlungen), Kalender-Termin (.ics) statt Push + Ansicht „Demnächst“, Verlauf mit ⋯-Menü statt kleiner −/+/×, Glocke als Blatt, eine Navigation am Handy (Hamburger weg), Spiel-Ecke in der Leiste bündeln, ein einheitliches Fenster-System, Haptik-Experiment (iOS-Schalter-Trick).
 - Die Vorschau-Seite (Artifact „Watchlist-Vorschau“) zeigt alle Animationen und Abläufe als Referenz.
