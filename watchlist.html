@@ -34,7 +34,7 @@
 @media (prefers-reduced-motion:reduce){.ttl .hz{animation:none}}
 :root[data-theme="light"]{--bg:#fff;--panel:#fff;--ink:#222026;--mute:#6f6b78;--line:#e6e4ea;--star:#7c5cbf;--acc:#7c5cbf;--accink:#fff;--off:#d6d3dc;color-scheme:light}
 :root[data-theme="purple"]{--bg:#0d0a1c;--panel:#17122b;--ink:#f2edff;--mute:#a69cc8;--line:#30285a;--star:#3de8ff;--acc:#8b5cff;--accink:#fff;--off:#3a3160;--cy:#3de8ff;--vi:#8b5cff;--c1:#ff5fb0;--c2:#8b5cff;color-scheme:dark}
-:root[data-theme="baby"]{--bg:#ffeef6;--panel:#fff8fb;--ink:#4a2238;--mute:#a0607f;--line:#f7c8de;--star:#ec5fa5;--acc:#e0559a;--accink:#fff;--off:#f3c4da;--cvh:310;color-scheme:light}
+:root[data-theme="baby"]{--bg:#ffeef6;--panel:#fff8fb;--ink:#4a2238;--mute:#935874;--line:#f7c8de;--star:#ec5fa5;--acc:#e0559a;--accink:#fff;--off:#f3c4da;--cvh:310;color-scheme:light}
 :root[data-theme="baby"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Ctext x='18' y='60' font-size='38' opacity='.32'%3E%F0%9F%A6%84%3C/text%3E%3Ctext x='108' y='150' font-size='38' opacity='.32' transform='scale(-1 1) translate(-252 0)'%3E%F0%9F%A6%84%3C/text%3E%3Ctext x='120' y='42' font-size='18' opacity='.3'%3E%E2%9C%A8%3C/text%3E%3Ctext x='30' y='140' font-size='16' opacity='.3'%3E%F0%9F%8C%88%3C/text%3E%3C/svg%3E");background-attachment:fixed}
 .head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative}
 .gear{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:50%;width:40px;height:40px;font-size:1.3rem;line-height:1;flex:none;transition:transform .25s}
@@ -1646,7 +1646,7 @@ body:has(#modal:not([hidden]),#brw:not([hidden]),#xo:not([hidden]),#rw:not([hidd
 /* =====================================================================
    3) ORIGAMI – Washi-Papier, Kraniche, Scherenschnitt-Landschaft
    ===================================================================== */
-:root[data-theme="paper"]{--bg:#f1eadd;--panel:#fbf8f2;--ink:#2a2420;--mute:#7a6d60;--line:#e1d5c3;--star:#e2962a;--acc:#d64a2f;--accink:#fff;--off:#e3d9ca;--c1:#d64a2f;--c2:#2e6a8a;--pink:#d6577a;--lila:#3f68a8;--cvh:25;--glass:rgba(252,249,243,.95);--shadow:0 12px 26px -10px rgba(76,52,28,.32);--glow1:transparent;--glow2:transparent;--scrim:rgba(64,46,28,.34);--spark:transparent;
+:root[data-theme="paper"]{--bg:#f1eadd;--panel:#fbf8f2;--ink:#2a2420;--mute:#706458;--line:#e1d5c3;--star:#e2962a;--acc:#d64a2f;--accink:#fff;--off:#e3d9ca;--c1:#d64a2f;--c2:#2e6a8a;--pink:#d6577a;--lila:#3f68a8;--cvh:25;--glass:rgba(252,249,243,.95);--shadow:0 12px 26px -10px rgba(76,52,28,.32);--glow1:transparent;--glow2:transparent;--scrim:rgba(64,46,28,.34);--spark:transparent;
   --paper:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .7' numOctaves='3' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .33 0 0 0 0 .24 0 0 0 1.25 -.66'/%3E%3C/filter%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .22 0 0 0 1.4 -.98'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23f)' opacity='.45'/%3E%3Crect width='240' height='240' filter='url(%23g)' opacity='.5'/%3E%3C/svg%3E");
   color-scheme:light}
 :root[data-theme="paper"] body{font-family:"Zen Maru Gothic","Segoe UI",system-ui,sans-serif;font-weight:500}
@@ -3162,6 +3162,120 @@ mark.mvm{background:color-mix(in srgb,var(--star,#e99a0c) 38%,transparent);color
 .mvlo[data-th="baby"]::before{background:radial-gradient(55% 60% at 50% 0%,rgba(255,170,220,.38),transparent 72%)}
 .mvlo[data-th="baby"] h3{font-family:"Baloo 2",sans-serif;font-style:normal;font-weight:800;color:#ffd6ec}
 @media (prefers-reduced-motion:reduce){.mvtnc{animation:none}.mvlo::before{transition:none}}
+
+/* =====================================================================
+   Phase 3: ein Fenster-System, eine Navigation am Handy, Spiel-Ecke, Verlauf mit ⋯,
+   Reaktionen, Einladungen, Demnächst
+   ===================================================================== */
+/* ---------- Fenster: Blatt am Handy, Fenster am Desktop ---------- */
+#mvscr{position:fixed;inset:0;z-index:8;background:rgba(18,12,30,.42);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);animation:mvFadeIn var(--d3) var(--e-out) backwards}
+#mvscr[hidden]{display:none}
+@keyframes mvFadeIn{from{opacity:0}}
+.xoin{--mvpx:16px;--mvpt:16px}.bwin{--mvpx:16px;--mvpt:14px}
+.mvwh{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;flex-wrap:nowrap;margin:calc(-1*var(--mvpt)) calc(-1*var(--mvpx)) 12px;padding:calc(var(--mvpt) + 6px) var(--mvpx) 10px;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2)}
+.mvwh h2{flex:1;min-width:0;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mvwh .bwcnt{flex:none;margin:0}
+.mvwh .x{position:relative;top:auto;right:auto;flex:none;width:36px;height:36px;margin:0;padding:0;border:0;border-radius:50%;background:color-mix(in srgb,var(--ink) 12%,transparent);color:var(--ink);line-height:1;font-size:1.35rem;cursor:pointer;transition:transform .3s var(--e-spring),background .2s}
+.mvwh .x:hover{transform:rotate(90deg) scale(1.08);background:color-mix(in srgb,var(--ink) 22%,transparent)}
+:root[data-theme="baby"] .mvwh .x{background:#ffe0f0;color:#c2387f}
+:root[data-theme="purple"] .mvwh .x{border-radius:0;background:var(--cy,#3de8ff);color:#0d0a1c;font-weight:800}
+:root[data-theme="deco"] .mvwh .x{border-radius:3px;border:1px solid rgba(227,180,72,.45)}
+@keyframes mvSheetUp{from{transform:translateY(102%)}}
+@keyframes mvWinIn{from{opacity:0;transform:translateY(18px) scale(.97)}}
+@media (max-width:767.98px){
+  .xoin{--mvpx:12px;--mvpt:12px}
+  #xo,#brw{top:calc(env(safe-area-inset-top,0px) + 10px);padding-top:0;border-radius:22px 22px 0 0;box-shadow:0 -14px 44px rgba(0,0,0,.3)}
+  #xo:not([hidden]),#brw:not([hidden]){animation:mvSheetUp var(--dsp) var(--e-soft) backwards}
+  .mvwh{padding-top:calc(var(--mvpt) + 12px)}
+  .mvwh::before{content:"";position:absolute;left:50%;top:7px;width:40px;height:5px;margin-left:-20px;border-radius:3px;background:color-mix(in srgb,var(--ink) 24%,transparent)}
+  #xo[data-k="news"],#xo[data-k="soon"]{top:auto;max-height:calc(100% - env(safe-area-inset-top,0px) - 40px)}
+  /* Eine Navigation: kein Hamburger mehr, alles im Ich-Blatt */
+  .hamb{display:none!important}
+  .mtop{padding-left:calc(16px + env(safe-area-inset-left,0px))}
+}
+@media (min-width:768px){
+  #xo,#brw{inset:clamp(16px,4vh,44px) max(24px,calc((100vw - 1100px)/2));border-radius:24px;border:1px solid var(--line);box-shadow:0 34px 90px rgba(0,0,0,.38);padding:0}
+  #xo[data-k="news"],#xo[data-k="soon"]{inset:clamp(16px,7vh,72px) max(24px,calc((100vw - 640px)/2)) auto;max-height:min(80vh,780px)}
+  #xo:not([hidden]),#brw:not([hidden]){animation:mvWinIn var(--d4) var(--e-soft) backwards}
+}
+/* Szenen pausieren, solange ein Fenster offen ist (spart Akku, nichts zappelt hinter dem Blatt) */
+body:has(#modal:not([hidden]),#brw:not([hidden]),#xo:not([hidden]),.sheet:not([hidden])) #tfx *,
+body:has(#modal:not([hidden]),#brw:not([hidden]),#xo:not([hidden]),.sheet:not([hidden])) #tfx *::before,
+body:has(#modal:not([hidden]),#brw:not([hidden]),#xo:not([hidden]),.sheet:not([hidden])) #tfx *::after,
+body:has(#modal:not([hidden]),#brw:not([hidden]),#xo:not([hidden]),.sheet:not([hidden])) #bfx *{animation-play-state:paused!important}
+
+/* ---------- Spiel-Ecke ---------- */
+.mvgc{display:flex;flex-direction:column;gap:8px;margin:6px 0;padding:8px;border-radius:18px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 78%,transparent)}
+.mvgc .pet{margin:0;width:100%;flex-wrap:wrap}
+.mvgc .pet .petsay{position:relative;left:0;right:0;top:0;flex-basis:100%;margin-top:8px}
+@media (min-width:768px) and (max-width:1023.98px){.sstat .mvgc{padding:0;border:0;background:none;align-items:center}.sstat .mvgc .pet{width:60px}.sstat .mvgcb{flex-direction:column;align-items:center}.sstat .mvgk{width:52px;min-height:44px;flex:none}.sstat .mvgk b,.sstat .mvgk small{display:none}}
+.mvgcb{display:flex;gap:6px}
+.mvgk{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;padding:6px 4px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;line-height:1.15;cursor:pointer;transition:border-color var(--d2),background var(--d2)}
+.mvgk .mvgi{font-size:1.05rem;line-height:1}
+.mvgk b{font-size:.78rem;white-space:nowrap}
+.mvgk small{font-size:.72rem;color:color-mix(in srgb,var(--mute) 70%,var(--ink));white-space:nowrap}
+.mvgk:hover{border-color:color-mix(in srgb,var(--acc) 55%,var(--line))}
+.mvgk.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.mvgk.hot{border-color:color-mix(in srgb,var(--acc) 60%,var(--line));background:color-mix(in srgb,var(--acc) 13%,var(--panel))}
+.sheet .mvgc{margin:8px 0 10px}
+
+/* ---------- Verlauf: Chips + ⋯ ---------- */
+.mvhr{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
+.mvhc{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 85%,transparent);color:var(--ink);font:inherit;font-size:.86rem;line-height:1.2}
+button.mvhc{cursor:pointer}
+button.mvhc:hover{border-color:var(--acc)}
+.mvhc.miss{border-style:dashed}
+.mvhc.miss b{color:var(--acc)}
+.mvhc .rn{font-weight:700;font-size:.8rem}
+.mvhc .rn.jos{color:color-mix(in srgb,var(--pink) 66%,var(--ink))}.mvhc .rn.joh{color:color-mix(in srgb,var(--lila) 66%,var(--ink))}
+.mvhc b{font-variant-numeric:tabular-nums}
+.mvhc .mvrx{font-size:1rem;line-height:1;margin-left:-2px}
+.hist li{position:relative}
+.hist li>div{padding-right:40px}
+.hist li>.mvdots{position:absolute;top:4px;right:4px}
+.mvdots{flex:none;align-self:flex-start;width:44px;height:44px;border-radius:50%;border:0;background:none;color:var(--ink);font-size:1.35rem;line-height:1;cursor:pointer}
+.mvdots:hover,.mvdots:focus-visible{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.mvhmenu .rsht{margin-bottom:4px}
+.mvml{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+.mvml>button{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 12px;border:0;border-radius:12px;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.mvml>button:hover,.mvml>button:focus-visible{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.mvml>button>span{width:24px;text-align:center;font-size:1.05rem}
+.mvml>button.warn{color:color-mix(in srgb,#e5484d 82%,var(--ink))}
+
+/* ---------- Reaktionen ---------- */
+.mvrxb{margin:12px 0 4px}
+.mvrxl{margin:0 0 6px;font-size:.82rem;font-weight:700;color:color-mix(in srgb,var(--mute) 70%,var(--ink))}
+.mvre{display:flex;flex-wrap:wrap;gap:6px}
+.mvreb{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--panel);font-size:1.25rem;line-height:1;cursor:pointer;transition:scale var(--d2) var(--e-spring),border-color var(--d2),background var(--d2)}
+.mvreb:hover{scale:1.08}
+.mvreb.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 16%,var(--panel));scale:1.08}
+.mvre.sm{margin-top:8px;gap:3px}
+.mvre.sm .mvreb{width:32px;height:32px;font-size:.95rem}
+.mvflye{position:fixed;z-index:95;pointer-events:none;font-size:1.6rem;line-height:1;will-change:transform,opacity}
+.mvnb{display:flex;flex-wrap:wrap;gap:6px}
+.newsl li:has(>.mvre){flex-wrap:wrap}
+.newsl li>.mvre{flex-basis:100%;margin:0 0 0 34px}
+
+/* ---------- Einladung ---------- */
+.mvinvp{display:flex;gap:14px;align-items:flex-start;margin:6px 0 14px}
+.mvinvp .cv{width:84px;flex:none;padding:0;border-radius:12px}
+.mvinvp h3{margin:2px 0 6px}
+.mvinvf .mvfach{margin-bottom:16px}
+.mvinvf .mvdock>.rej{flex:0 0 auto}.mvinvf .mvdock>.add{flex:1 1 auto;margin-left:0}
+.mvtnb .mvicsb,.mvicsb{min-width:44px;min-height:40px;padding:6px 10px;justify-content:center}
+
+/* ---------- Demnächst ---------- */
+.mvsoonh{margin:18px 0 8px;font-size:1rem}
+.mvsoonh:first-of-type{margin-top:4px}
+.mvsoon{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mvsr{display:flex;align-items:center;gap:12px;padding:8px;border-radius:14px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 85%,transparent)}
+.mvsr>.cv{width:44px;flex:none;padding:0;border-radius:8px}
+.mvsrt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mvsrt .lnk{text-align:left;padding:0}
+.mvsrt .gn{font-size:.82rem}
+.mvsrk{font-size:.72rem!important;opacity:.85}
+
+@media (prefers-reduced-motion:reduce){#xo:not([hidden]),#brw:not([hidden]),#mvscr{animation:none!important}.mvreb{transition:none}}
 /* BEWEGUNG-END */
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3179,7 +3293,7 @@ mark.mvm{background:color-mix(in srgb,var(--star,#e99a0c) 38%,transparent);color
 </aside>
 <div class="scrim" id="scrim" hidden></div>
 <main id="main">
-<div class="ctop"><div class="cth"><h2 id="cth" class="sr"></h2><nav class="ctabs" aria-label="Bereiche"><button class="ttab" data-top="anime"><span aria-hidden="true" data-mvi="anime">🌸</span> Animes</button><button class="ttab" data-top="film"><span aria-hidden="true" data-mvi="film">🎬</span> Filme</button><button class="ttab" data-top="serie"><span aria-hidden="true" data-mvi="serie">📺</span> Serien</button></nav><span class="ctv" id="ctv"></span></div><div class="sbox"><div class="srch" id="srch" role="search"><input id="sq" type="search" placeholder="Titel suchen …" autocomplete="off" aria-label="Titel suchen" aria-controls="sres"><div class="sres" id="sres" hidden></div></div><button class="brwb bell" id="bell" data-xo="news" aria-label="Neuigkeiten"><span aria-hidden="true" data-mvi="bell">🔔</span><span class="bdg" id="belln" hidden></span></button><button class="brwb" id="brwb" data-brw="1" aria-label="Alle Titel sortieren und filtern" title="Sortieren &amp; filtern"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="brwt">Alle Titel</span></button></div></div>
+<div class="ctop"><div class="cth"><h2 id="cth" class="sr"></h2><nav class="ctabs" aria-label="Bereiche"><button class="ttab" data-top="anime"><span aria-hidden="true" data-mvi="anime">🌸</span> Animes</button><button class="ttab" data-top="film"><span aria-hidden="true" data-mvi="film">🎬</span> Filme</button><button class="ttab" data-top="serie"><span aria-hidden="true" data-mvi="serie">📺</span> Serien</button></nav><span class="ctv" id="ctv"></span></div><div class="sbox"><div class="srch" id="srch" role="search"><input id="sq" type="search" placeholder="Titel suchen …" autocomplete="off" aria-label="Titel suchen" aria-controls="sres"><div class="sres" id="sres" hidden></div></div><button class="brwb bell" id="bell" data-xo="news" aria-label="Neuigkeiten"><span aria-hidden="true" data-mvi="bell">🔔</span><span class="bdg" id="belln" hidden></span></button><button class="brwb" id="brwb" data-brw="1" aria-label="Stöbern: alle Titel sortieren und filtern" title="Stöbern"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="brwt">Stöbern</span></button></div></div>
 <div id="v-main">
 <div class="howto" id="howto" hidden></div>
 <p class="sub">Gesehen? <b>Haken antippen</b> und bewerten – fertig. ✨</p>
@@ -3201,7 +3315,7 @@ mark.mvm{background:color-mix(in srgb,var(--star,#e99a0c) 38%,transparent);color
 <button class="accfab" id="accfab" data-sheet="1" aria-expanded="false" aria-controls="sheet"><span class="acv" id="fabv" aria-hidden="true"></span><span class="fabn" id="fabn"></span><span class="aca" aria-hidden="true">▲</span></button></nav>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Ansicht, Statistik und Verlauf" hidden></div>
 <div class="menu" id="menu" hidden><div class="grp"><h4>Design</h4><div class="seg thseg" role="group" aria-label="Design"><button data-th="light"><i class="thp p-light" aria-hidden="true"></i>Hell</button><button data-th="dark"><i class="thp p-dark" aria-hidden="true"></i>Dunkel</button><button data-th="purple"><i class="thp p-purple" aria-hidden="true"></i>Lila</button><button data-th="baby"><i class="thp p-baby" aria-hidden="true"></i>Baby</button><button data-th="deco"><i class="thp p-deco" aria-hidden="true"></i>Kinopalast<span class="thn">Neu</span></button><button data-th="sea"><i class="thp p-sea" aria-hidden="true"></i>Tiefsee<span class="thn">Neu</span></button><button data-th="paper"><i class="thp p-paper" aria-hidden="true"></i>Origami<span class="thn">Neu</span></button><button data-th="auto" title="7–19 Uhr hell, sonst dunkel"><i class="thp p-auto" aria-hidden="true"></i>Auto</button></div></div>
-<div class="grp"><h4>Bewegung &amp; Symbole</h4><div class="mvset"><span>Symbole</span><div class="seg" role="group" aria-label="Symbole"><button data-mvicons="emoji" aria-pressed="true">😊 Emoji</button><button data-mvicons="line" aria-pressed="false">✎ Linien</button></div></div><div class="mvset"><span>Ruhige Szene<br><small class="mut">Hintergrund steht still, spart Akku</small></span><button class="mvsw" role="switch" aria-checked="false" data-mvcalm="1" aria-label="Ruhige Szene"></button></div></div>
+<div class="grp"><h4>Bewegung &amp; Symbole</h4><div class="mvset"><span>Symbole</span><div class="seg" role="group" aria-label="Symbole"><button data-mvicons="emoji" aria-pressed="true">😊 Emoji</button><button data-mvicons="line" aria-pressed="false">✎ Linien</button></div></div><div class="mvset"><span>Ruhige Szene<br><small class="mut">Hintergrund steht still, spart Akku</small></span><button class="mvsw" role="switch" aria-checked="false" data-mvcalm="1" aria-label="Ruhige Szene"></button></div><div class="mvset"><span>Vibration<br><small class="mut">Experiment: kurzes Tippen bei Haken, Aufdecken &amp; Co.</small></span><button class="mvsw" role="switch" aria-checked="true" data-mvhap="1" aria-label="Vibration"></button></div></div>
 <div class="grp"><h4>Cloud-Sync</h4><div id="cloudbox"></div></div>
 <div class="grp"><h4>Neuerscheinungen</h4><div id="autobox"></div></div>
 <div class="grp"><h4>Daten</h4><div id="rstbox"></div></div></div>
@@ -3211,7 +3325,7 @@ mark.mvm{background:color-mix(in srgb,var(--star,#e99a0c) 38%,transparent);color
 <div id="tint" aria-hidden="true"></div>
 <div id="petbub" class="petbub" hidden aria-hidden="true"></div>
 <div id="xo" hidden role="dialog" aria-modal="true" aria-label="Extras"></div>
-<div id="brw" hidden role="dialog" aria-modal="true" aria-label="Alle Titel sortieren und filtern"></div>
+<div id="brw" hidden role="dialog" aria-modal="true" aria-label="Stöbern"></div>
 <div id="rw" hidden role="dialog" aria-modal="true" aria-label="Rewind – euer Jahresrückblick"></div>
 <div id="chest" hidden role="dialog" aria-modal="true" aria-labelledby="chh"></div>
 <div id="toast" role="status" aria-live="polite" hidden></div>
@@ -14893,8 +15007,8 @@ function accPanel(withStat){const c=C(),ls=secLists();
     return`<button class="avr${l===view?" on":""}" data-view="${l}" aria-pressed="${l===view}">${avHtml(l)}<span class="avn">${vtitle(l)}${l===I()?" <small>(du)</small>":""}</span><span class="avc" aria-label="${n} von 10 Plätzen belegt"><span data-odo="avc-${l}">${n}</span>/10</span></button>`};
   const tb=(t,ic,lab,x)=>`<button class="atb${tab===t?" on":""}" data-tab="${t}" aria-pressed="${tab===t}"><span class="ai" aria-hidden="true">${mvIcE(ic)}</span><span class="atl">${lab}</span>${x||""}</button>`;
   return`<div class="achr"><p class="ach">Ansicht</p><button class="acl" data-gear="1" title="${esc(cloudTxt())} – Einstellungen öffnen" aria-label="${esc(cloudTxt())} – Einstellungen öffnen">${esc(cloudShort())}<span class="acs">${esc(cloudTime())}</span></button></div><div class="avs" role="group" aria-label="Ansicht wählen">${LISTS.map(row).join("")}</div><div class="asep"></div>
-${withStat?tb("stat","📊","Statistik")+mstHtml()+tb("ach","🏅","Abzeichen",`<span class="lc">Lv <span data-odo="alv">${achFor(I()).lv.L}</span></span>`)+tb("inv","🎒","Inventar",`<span class="lc">${fmtX(achFor(I()).mult)}</span>`)+(achFor(I()).pend.length?`<button class="atb chpend2" data-chshow="0"><span class="ai" aria-hidden="true">${mvIcE("🎁")}</span><span class="atl">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""):""}${tb("hist","🕘","Verlauf",`<span class="lc"><span data-odo="ahc">${c.done.length}</span></span>`)}${tb("wl","📋","Watchlist",`<span class="lc"><span data-odo="awc">${c.list.filter(x=>x!=="@").length}</span>/10</span>`)}<div class="asep"></div>
-<p class="ach">Filmabend</p><div class="fabd"><button class="atb ft" data-roll="1"><span class="ai" aria-hidden="true">${mvIcE("🎲")}</span><span class="atl">Würfeln</span></button><button class="atb ft${vHot()?" hot":""}" data-swipe="1"><span class="ai" aria-hidden="true">${mvIcE("💞")}</span><span class="atl">Swipen${vStatus()?`<small>${esc(vStatus())}</small>`:""}</span></button><button class="atb ft" data-xo="fin"><span class="ai" aria-hidden="true">${mvIcE("🧭")}</span><span class="atl">Zeit &amp; Stimmung</span></button><button class="atb ft" data-xo="mar"><span class="ai" aria-hidden="true">${mvIcE("🎞️")}</span><span class="atl">Marathon</span></button><button class="atb ft" data-xo="quiz"><span class="ai" aria-hidden="true">${mvIcE("🧠")}</span><span class="atl">Quiz</span></button><button class="atb ft" data-xo="poster"><span class="ai" aria-hidden="true">${mvIcE("🖼")}</span><span class="atl">Poster</span></button></div><div class="asep"></div>
+${withStat?mvGameCard("h")+tb("stat","📊","Statistik")+mstHtml()+mvSoonRow("hub"):""}${tb("hist","🕘","Verlauf",`<span class="lc"><span data-odo="ahc">${c.done.length}</span></span>`)}${tb("wl","📋","Watchlist",`<span class="lc"><span data-odo="awc">${c.list.filter(x=>x!=="@").length}</span>/10</span>`)}<div class="asep"></div>
+<p class="ach">Filmabend &amp; Spiele</p><div class="fabd"><button class="atb ft mvfaq" data-fa="1"><span class="ai" aria-hidden="true">${mvIcE("🍿")}</span><span class="atl">Filmabend</span></button><button class="atb ft" data-roll="1"><span class="ai" aria-hidden="true">${mvIcE("🎲")}</span><span class="atl">Würfeln</span></button><button class="atb ft${vHot()?" hot":""}" data-swipe="1"><span class="ai" aria-hidden="true">${mvIcE("💞")}</span><span class="atl">Swipen${vStatus()?`<small>${esc(vStatus())}</small>`:""}</span></button><button class="atb ft" data-xo="fin"><span class="ai" aria-hidden="true">${mvIcE("🧭")}</span><span class="atl">Zeit &amp; Stimmung</span></button><button class="atb ft" data-xo="mar"><span class="ai" aria-hidden="true">${mvIcE("🎞️")}</span><span class="atl">Marathon</span></button><button class="atb ft" data-xo="quiz"><span class="ai" aria-hidden="true">${mvIcE("🧠")}</span><span class="atl">Quiz</span></button><button class="atb ft" data-xo="poster"><span class="ai" aria-hidden="true">${mvIcE("🖼")}</span><span class="atl">Poster</span></button></div><div class="asep"></div>
 <button class="atb agear" data-gear="2" aria-expanded="${menu}" aria-controls="menu"><span class="ai" aria-hidden="true">${mvIcE("⚙️")}</span><span class="atl">Einstellungen</span></button><button class="atb sm" data-whoopen="1"><span class="ai" aria-hidden="true">${mvIcE("🔄")}</span><span class="atl">Person wechseln<small>angemeldet als ${U[I()].n}</small></span></button>`}
 function renderSide(){const Ly=lay();
   if(layNow&&Ly!==layNow){drawer=false;sheet=false;if(Ly==="t")accOpen=false}layNow=Ly;
@@ -14903,7 +15017,7 @@ function renderSide(){const Ly=lay();
   const ab=$("accb");ab.setAttribute("aria-expanded",accOpen);ab.setAttribute("aria-label",`Account: Ansicht ${vtitle(view)}, angemeldet als ${U[I()].n} – ${accOpen?"zuklappen":"aufklappen"}`);
   const p=$("accp");p.hidden=!accOpen;if(accOpen){const o=p.querySelector(".accs"),st=o?o.scrollTop:0;keepFocus(p,()=>p.innerHTML=`<div class="accs">${accPanel()}</div>`);p.firstChild.scrollTop=st}else p.innerHTML="";
   const sh=$("sheet"),shWas=sh.hidden;sh.hidden=!sheet;if(shWas&&sheet&&!calm())fxOnce(sh,"opening",700);if(sheet)keepFocus(sh,()=>sh.innerHTML=`<div class="shh"><span class="shg" aria-hidden="true"></span><button class="navx" data-navx="1" aria-label="Schließen">×</button></div>`+accPanel(true));else sh.innerHTML="";
-  const ss=$("sstat");keepFocus(ss,()=>ss.innerHTML=`<button class="snb sstb${tab==="stat"?" act":""}" data-tab="stat" aria-pressed="${tab==="stat"}"><span class="si" aria-hidden="true">${mvIcE("📊")}</span><span class="st">Statistik</span></button>${mstHtml()}<button class="snb sstb${tab==="ach"?" act":""}" data-tab="ach" aria-pressed="${tab==="ach"}"><span class="si" aria-hidden="true">${mvIcE("🏅")}</span><span class="st">Abzeichen</span><span class="lvt">Lv <span data-odo="slv">${achFor(I()).lv.L}</span></span></button><button class="snb sstb${tab==="inv"?" act":""}" data-tab="inv" aria-pressed="${tab==="inv"}"><span class="si" aria-hidden="true">${mvIcE("🎒")}</span><span class="st">Inventar</span><span class="lvt"><span data-odo="smx">${fmtX(achFor(I()).mult)}</span></span></button>${petHtml(I())}${eqBar()}${achFor(I()).pend.length?`<button class="chpend" data-chshow="0" aria-label="${achFor(I()).pend.length===1?"Eine Kiste":achFor(I()).pend.length+" Kisten"} öffnen"><span aria-hidden="true">🎁</span><span class="st">${achFor(I()).pend.length===1?"Kiste öffnen":achFor(I()).pend.length+" Kisten öffnen"}</span></button>`:""}`);
+  const ss=$("sstat");keepFocus(ss,()=>ss.innerHTML=lay()==="m"?"":mvSideHtml());
   $("accb").classList.toggle("vhot",vHot());$("accfab").classList.toggle("vhot",vHot());
   $("fabv").innerHTML=avHtml(view);$("fabn").textContent=vtitle(view);const fb=$("accfab");fb.setAttribute("aria-expanded",sheet);fb.setAttribute("aria-label",`Ansicht ${vtitle(view)} – Ansicht, Statistik und Verlauf öffnen`);
   const sd=$("side");sd.classList.toggle("open",drawer);sd.classList.toggle("popen",accOpen&&Ly==="t");$("hamb").setAttribute("aria-expanded",drawer);
@@ -15283,7 +15397,7 @@ function mvSetup(){
   // große Überschrift am Handy wandert beim Scrollen in die Kopfzeile (1)
   let sf=0;addEventListener("scroll",()=>{if(sf)return;sf=requestAnimationFrame(()=>{sf=0;document.documentElement.style.setProperty("--mvp",Math.max(0,Math.min(1,(scrollY-10)/56)).toFixed(3))})},{passive:true});
   mvCardsSetup();mvPullSetup();mvToastSetup();
-  mvSheetDrag($("modal"),()=>$("modal").querySelector(".mbox"),()=>{if(blind&&blind.anim)return;if(mvBlKeep())return;openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;render()});
+  mvSheetDrag($("modal"),()=>$("modal").querySelector(".mbox"),()=>{if(blind&&blind.anim)return;if(mvBlKeep())return;openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;mvHM=null;render()});
   mvSheetDrag($("sheet"),()=>$("sheet"),()=>{closeNav();render()});
   mvEdge($("brw"),()=>{brwClose();render()});mvEdge($("xo"),()=>xoClose());
   mvIconsFill();mvMenuSync()}
@@ -15385,9 +15499,14 @@ function mvBlPending(){const out=[];for(const k of Object.keys(SEC)){const B=ST[
   if(e.done&&!(e.rev||{})[I()])out.push({k,id,t:e.t,kind:"rev"});else if(!e.done&&e.r[O()]!=null&&e.r[I()]==null)out.push({k,id,t:e.t,kind:"turn"})}}return out}
 
 // ---------- Banner oben: Heute Abend / Wie war's? / Aufdecken ----------
-function mvTopRender(){let el=$("mvtn");if(!el)return;if(tab!=="wl"||!me){el.hidden=true;return}const n=mvTonight(),P=mvBlPending();let h="";
-  if(n){const m=M[n.id],late=Date.now()-n.t>90*60e3;h+=`<div class="mvtnc hasx">${cv(n.id,m.name)}<div class="mvtnt"><small>${late?"Wie war's?":"Heute Abend"}</small><button class="lnk" data-info="${n.id}">${esc(m.name)}</button><span class="gn">${SEC[n.sec].one} · ${n.by===I()?"du hast ausgesucht":esc(U[n.by].n)+" hat ausgesucht"}</span></div><div class="mvtnb"><button class="add" data-mvhow="1">${late?"Auf drei!":"Fertig? Auf drei!"}</button></div><button class="mvtnx" data-mvtnx="1" aria-label="Heute-Abend-Hinweis entfernen">×</button></div>`}
-  for(const p of P.slice(0,2)){const m=M[p.id];h+=`<div class="mvtnc">${cv(p.id,m.name)}<div class="mvtnt"><small>${p.kind==="rev"?"Aufgedeckt":"Du bist dran"}</small><b>${esc(m.name)}</b><span class="gn">${p.kind==="rev"?esc(U[O()].n)+" hat aufgedeckt":esc(U[O()].n)+" hat verdeckt bewertet"}</span></div><div class="mvtnb"><button class="add" data-mvbl="${p.k}:${p.id}">${p.kind==="rev"?"Ansehen":"Auf drei!"}</button></div></div>`}
+function mvTopRender(){let el=$("mvtn");if(!el)return;if(tab!=="wl"||!me){el.hidden=true;return}const n=mvTonight(),P=mvBlPending(),v=mvInv(),u=I(),o=O();let h="";
+  if(n){const m=M[n.id],iv=v&&v.id===n.id?v:null,late=Date.now()-(iv?iv.at:n.t)>90*60e3,ask=iv&&iv.by!==u&&!iv.ans,nope=iv&&iv.by!==u&&iv.ans&&!iv.ans.ok;
+    if(!nope){let st=`${SEC[n.sec].one} · ${n.by===u?"du hast ausgesucht":esc(U[n.by].n)+" hat ausgesucht"}`;
+      if(iv){const t=esc(mvWhen(iv.at));st=iv.by===u?(iv.ans?(iv.ans.ok?`${t} · ${esc(U[o].n)} ist dabei 💞`:`${esc(U[o].n)} kann heute nicht`):`${t} · wartet auf ${esc(U[o].n)} …`):`${t} · du bist dabei 💞`;if(ask)st=`${t} · ${esc(U[iv.by].n)} lädt dich ein`}
+      const cal=iv&&!(iv.ans&&!iv.ans.ok)?`<button class="rej mvicsb" data-mvics="inv" aria-label="Filmabend in den Kalender eintragen">${mvIcE("📅")}</button>`:"";
+      const btns=ask?`<button class="add" data-mvinv="1">💞 Bin dabei</button><button class="rej" data-mvinv="0">Heute nicht</button>`:`<button class="add" data-mvhow="1">${late?"Auf drei!":"Fertig? Auf drei!"}</button>${cal}`;
+      h+=`<div class="mvtnc hasx${ask?" ask":""}">${cv(n.id,m.name)}<div class="mvtnt"><small>${ask?"Einladung":late?"Wie war's?":"Heute Abend"}</small><button class="lnk" data-info="${n.id}">${esc(m.name)}</button><span class="gn">${st}</span></div><div class="mvtnb">${btns}</div><button class="mvtnx" data-mvtnx="1" aria-label="${ask?"Einladung ablehnen":"Heute-Abend-Hinweis entfernen"}">×</button></div>`}}
+  for(const p of P.slice(0,2)){const m=M[p.id];h+=`<div class="mvtnc">${cv(p.id,m.name)}<div class="mvtnt"><small>${p.kind==="rev"?"Aufgedeckt":"Du bist dran"}</small><b>${esc(m.name)}</b><span class="gn">${p.kind==="rev"?esc(U[o].n)+" hat aufgedeckt":esc(U[o].n)+" hat verdeckt bewertet"}</span></div><div class="mvtnb"><button class="add" data-mvbl="${p.k}:${p.id}">${p.kind==="rev"?"Ansehen":"Auf drei!"}</button></div></div>`}
   if(el._h!==h){el.innerHTML=h;el._h=h}el.hidden=!h}
 
 // ---------- Filmabend als Programmheft (Phase 2): Zeit & Stimmung → Kandidaten → würfeln/wählen → „Heute läuft …“ ----------
@@ -15400,7 +15519,7 @@ function faCands(){const k=topTab,st=ST[k],done=new Set(),seen=new Set();for(con
   const on=(u,id)=>!!(st.lists[u]&&st.lists[u].list.includes(id));
   const sc=id=>{const m=M[id];let s=(+m.r||6.5)+Math.random()*2.2;if(on("both",id))s+=2;if(on("jos",id))s+=1.1;if(on("joh",id))s+=1.1;return s};
   return P.map(id=>({id,s:sc(id)})).sort((a,b)=>b.s-a.s).slice(0,4).map(x=>x.id)}
-function faHtml2(){const k=topTab,st=ST[k],step=xo.step||1;
+function faHtml2(){const k=topTab,st=ST[k],step=xo.step||1;if(step===4)return mvInvForm();
   if(step===1){const T=FA_TIME[k==="film"?"film":"x"],ch=(key,opts)=>`<div class="bwchips mvfach" role="group">${opts.map(([v,l])=>`<button class="bwchip${xo[key]===v?" on":""}" data-fa${key}="${v}" aria-pressed="${xo[key]===v}">${l}</button>`).join("")}</div>`;
     return`<div class="mvfa"><p class="mvfa-k">Programmheft · Seite 1</p><h3>Wie viel Zeit habt ihr?</h3>${ch("time",T)}<h3>Worauf habt ihr Lust?</h3>${ch("mood",MOODS.filter(x=>x[0]!=="kurz").map(x=>[x[0],x[1]]))}<h3>Woher?</h3>${ch("src",[["lists","Aus euren Listen"],["all",`Aus allen ${k==="film"?"Filmen":SEC[k].many}`]])}
 <button class="add fab2" data-fastep="2"><span aria-hidden="true">${mvIc("popcorn")}</span> Vorschläge zeigen</button></div>`}
@@ -15411,7 +15530,7 @@ ${C2.some(id=>on("jos",id)||on("joh",id)||on("both",id))?`<p class="mvlegend" ar
 <div class="mvfa-b mvdock"><button class="rej" data-fastep="1">‹ Anders</button>${C2.length>1?`<button class="rej" data-fadice="1"><span aria-hidden="true">${mvIc("dice")}</span> Würfeln</button>`:""}<button class="rej" data-faswipe="1"><span aria-hidden="true">${mvIc("heart")}</span> Swipen</button><button class="add mvpick" data-fapick="1"${xo.pick?"":" disabled"}>${mvPickLbl(xo.pick&&M[xo.pick])}</button></div></div>`}
   const m=M[xo.pick];if(!m)return"";const r=runMin(m),now=new Date();
   return`<div class="mvlo${xo.lit?" on":""}" data-th="${esc(document.documentElement.dataset.theme||"")}"><p class="mvlo-k">Heute läuft</p><div class="mvlo-p">${cv(m.id,m.name)}</div><h3>${esc(m.name)}</h3><p class="mvlo-m">${[m.y||YEAR[m.id]||"",r?fmtMin(r):"",esc(U.jos.n)+" & "+esc(U.joh.n),"heute, "+now.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})].filter(Boolean).map(x=>`<span>${x}</span>`).join(" · ")}</p>
-<div class="mvlo-b"><button class="rej" data-fastep="2">Doch was anderes</button><button class="add" data-fastart="1"><span aria-hidden="true">▶</span> Los geht's</button></div></div>`}
+<div class="mvlo-b"><button class="rej" data-fastep="2">Doch was anderes</button><button class="rej" data-fainv="1"><span aria-hidden="true">💌</span> ${esc(U[O()].n)} einladen</button><button class="add" data-fastart="1"><span aria-hidden="true">▶</span> Los geht's</button></div></div>`}
 const mvPickLbl=m=>m?`<span class="mvpkn">„${esc(m.name)}“</span> nehmen wir`:"Erst einen antippen";
 // Hauptknopf folgt der Auswahl: der Titel rollt herein
 function mvPickSync(){const p=document.querySelector("#xo [data-fapick]");if(!p)return;const m=xo&&xo.pick&&M[xo.pick];p.disabled=!m;const n=p.querySelector(".mvpkn");if(m&&n)mvRollTxt(n,`„${m.name}“`);else p.innerHTML=mvPickLbl(m)}
@@ -15462,6 +15581,170 @@ function mvTdayFx(){const td=document.querySelector("#grid .mvtday"),id=td&&td.c
 function mvAfter2(){try{mvTopRender()}catch(e){}mvOdoKeys(document);mvBars(document);try{mvBlFx();mvTdayFx()}catch(e){}}
 // Leiste und Handy-Blatt werden auch ohne render() neu gezeichnet (Haustier, Kisten): Zahlen und Balken dort ebenfalls rollen lassen
 {const o=renderSide;renderSide=function(){o.apply(this,arguments);try{const sd=$("side"),sh=$("sheet");mvOdoKeys(sd);mvBars(sd);if(sh&&!sh.hidden){mvOdoKeys(sh);mvBars(sh)}}catch(e){}}}
+
+// =====================================================================
+// Phase 3: ein Fenster-System, eine Navigation am Handy, Spiel-Ecke, Verlauf mit ⋯,
+// Reaktionen, Einladungen, Kalender, „Demnächst“, Haptik
+// =====================================================================
+if(!MV_IC.cal){MV_IC.cal=["📅",`<rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10.5h16M8.5 3.5v4M15.5 3.5v4"/><path d="M8 14h2M14 14h2M8 17h2"/>`];MV_EMO["📅"]="cal"}
+if(!MV_IC.mail){MV_IC.mail=["💌",`<rect x="3.5" y="6" width="17" height="12.5" rx="2.2"/><path d="m4.5 7.5 7.5 6 7.5-6"/>`];MV_EMO["💌"]="mail"}
+
+// ---------- Fenster: am Handy ein Blatt von unten, am Desktop ein Fenster (Stöbern, Extras, Glocke) ----------
+function mvScrSync(){const s=$("mvscr");if(!s)return;const on=!!xo||!!brw;if(s.hidden===on)s.hidden=!on}
+function mvScrClick(){if(xo){xoClose();return}if(brw){brwClose();render()}}
+{const a=xoOpen,b=xoClose,c=brwOpen,d=brwClose;
+  xoOpen=function(){const r=a.apply(this,arguments);mvScrSync();return r};
+  xoClose=function(){const r=b.apply(this,arguments);mvScrSync();return r};
+  brwOpen=function(){const r=c.apply(this,arguments);mvScrSync();return r};
+  brwClose=function(){const r=d.apply(this,arguments);mvScrSync();return r}}
+
+// ---------- Zeit-Helfer ----------
+const mvClock=t=>new Date(t).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
+const mvDay=t=>{const d=todayB(t);return d===todayB()?"heute":d===dPlus(1)?"morgen":new Date(t).toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short"})};
+const mvWhen=t=>mvDay(t)+", "+mvClock(t);
+const mvDayHead=d=>d===todayB()?"Heute":d===dPlus(1)?"Morgen":new Date(d+"T12:00:00").toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});
+
+// ---------- Haptik (Experiment): iPhone über den Schalter-Trick, sonst navigator.vibrate ----------
+const mvHapOn=()=>{try{return localStorage.getItem("wl-hap")!=="0"}catch(e){return true}};
+function mvSetHap(on){try{localStorage.setItem("wl-hap",on?"1":"0")}catch(e){}mvMenuSync()}
+function mvHap(){if(!mvHapOn())return;try{
+  if(navigator.vibrate&&!/iP(hone|ad|od)/.test(navigator.userAgent)){navigator.vibrate(12);return}
+  const l=document.createElement("label");l.setAttribute("aria-hidden","true");l.style.display="none";const i=document.createElement("input");i.type="checkbox";i.setAttribute("switch","");i.tabIndex=-1;l.appendChild(i);
+  const stop=e=>e.stopPropagation();l.addEventListener("click",stop);i.addEventListener("click",stop);document.head.appendChild(l);l.click();l.remove()}catch(e){}}
+// Bei welchen Aktionen es kurz „tickt“ (läuft vor allen anderen Aktionen, auch vor dem Filmabend)
+function mvHapFor(d){if(d.ck||d.bl==="go"||d.fapick||d.fastart||d.fadice||d.mvre||d.mvinv!==undefined||d.fainvgo||d.rsave)mvHap()}
+{const o=mvMenuSync;mvMenuSync=function(){o.apply(this,arguments);document.querySelectorAll("[data-mvhap]").forEach(b=>b.setAttribute("aria-checked",mvHapOn()))}}
+
+// ---------- Fliegende Emojis (Reaktion, Einladung, Zusage) ----------
+function mvFlyEmoji(el,e,dir){if(calm()||!el||!el.getBoundingClientRect)return;const r=el.getBoundingClientRect(),dn=dir===-1;
+  for(let i=0;i<6;i++){const s=document.createElement("span");s.className="mvflye";s.textContent=e;s.setAttribute("aria-hidden","true");s.style.left=(r.left+r.width/2)+"px";s.style.top=(r.top+r.height/2)+"px";document.body.appendChild(s);
+    const dx=(Math.random()-.5)*(i?120:20),dy=(dn?1:-1)*(80+Math.random()*90),sc=i?.7+Math.random()*.45:1.7;
+    mvDone(mvA(s,[{transform:"translate(-50%,-50%) scale(.3)",opacity:0},{transform:`translate(calc(-50% + ${dx*.35}px),calc(-50% + ${dy*.4}px)) scale(${sc})`,opacity:1,offset:.32},{transform:`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px)) scale(${sc*.75})`,opacity:0}],{duration:950+i*80,delay:i*45,easing:MV_EZ.out,fill:"forwards"})).then(()=>s.remove())}}
+function mvFlyTo(txt,from,to){if(calm()||!from)return;const t=to&&to.getClientRects&&to.getClientRects().length?to.getBoundingClientRect():null;const s=document.createElement("span");s.className="mvflye";s.textContent=txt;s.setAttribute("aria-hidden","true");document.body.appendChild(s);
+  const x0=from.left+from.width/2,y0=from.top+from.height/2,x1=t?t.left+t.width/2:innerWidth-36,y1=t?t.top+t.height/2:28;s.style.left=x0+"px";s.style.top=y0+"px";
+  mvDone(mvA(s,[{transform:"translate(-50%,-50%) scale(.5)",opacity:0},{transform:"translate(-50%,-50%) scale(1.9) rotate(-8deg)",opacity:1,offset:.22},{transform:`translate(calc(-50% + ${x1-x0}px),calc(-50% + ${y1-y0}px)) scale(.55) rotate(6deg)`,opacity:.15}],{duration:1050,easing:MV_EZ.io,fill:"forwards"})).then(()=>{s.remove();if(t&&to)mvA(to,[{scale:1},{scale:1.25,offset:.4},{scale:1}],{duration:MV_D.sp,easing:MV_EZ.bounce})})}
+function mvBellFx(x){const b=$("bell");if(!b||!x)return;if(x.fx==="re")mvFlyEmoji(b,x.fe||"❤️",-1);else if(x.fx==="heart")mvFlyEmoji(b,"💞",-1)}
+
+// ---------- Reaktionen auf Bewertungen (geteilt über ST.film.x.re) ----------
+const MV_RE=["❤️","😂","😮","👍","🍿","😢"];
+const mvReKey=(k,id,u)=>k+":"+id+":"+u;
+const mvReOf=(k,id,u)=>{let x;try{x=xData()}catch(e){return null}const r=(x.re||{})[mvReKey(k,id,u)];return r&&r.by!==u&&U[r.by]?r:null};
+function mvReRow(k,id,u,sm){const cur=mvReOf(k,id,u),mine=cur&&cur.by===I()?cur.e:"";
+  return`<div class="mvre${sm?" sm":""}" role="group" aria-label="Auf die Bewertung von ${esc(U[u].n)} reagieren">${MV_RE.map(e=>`<button class="mvreb${e===mine?" on":""}" data-mvre="${k}:${id}:${u}|${e}" aria-pressed="${e===mine}" aria-label="Mit ${e} reagieren">${e}</button>`).join("")}</div>`}
+const mvReRowK=(key,sm)=>{const[k,id,u]=key.split(":");return M[id]&&U[u]?mvReRow(k,id,u,sm):""};
+function mvReact(key,e,btn){const x=xData(),R=x.re||(x.re={}),cur=R[key],[k,id,u]=key.split(":");if(!M[id]||!U[u]||u===I())return;
+  if(cur&&cur.by===I()&&cur.e===e){delete R[key];toast("Reaktion zurückgenommen")}
+  else{R[key]={e,by:I(),t:Date.now()};mvFlyEmoji(btn,e);toast(`${e} an ${U[u].n} geschickt`)}
+  const ks=Object.keys(R);if(ks.length>200)ks.sort((a,b)=>R[a].t-R[b].t).slice(0,ks.length-200).forEach(q=>delete R[q]);
+  xSave()}
+
+// ---------- Einladung zum Filmabend (geteilt über ST.film.x.inv) ----------
+const mvInv=()=>{let x;try{x=xData()}catch(e){return null}const v=x.inv;if(!v||!M[v.id]||!U[v.by])return null;if(Date.now()>Math.max(v.at+4*3600e3,v.t+20*3600e3))return null;return v};
+function mvInvTimes(){const now=Date.now(),d=new Date(),out=[["now","Jetzt"]];
+  for(const hm of ["19:00","19:30","20:00","20:30","21:00","21:30","22:00"]){const[h,mi]=hm.split(":").map(Number),t=new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,mi).getTime();if(t>now+10*60e3)out.push([String(t),hm])}
+  if(out.length<3){const t=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1,20,0).getTime();out.push([String(t),"Morgen 20:00"])}
+  return out}
+function mvInvForm(){const m=M[xo.pick];if(!m)return"";const o=O(),T=mvInvTimes();if(!T.some(x=>x[0]===xo.invAt))xo.invAt=T[Math.min(1,T.length-1)][0];
+  return`<div class="mvfa mvinvf"><p class="mvfa-k">Einladung</p><div class="mvinvp">${cv(m.id,m.name)}<div><h3>Wann schaut ihr „${esc(m.name)}“?</h3><p class="mut">${esc(U[o].n)} sieht die Einladung oben auf der Startseite und in der Glocke und kann zusagen.</p></div></div>
+<div class="bwchips mvfach" role="group" aria-label="Uhrzeit">${T.map(([v,l])=>`<button class="bwchip${xo.invAt===v?" on":""}" data-fainvt="${v}" aria-pressed="${xo.invAt===v}">${l}</button>`).join("")}</div>
+<div class="mvfa-b mvdock"><button class="rej" data-fastep="3">‹ Zurück</button><button class="add" data-fainvgo="1"><span aria-hidden="true">${mvIcE("💌")}</span> Einladung senden</button></div></div>`}
+function mvInvSend(id,k,at,from){const x=xData();x.inv={id,sec:k,at,by:I(),t:Date.now(),ans:null};mvSetTonight(id,k);xoClose();
+  toast(`💌 Einladung an ${U[O()].n} geschickt – ${mvWhen(at)}`);mvFlyTo("💌",from,$("bell"))}
+function mvInvAns(ok,btn){const v=mvInv();if(!v||v.by===I())return;v.ans={ok:!!ok,t:Date.now()};xSave();
+  if(ok){toast(`💞 Zugesagt – ${mvWhen(v.at)}`);mvFlyEmoji(btn,"💞")}else toast("🌙 Abgesagt – vielleicht ein anderes Mal")}
+// × am Heute-Abend-Hinweis: eigene Einladung zurückziehen, offene Einladung an mich absagen
+function mvInvDrop(){const v=mvInv(),n=mvTonight();if(!v||(n&&n.id!==v.id))return;const x=xData();if(v.by===I())x.inv=null;else if(!v.ans)v.ans={ok:false,t:Date.now()}}
+
+// ---------- Kalender (.ics) ----------
+const mvIcsEsc=s=>String(s).replace(/\\/g,"\\\\").replace(/\r?\n/g,"\\n").replace(/([,;])/g,"\\$1");
+const mvIcsT=t=>new Date(t).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+function mvIcs(ev){const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Josefines und Johanns Watchlist//DE","CALSCALE:GREGORIAN","METHOD:PUBLISH","BEGIN:VEVENT","UID:"+ev.uid+"@watchlist","DTSTAMP:"+mvIcsT(Date.now())];
+  if(ev.day){const n=new Date(ev.day+"T12:00:00Z");n.setUTCDate(n.getUTCDate()+1);L.push("DTSTART;VALUE=DATE:"+ev.day.replace(/-/g,""),"DTEND;VALUE=DATE:"+n.toISOString().slice(0,10).replace(/-/g,""))}
+  else L.push("DTSTART:"+mvIcsT(ev.at),"DTEND:"+mvIcsT(ev.at+(ev.dur||120)*60e3));
+  L.push("SUMMARY:"+mvIcsEsc(ev.title));if(ev.desc)L.push("DESCRIPTION:"+mvIcsEsc(ev.desc));
+  if(!ev.day)L.push("BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+mvIcsEsc(ev.title),"TRIGGER:-PT30M","END:VALARM");
+  L.push("END:VEVENT","END:VCALENDAR");return L.join("\r\n")+"\r\n"}
+const mvSlug=s=>String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss").replace(/[^A-Za-z0-9]+/g,"-").replace(/^-+|-+$/g,"").toLowerCase().slice(0,40)||"termin";
+function mvIcsDl(name,ics){try{const b=new Blob([ics],{type:"text/calendar;charset=utf-8"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;a.rel="noopener";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),6e4);toast("📅 Termin erstellt – zum Eintragen die Datei öffnen")}catch(e){toast("Der Termin konnte nicht erstellt werden.")}}
+function mvIcsGo(what){if(what==="inv"){const n=mvTonight();if(!n)return;const v=mvInv(),m=M[n.id],at=v&&v.id===n.id?v.at:(()=>{const d=new Date();d.setHours(20,0,0,0);return Math.max(d.getTime(),Date.now()+30*60e3)})();
+    mvIcsDl(`filmabend-${mvSlug(m.name)}.ics`,mvIcs({uid:"fa-"+n.id+"-"+todayB(at),at,dur:runMin(m)||120,title:`🍿 Filmabend: ${m.name}`,desc:`${U.jos.n} & ${U.joh.n} schauen „${m.name}“.`}));return}
+  const[kind,id]=what.split(":");const x=NEXT[id],m=M[id];if(kind!=="sea"||!x||!m||!x.date||x.date.length!==10)return;
+  mvIcsDl(`${mvSlug(m.name)}-${x.date}.ics`,mvIcs({uid:"sea-"+id+"-"+x.date,day:x.date,title:`${x.status==="run"?"▶️":"📺"} ${m.name}: ${x.label}${x.name?" – "+x.name:""}`,desc:x.status==="run"?"Neue Folge":"Neue Staffel startet"}))}
+
+// ---------- „Demnächst“: Filmabend, Staffelstarts, nächste Folgen ----------
+function mvSoonList(){const out=[],t0=todayB(),n=mvTonight(),v=mvInv();
+  if(n){const iv=v&&v.id===n.id?v:null;out.push({kind:"fa",id:n.id,sec:n.sec,at:iv?iv.at:null,iv,date:iv?todayB(iv.at):t0})}
+  let R={};try{R=seaRel()}catch(e){}
+  for(const id in R){const x=NEXT[id];if(!x||!M[id]||!x.date||x.date.length!==10||x.date<t0)continue;out.push({kind:x.status==="run"?"ep":"sea",id,sec:R[id],x,date:x.date})}
+  return out.sort((a,b)=>a.date.localeCompare(b.date)||(a.kind==="fa"?-1:b.kind==="fa"?1:0))}
+const mvSoonN=()=>{try{const t7=dPlus(7);return mvSoonList().filter(x=>x.date<=t7).length}catch(e){return 0}};
+function mvSoonHtml(){const L=mvSoonList();
+  if(!L.length)return`<div class="qzbox"><p class="qzbig">📅</p><h3>Gerade ist nichts geplant</h3><p class="gn">Hier stehen euer nächster Filmabend und die Termine neuer Staffeln und Folgen eurer Serien und Animes.</p></div>`;
+  let h="",last="";
+  for(const it of L){if(it.date!==last){if(last)h+="</ul>";h+=`<h3 class="mvsoonh">${esc(mvDayHead(it.date))}</h3><ul class="mvsoon">`;last=it.date}
+    const m=M[it.id];let sub="",cal="";
+    if(it.kind==="fa"){const iv=it.iv,o=O();sub=`🍿 Filmabend${iv?" · "+mvClock(iv.at)+" Uhr":""}${iv?(iv.ans?(iv.ans.ok?" · "+(iv.by===I()?esc(U[o].n)+" ist dabei":"du bist dabei")+" 💞":" · abgesagt"):(iv.by===I()?" · wartet auf "+esc(U[o].n):" · "+esc(U[iv.by].n)+" lädt dich ein")):""}`;cal=iv&&iv.ans&&!iv.ans.ok?"":`<button class="rej mvicsb" data-mvics="inv" aria-label="Filmabend „${esc(m.name)}“ in den Kalender eintragen">${mvIcE("📅")}</button>`}
+    else{const x=it.x;sub=it.kind==="ep"?`▶️ ${esc(x.label)}`:`📺 ${esc(x.label)}${x.name?" („"+esc(x.name)+"“)":""} startet`;cal=`<button class="rej mvicsb" data-mvics="sea:${it.id}" aria-label="${esc(m.name)}: ${esc(x.label)} in den Kalender eintragen">${mvIcE("📅")}</button>`}
+    h+=`<li class="mvsr">${cv(it.id,m.name)}<div class="mvsrt"><button class="lnk" data-info="${it.id}"><b>${esc(m.name)}</b></button><span class="gn">${sub}</span><span class="gn mvsrk">${SEC[it.sec]?SEC[it.sec].one:""}</span></div>${cal}</li>`}
+  return h+`</ul><p class="gn newsnote">📅 legt einen Termin im Kalender deines Handys an. So erinnert es dich auch im gesperrten Zustand. Ob das aus der Home-Bildschirm-App heraus klappt, bitte einmal am iPhone ausprobieren.</p>`}
+function mvSoonRow(where){const n=mvSoonN();
+  return where==="side"?`<button class="snb sstb${xo&&xo.k==="soon"?" act":""}" data-xo="soon"><span class="si" aria-hidden="true">${mvIcE("📅")}</span><span class="st">Demnächst</span>${n?`<span class="lvt">${n}</span>`:""}</button>`
+    :`<button class="atb" data-xo="soon"><span class="ai" aria-hidden="true">${mvIcE("📅")}</span><span class="atl">Demnächst</span>${n?`<span class="lc">${n}</span>`:""}</button>`}
+
+// ---------- Spiel-Ecke: Haustier, Level, Abzeichen, Inventar und Kisten in einer Karte ----------
+function mvGameCard(w){const u=I(),A=achFor(u),n=A.pend.length;
+  return`<div class="mvgc">${petHtml(u)}<div class="mvgcb" role="group" aria-label="Spiel-Ecke">
+<button class="mvgk${tab==="ach"?" on":""}" data-tab="ach" aria-pressed="${tab==="ach"}" title="Abzeichen · Level ${A.lv.L}"><span class="mvgi" aria-hidden="true">${mvIcE("🏅")}</span><b>Abzeichen</b><small>Lv <span data-odo="g${w}lv">${A.lv.L}</span></small></button>
+<button class="mvgk${tab==="inv"?" on":""}" data-tab="inv" aria-pressed="${tab==="inv"}" title="Inventar · ${fmtX(A.mult)}"><span class="mvgi" aria-hidden="true">${mvIcE("🎒")}</span><b>Inventar</b><small><span data-odo="g${w}mx">${fmtX(A.mult)}</span></small></button>
+${n?`<button class="mvgk hot" data-chshow="0" title="${n===1?"Eine Kiste":n+" Kisten"} öffnen" aria-label="${n===1?"Eine Kiste":n+" Kisten"} öffnen"><span class="mvgi" aria-hidden="true">${mvIcE("🎁")}</span><b><span data-odo="g${w}ch">${n}</span> ${n===1?"Kiste":"Kisten"}</b><small>öffnen</small></button>`:""}</div></div>`}
+// Leiste (Tablet/Desktop): Statistik, Demnächst, Spiel-Ecke – statt sechs Einträgen untereinander
+function mvSideHtml(){return`<button class="snb sstb${tab==="stat"?" act":""}" data-tab="stat" aria-pressed="${tab==="stat"}"><span class="si" aria-hidden="true">${mvIcE("📊")}</span><span class="st">Statistik</span></button>${mstHtml()}${mvSoonRow("side")}${mvGameCard("s")}`}
+
+// ---------- Verlauf: Bewertungs-Chips + ⋯-Menü ----------
+let mvHM=null;
+function mvHChip(id,u,ed){const r=rt(id,u),k=topTab,rx=mvReOf(k,id,u);
+  const lab=`<span class="rn ${u}">${esc(U[u].n)}</span><b>${r?fmtR(r):"–"}</b>${rx?`<span class="mvrx" title="${esc(U[rx.by].n)} hat mit ${rx.e} reagiert" aria-label="${esc(U[rx.by].n)} hat mit ${rx.e} reagiert">${rx.e}</span>`:""}`;
+  if(u===I()&&ed)return`<button class="mvhc ${u}${r?"":" miss"}" data-rate1="${id}" aria-label="${r?`Deine Bewertung ${fmtR(r)} ändern`:"Jetzt bewerten"}: ${esc(M[id].name)}">${r?lab:`<span class="rn ${u}">${esc(U[u].n)}</span><b>☆ Bewerten</b>`}</button>`;
+  return`<span class="mvhc ro ${u}">${lab}</span>`}
+function mvHMHtml(){const id=mvHM,m=M[id];if(!m){mvHM=null;return""}const u=I(),o=O(),k=topTab,c=C(),mine=rt(id,u),his=rt(id,o),ed=editable(),inDone=c.done.some(d=>d.id===id);
+  return`<div class="mbox sm mvhmenu" role="dialog" aria-label="Aktionen: ${esc(m.name)}"><button class="x" data-close="1" aria-label="Schließen">×</button>
+<div class="rsht">${cv(id,m.name)}<div><h3>${esc(m.name)}</h3><p class="mut">${[mine?"Du: "+fmtR(mine):"",his?esc(U[o].n)+": "+fmtR(his):""].filter(Boolean).join(" · ")||"Noch keine Bewertung"}</p></div></div>
+${his?`<div class="mvrxb"><p class="mvrxl">Auf ${esc(U[o].g)} ${fmtR(his)} reagieren</p>${mvReRow(k,id,o)}</div>`:""}
+<div class="mvml">${ed?`<button data-rate1="${id}"><span aria-hidden="true">✎</span>${mine?"Bewertung ändern":"Jetzt bewerten"}</button>`:""}<button data-info="${id}"><span aria-hidden="true">ⓘ</span>Infos</button>${ed&&inDone?`<button data-back="${id}"><span aria-hidden="true">↩</span>Zurück in die Watchlist</button>`:""}${ed&&mine?`<button class="warn" data-rclr="${id}"><span aria-hidden="true">🗑</span>Meine Bewertung löschen</button>`:""}</div></div>`}
+
+// ---------- Glocke: Reaktionen und Einladungen ----------
+function mvNews3(N,u,o,t30){const x=xData(),R=x.re||{};
+  for(const key in R){const r=R[key],[k,id,ru]=key.split(":");if(!M[id]||ru!==u||r.by!==o||r.t<t30)continue;const v=(((ST[k]||{}).w||{})[id]||{}).r||{};
+    N.push({t:r.t,ic:r.e,h:`${esc(U[o].n)} hat auf deine Bewertung von <b>${esc(M[id].name)}</b>${v[u]?" ("+fmtR(v[u])+")":""} mit ${r.e} reagiert`,go:k+":"+id,fx:"re",fe:r.e})}
+  const v=mvInv();if(v){const m=M[v.id];
+    if(v.by===o)N.push({t:v.t,pin:v.ans?0:1,ic:"💌",h:`${esc(U[o].n)} lädt dich ein: <b>${esc(m.name)}</b> · ${esc(mvWhen(v.at))}${v.ans?(v.ans.ok?" – du hast zugesagt 💞":" – du hast abgesagt"):""}`,inv:v.ans?0:1,go:v.sec+":"+v.id,fx:"heart"});
+    else if(v.by===u&&v.ans)N.push({t:v.ans.t,ic:v.ans.ok?"💞":"🌙",h:v.ans.ok?`${esc(U[o].n)} ist dabei: <b>${esc(m.name)}</b> · ${esc(mvWhen(v.at))}`:`${esc(U[o].n)} kann heute nicht: <b>${esc(m.name)}</b>`,go:v.sec+":"+v.id,fx:v.ans.ok?"heart":""})}}
+
+// ---------- Aktionen (vor allen anderen in act()) ----------
+function mvAct3(d){
+  if(mvHM&&!d.mvre&&!d.mvhm)mvHM=null;
+  if(d.mvhm){mvHM=d.mvhm;render();return true}
+  if(d.mvre){const[key,e]=d.mvre.split("|");const b=document.querySelector(`[data-mvre="${CSS.escape(d.mvre)}"]`);mvReact(key,e,b);render();return true}
+  if(d.mvinv!==undefined){const b=document.querySelector(`[data-mvinv="${CSS.escape(d.mvinv)}"]`);mvInvAns(d.mvinv==="1",b);render();return true}
+  if(d.mvics){mvIcsGo(d.mvics);return true}
+  if(xo&&xo.k==="fa"){
+    if(d.fainv){mvTurnPage(()=>{xo.step=4;xoRender();$("xo").scrollTop=0;mvFaFocus()});return true}
+    if(d.fainvt!==undefined){const v=d.fainvt;if(xo.invAt===v)return true;mvChipGo("invt",()=>{xo.invAt=v;xoRender()});return true}
+    if(d.fainvgo){const b=document.querySelector("#xo [data-fainvgo]"),r=b?b.getBoundingClientRect():null,at=xo.invAt==="now"?Date.now():+xo.invAt;if(!xo.pick||!at)return true;mvInvSend(xo.pick,topTab,at,r);return true}}
+  return false}
+
+// ---------- Nach jedem Zeichnen ----------
+function mvAfter3(){mvScrSync()}
+{const o=mvAfter2;mvAfter2=function(){o.apply(this,arguments);try{mvAfter3()}catch(e){}}}
+
+// ---------- Einmalig einrichten ----------
+function mvSetup3(){
+  const s=document.createElement("div");s.id="mvscr";s.hidden=true;s.setAttribute("aria-hidden","true");s.addEventListener("click",mvScrClick);document.body.appendChild(s);
+  mvSheetDrag($("xo"),()=>$("xo"),()=>{if(xo)xoClose()});
+  mvSheetDrag($("brw"),()=>$("brw"),()=>{if(brw){brwClose();render()}});
+  document.addEventListener("click",e=>{const t=e.target;if(!t||!t.closest)return;const hp=t.closest("[data-mvhap]");if(hp){mvSetHap(!mvHapOn());mvHap();e.stopImmediatePropagation()}},true);
+  mvMenuSync()}
+{const o=mvSetup;mvSetup=function(){o.apply(this,arguments);try{mvSetup3()}catch(e){console.error(e)}}}
 // BEWEGUNG-END
 
 function render(){
@@ -15499,11 +15782,11 @@ function render(){
   const rowFor=(id,u)=>`<div class="rr"><span class="rn ${u}">${U[u].n}</span>${u===I()&&ed?`<span class="stars sm2">${liveStars(id)}${rt(id,u)?`<button class="rsb rclr" data-rclr="${id}" aria-label="Deine Bewertung entfernen">×</button>`:""}</span>`:sst(rt(id,u))}</div>`;
   const nt=id=>{const n=S.notes[id]||{};return["jos","joh"].filter(u=>n[u]).map(u=>`<p class="hn"><b>${U[u].n}:</b> ${esc(n[u])}</p>`).join("")};
   $("hsort").innerHTML=SORTS.map(x=>`<option value="${x[0]}"${x[0]===hsort?" selected":""}>${x[1]}</option>`).join("");
-  $("hist").innerHTML=sortedDone().map(d=>`<li class="${d.id===pp?"pop":""}">${cv(d.id,M[d.id].name)}<div><button class="lnk" data-info="${d.id}"><b>${M[d.id].name}</b></button> ${seaBadge(d.id)}<span class="gn">${fdate(d.t)}</span>${d.pre?`<span class="pre">schon vorher gesehen</span>`:""}${d.via==="both"?`<span class="pre">💞 zusammen gesehen</span>`:""}${agreeTag(d.id)}${rowFor(d.id,"jos")}${rowFor(d.id,"joh")}${nt(d.id)}</div>${ed?`<button class="chk" data-back="${d.id}">Zurück in die Watchlist</button>`:""}</li>`).join("")||`<li class="gn">Noch nichts abgeschlossen.</li>`;
+  $("hist").innerHTML=sortedDone().map(d=>`<li class="${d.id===pp?"pop":""}">${cv(d.id,M[d.id].name)}<div><button class="lnk" data-info="${d.id}"><b>${M[d.id].name}</b></button> ${seaBadge(d.id)}<span class="gn">${fdate(d.t)}</span>${d.pre?`<span class="pre">schon vorher gesehen</span>`:""}${d.via==="both"?`<span class="pre">💞 zusammen gesehen</span>`:""}${agreeTag(d.id)}<div class="mvhr">${mvHChip(d.id,"jos",ed)}${mvHChip(d.id,"joh",ed)}</div>${nt(d.id)}</div>${ed?`<button class="mvdots" data-mvhm="${d.id}" aria-haspopup="dialog" aria-label="Mehr zu ${esc(M[d.id].name)}">⋯</button>`:""}</li>`).join("")||`<li class="gn">Noch nichts abgeschlossen.</li>`;
   if(tab==="stat")$("v-stat").innerHTML=rwStatTile()+xStatBtns()+statHtml();
   $("ro").hidden=ed||tab==="stat";$("rollb").hidden=!ed;$("swb2").hidden=!ed;$("finb").hidden=!ed;
   $("v-wl").hidden=tab!=="wl";$("v-hist").hidden=tab!=="hist";$("v-stat").hidden=tab!=="stat";$("v-ach").hidden=tab!=="ach";if(tab==="ach")$("v-ach").innerHTML=achHtml();$("v-inv").hidden=tab!=="inv";if(tab==="inv")$("v-inv").innerHTML=invHtml();
-  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual&&!rateId&&!faOn&&!blind;if(moWas&&!mo.hidden&&!calm())fxOnce(mo,"opening",620)
+  const mo=$("modal"),ae=document.activeElement,moWas=mo.hidden;mo.hidden=!openId&&!preId&&!rollOn&&!swapId&&!dual&&!rateId&&!faOn&&!blind&&!mvHM;if(moWas&&!mo.hidden&&!calm())fxOnce(mo,"opening",620)
   // Beim Tippen einer Notiz das Fenster nicht neu aufbauen, sonst springt der Cursor raus.
   if(!(ae&&ae.dataset&&ae.dataset.note&&mo.contains(ae))&&!(spinning&&rollOn&&$("reel")&&$("reel").children.length>1)&&!(blind&&blind.anim)){
     if(openId)mo.innerHTML=modalHtml();
@@ -15513,7 +15796,8 @@ function render(){
     else if(swapId)mo.innerHTML=swapHtml();
     else if(dual)mo.innerHTML=dualHtml();
     else if(rateId)mo.innerHTML=rateSheetHtml();
-    else if(blind)mo.innerHTML=blindHtml();}
+    else if(blind)mo.innerHTML=blindHtml();
+    else if(mvHM)mo.innerHTML=mvHMHtml();}
   const wh=$("who");wh.hidden=!(!me||whoOpen||needCode());if(!wh.hidden&&!(document.activeElement&&document.activeElement.id==="ccin"))wh.innerHTML=needCode()?codeHtml():whoHtml();
   $("menu").hidden=!menu;document.querySelectorAll("[data-gear]").forEach(g=>g.setAttribute("aria-expanded",menu));
   const th=document.documentElement.dataset.auto?"auto":document.documentElement.dataset.theme||(window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -15577,7 +15861,7 @@ document.addEventListener("click",e=>{
   if(brwClick(e))return;
   {const ob=e.target.closest&&e.target.closest("[data-brw]");if(ob){brwOpen();return}}
   if(e.target.id==="scrim"){closeNav();render();return}
-  if(e.target.id==="modal"){if(blind&&blind.anim)return;if(mvBlKeep())return;fxCloseInfo(()=>{openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;render()});return}
+  if(e.target.id==="modal"){if(blind&&blind.anim)return;if(mvBlKeep())return;fxCloseInfo(()=>{openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;mvHM=null;render()});return}
   if(sOpen&&!e.target.closest("#srch,#modal,#toast")){sOpen=false;renderSearch()}
   const b=e.target.closest("button");
   if(menu&&!e.target.closest("#menu,[data-gear]")){menu=false;rstAsk=false;impData=null;if(!b){render();return}}
@@ -15589,10 +15873,12 @@ document.addEventListener("click",e=>{
 function act(d){
   const c=C(),w=id=>S.w[id]||(S.w[id]={});
   if(faOn&&(d.roll||d.swipe||d.xo))faOn=false;
+  try{mvHapFor(d)}catch(e){}
   if(faAct(d))return;
+  if(mvAct3(d))return;
   if(d.bl){mvBlindAct(d.bl);return}
   if(d.mvhow){const n=mvTonight();if(n){if(topTab!==n.sec){topTab=n.sec;S=ST[topTab];vi=0}tab="wl";mvBlindOpen(n.id,n.sec);render()}return}
-  if(d.mvtnx){mvTonightClear();render();return}
+  if(d.mvtnx){mvInvDrop();mvTonightClear();render();return}
   if(d.mvbl){const[k,id]=d.mvbl.split(":");if(xo)xoClose();if(!SEC[k]||!M[id])return;if(topTab!==k){topTab=k;S=ST[k];vi=0}tab="wl";mvBlindOpen(id,k);render();return}
   if(xAct(d))return;
   if(d.acc||d.sadd)petReact(d.acc||d.sadd,"add");else if(d.info)petReact(d.info,"look");
@@ -15645,7 +15931,7 @@ function act(d){
   else if(d.mood){if(spinning)return;mood=d.mood;rollId=null}
   else if(d.spin){spin();return}
   else if(d.info){if(d.epjump)setTimeout(()=>{const x=document.querySelector("#modal .eps");if(x){x.scrollIntoView({block:"start",behavior:"smooth"});const i=x.querySelector("[data-epto]");if(i)i.focus({preventScroll:true})}},60);openId=d.info;seaNeed(openId);rollOn=false;rmAsk=null;if(META[openId]===undefined&&!Q.includes(openId)){Q.unshift(openId);covFetch()}}
-  else if(d.close){if(mvBlKeep())return;openId=null;preId=null;rollOn=false;whoOpen=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;if(!(blind&&blind.anim))blind=null}
+  else if(d.close){if(mvBlKeep())return;openId=null;preId=null;rollOn=false;whoOpen=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;mvHM=null;if(!(blind&&blind.anim))blind=null}
   else if(d.dclr)dual.r[d.dclr]=undefined;
   else if(d.rstep){const[ctx,id,dl]=d.rstep.split("|"),cur=ctx.startsWith("dr:")?dual.r[ctx.slice(3)]:ctx==="rs"?rsV:ctx.startsWith("bl:")?(blind&&blind.v[ctx.slice(3)]):rt(id,I());if(!cur)return;rateCommit(ctx,id,cur+(+dl)/10);return}
   else if(d.dsave){const {id,pre}=dual,s=w(id),li=c.list.indexOf(id),x0=xpNow();mvXpPend={r:mvRect(id),x0};snap(`„${M[id].name}“ zusammen bewertet`);s.r=s.r||{};
@@ -15746,7 +16032,7 @@ document.addEventListener("keydown",e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"&&!typing&&H.length){e.preventDefault();undo();return}
   if(e.key!=="Escape")return;
   if(blind&&blind.anim)return;if(mvBlKeep())return;
-  if(openId||preId||rollOn||swapId||dual||rateId||faOn||blind){openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null}else if(brw){brwClose();return}else if(whoOpen&&me)whoOpen=false;else if(menu){menu=false;rstAsk=false;impData=null;([...document.querySelectorAll(".agear")].find(g=>g.getClientRects().length)||(lay()==="m"?$("hamb"):$("accb"))).focus()}else if(drawer||sheet||(accOpen&&lay()==="t"))closeNav();else if(accOpen&&lay()==="d"){accOpen=false;$("accb").focus()}else return;render()});
+  if(openId||preId||rollOn||swapId||dual||rateId||faOn||blind||mvHM){openId=null;preId=null;rollOn=false;rmAsk=null;swapId=null;dual=null;faOn=false;rateId=null;rsV=0;blind=null;mvHM=null}else if(brw){brwClose();return}else if(whoOpen&&me)whoOpen=false;else if(menu){menu=false;rstAsk=false;impData=null;([...document.querySelectorAll(".agear")].find(g=>g.getClientRects().length)||(lay()==="m"?$("hamb"):$("accb"))).focus()}else if(drawer||sheet||(accOpen&&lay()==="t"))closeNav();else if(accOpen&&lay()==="d"){accOpen=false;$("accb").focus()}else return;render()});
 // Desktop und Drawer: Klick außerhalb schließt den schwebenden Reiter (nach dem eigentlichen Klick, damit der nicht verloren geht)
 let accDown=false;document.addEventListener("pointerdown",e=>{accDown=!!(e.target.closest&&e.target.closest("#acc,#menu"))},true);
 document.addEventListener("click",e=>{if(!accOpen||lay()==="t")return;const inside=e.detail===0?!document.contains(e.target)||!!(e.target.closest&&e.target.closest("#acc,#menu")):accDown;if(inside)return;accOpen=false;try{localStorage.setItem("wl-acc-open","0")}catch(x){}render()});
@@ -15992,7 +16278,7 @@ function brwRender(){const el=$("brw"),b=brw;if(!b)return;el.hidden=false;
   const chip=(k,v,on,lab)=>`<button class="bwchip${on?" on":""}" data-${k}="${v}" aria-pressed="${on}">${lab}</button>`;
   const nf=(b.y0?1:0)+(b.y1?1:0)+(b.rmin?1:0)+b.tags.length+(b.st!=="all"?1:0)+(b.lang!=="all"?1:0);
   el.innerHTML=`<div class="bwin">
-  <header class="bwhead"><button class="rst bwback" data-bwclose="1">‹ Zurück</button><h2>Stöbern &amp; sortieren</h2><span class="bwcnt" id="bwcnt" aria-live="polite"></span></header>
+  <header class="bwhead mvwh"><h2>Stöbern</h2><span class="bwcnt" id="bwcnt" aria-live="polite"></span><button class="x bwback" data-bwclose="1" aria-label="Schließen">×</button></header>
   <nav class="bwtabs" aria-label="Bereich">${Object.keys(SEC).map(k=>`<button class="bwtab${k===topTab?" on":""}" data-bwtab="${k}" aria-pressed="${k===topTab}">${{anime:"🎌",film:"🎬",serie:"📺"}[k]} ${SEC[k].many} <span class="lc">${Object.values(M).filter(m=>m.sec===k&&!m.old).length}</span></button>`).join("")}</nav>
   <div class="bwbar"><input id="bwq" type="search" placeholder="Name filtern …" value="${esc(b.q)}" aria-label="Nach Name filtern" autocomplete="off">
     <label class="bwsel"><span class="sr">Sortieren nach</span><select id="bwsort">${BRW_SORT.map(s=>`<option value="${s[0]}"${s[0]===b.sort?" selected":""}>⇅ ${s[1]}</option>`).join("")}</select></label>
@@ -16324,7 +16610,7 @@ const xRate=(k,id,u)=>(((ST[k].w||{})[id]||{}).r||{})[u]||0;
 
 // ---------- Gemeinsame Ebene für die Extras (#xo, liegt wie „Stöbern“ unter dem Info-Fenster) ----------
 let xo=null;
-const XO_T={fa:"🍿 Filmabend",fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster",news:"🔔 Neuigkeiten"};
+const XO_T={soon:"📅 Demnächst",fa:"🍿 Filmabend",fin:"🧭 Zeit & Stimmung",mar:"🎞️ Marathon-Planer",quiz:"🧠 Euer Quiz",poster:"🖼 Jahres-Poster",news:"🔔 Neuigkeiten"};
 function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   xo=Object.assign({k,back:document.activeElement},o||{});
   if(k==="fin")Object.assign(xo,{min:0,x:0,y:0,set:false});
@@ -16333,9 +16619,9 @@ function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   if(k==="poster")posterMake();
   const el=$("xo");el.scrollTop=0;const f=el.querySelector(".bwback");if(f)f.focus({preventScroll:true})}
 function xoClose(){const b=xo&&xo.back;if(xo&&xo.url)URL.revokeObjectURL(xo.url);xo=null;document.body.classList.remove("xoon");const el=$("xo");el.hidden=true;el.innerHTML="";render();if(b&&document.contains(b)&&b.getClientRects().length)b.focus()}
-function xoRender(){const el=$("xo");if(!xo){if(!el.hidden){el.hidden=true;el.innerHTML=""}return}el.hidden=false;
-  const body=xo.k==="fa"?faHtml2():xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():posterHtml();
-  const st=el.scrollTop;keepFocus(el,()=>el.innerHTML=`<div class="xoin x-${xo.k}"><header class="bwhead"><button class="rst bwback" data-xoclose="1">‹ Zurück</button><h2>${XO_T[xo.k]}</h2></header>${body}</div>`);el.scrollTop=st;
+function xoRender(){const el=$("xo");if(!xo){if(!el.hidden){el.hidden=true;el.innerHTML=""}return}el.hidden=false;el.dataset.k=xo.k;
+  const body=xo.k==="soon"?mvSoonHtml():xo.k==="fa"?faHtml2():xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():posterHtml();
+  const st=el.scrollTop;keepFocus(el,()=>el.innerHTML=`<div class="xoin x-${xo.k}"><header class="bwhead mvwh"><h2>${XO_T[xo.k]}</h2><button class="x bwback" data-xoclose="1" aria-label="Schließen">×</button></header>${body}</div>`);el.scrollTop=st;
   if(xo.k==="fin")finResults()}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&xo&&!openId&&!preId&&!rw&&!menu&&$("modal").hidden){e.preventDefault();xoClose()}});
 
@@ -16615,7 +16901,7 @@ const newsSeen=()=>{try{return +localStorage.getItem(newsKey())||0}catch(e){retu
 function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=Date.now()-45*864e5,x=xData(),mvL=mvLocAll();
   for(const k of RW_SECS){const s0=ST[k],mine=new Set();for(const l of [u,"both"])if(s0.lists[l]){for(const d of s0.lists[l].done)mine.add(d.id);for(const id of s0.lists[l].list)mine.add(id)}
     for(const id in s0.w||{}){const w=s0.w[id],t=(w.rt||{})[o],r=(w.r||{})[o];if(!M[id]||!t||!r||t<t30||!(mine.has(id)||(w.r||{})[u])||(mvL[k+":"+id]&&t<=mvL[k+":"+id]+60e3))continue;
-      N.push({t,ic:"⭐",h:`${esc(U[o].n)} hat <b>${esc(M[id].name)}</b> mit ${fmtR(r)} bewertet${(w.r||{})[u]?` <span class="gn">(du: ${fmtR(w.r[u])})</span>`:" – deine Bewertung fehlt noch"}`,go:k+":"+id})}
+      N.push({t,ic:"⭐",h:`${esc(U[o].n)} hat <b>${esc(M[id].name)}</b> mit ${fmtR(r)} bewertet${(w.r||{})[u]?` <span class="gn">(du: ${fmtR(w.r[u])})</span>`:" – deine Bewertung fehlt noch"}`,go:k+":"+id,re:k+":"+id+":"+o})}
     const todo=s0.lists.both?s0.lists.both.done.filter(d=>M[d.id]&&!xRate(k,d.id,u)).length:0;if(todo)N.push({t:0,ic:"✍️",h:`<b>${todo}</b> gemeinsam ${todo===1?"gesehener Titel wartet":"gesehene Titel warten"} bei ${SEC[k].many} auf deine Bewertung`,top:k})}
   for(const r of x.recs){if(!M[r.id])continue;
     if(r.to===u&&r.st==="new")N.push({t:r.t,ic:"💌",h:`${esc(U[r.from].n)} empfiehlt dir <b>${esc(M[r.id].name)}</b>${r.msg?` – „${esc(r.msg)}“`:""}`,go:r.k+":"+r.id});
@@ -16624,15 +16910,16 @@ function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=D
   try{if(vHot())N.push({t:0,pin:1,ic:"💞",h:`Swipe-Abstimmung: ${esc(vStatus()||"du bist dran")}`,swipe:1})}catch(e){}
   try{for(const p of mvBlPending())N.push(p.kind==="rev"?{t:p.t,ic:"🎴",rev:1,h:`Aufgedeckt: <b>${esc(M[p.id].name)}</b> – schau, wie einig ihr seid`,bl:p.k+":"+p.id}:{t:p.t,pin:1,ic:"🙈",h:`${esc(U[o].n)} hat <b>${esc(M[p.id].name)}</b> verdeckt bewertet – du bist dran`,bl:p.k+":"+p.id});
     const tn=mvTonight();if(tn&&tn.by!==u)N.push({t:tn.t,ic:"🍿",h:`${esc(U[tn.by].n)} hat <b>${esc(M[tn.id].name)}</b> für heute Abend ausgesucht`,go:tn.sec+":"+tn.id})}catch(e){}
+  try{mvNews3(N,u,o,t30)}catch(e){}
   for(const n of N)n.neu=n.t>seen;
   return N.sort((a,b)=>(b.neu-a.neu)||(!!b.pin-!!a.pin)||b.t-a.t).slice(0,40)}
 const newsCount=()=>newsList().filter(n=>n.neu).length;
 function newsHtml(){const N=xo.list||(xo.list=newsList());
-  return`<p class="xolead">Was seit deinem letzten Blick passiert ist. Die Glocke zählt nur Neues.</p>${N.length?`<ul class="newsl">${N.map(n=>`<li class="${n.neu?"neu":""}"><span class="nwi" aria-hidden="true">${n.ic}</span><span class="nwt">${n.h}${n.t?`<small>${fdate(n.t)}</small>`:""}</span>${n.bl?`<button class="rej" data-mvbl="${n.bl}">${n.rev?"Ansehen":"Auf drei!"}</button>`:n.go?`<button class="rej" data-newsgo="${n.go}">Ansehen</button>`:n.top?`<button class="rej" data-newstop="${n.top}">Öffnen</button>`:n.swipe?`<button class="rej" data-newsswipe="1">Swipen</button>`:""}</li>`).join("")}</ul>`:`<div class="qzbox"><p class="qzbig">🔕</p><h3>Nichts Neues</h3><p class="gn">Hier erscheinen Bewertungen von ${esc(U[O()].n)}, Empfehlungen, neue Staffeln und offene Abstimmungen.</p></div>`}
+  return`<p class="xolead">Was seit deinem letzten Blick passiert ist. Die Glocke zählt nur Neues.</p>${N.length?`<ul class="newsl">${N.map(n=>`<li class="${n.neu?"neu":""}"><span class="nwi" aria-hidden="true">${n.ic}</span><span class="nwt">${n.h}${n.t?`<small>${fdate(n.t)}</small>`:""}</span>${n.inv?`<span class="mvnb"><button class="add" data-mvinv="1">💞 Bin dabei</button><button class="rej" data-mvinv="0">Heute nicht</button></span>`:n.bl?`<button class="rej" data-mvbl="${n.bl}">${n.rev?"Ansehen":"Auf drei!"}</button>`:n.go?`<button class="rej" data-newsgo="${n.go}">Ansehen</button>`:n.top?`<button class="rej" data-newstop="${n.top}">Öffnen</button>`:n.swipe?`<button class="rej" data-newsswipe="1">Swipen</button>`:""}${n.re?mvReRowK(n.re,1):""}</li>`).join("")}</ul>`:`<div class="qzbox"><p class="qzbig">🔕</p><h3>Nichts Neues</h3><p class="gn">Hier erscheinen Bewertungen von ${esc(U[O()].n)}, Empfehlungen, neue Staffeln und offene Abstimmungen.</p></div>`}
   <p class="gn newsnote">Hinweis: Die Glocke zeigt Neues, sobald du die Seite öffnest. Mitteilungen aufs gesperrte Handy gibt es noch nicht.</p>`}
 let newsPrev=null;
 function xBell(){const b=$("bell");if(!b)return;const n=me?newsCount():0,bd=$("belln");bd.hidden=!n;mvOdo(bd,String(n>9?"9+":n));b.classList.toggle("has",!!n);b.setAttribute("aria-label",n?`Neuigkeiten: ${n} neu`:"Neuigkeiten");
-  if(newsPrev!==null&&n>newsPrev&&!(xo&&xo.k==="news")){const x=newsList().find(y=>y.neu);if(x){const d=document.createElement("div");d.innerHTML=x.h;toast("🔔 "+d.textContent);if(!calm()){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}}}
+  if(newsPrev!==null&&n>newsPrev&&!(xo&&xo.k==="news")){const x=newsList().find(y=>y.neu);if(x){const d=document.createElement("div");d.innerHTML=x.h;toast("🔔 "+d.textContent);try{mvBellFx(x)}catch(e){}if(!calm()){b.classList.remove("ring");void b.offsetWidth;b.classList.add("ring")}}}
   newsPrev=n}
 // Wird in render() aufgerufen: Streifen, Empfehlungen, Glocke
 function x2Render(){const c=$("cont");if(c){const h=contHtml();if(c._h!==h){c.innerHTML=h;c._h=h}c.hidden=!h}

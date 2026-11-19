@@ -1,6 +1,6 @@
 # Übergabe für eine neue Session – Josefines ♥ Johanns Watchlist
 
-Stand: 18.11.2026 (nach Phase 2 des UX-Umbaus). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
+Stand: 19.11.2026 (Phase 3 des UX-Umbaus auf dem Branch, wartet auf Freigabe für `main`). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
 
 ## 1. Was das Projekt ist
 - Private PWA-Watchlist für zwei Personen (Josefine = `jos`, Johann = `joh`, gemeinsam = `both`), Sprache Deutsch.
@@ -12,7 +12,7 @@ Stand: 18.11.2026 (nach Phase 2 des UX-Umbaus). Ausführliche Feature-Doku: `ueb
 - Arbeits-Branch dieser Session: `claude/relaxed-thompson-jsh0v5` (vorher `claude/gallant-pasteur-7en1qv`). Auf `main` kommt eine Änderung erst, wenn der Nutzer sie freigegeben hat (bei größeren Umbauten zuerst eine Vorschau-Seite als Artifact zeigen); dann `git push origin <branch>:main`.
 - **Live: GitHub Pages** https://pxrple01.github.io/soulwatch12/ – jeder Push auf `main` ist nach 1–2 Min. online (Prüfen: `curl` auf die Seite, z. B. nach einem neuen String oder `jj-watchlist-vNN` in `sw.js`).
 - Netlify (soulwatch.netlify.app) ist **tot** (kostenloses Kontingent aufgebraucht, „Usage exceeded“). Der Nutzer sollte dort Builds stoppen/Seite löschen – das kann Claude nicht.
-- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v39`**, bei Releases hochzählen), `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
+- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v40`** auf dem Branch, `v39` auf `main`; bei Releases hochzählen), `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
 - Commit-Nachrichten auf Deutsch, enden mit den Attribution-Zeilen aus dem System-Hinweis. Keine Modellnamen in Commits/Code.
 
 ## 3. Cloud (Supabase) – Sicherheit!
@@ -27,12 +27,13 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 - CSS `/* THEMES-START */…` + JS `// THEMES-START…` (Designs Kinopalast `deco`, Tiefsee `sea`, Origami `paper`; Szenen-Ebenen `#tfx` hinter, `#tfo` über dem Inhalt; `thSwitch`, `thIntro`, `thConfetti` …)
 - CSS `/* KISTE-START */…` + JS `// KISTE-START…` (inszeniertes Kisten-Öffnen, Präfix `kx-`)
 - JS `// GESCHENK-START…` vor `chList` (Geschenk-Kisten `CH_GIFTS`, aktuell `g1` für beide)
-- CSS `/* BEWEGUNG-START */…` (ganz am Ende) + JS `// BEWEGUNG-START…// BEWEGUNG-END` (direkt vor `render()`): Bewegungs-System, Startseite mit Tipps im freien Platz, Karten mit Haken + Bewertungs-Blatt, Gesten, Animationen 1–31, Symbole Emoji/Linien, Ruhige Szene (Phase 1); Filmabend-Programmheft (`xo.k="fa"`), Heute Abend, „Auf drei!“ (`blind`), rollende Zahlen über `data-odo` (Phase 2). Details in `uebergabe.md` (Abschnitte „Phase 1“ und „Phase 2“).
+- CSS `/* BEWEGUNG-START */…` (ganz am Ende) + JS `// BEWEGUNG-START…// BEWEGUNG-END` (direkt vor `render()`): Bewegungs-System, Startseite mit Tipps im freien Platz, Karten mit Haken + Bewertungs-Blatt, Gesten, Animationen 1–31, Symbole Emoji/Linien, Ruhige Szene (Phase 1); Filmabend-Programmheft (`xo.k="fa"`), Heute Abend, „Auf drei!“ (`blind`), rollende Zahlen über `data-odo` (Phase 2); ein Fenster-System (Blatt/Fenster mit × rechts), eine Navigation am Handy (kein Hamburger), Spiel-Ecke-Karte, Verlauf mit ⋯-Menü, Reaktionen, Einladungen, Kalender (.ics), „Demnächst“, Haptik (Phase 3). Details in `uebergabe.md` (Abschnitte „Phase 1“ bis „Phase 3“).
 - **Wichtig:** Die Quelldateien (kino.css, extras.css/js, themes.css/js, kiste.css/js, gift.js, Build-Skripte `build_all.sh`, `apply*.py`, Katalog-Pipeline `cat2/*`) lagen nur im Scratchpad der alten Session und sind **nicht** im Repo. In einer neuen Session direkt in `index.html` zwischen den Markern arbeiten (Marker beibehalten!).
 - Designs: light, dark, purple (Johann/Manga), baby (Josefine/Einhorn), deco, sea, paper, auto.
 - Bewertungen 1–10 (`RMIN=1`, `RMAX=10`), Kisten/Gegenstände/Sets/XP/Haustier, Rewind, Swipen, Glocke, Empfehlungen, Weiterschauen – Details in `uebergabe.md`.
 - Bewerten auf der Watchlist: Haken auf dem Cover (`.ck`) → Bewertungs-Blatt (`rateId`, Kontext `"rs"`), in „Zusammen“ „Auf drei!“ (verdeckt bewerten, gemeinsam aufdecken). Keine Regler mehr auf den Karten. Das Info-Fenster hat die Hauptaktion („Gesehen – jetzt bewerten“ bzw. „Zurück in die Watchlist“).
-- Neue geteilte Daten (Phase 2): `ST[k].blind` (verdeckte Bewertungen), `ST.film.x.tonight` (Heute Abend).
+- Neue geteilte Daten: `ST[k].blind` (verdeckte Bewertungen), `ST.film.x.tonight` (Heute Abend), `ST.film.x.re` (Reaktionen), `ST.film.x.inv` (Einladung).
+- Am Handy gibt es keine Seitenleiste mehr: Navigation = untere Leiste + Ich-Blatt (`accPanel(true)`). Stöbern/Extras/Glocke sind am Handy Blätter, am Desktop Fenster (`#mvscr` = Scrim).
 
 ## 5. Bekannte Fallen
 - Neue Klassen/`@keyframes` vorher suchen (viele kurze Namen; reservierte Präfixe `dc- se- pp- th- kx- mv`; vergeben sind z. B. `.ttl`, `.ok`, `.cl`, `.done`, `.turn`).
@@ -40,6 +41,7 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 - Keine Variable `top` (heißt `topTab`). Kein Hintergrund am `<html>` (sonst ist `#tfx` unsichtbar).
 - Bei `prefers-reduced-motion` muss alles ruhig bleiben (`calm()`).
 - `achCheck` (Abzeichen/Kisten) läuft spätestens 4 s nach dem Zeichnen (`achT0`).
+- Klassen `.mvfly` (id) und `.mvmenu` sind vergeben (Phase 3 nutzt `.mvflye`, `.mvhmenu`). Modal-Zustände von Phase 3 (`mvHM`) werden in allen vier Schließ-Wegen zurückgesetzt.
 - `render()` baut auch Modal und Extras-Seite (`xoRender`) jedes Mal neu: Zustände in `blind`/`xo` halten, einmalige Animationen per JS (WAAPI) statt CSS-Animation. Für rollende Zahlen `data-odo="eindeutiger-schlüssel"` verwenden.
 - Gegenstände in Kisten werden **berechnet**, nicht gespeichert – nie Kisten in die bestehende Ziehungs-Reihe einfügen (siehe Geschenk-Kisten).
 - Wikipedia-API (`api.php`) war stark gedrosselt (429) → `Spezial:Exportieren` (POST, viele Seiten pro Anfrage) nutzen. AniList braucht eigenen User-Agent („watchlist-builder/1.0“), Wikimedia-UA ohne persönliche Kontaktdaten.
@@ -54,6 +56,7 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 ## 7. UX-Umbau: nächste Schritte (vom Nutzer so bestellt)
 - Phase 1 (fertig): Bewegungs-System, Startseite, Karten ohne Regler, Animationen.
 - Phase 2 (fertig): Filmabend als Programmheft (Zeit & Stimmung → Kandidaten → würfeln/swipen → „Heute läuft …“ mit Licht-aus je Design → Banner „Heute Abend“/„Wie war's?“), „Auf drei!“ (ein oder zwei Handys), „Zurück in die Watchlist“ im Info-Fenster (mit Tausch bei voller Liste), rollende Zahlen und Beschriftungen an vielen Stellen.
+- Phase 3 (fertig auf dem Branch, Freigabe für `main` steht aus): ein Fenster-System, eine Navigation am Handy, Spiel-Ecke, Verlauf mit ⋯-Menü, Reaktionen, Einladungen, Kalender (.ics), „Demnächst“, Haptik-Experiment, Kleinkram. Vorschau-Artifact „Watchlist – Vorschau Phase 3“ (Demo-Daten, Cloud aus).
 - Nicht gewünscht: Live-Anzeige „X ist gerade da“ (hat der Nutzer ausdrücklich abgelehnt).
 - **Phase 3:** Reaktionen/Einladungen zwischen den beiden (über `ST.film.x` wie Empfehlungen), Kalender-Termin (.ics) statt Push + Ansicht „Demnächst“, Verlauf mit ⋯-Menü statt kleiner −/+/×, Glocke als Blatt, eine Navigation am Handy (Hamburger weg), Spiel-Ecke in der Leiste bündeln, ein einheitliches Fenster-System, Haptik-Experiment (iOS-Schalter-Trick).
 - Die Vorschau-Seite (Artifact „Watchlist-Vorschau“) zeigt alle Animationen und Abläufe als Referenz.
