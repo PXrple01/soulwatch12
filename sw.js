@@ -1,8 +1,8 @@
-// Offline-Start für die Watchlist: Seite und App-Dateien werden zwischengespeichert.
+// Offline-Start für die Watchlist: Seite, Katalog (katalog.js) und App-Dateien werden zwischengespeichert.
 // Immer zuerst aus dem Netz laden (damit neue Versionen sofort ankommen). Ohne Netz oder bei einem Server-Fehler
 // (z. B. wenn der Hoster gestört ist) startet die zuletzt gespeicherte Version.
-const CACHE = "jj-watchlist-v40";
-const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
+const CACHE = "jj-watchlist-v41";
+const FILES = ["./", "./index.html", "./katalog.js", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => {
   // Einzeln speichern: fehlt eine Datei, scheitert nicht gleich die ganze Installation
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(FILES.map(f => c.add(f).catch(() => {})))));
