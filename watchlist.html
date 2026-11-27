@@ -3341,6 +3341,111 @@ button.mvhc:hover{border-color:var(--acc)}
 @keyframes mvPulse{50%{opacity:.45}}
 @media (prefers-reduced-motion:reduce){.mvwpw{animation:none}}
 /* BEWEGUNG-END */
+/* UNSLOP-START */
+/* =====================================================================
+   unslop-Pass (27.11.2026) nach „unslop“ von Damir Sokolovsky (@heydamir), CC BY 4.0.
+   Hell & Dunkel: warme Grautöne ohne Farbschleier im Hintergrund, Saallicht-Bernstein als einziger Akzent, Pink/Lila nur für Josefine/Johann.
+   Lila, Kinopalast, Tiefsee, Origami: kein Glow an Bedienelementen, keine Verläufe zwischen zwei Farbtönen.
+   Alle außer Baby: kleine Beschriftungen ohne Versalien, kein schlagendes Herz, Paar-Zeichen statt 💞.
+   ===================================================================== */
+:root:not([data-theme]),:root[data-theme="light"]{--bg:#f6f3ee;--panel:#fffdf9;--ink:#24201b;--mute:#675e55;--line:#e5dfd5;--sk:#ece6dc;--acc:#9c5200;--accink:#fff;--c1:#a85a00;--c2:#9c5200;--star:#b86a00;--glass:rgba(255,253,249,.82);--glow1:transparent;--glow2:transparent}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--bg:#100e0c;--panel:#1a1714;--ink:#f3eee6;--mute:#a79e93;--line:#2c2722;--sk:#221e1a;--acc:#f0b44a;--accink:#1d1406;--c1:#f0b44a;--c2:#e3a43a;--star:#f2c14e;--glass:rgba(26,23,20,.82);--glow1:transparent;--glow2:transparent}}
+:root[data-theme="dark"]{--bg:#100e0c;--panel:#1a1714;--ink:#f3eee6;--mute:#a79e93;--line:#2c2722;--sk:#221e1a;--acc:#f0b44a;--accink:#1d1406;--c1:#f0b44a;--c2:#e3a43a;--star:#f2c14e;--glass:rgba(26,23,20,.82);--glow1:transparent;--glow2:transparent}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) body::before,:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) body::after{background:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .add{border-radius:10px;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.14)}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .add:hover{transform:none;filter:brightness(1.06);box-shadow:0 2px 6px rgba(0,0,0,.16)}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .add:active{transform:scale(.98)}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .rej{border-radius:10px}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .rec .add::after{content:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .fab2{box-shadow:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) :is(.mvtnc,.mvcand.hot,.mvgc,.mvdock){box-shadow:0 1px 2px rgba(0,0,0,.08)}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .mvcand.hot{box-shadow:0 0 0 2px var(--acc)}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .mvtnc{border-color:var(--line)}
+/* Glow raus (automatisch aus den vorhandenen Regeln erzeugt) */
+:root[data-theme="purple"] .ttab.on{text-shadow:none}
+:root[data-theme="purple"] .gear:hover{box-shadow:none}
+:root[data-theme="purple"] .sea button.on{box-shadow:none}
+:root[data-theme="purple"] .slotm{box-shadow:none}
+:root[data-theme="purple"] input:focus,:root[data-theme="purple"] textarea:focus{box-shadow:none}
+:root[data-theme="purple"] .rate .rfg{text-shadow:none}
+:root:not([data-theme="baby"]) .leg .pethab{box-shadow:0 0 0 2px #f2c14e}
+:root[data-theme="deco"] .srch input:focus{box-shadow:0 0 0 4px rgba(227,180,72,.2)}
+:root[data-theme="deco"] .rdots i.on{box-shadow:none}
+:root[data-theme="deco"] .grid>.card:not(.slot):hover{box-shadow:0 0 0 1px rgba(227,180,72,.75), 0 24px 50px rgba(0,0,0,.6)}
+:root[data-theme="sea"] :is(.ttl .n1,.mtt .n1){text-shadow:none}
+:root[data-theme="sea"] :is(.ttl .n2,.mtt .n2){text-shadow:none}
+:root[data-theme="sea"] .srch input:focus{box-shadow:0 0 0 4px rgba(56,215,255,.18)}
+:root[data-theme="sea"] .bnav{box-shadow:0 14px 34px rgba(0,8,16,.6)}
+:root[data-theme="sea"] .rec{box-shadow:0 30px 70px rgba(0,8,16,.6), inset 0 1px 0 rgba(200,255,255,.16)}
+:root[data-theme="sea"] .rec .cv{box-shadow:0 0 0 1px rgba(200,255,255,.35), 0 20px 50px rgba(0,8,16,.7)}
+:root[data-theme="sea"] .rdots i.on{box-shadow:none}
+:root[data-theme="sea"] :is(.add,.slb):hover{box-shadow:0 10px 30px rgba(56,215,255,.5), inset 0 0 0 1px rgba(220,255,255,.5)}
+:root[data-theme="sea"] :is(.rej,.rollb,.howx):hover{box-shadow:none}
+:root[data-theme="sea"] .grid>.card:not(.slot):hover{box-shadow:0 0 0 1px rgba(150,245,255,.55), 0 24px 50px rgba(0,8,16,.6)}
+:root[data-theme="sea"] .card .slp{box-shadow:inset 0 0 0 1px rgba(160,255,255,.4)}
+:root[data-theme="sea"] .r2 .rate .rbg{box-shadow:inset 0 0 0 1px rgba(120,235,255,.3)}
+:root[data-theme="sea"] .r2 .rate .rfg{box-shadow:none}
+:root[data-theme="sea"] #modal .mbox{box-shadow:0 30px 90px rgba(0,6,12,.8)}
+:root[data-theme="sea"] #modal .fpo{box-shadow:0 0 0 1px rgba(200,255,255,.35), 0 24px 50px rgba(0,8,16,.7)}
+:root[data-theme="sea"] #toast{box-shadow:0 14px 34px rgba(0,8,16,.6)}
+:root:not([data-theme="baby"]) .fxp{text-shadow:none}
+:root[data-theme="purple"] .sstar{text-shadow:none}
+/* Ein Farbton statt Verlauf zwischen zwei Farbtönen */
+:root[data-theme="purple"] .tab.on,:root[data-theme="purple"] .seg button.on{background:#8b5cff}
+:root[data-theme="purple"] .add{background:#3de8ff!important}
+:root[data-theme="purple"] .bwtab.on,:root[data-theme="purple"] .bwchip.on,:root[data-theme="purple"] .bwadd{background:#8b5cff}
+:root[data-theme="sea"] :is(.add,.slb){background:#38d7ff}
+/* Kleine Beschriftungen: Satzschreibung statt Versalien mit Sperrung */
+:root:not([data-theme="baby"]) .ttl .kick{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .menu h4{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .kick2{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .sh{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .notes h4{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .ach{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .chkl{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .thn{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .fl{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .tmap .tql{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .stp{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .mvcr-k{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .mvwpl{text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) :is(.mvtnt small,.mvwpl,.mvcr-k,.mvfa-k,.mvlo-k,.mvrxl){text-transform:none;letter-spacing:.01em}
+:root:not([data-theme="baby"]) .mvtnt small{font-weight:600}
+:root:not([data-theme="baby"]) .ttl .hz{animation:none}
+/* Paar-Zeichen: zwei Punkte in Josefines Pink und Johanns Lila – nur wo es um euch beide geht */
+.mvpair{display:inline-flex;gap:2px;vertical-align:middle;font-style:normal}
+.mvpair::before,.mvpair::after{content:"";width:7px;height:7px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+.mvpair::before{background:var(--pink)}.mvpair::after{background:var(--lila)}
+:root:not([data-theme="baby"]) .cvw>.mvmt.hi{background:rgba(18,12,30,.78)}
+/* Reiter, Titel, Kennzahlen: eine Farbe, kein Verlaufstext, kein farbiger Schatten */
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .ctabs::before{background:var(--acc);box-shadow:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .ctabs .ttab.on{color:var(--accink);box-shadow:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .slb{background:var(--acc);color:var(--accink);box-shadow:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .slb::after{content:none}
+:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .cth::before,:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .tile b,:root:not([data-theme="purple"]):not([data-theme="baby"]):not([data-theme="deco"]):not([data-theme="sea"]):not([data-theme="paper"]) .swmatch b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink)}
+:where(html[data-theme="purple"],html[data-theme="deco"],html[data-theme="sea"],html[data-theme="paper"]) :is(.xpbar i,.marp i,.swbar i,.fdot.on,.thn){background:var(--acc)}
+:where(html[data-theme="purple"],html[data-theme="deco"],html[data-theme="sea"],html[data-theme="paper"]) .hf:not(.c1):not(.c2),:where(html[data-theme="purple"],html[data-theme="deco"],html[data-theme="sea"],html[data-theme="paper"]) .cb{background:var(--acc)}
+:where(html[data-theme="purple"],html[data-theme="deco"],html[data-theme="sea"],html[data-theme="paper"]) .swyes{background:var(--acc)!important;color:var(--accink)}
+:where(html[data-theme="purple"],html[data-theme="deco"],html[data-theme="sea"],html[data-theme="paper"]) .achbig{background:var(--acc);color:var(--accink)}
+:root[data-theme="purple"] .slb{background:#3de8ff}
+:root[data-theme="purple"] .snb.on{background:rgba(139,92,255,.4)}
+:root[data-theme="purple"] .swyes{background:#62b9d6!important}
+:root[data-theme="purple"] .achbig{background:#7d58e6!important}
+:root[data-theme="deco"] .ctabs::before,:root[data-theme="deco"] .snb.on::before{box-shadow:none}
+:root[data-theme="deco"] .hf:not(.c1):not(.c2),:root[data-theme="deco"] .cb{background:var(--acc)}
+:root[data-theme="sea"] .cth::before,:root[data-theme="sea"] .tile b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink);-webkit-text-fill-color:var(--ink);filter:none}
+:root[data-theme="sea"] .ctabs::before,:root[data-theme="sea"] .snb.on::before{background:var(--acc);box-shadow:none}
+:root[data-theme="sea"] .ctabs .ttab.on{color:var(--accink);text-shadow:none}
+:root[data-theme="sea"] .snb.on,:root[data-theme="sea"] .snb.act{background:rgba(62,230,208,.14)}
+/* Kinopalast: rollende Ziffern lassen sich nicht mit Folie ausschneiden (waren unsichtbar) → Gold als Farbe */
+:root[data-theme="deco"] .tile b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--acc)}
+/* Origami: Akzent als Text dunkler, Reiter-Beschriftung kräftiger (Kontrast ≥ 4,5:1) */
+:root[data-theme="paper"] .sub b{color:#ad3820}
+:root[data-theme="paper"] .ctabs .ttab:not(.on){color:#64584c}
+/* „Passt zu euch beiden“: Zahl und % bleiben zusammen, Herkunft als ruhige zweite Zeile */
+.mvmti .gn{display:block;margin-top:2px;white-space:normal}
+/* UNSLOP-END */
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Baloo+2:wght@500;700;800&family=Anton&family=Limelight&family=Jost:wght@400;500;600;700&family=Josefin+Sans:wght@600;700&family=Quicksand:wght@400;500;600;700&family=Shippori+Mincho:wght@600;800&family=Zen+Maru+Gothic:wght@400;500;700&family=Caveat:wght@600;700&display=swap">
@@ -3360,7 +3465,7 @@ button.mvhc:hover{border-color:var(--acc)}
 <div class="ctop"><div class="cth"><h2 id="cth" class="sr"></h2><nav class="ctabs" aria-label="Bereiche"><button class="ttab" data-top="anime"><span aria-hidden="true" data-mvi="anime">🌸</span> Animes</button><button class="ttab" data-top="film"><span aria-hidden="true" data-mvi="film">🎬</span> Filme</button><button class="ttab" data-top="serie"><span aria-hidden="true" data-mvi="serie">📺</span> Serien</button></nav><span class="ctv" id="ctv"></span></div><div class="sbox"><div class="srch" id="srch" role="search"><input id="sq" type="search" placeholder="Titel suchen …" autocomplete="off" aria-label="Titel suchen" aria-controls="sres"><div class="sres" id="sres" hidden></div></div><button class="brwb bell" id="bell" data-xo="news" aria-label="Neuigkeiten"><span aria-hidden="true" data-mvi="bell">🔔</span><span class="bdg" id="belln" hidden></span></button><button class="brwb" id="brwb" data-brw="1" aria-label="Stöbern: alle Titel sortieren und filtern" title="Stöbern"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="brwt">Stöbern</span></button></div></div>
 <div id="v-main">
 <div class="howto" id="howto" hidden></div>
-<p class="sub">Gesehen? <b>Haken antippen</b> und bewerten – fertig. ✨</p>
+<p class="sub">Gesehen? <b>Haken antippen</b> und bewerten – fertig</p>
 <p class="ro" id="ro" hidden></p>
 <div id="v-wl"><div class="rwban" id="rwban" hidden></div><div id="recin" hidden></div><div id="mvtn" hidden></div><div id="cont" hidden></div><div class="sban" id="sban" hidden></div><section class="rec" id="rec" aria-live="polite" hidden></section><div class="fabar" id="fabar"><button class="add fab2" id="fabtn" data-fa="1"><span data-mvi="popcorn" aria-hidden="true">🍿</span> Filmabend starten</button></div>
 <button class="todob" id="todob" data-todo="1" hidden></button>
@@ -5566,7 +5671,7 @@ function blindHtml(){const b=blind,m=M[b.id];if(!m){blind=null;return""}const u=
     const card=x=>`<div class="mvp3c ${x}${fin?" up":""}"><div class="mvfc mvbk"><b>${U[x].n[0]}</b><small>${esc(nm(x))}</small></div><div class="mvfc mvfr"><span class="n"><span data-odo="p3-${x}">${fin?b.v[x].toFixed(1).replace(".",","):"0,0"}</span></span><small>${fin?rWord(b.v[x]):""}</small></div></div>`;
     const X=v=>((v-1)/9*100).toFixed(2)+"%",lo=Math.min(b.v.jos||0,b.v.joh||0),hi=Math.max(b.v.jos||0,b.v.joh||0);
     body=`<div class="mvp3">${card("jos")}${card("joh")}</div><div class="mvmeter${fin?" up":""}" aria-hidden="true"><i class="mt"></i><i class="gap" style="left:${X(lo)};width:calc(${X(hi)} - ${X(lo)})"></i><span class="mvmk jos" style="left:${X(b.v.jos||1)}">${U.jos.n[0]}</span><span class="mvmk joh" style="left:${X(b.v.joh||1)}">${U.joh.n[0]}</span></div>
-<div class="mvverd" aria-live="polite">${fin?mvVerdict(d):""}</div>${fin?mvGuessHtml(b):""}<div class="btns">${fin?(b.view?`<button class="add" data-bl="seen">Schön!</button>`:`<button class="add" data-bl="done"><span aria-hidden="true">✓</span> Speichern</button>`):`<button class="add" data-bl="go">Auf drei aufdecken</button>`}</div>`}
+<div class="mvverd" aria-live="polite">${fin?mvVerdict(d):""}</div>${fin?mvGuessHtml(b):""}<div class="btns">${fin?(b.view?`<button class="add" data-bl="seen">Fertig</button>`:`<button class="add" data-bl="done"><span aria-hidden="true">✓</span> Speichern</button>`):`<button class="add" data-bl="go">Auf drei aufdecken</button>`}</div>`}
   return`<div class="mbox sm rsh mvblind" role="dialog" aria-label="Auf drei: ${esc(m.name)}">${head}${body}</div>`}
 const mvVerdict=d=>d<=.6?`<span class="v1">💞 Einig!</span>`:d<=2?`<span class="v2">Fast einig</span>`:`<span class="v3">Geschmäcker verschieden</span>`;
 async function mvReveal(){const b=blind;if(!b||b.anim)return;b.anim=true;const box=$("modal").querySelector(".mvblind");if(!box){b.anim=false;return}
@@ -5620,7 +5725,7 @@ function mvTopRender(){let el=$("mvtn");if(!el)return;if(tab!=="wl"||!me){el.hid
     if(!nope){let st=`${SEC[n.sec].one} · ${n.by===u?"du hast ausgesucht":esc(U[n.by].n)+" hat ausgesucht"}`;
       if(iv){const t=esc(mvWhen(iv.at));st=iv.by===u?(iv.ans?(iv.ans.ok?`${t} · ${esc(U[o].n)} ist dabei 💞`:`${esc(U[o].n)} kann heute nicht`):`${t} · wartet auf ${esc(U[o].n)} …`):`${t} · du bist dabei 💞`;if(ask)st=`${t} · ${esc(U[iv.by].n)} lädt dich ein`}
       const cal=iv&&!(iv.ans&&!iv.ans.ok)?`<button class="rej mvicsb" data-mvics="inv" aria-label="Filmabend in den Kalender eintragen">${mvIcE("📅")}</button>`:"";
-      const btns=ask?`<button class="add" data-mvinv="1">💞 Bin dabei</button><button class="rej" data-mvinv="0">Heute nicht</button>`:`<button class="add" data-mvhow="1">${late?"Auf drei!":"Fertig? Auf drei!"}</button>${cal}`;
+      const btns=ask?`<button class="add" data-mvinv="1">💞 Bin dabei</button><button class="rej" data-mvinv="0">Heute nicht</button>`:`<button class="add" data-mvhow="1">Auf drei!</button>${cal}`;
       h+=`<div class="mvtnc hasx${ask?" ask":""}">${cv(n.id,m.name)}<div class="mvtnt"><small>${ask?"Einladung":late?"Wie war's?":"Heute Abend"}</small><button class="lnk" data-info="${n.id}">${esc(m.name)}</button><span class="gn">${st}</span></div><div class="mvtnb">${btns}</div><button class="mvtnx" data-mvtnx="1" aria-label="${ask?"Einladung ablehnen":"Heute-Abend-Hinweis entfernen"}">×</button></div>`}}
   for(const p of P.slice(0,2)){const m=M[p.id];h+=`<div class="mvtnc">${cv(p.id,m.name)}<div class="mvtnt"><small>${p.kind==="rev"?"Aufgedeckt":"Du bist dran"}</small><b>${esc(m.name)}</b><span class="gn">${p.kind==="rev"?esc(U[o].n)+" hat aufgedeckt":esc(U[o].n)+" hat verdeckt bewertet"}</span></div><div class="mvtnb"><button class="add" data-mvbl="${p.k}:${p.id}">${p.kind==="rev"?"Ansehen":"Auf drei!"}</button></div></div>`}
   if(el._h!==h){el.innerHTML=h;el._h=h}el.hidden=!h}
@@ -5673,7 +5778,7 @@ function faAct(d){if(!xo||xo.k!=="fa")return false;
   if(d.fadice){faDice();return true}
   if(d.faswipe){rollSrc=xo.src==="all"?"all":"wl";mood=xo.mood||"egal";const was=xo;xoClose();view="both";fixView();act({swipe:"1"});void was;return true}
   if(d.fapick){if(!xo.pick)return true;const c=document.querySelector(`#xo [data-facand="${CSS.escape(xo.pick)}"] .cv`),from=c?c.getBoundingClientRect():null;xo.step=3;xo.lit=false;xoRender();$("xo").scrollTop=0;mvFaFocus();faLightsOut(from);return true}
-  if(d.fastart){const id=xo.pick,k=topTab;mvSetTonight(id,k);xoClose();toast(`🍿 Viel Spaß mit „${M[id].name}“! Danach: Auf drei!`);return true}
+  if(d.fastart){const id=xo.pick,k=topTab;mvSetTonight(id,k);xoClose();toast(`🍿 Viel Spaß mit „${M[id].name}“ – danach: Auf drei!`);return true}
   return false}
 // Gewählter Chip: die Auswahl gleitet zum neuen Chip (View Transition, wo der Browser sie kann)
 function mvChipGo(key,fn){const q=()=>document.querySelector(`#xo [data-fa${key}].on`),o=q();if(!fxVT()||!o){fn();return}
@@ -5950,9 +6055,9 @@ function mvMatchData(k){if(!ST[k])return null;const sig=mvMatchSig(k),c=MV_MT[k]
 function mvMatch(id){const m=M[id];if(!m)return null;const d=mvMatchData(m.sec);if(!d||!d.sorted.length)return null;if(d.map[id]!=null)return d.map[id];
   const v=d.val(m),S2=d.sorted;let lo=0,hi=S2.length;while(lo<hi){const mid=(lo+hi)>>1;if(S2[mid]<v)lo=mid+1;else hi=mid}
   return d.map[id]=Math.max(1,Math.min(99,Math.round(lo/S2.length*100)))}
-function mvMatchPill(id){const p=mvMatch(id);return p==null?"":`<span class="mvmt${p>=80?" hi":""}" title="Passt zu euch beiden: ${p} %" aria-label="Passt zu euch beiden: ${p} Prozent"><i aria-hidden="true">💞</i><span data-odo="mt-${id}">${p}</span>%</span>`}
-function mvMatchTxt(id){const p=mvMatch(id);return p==null?"":`<span class="mvmtc">💞 <span data-odo="mc-${id}">${p}</span> % für euch</span>`}
-function mvMatchInfo(id){const p=mvMatch(id);return p==null?"":`<p class="mvmti"><span aria-hidden="true">💞</span> Passt zu euch beiden: <b><span data-odo="mi-${id}">${p}</span> %</b><span class="gn"> · aus euren Bewertungen</span></p>`}
+function mvMatchPill(id){const p=mvMatch(id);return p==null?"":`<span class="mvmt${p>=80?" hi":""}" title="Passt zu euch beiden: ${p} %" aria-label="Passt zu euch beiden: ${p} Prozent"><i class="mvpair" aria-hidden="true"></i><span data-odo="mt-${id}">${p}</span>%</span>`}
+function mvMatchTxt(id){const p=mvMatch(id);return p==null?"":`<span class="mvmtc"><i class="mvpair" aria-hidden="true"></i> <span data-odo="mc-${id}">${p}</span>&nbsp;% für euch</span>`}
+function mvMatchInfo(id){const p=mvMatch(id);return p==null?"":`<p class="mvmti"><i class="mvpair" aria-hidden="true"></i> Passt zu euch beiden: <b><span data-odo="mi-${id}">${p}</span>&nbsp;%</b><span class="gn">Berechnet aus euren Bewertungen</span></p>`}
 
 // ---------- „Wo läuft's?“ über TMDB (Daten von JustWatch) ----------
 // Öffentlicher TMDB-API-Schlüssel (v3, nur lesen). Bei Missbrauch auf themoviedb.org unter Einstellungen → API neu erzeugen und hier tauschen.
