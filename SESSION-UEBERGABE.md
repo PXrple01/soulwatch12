@@ -1,6 +1,6 @@
 # Übergabe für eine neue Session – Josefines ♥ Johanns Watchlist
 
-Stand: 28.11.2026 (Phase 5 auf dem Branch, wartet auf Freigabe für `main`; alles davor ist live). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
+Stand: 28.11.2026 (nach Phase 5, alles live auf `main`). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
 
 ## 1. Was das Projekt ist
 - Private PWA-Watchlist für zwei Personen (Josefine = `jos`, Johann = `joh`, gemeinsam = `both`), Sprache Deutsch.
@@ -12,7 +12,7 @@ Stand: 28.11.2026 (Phase 5 auf dem Branch, wartet auf Freigabe für `main`; alle
 - Arbeits-Branch dieser Session: `claude/relaxed-thompson-jsh0v5` (vorher `claude/gallant-pasteur-7en1qv`). Auf `main` kommt eine Änderung erst, wenn der Nutzer sie freigegeben hat (bei größeren Umbauten zuerst eine Vorschau-Seite als Artifact zeigen); dann `git push origin <branch>:main`.
 - **Live: GitHub Pages** https://pxrple01.github.io/soulwatch12/ – jeder Push auf `main` ist nach 1–2 Min. online (Prüfen: `curl` auf die Seite, z. B. nach einem neuen String oder `jj-watchlist-vNN` in `sw.js`).
 - Netlify (soulwatch.netlify.app) ist **tot** (kostenloses Kontingent aufgebraucht, „Usage exceeded“). Der Nutzer sollte dort Builds stoppen/Seite löschen – das kann Claude nicht.
-- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache **`jj-watchlist-v43`** auf dem Branch, `v42` auf `main`; bei Releases hochzählen), `katalog.js`, `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`, `tests/` (Browser-Tests) und `.github/workflows/tests.yml` (GitHub-Prüfung bei jedem Push).
+- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v43`**, bei Releases hochzählen), `katalog.js`, `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`, `tests/` (Browser-Tests) und `.github/workflows/tests.yml` (GitHub-Prüfung bei jedem Push).
 - Commit-Nachrichten auf Deutsch, enden mit den Attribution-Zeilen aus dem System-Hinweis. Keine Modellnamen in Commits/Code.
 
 ## 3. Cloud (Supabase) – Sicherheit!
@@ -62,7 +62,7 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 ## 7. UX-Umbau: nächste Schritte (vom Nutzer so bestellt)
 - Phase 1 (fertig): Bewegungs-System, Startseite, Karten ohne Regler, Animationen.
 - Phase 2 (fertig): Filmabend als Programmheft (Zeit & Stimmung → Kandidaten → würfeln/swipen → „Heute läuft …“ mit Licht-aus je Design → Banner „Heute Abend“/„Wie war's?“), „Auf drei!“ (ein oder zwei Handys), „Zurück in die Watchlist“ im Info-Fenster (mit Tausch bei voller Liste), rollende Zahlen und Beschriftungen an vielen Stellen.
-- Phase 5 (fertig auf dem Branch, Freigabe für `main` steht aus): „Eure Abos“ (Karten, Filmabend, Wo läuft's?), „Jetzt im Abo“ in der Glocke, Regie & Besetzung mit „Mehr mit …“, deutsche Texte für 956 Animes, Tests im Repo + GitHub-Prüfung. Vorschau-Artifact „Watchlist – Vorschau Abos & Besetzung“.
+- Phase 5 (fertig, live seit 28.11.2026): „Eure Abos“ (Karten, Filmabend, Wo läuft's?), „Jetzt im Abo“ in der Glocke, Regie & Besetzung mit „Mehr mit …“, deutsche Texte für 956 Animes, Tests im Repo + GitHub-Prüfung. Vorschau-Artifact „Watchlist – Vorschau Abos & Besetzung“.
 - Ideen-Liste vom 28.11.2026, die der Nutzer noch auswählen kann: A Adventskalender (ab 1.12.), B Kino-Aushang, C Zeitkapsel, D „Die App tippt mit“, E Film-Bingo, F Szenenbild-Rätsel, G Filmgeschichte als Filmstreifen, H Brücken-Film, I Filmfiguren, J Filmuniversum; außerdem noch offen: Veto-Joker, „Heute vor einem Jahr“ + Tagebuch, Filmabend-Serie, Countdown im Banner, Monats-Rückblick, Spoiler-Schutz, automatische Cloud-Sicherung, echte Push-Mitteilungen über Supabase.
 - unslop-Durchgang (fertig, live seit 27.11.2026): ruhigere Bedienung, Saallicht-Bernstein in Hell & Dunkel, alle Designs außer Baby, Skill von Damir Sokolovsky (CC BY 4.0). Vorschau-Artifact „Watchlist – Vorschau unslop“ mit Umschalter Vorher/Nachher. Details in `uebergabe.md`.
 - Phase 4 (fertig, live seit 19.11.2026): Zusammenführen im Cloud-Abgleich, Tipp-Spiel „Was gibt …?“ mit „Wie gut kennt ihr euch?“, Abspann nach „Auf drei!“, „Passt zu euch beiden“ in %, „Wo läuft's?“ (TMDB), Katalog als eigene Datei (≈ 30 % schnellerer Start). Vorschau-Artifact „Watchlist – Vorschau Phase 4“.
