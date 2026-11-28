@@ -1,0 +1,38 @@
+// Tipp-Spiel mit zwei Handys: A bewertet + tippt verdeckt, B bewertet + tippt + deckt auf, A sieht Tipps und Abspann
+const L = require('./lib.js');
+const Q = v => { chShow = () => {}; if (chOn) { chOn = false; chRender() } cState = 'ok'; mvLevel = () => {}; mvBadge = () => {}; toastMsg = ''; topTab = 'film'; S = ST.film; view = v; render() };
+L.run('12 Tipp-Spiel mit zwei Handys', async (b, t) => {
+  const dump = await L.makeData(b);
+  const A = await L.ctx(b, L.M_VP, Object.assign({}, dump, { 'anime-theme-v1': 'light', 'wl-howto-hide': '1' })); t.watch(A.page, 'A');
+  await A.page.goto(L.BASE); await A.page.waitForTimeout(1500); await A.page.evaluate(Q, 'both'); await A.page.addStyleTag({ content: L.HIDE });
+  const id = await A.page.evaluate(() => C().list.find(x => x !== '@'));
+  await A.page.click(`#grid .card[data-k="${id}"] .ck`); await A.page.waitForTimeout(1200);
+  await A.page.click('[data-bl="two"]'); await A.page.waitForTimeout(400);
+  await L.rate(A.page, '#modal .rate[data-rate^="bl:"]', .7); await A.page.click('[data-bl="save"]'); await A.page.waitForTimeout(450);
+  await L.rate(A.page, '#modal .rate[data-rate^="bg:"]', .5); await A.page.click('[data-bl="gok"]'); await A.page.waitForTimeout(700);
+  const a = await A.page.evaluate(id => ST.film.blind[id], id);
+  t.ok(a && a.r.joh > 0 && a.g && a.g.joh > 0, 'A: Zahl und Tipp liegen verdeckt bereit', a);
+  const sA = await L.dumpLS(A.page); await A.c.close();
+  const B = await L.ctx(b, L.M_VP, Object.assign({}, sA, { 'wl-user': 'jos', 'anime-theme-v1': 'paper', 'wl-th-intro': L.today() + 'paper' })); t.watch(B.page, 'B');
+  await B.page.goto(L.BASE); await B.page.waitForTimeout(1500); await B.page.evaluate(Q, 'jos'); await B.page.addStyleTag({ content: L.HIDE });
+  await B.page.click('#mvtn [data-mvbl]'); await B.page.waitForTimeout(700);
+  await L.rate(B.page, '#modal .rate[data-rate^="bl:"]', .55); await B.page.click('[data-bl="save"]'); await B.page.waitForTimeout(450);
+  t.ok(await B.page.evaluate(() => blind.step === 'guess'), 'B: Tipp-Schritt kommt');
+  await L.rate(B.page, '#modal .rate[data-rate^="bg:"]', .66); await B.page.click('[data-bl="gok"]'); await B.page.waitForTimeout(500);
+  await B.page.click('[data-bl="go"]'); await B.page.waitForTimeout(4200);
+  t.eq(await B.page.evaluate(() => document.querySelectorAll('#modal .mvgu li').length), 2, 'B: Ergebnis zeigt beide Tipps');
+  await B.page.click('[data-bl="done"]'); await B.page.waitForTimeout(2400);
+  t.ok(await B.page.evaluate(() => !!document.getElementById('mvcred')), 'B: Abspann läuft');
+  const kn = await B.page.evaluate(() => JSON.stringify(xData().kn));
+  t.ok(/"jos":\{"p"/.test(kn) && /"joh":\{"p"/.test(kn), 'B: Tipp-Punkte beider gespeichert', kn);
+  await B.page.evaluate(() => { const e = document.getElementById('mvcred'); if (e) e.click() }); await B.page.waitForTimeout(500);
+  const sB = await L.dumpLS(B.page); await B.c.close();
+  const A2 = await L.ctx(b, L.M_VP, Object.assign({}, sB, { 'wl-user': 'joh', 'anime-theme-v1': 'purple', 'wl-th-intro': L.today() + 'purple' })); t.watch(A2.page, 'A2');
+  await A2.page.goto(L.BASE); await A2.page.waitForTimeout(1500); await A2.page.evaluate(Q, 'joh'); await A2.page.addStyleTag({ content: L.HIDE });
+  await A2.page.click('#mvtn [data-mvbl]'); await A2.page.waitForTimeout(600); await A2.page.click('[data-bl="go"]'); await A2.page.waitForTimeout(4200);
+  t.eq(await A2.page.evaluate(() => document.querySelectorAll('#modal .mvgu li').length), 2, 'A: sieht beide Tipps');
+  await A2.page.click('[data-bl="seen"]'); await A2.page.waitForTimeout(2600);
+  t.ok(await A2.page.evaluate(() => !!document.getElementById('mvcred')), 'A: Abspann läuft auch hier');
+  t.eq(await A2.page.evaluate(() => JSON.stringify(xData().kn)), kn, 'A: Punkte werden nicht doppelt gezählt');
+  await A2.c.close();
+});

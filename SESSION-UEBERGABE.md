@@ -1,6 +1,6 @@
 # Übergabe für eine neue Session – Josefines ♥ Johanns Watchlist
 
-Stand: 27.11.2026 (nach dem unslop-Durchgang, alles live auf `main`). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
+Stand: 28.11.2026 (Phase 5 auf dem Branch, wartet auf Freigabe für `main`; alles davor ist live). Ausführliche Feature-Doku: `uebergabe.md` (immer zuerst lesen, dort steht jedes Update mit Details).
 
 ## 1. Was das Projekt ist
 - Private PWA-Watchlist für zwei Personen (Josefine = `jos`, Johann = `joh`, gemeinsam = `both`), Sprache Deutsch.
@@ -12,7 +12,7 @@ Stand: 27.11.2026 (nach dem unslop-Durchgang, alles live auf `main`). Ausführli
 - Arbeits-Branch dieser Session: `claude/relaxed-thompson-jsh0v5` (vorher `claude/gallant-pasteur-7en1qv`). Auf `main` kommt eine Änderung erst, wenn der Nutzer sie freigegeben hat (bei größeren Umbauten zuerst eine Vorschau-Seite als Artifact zeigen); dann `git push origin <branch>:main`.
 - **Live: GitHub Pages** https://pxrple01.github.io/soulwatch12/ – jeder Push auf `main` ist nach 1–2 Min. online (Prüfen: `curl` auf die Seite, z. B. nach einem neuen String oder `jj-watchlist-vNN` in `sw.js`).
 - Netlify (soulwatch.netlify.app) ist **tot** (kostenloses Kontingent aufgebraucht, „Usage exceeded“). Der Nutzer sollte dort Builds stoppen/Seite löschen – das kann Claude nicht.
-- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache aktuell **`jj-watchlist-v42`**, bei Releases hochzählen), `katalog.js`, `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`.
+- Dateien im Repo: `index.html`, `watchlist.html`, `sw.js` (Cache **`jj-watchlist-v43`** auf dem Branch, `v42` auf `main`; bei Releases hochzählen), `katalog.js`, `manifest.webmanifest`, `icon-180/192/512.png`, `.nojekyll`, `uebergabe.md`, `supabase-setup.sql`, `SESSION-UEBERGABE.md`, `tests/` (Browser-Tests) und `.github/workflows/tests.yml` (GitHub-Prüfung bei jedem Push).
 - Commit-Nachrichten auf Deutsch, enden mit den Attribution-Zeilen aus dem System-Hinweis. Keine Modellnamen in Commits/Code.
 
 ## 3. Cloud (Supabase) – Sicherheit!
@@ -28,6 +28,7 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 - CSS `/* KISTE-START */…` + JS `// KISTE-START…` (inszeniertes Kisten-Öffnen, Präfix `kx-`)
 - JS `// GESCHENK-START…` vor `chList` (Geschenk-Kisten `CH_GIFTS`, aktuell `g1` für beide)
 - CSS `/* BEWEGUNG-START */…` (ganz am Ende) + JS `// BEWEGUNG-START…// BEWEGUNG-END` (direkt vor `render()`): Bewegungs-System, Startseite mit Tipps im freien Platz, Karten mit Haken + Bewertungs-Blatt, Gesten, Animationen 1–31, Symbole Emoji/Linien, Ruhige Szene (Phase 1); Filmabend-Programmheft (`xo.k="fa"`), Heute Abend, „Auf drei!“ (`blind`), rollende Zahlen über `data-odo` (Phase 2); ein Fenster-System (Blatt/Fenster mit × rechts), eine Navigation am Handy (kein Hamburger), Spiel-Ecke-Karte, Verlauf mit ⋯-Menü, Reaktionen, Einladungen, Kalender (.ics), „Demnächst“, Haptik (Phase 3). Details in `uebergabe.md` (Abschnitte „Phase 1“ bis „Phase 3“).
+- CSS `/* ABO-START */…` (nach `UNSLOP-END`) + JS `// ABO-START…// ABO-END` (vor `// BEWEGUNG-END`): „Eure Abos“, „Jetzt im Abo“, Regie & Besetzung, „Mehr mit …“ (Phase 5).
 - Katalog: `katalog.js` wird per `<script src="katalog.js?v=<sha1>">` vor dem App-Skript geladen. Bei Katalog-Änderungen den `?v=`-Wert mitändern, sonst halten Browser und Cache die alte Datei.
 - **Wichtig:** Die Quelldateien (kino.css, extras.css/js, themes.css/js, kiste.css/js, gift.js, Build-Skripte `build_all.sh`, `apply*.py`, Katalog-Pipeline `cat2/*`) lagen nur im Scratchpad der alten Session und sind **nicht** im Repo. In einer neuen Session direkt in `index.html` zwischen den Markern arbeiten (Marker beibehalten!).
 - Designs: light, dark, purple (Johann/Manga), baby (Josefine/Einhorn), deco, sea, paper, auto.
@@ -44,13 +45,15 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 - `achCheck` (Abzeichen/Kisten) läuft spätestens 4 s nach dem Zeichnen (`achT0`).
 - Der Cloud-Abgleich führt seit Phase 4 gleichzeitige Änderungen zusammen (3-Wege mit Basis `wl-cloud-base-<bereich>`, `mvMerge3`). Neue gemeinsame Felder am besten als Objekte mit eindeutigen Schlüsseln anlegen (die werden sauber zusammengeführt); Arrays werden als Mengen bzw. nach `id` zusammengeführt.
 - **Design-Regeln seit dem unslop-Durchgang** (alle Designs außer Baby): kein Glow an Bedienelementen, keine Verläufe zwischen zwei Farbtönen auf Knöpfen/Reitern/Text, keine Versalien mit Sperrung bei kleinen Beschriftungen, Pink/Lila nur für Josefine/Johann, in Hell & Dunkel ist Bernstein (`--acc`) der einzige Akzent. Anpassungen gehören in den Block `/* UNSLOP-START */ … /* UNSLOP-END */`. Sicherung des Stands davor: Branch `sicherung-vor-unslop`.
+- In Blöcken, die vor dem Ende des App-Skripts stehen (BEWEGUNG, ABO), keine `const`-Werte von weiter unten **beim Laden** anfassen (z. B. `XO_T`) – das bricht den Start ab. In Funktionen ist es egal. Die Tests (`tests/13-rundgang`) fangen so etwas.
 - Klassen `.mvfly` (id) und `.mvmenu` sind vergeben (Phase 3 nutzt `.mvflye`, `.mvhmenu`). Modal-Zustände von Phase 3 (`mvHM`) werden in allen vier Schließ-Wegen zurückgesetzt.
 - `render()` baut auch Modal und Extras-Seite (`xoRender`) jedes Mal neu: Zustände in `blind`/`xo` halten, einmalige Animationen per JS (WAAPI) statt CSS-Animation. Für rollende Zahlen `data-odo="eindeutiger-schlüssel"` verwenden.
 - Gegenstände in Kisten werden **berechnet**, nicht gespeichert – nie Kisten in die bestehende Ziehungs-Reihe einfügen (siehe Geschenk-Kisten).
 - Wikipedia-API (`api.php`) war stark gedrosselt (429) → `Spezial:Exportieren` (POST, viele Seiten pro Anfrage) nutzen. AniList braucht eigenen User-Agent („watchlist-builder/1.0“), Wikimedia-UA ohne persönliche Kontaktdaten.
 
 ## 6. Testen
-- Lokaler Server: `python3 -m http.server 5178` im Repo-Ordner; Chromium + Playwright sind vorinstalliert (`require('playwright')`).
+- **Testsammlung im Repo:** `cd tests && node run.js` (startet einen eigenen Server, 14 Dateien, ~8 Min.; einzelne: `node run.js 03 14`). Läuft bei jedem Push auch auf GitHub („Actions“). Nach jeder Änderung laufen lassen und neue Funktionen mit einer eigenen `NN-name.test.js` abdecken (Muster in `tests/README.md`).
+- Lokaler Server von Hand: `python3 -m http.server 5178` im Repo-Ordner; Chromium + Playwright sind vorinstalliert (`require('playwright')`).
 - Die Geschenk-Kiste geht nach dem Laden von selbst auf → in Tests nach `goto`: `chShow=()=>{};if(chOn){chOn=false;chRender()}`. Für Tests `cState="ok"` setzen; Testdaten über localStorage (`wl-user`, `wl-code`="x", `wl-howto-hide`, `wl-th-intro`).
 - In der Tiefsee schweben Karten → in Playwright `#grid .card{animation:none}` injizieren.
 - Parallel laufende Browser-Tests führen zu Zeitüberschreitungen – nacheinander ausführen.
@@ -59,6 +62,8 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 ## 7. UX-Umbau: nächste Schritte (vom Nutzer so bestellt)
 - Phase 1 (fertig): Bewegungs-System, Startseite, Karten ohne Regler, Animationen.
 - Phase 2 (fertig): Filmabend als Programmheft (Zeit & Stimmung → Kandidaten → würfeln/swipen → „Heute läuft …“ mit Licht-aus je Design → Banner „Heute Abend“/„Wie war's?“), „Auf drei!“ (ein oder zwei Handys), „Zurück in die Watchlist“ im Info-Fenster (mit Tausch bei voller Liste), rollende Zahlen und Beschriftungen an vielen Stellen.
+- Phase 5 (fertig auf dem Branch, Freigabe für `main` steht aus): „Eure Abos“ (Karten, Filmabend, Wo läuft's?), „Jetzt im Abo“ in der Glocke, Regie & Besetzung mit „Mehr mit …“, deutsche Texte für 956 Animes, Tests im Repo + GitHub-Prüfung. Vorschau-Artifact „Watchlist – Vorschau Abos & Besetzung“.
+- Ideen-Liste vom 28.11.2026, die der Nutzer noch auswählen kann: A Adventskalender (ab 1.12.), B Kino-Aushang, C Zeitkapsel, D „Die App tippt mit“, E Film-Bingo, F Szenenbild-Rätsel, G Filmgeschichte als Filmstreifen, H Brücken-Film, I Filmfiguren, J Filmuniversum; außerdem noch offen: Veto-Joker, „Heute vor einem Jahr“ + Tagebuch, Filmabend-Serie, Countdown im Banner, Monats-Rückblick, Spoiler-Schutz, automatische Cloud-Sicherung, echte Push-Mitteilungen über Supabase.
 - unslop-Durchgang (fertig, live seit 27.11.2026): ruhigere Bedienung, Saallicht-Bernstein in Hell & Dunkel, alle Designs außer Baby, Skill von Damir Sokolovsky (CC BY 4.0). Vorschau-Artifact „Watchlist – Vorschau unslop“ mit Umschalter Vorher/Nachher. Details in `uebergabe.md`.
 - Phase 4 (fertig, live seit 19.11.2026): Zusammenführen im Cloud-Abgleich, Tipp-Spiel „Was gibt …?“ mit „Wie gut kennt ihr euch?“, Abspann nach „Auf drei!“, „Passt zu euch beiden“ in %, „Wo läuft's?“ (TMDB), Katalog als eigene Datei (≈ 30 % schnellerer Start). Vorschau-Artifact „Watchlist – Vorschau Phase 4“.
 - Phase 3 (fertig, live seit 19.11.2026): ein Fenster-System, eine Navigation am Handy, Spiel-Ecke, Verlauf mit ⋯-Menü, Reaktionen, Einladungen, Kalender (.ics), „Demnächst“, Haptik-Experiment, Kleinkram. Vorschau-Artifact „Watchlist – Vorschau Phase 3“ (Demo-Daten, Cloud aus).
@@ -69,6 +74,5 @@ In `index.html` gibt es eingespielte Blöcke, die aus Quelldateien gebaut werden
 ## 8. Offene Punkte / Ideen
 - Nutzer: neue Adresse auf allen Geräten öffnen, Person + Haushalts-Code eingeben, Home-Bildschirm-Symbol neu anlegen; Netlify abschalten.
 - Katalog ist ausgelagert (Phase 4). Weitere Ideen fürs Laden: Beschreibungstexte in eine dritte, später geladene Datei, Cover-URL-Präfixe kürzen, bei Animes `plot` aus `desc` ableiten.
-- 751 Animes haben nur eine englische Beschreibung: TMDB hat oft deutsche Texte (der Schlüssel ist jetzt vorhanden).
-- 751 neue Animes haben nur englische Beschreibung (AniList).
+- 94 Animes haben weiterhin nur eine englische Beschreibung (bei TMDB gibt es keinen deutschen Text).
 - Push-Mitteilungen aufs gesperrte Handy gibt es nicht (bräuchte Server-Versand).

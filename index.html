@@ -3445,6 +3445,41 @@ button.mvhc:hover{border-color:var(--acc)}
 /* „Passt zu euch beiden“: Zahl und % bleiben zusammen, Herkunft als ruhige zweite Zeile */
 .mvmti .gn{display:block;margin-top:2px;white-space:normal}
 /* UNSLOP-END */
+/* ABO-START */
+/* Phase 5: Abo-Hinweis auf Karten, Filmabend, „Wo läuft's?“, Abo-Auswahl, Regie & Besetzung, „Mehr mit …“ */
+.cvw>.mvab{position:absolute;z-index:3;left:7px;top:7px;display:inline-flex;align-items:center;gap:5px;max-width:calc(100% - 14px);padding:3px 8px 3px 4px;border-radius:8px;background:rgba(18,14,10,.74);color:#fff;font:600 .7rem/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);pointer-events:none;white-space:nowrap;overflow:hidden}
+.cvw>.mvab img{width:18px;height:18px;border-radius:5px;flex:none}
+.cvw>.mvab>span:not(.sr){overflow:hidden;text-overflow:ellipsis}
+.cvw>.mvab .mvab2{opacity:.75}
+.mvabt{display:block;margin-top:2px;font-size:.74rem;font-weight:600;color:color-mix(in srgb,var(--mute) 70%,var(--ink))}
+.mvwpb.mvwpon{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.mvwpa{margin:0 0 8px;font-size:.86rem;font-weight:600;color:var(--ink)}
+.mvwpa span{color:var(--acc);margin-right:2px}
+.mvwpa0{margin:8px 0 0;font-size:.82rem}
+.mvabg{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin:14px 0 10px}
+.mvabc{display:flex;align-items:center;gap:10px;min-height:48px;margin:0;padding:6px 12px 6px 6px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:.88rem;font-weight:600;text-align:left;cursor:pointer;transition:border-color var(--d2,.2s),box-shadow var(--d2,.2s)}
+.mvabc img{width:34px;height:34px;border-radius:8px;flex:none}
+.mvabc span{flex:1;min-width:0}
+.mvabc.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.mvabc.on::after{content:"✓";color:var(--acc);font-weight:800}
+.mvabc:focus-visible,.mvpc:focus-visible,.mvpr:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.mvabn{font-size:.78rem}
+.mvcrw .mvwpi{gap:6px}
+.mvpc{display:inline-flex;flex-direction:column;align-items:flex-start;max-width:100%;min-height:40px;margin:0;padding:5px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:.8rem;line-height:1.3;text-align:left;cursor:pointer}
+.mvpc b{font-weight:600}
+.mvpc small{max-width:170px;color:var(--mute);font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mvpc:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.mvpl{list-style:none;margin:10px 0;padding:0;display:grid;gap:8px}
+.mvpr{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:8px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.mvpr .cv{width:48px;flex:none;border-radius:8px}
+.mvprt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.mvprt b{font-weight:600;line-height:1.25}
+.mvprt small{color:var(--mute);font-size:.76rem}
+.mvprt em{font-style:normal;font-size:.76rem;font-weight:600;color:color-mix(in srgb,var(--acc) 75%,var(--ink))}
+#modal .mvwp .mvwpf{font-size:.74rem;line-height:1.45}   /* Quellenzeile klein halten (das Info-Fenster vergrößert sonst alle Absätze) */
+:root[data-theme="purple"] .cvw>.mvab{top:34px}   /* Manga: Platznummer „#1“ oben links frei lassen */
+/* ABO-END */
+
 
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3485,6 +3520,7 @@ button.mvhc:hover{border-color:var(--acc)}
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Ansicht, Statistik und Verlauf" hidden></div>
 <div class="menu" id="menu" hidden><div class="grp"><h4>Design</h4><div class="seg thseg" role="group" aria-label="Design"><button data-th="light"><i class="thp p-light" aria-hidden="true"></i>Hell</button><button data-th="dark"><i class="thp p-dark" aria-hidden="true"></i>Dunkel</button><button data-th="purple"><i class="thp p-purple" aria-hidden="true"></i>Lila</button><button data-th="baby"><i class="thp p-baby" aria-hidden="true"></i>Baby</button><button data-th="deco"><i class="thp p-deco" aria-hidden="true"></i>Kinopalast<span class="thn">Neu</span></button><button data-th="sea"><i class="thp p-sea" aria-hidden="true"></i>Tiefsee<span class="thn">Neu</span></button><button data-th="paper"><i class="thp p-paper" aria-hidden="true"></i>Origami<span class="thn">Neu</span></button><button data-th="auto" title="7–19 Uhr hell, sonst dunkel"><i class="thp p-auto" aria-hidden="true"></i>Auto</button></div></div>
 <div class="grp"><h4>Bewegung &amp; Symbole</h4><div class="mvset"><span>Symbole</span><div class="seg" role="group" aria-label="Symbole"><button data-mvicons="emoji" aria-pressed="true">😊 Emoji</button><button data-mvicons="line" aria-pressed="false">✎ Linien</button></div></div><div class="mvset"><span>Ruhige Szene<br><small class="mut">Hintergrund steht still, spart Akku</small></span><button class="mvsw" role="switch" aria-checked="false" data-mvcalm="1" aria-label="Ruhige Szene"></button></div><div class="mvset"><span>Vibration<br><small class="mut">Experiment: kurzes Tippen bei Haken, Aufdecken &amp; Co.</small></span><button class="mvsw" role="switch" aria-checked="true" data-mvhap="1" aria-label="Vibration"></button></div></div>
+<div class="grp"><h4>Streaming</h4><div id="abobox"></div></div>
 <div class="grp"><h4>Cloud-Sync</h4><div id="cloudbox"></div></div>
 <div class="grp"><h4>Neuerscheinungen</h4><div id="autobox"></div></div>
 <div class="grp"><h4>Daten</h4><div id="rstbox"></div></div></div>
@@ -3500,7 +3536,7 @@ button.mvhc:hover{border-color:var(--acc)}
 <div id="toast" role="status" aria-live="polite" hidden></div>
 <input type="file" id="impf" accept=".json,application/json" hidden>
 
-<script src="katalog.js?v=099d4ba565"></script>
+<script src="katalog.js?v=6277ee77d5"></script>
 <script>
 if(typeof FILMS==="undefined"||typeof ANIME2==="undefined"){document.body.innerHTML='<div style="padding:40px 20px;font:16px/1.5 system-ui,sans-serif;max-width:520px;margin:auto"><h2>Der Katalog konnte nicht geladen werden</h2><p>Bitte prüft die Internetverbindung und öffnet die Watchlist neu.</p><button onclick="location.reload()" style="font:inherit;padding:10px 18px;border-radius:12px">Neu laden</button></div>';throw new Error("Katalog fehlt")}
 
@@ -4105,11 +4141,11 @@ const trailerHtml=id=>{const n=esc(M[id].name);return`<div class="trls"><a class
 function modalHtml(){
   const m=M[openId],x=META[openId]||{};
   if(m.sec!=="anime"){const w=x.syn||"";
-    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${mvMatchInfo(openId)}${mvModalActs(openId)}${trailerHtml(openId)}${mvWatchHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+    return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${m.cov?`<img class="fpo" src="${esc(m.cov)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${m.orig&&m.orig!==m.name?esc(m.orig)+" · ":""}${esc(fmeta(m))}${m.v?" ("+votes(m.v)+" Stimmen)":""}<br>${esc(m.gl||"")} · ${m.tags.map(t=>L[t]).filter(Boolean).join(", ")}</p><p>${esc(m.plot||"")}</p>${w?`<p class="syn">${esc(w.slice(0,1400))}${w.length>1400?"…":""}<br><i>Aus der deutschen Wikipedia</i></p>`:META[openId]===undefined?`<p class="syn">Wikipedia-Text wird geladen …</p>`:""}${mvMatchInfo(openId)}${mvModalActs(openId)}${trailerHtml(openId)}${mvWatchHtml(openId)}${mvCrHtml(openId)}${m.sec==="serie"?seaHtml(openId,1)+epHtml(openId)+seaNextHtml(openId):""}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
   // Animes: Jahr/Wertung/Sprache aus dem Katalog (AniList/aniSearch), sonst aus den online geladenen Infos.
   const t=m.desc||PLOT[openId]||m.plot||x.syn||"",y=m.y||x.y||YEAR[openId],r=m.r||x.s,cu=covOf(openId);
   const meta=[y||"Jahr unbekannt",r?"AniList "+String(r).replace(".",",")+" / 10":"",m.fmt||"",m.lang==="de"?"🇩🇪 Deutsche Synchro":m.lang==="omu"?"🇯🇵 Nur OmU (Untertitel)":""].filter(Boolean).join(" · ");
-  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${mvMatchInfo(openId)}${mvModalActs(openId)}${trailerHtml(openId)}${mvWatchHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
+  return `<div class="mbox" role="dialog" aria-label="${esc(m.name)}"><div class="mhero" aria-hidden="true"${bgOf(openId)}></div><button class="x" data-close="1" aria-label="Schließen">×</button><div class="fm">${cu?`<img class="fpo" src="${esc(cu)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<div><h3>${esc(m.name)}</h3><p class="meta">${meta}${m.gl?`<br>${esc(m.gl)}${m.tags.length?" · "+m.tags.map(g=>L[g]).filter(Boolean).join(", "):""}`:""}</p><p>${t?esc(t.slice(0,1500))+(t.length>1500?"…":""):"Beschreibung wird geladen, sobald eine Verbindung besteht."}</p>${m.desc?`<p class="syn"><i>Inhaltsangabe: ${esc(m.dsrc||"aniSearch.de")}</i></p>`:""}${mvMatchInfo(openId)}${mvModalActs(openId)}${trailerHtml(openId)}${mvWatchHtml(openId)}${mvCrHtml(openId)}${seaHtml(openId,1)}${epHtml(openId)}${seaNextHtml(openId)}${recBtnHtml(openId)}${rmHtml(openId)}${notesHtml(openId)}</div></div></div>`}
 const rt=(id,u)=>((S.w[id]||{}).r||{})[u];
 const avg=id=>{const v=Object.values((S.w[id]||{}).r||{});return v.length?v.reduce((a,b)=>a+b,0)/v.length:0};
 // ---------- Bewertung mit Kommastelle: 1 bis 10 Sterne in 0,1er-Schritten ----------
@@ -5450,7 +5486,7 @@ function mvShine(n){if(calm())return;const s=document.createElement("span");s.cl
 // ---------- Tipp im freien Platz (B1) ----------
 let mvGhostN=0;
 function mvGhostHtml(r0,i){const m=r0.m,id=m.id;
-  return`<article class="card ghost" data-k="${id}" style="--i:${i}"><div class="cvw">${cv(id,m.name)}<span class="gl" aria-hidden="true">💡 Tipp${r0.nw||autoNew(m)?" · neu":""}</span><button class="gx" data-rej="${id}" aria-label="Nichts für mich: ${esc(m.name)}">${MV_X}</button><button class="gs" data-skip="1" aria-label="Anderer Tipp">${MV_R}</button>${mvMatchPill(id)}</div><button class="nm lnk" data-info="${id}">${m.name}</button><div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div><div class="ga"><button class="add" data-acc="${id}" aria-label="${esc(m.name)} auf die Liste nehmen"><span aria-hidden="true">✓</span> Nehmen</button></div><button class="lnk gpre" data-pre="${id}">Schon gesehen?</button></article>`}
+  return`<article class="card ghost" data-k="${id}" style="--i:${i}"><div class="cvw">${cv(id,m.name)}<span class="gl" aria-hidden="true">💡 Tipp${r0.nw||autoNew(m)?" · neu":""}</span><button class="gx" data-rej="${id}" aria-label="Nichts für mich: ${esc(m.name)}">${MV_X}</button><button class="gs" data-skip="1" aria-label="Anderer Tipp">${MV_R}</button>${mvMatchPill(id)}${mvAboBadge(id)}</div><button class="nm lnk" data-info="${id}">${m.name}</button><div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div><div class="ga"><button class="add" data-acc="${id}" aria-label="${esc(m.name)} auf die Liste nehmen"><span aria-hidden="true">✓</span> Nehmen</button></div><button class="lnk gpre" data-pre="${id}">Schon gesehen?</button></article>`}
 function mvGhostOut(b,fn){const g=b.closest(".ghost"),c=g&&g.querySelector(".cv");if(!c||calm()){fn();return}
   const no=!!b.dataset.rej;g.querySelectorAll(".nm,.gn,.gl,.gx,.gs,.ga,.gpre").forEach(x=>mvA(x,[{opacity:1},{opacity:0}],{duration:160,fill:"forwards"}));
   const kf=no?[{transform:"perspective(500px) rotateX(0)",opacity:1,transformOrigin:"50% 100%"},{transform:"perspective(500px) rotateX(72deg) translateY(26px)",opacity:0,transformOrigin:"50% 100%"}]
@@ -5735,6 +5771,7 @@ const FA_TIME={film:[["egal","Egal"],["kurz","Bis 1¾ Std."],["lang","Ganzer Abe
 function faCands(){const k=topTab,st=ST[k],done=new Set(),seen=new Set();for(const l of LISTS)if(st.lists[l])for(const d of st.lists[l].done)done.add(d.id);
   let P=[];if(xo.src==="all"){for(const m of Object.values(M))if(m.sec===k&&!m.old&&!done.has(m.id))P.push(m.id)}
   else for(const l of LISTS){const L=st.lists[l];if(!L)continue;for(const id of L.list)if(id!=="@"&&M[id]&&!seen.has(id)&&!done.has(id)){seen.add(id);P.push(id)}}
+  if(xo.src==="abo")P=P.filter(id=>mvAboOn(id).length);
   const md=MOODS.find(x=>x[0]===xo.mood);if(md&&md[2].length){const f=P.filter(id=>(M[id].tags||[]).some(t=>md[2].includes(t)));if(f.length>=2)P=f}
   if(xo.time!=="egal"){const film=k==="film",f=P.filter(id=>{const r=runMin(M[id]);if(!r)return true;return xo.time==="kurz"?r<=(film?105:30):r>=(film?120:45)});if(f.length>=2)P=f}
   const on=(u,id)=>!!(st.lists[u]&&st.lists[u].list.includes(id));
@@ -5742,12 +5779,12 @@ function faCands(){const k=topTab,st=ST[k],done=new Set(),seen=new Set();for(con
   return P.map(id=>({id,s:sc(id)})).sort((a,b)=>b.s-a.s).slice(0,4).map(x=>x.id)}
 function faHtml2(){const k=topTab,st=ST[k],step=xo.step||1;if(step===4)return mvInvForm();
   if(step===1){const T=FA_TIME[k==="film"?"film":"x"],ch=(key,opts)=>`<div class="bwchips mvfach" role="group">${opts.map(([v,l])=>`<button class="bwchip${xo[key]===v?" on":""}" data-fa${key}="${v}" aria-pressed="${xo[key]===v}">${l}</button>`).join("")}</div>`;
-    return`<div class="mvfa"><p class="mvfa-k">Programmheft · Seite 1</p><h3>Wie viel Zeit habt ihr?</h3>${ch("time",T)}<h3>Worauf habt ihr Lust?</h3>${ch("mood",MOODS.filter(x=>x[0]!=="kurz").map(x=>[x[0],x[1]]))}<h3>Woher?</h3>${ch("src",[["lists","Aus euren Listen"],["all",`Aus allen ${k==="film"?"Filmen":SEC[k].many}`]])}
+    return`<div class="mvfa"><p class="mvfa-k">Programmheft · Seite 1</p><h3>Wie viel Zeit habt ihr?</h3>${ch("time",T)}<h3>Worauf habt ihr Lust?</h3>${ch("mood",MOODS.filter(x=>x[0]!=="kurz").map(x=>[x[0],x[1]]))}<h3>Woher?</h3>${ch("src",[["lists","Aus euren Listen"],["all",`Aus allen ${k==="film"?"Filmen":SEC[k].many}`]].concat(mvAboKeys().length?[["abo","In euren Abos"]]:[]))}
 <button class="add fab2" data-fastep="2"><span aria-hidden="true">${mvIc("popcorn")}</span> Vorschläge zeigen</button></div>`}
   if(step===2){const C2=xo.cands||[],on=(u,id)=>!!(st.lists[u]&&st.lists[u].list.includes(id));
     return`<div class="mvfa"><p class="mvfa-k">Programmheft · Seite 2</p><h3>${C2.length?(C2.length===1?"Einer":C2.length===2?"Zwei":C2.length===3?"Drei":"Vier")+" für heute Abend":"Dazu passt gerade nichts"}</h3><p class="mut">${C2.length?"Antippen zum Auswählen – oder würfeln.":"Lockert Zeit oder Stimmung – oder sucht aus allen Titeln."}</p>
 ${C2.some(id=>on("jos",id)||on("joh",id)||on("both",id))?`<p class="mvlegend" aria-hidden="true"><span><i class="jos"></i>${esc(U.jos.n)}</span><span><i class="joh"></i>${esc(U.joh.n)}</span><span><i class="both"></i>Zusammen</span></p>`:""}
-<div class="mvcands">${C2.map(id=>{const m=M[id],r=runMin(m),wh=[on("jos",id)&&U.jos.n,on("joh",id)&&U.joh.n,on("both",id)&&"Zusammen"].filter(Boolean);return`<button class="mvcand${xo.pick===id?" hot":""}" data-facand="${id}" aria-pressed="${xo.pick===id}">${wh.length?`<span class="who" role="img" aria-label="Auf der Liste: ${esc(wh.join(", "))}.">${on("jos",id)?`<i class="jos"></i>`:""}${on("joh",id)?`<i class="joh"></i>`:""}${on("both",id)?`<i class="both"></i>`:""}</span>`:""}${cv(id,m.name)}<b>${esc(m.name)}</b><small>${[m.y||YEAR[id]||"",r?fmtMin(r):""].filter(Boolean).join(" · ")}</small>${mvMatchTxt(id)}</button>`}).join("")}</div>
+<div class="mvcands">${C2.map(id=>{const m=M[id],r=runMin(m),wh=[on("jos",id)&&U.jos.n,on("joh",id)&&U.joh.n,on("both",id)&&"Zusammen"].filter(Boolean);return`<button class="mvcand${xo.pick===id?" hot":""}" data-facand="${id}" aria-pressed="${xo.pick===id}">${wh.length?`<span class="who" role="img" aria-label="Auf der Liste: ${esc(wh.join(", "))}.">${on("jos",id)?`<i class="jos"></i>`:""}${on("joh",id)?`<i class="joh"></i>`:""}${on("both",id)?`<i class="both"></i>`:""}</span>`:""}${cv(id,m.name)}<b>${esc(m.name)}</b><small>${[m.y||YEAR[id]||"",r?fmtMin(r):""].filter(Boolean).join(" · ")}</small>${mvMatchTxt(id)}${mvAboTxt(id)}</button>`}).join("")}</div>
 <div class="mvfa-b mvdock"><button class="rej" data-fastep="1">‹ Anders</button>${C2.length>1?`<button class="rej" data-fadice="1"><span aria-hidden="true">${mvIc("dice")}</span> Würfeln</button>`:""}<button class="rej" data-faswipe="1"><span aria-hidden="true">${mvIc("heart")}</span> Swipen</button><button class="add mvpick" data-fapick="1"${xo.pick?"":" disabled"}>${mvPickLbl(xo.pick&&M[xo.pick])}</button></div></div>`}
   const m=M[xo.pick];if(!m)return"";const r=runMin(m),now=new Date();
   return`<div class="mvlo${xo.lit?" on":""}" data-th="${esc(document.documentElement.dataset.theme||"")}"><p class="mvlo-k">Heute läuft</p><div class="mvlo-p">${cv(m.id,m.name)}</div><h3>${esc(m.name)}</h3><p class="mvlo-m">${[m.y||YEAR[m.id]||"",r?fmtMin(r):"",esc(U.jos.n)+" & "+esc(U.joh.n),"heute, "+now.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})].filter(Boolean).map(x=>`<span>${x}</span>`).join(" · ")}</p>
@@ -6064,7 +6101,7 @@ function mvMatchInfo(id){const p=mvMatch(id);return p==null?"":`<p class="mvmti"
 const TMDB_KEY="1cfeec48f37e95e01899e428d7c89d6e";
 const MV_WP={},mvWpBusy=new Set();
 function mvWpGet(id){if(MV_WP[id]!==undefined)return MV_WP[id];try{const j=JSON.parse(localStorage.getItem("wl-wp-"+id)||"null");if(j&&j.ok&&Date.now()-j.t<7*864e5){MV_WP[id]=j;return j}}catch(e){}return undefined}
-const mvWpL=(de,k)=>((de&&de[k])||[]).slice().sort((a,b)=>(a.display_priority||0)-(b.display_priority||0)).map(p=>({n:p.provider_name,l:p.logo_path||""}));
+const mvWpL=(de,k)=>((de&&de[k])||[]).slice().sort((a,b)=>(a.display_priority||0)-(b.display_priority||0)).map(p=>({n:p.provider_name,l:p.logo_path||"",i:p.provider_id}));
 async function mvWpLoad(id){const m=M[id];if(!m||mvWpBusy.has(id))return;mvWpBusy.add(id);
   const q=p=>fetch("https://api.themoviedb.org/3"+p+(p.includes("?")?"&":"?")+"api_key="+TMDB_KEY).then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status)));
   let res;
@@ -6073,7 +6110,7 @@ async function mvWpLoad(id){const m=M[id];if(!m||mvWpBusy.has(id))return;mvWpBus
     else{const nm=encodeURIComponent(m.orig||m.name),y=parseInt(m.y,10)||0,mv=/^Film/.test(m.fmt||""),T=[["tv",`/search/tv?query=${nm}${y?"&first_air_date_year="+y:""}`],["movie",`/search/movie?query=${nm}${y?"&year="+y:""}`]];
       for(const[k,p]of mv?T.reverse():T){const s=await q(p);if(s.results&&s.results[0]){kind=k;tid=s.results[0].id;break}}}
     if(tid){const w=await q(`/${kind}/${tid}/watch/providers`),de=(w.results||{}).DE||null;
-      res={t:Date.now(),ok:true,link:(de&&de.link)||"",fl:mvWpL(de,"flatrate").concat(mvWpL(de,"free"),mvWpL(de,"ads")),rent:mvWpL(de,"rent"),buy:mvWpL(de,"buy")}}
+      res={t:Date.now(),ok:true,k:kind,tid,link:(de&&de.link)||"",fl:mvWpL(de,"flatrate").concat(mvWpL(de,"free"),mvWpL(de,"ads")),rent:mvWpL(de,"rent"),buy:mvWpL(de,"buy")}}
     else res={t:Date.now(),ok:true,none:true,fl:[],rent:[],buy:[]}}
   catch(e){res={t:Date.now(),ok:false}}
   mvWpBusy.delete(id);MV_WP[id]=res;if(res.ok)try{localStorage.setItem("wl-wp-"+id,JSON.stringify(res))}catch(e){}
@@ -6093,6 +6130,125 @@ let mvGuLast="";
 function mvAfter4(){const u=document.querySelector("#modal .mvgu");const k=u&&blind?blind.id+blind.step:"";if(!k||k===mvGuLast){if(!u)mvGuLast="";return}mvGuLast=k;
   if(!calm())u.querySelectorAll("li").forEach((li,i)=>mvA(li,[{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"none"}],{duration:MV_D[4],delay:200+i*140,easing:MV_EZ.out,fill:"backwards"}))}
 {const o=mvAfter2;mvAfter2=function(){o.apply(this,arguments);try{mvAfter4()}catch(e){}}}
+// ABO-START
+// ===================================================================================
+// Phase 5: „Eure Abos“ (Karten, Filmabend, Wo läuft's?), „Jetzt im Abo“ in der Glocke, Regie & Besetzung mit „Mehr mit …“
+// Daten: TMDB (Anbieter von JustWatch). Abos gelten für beide: ST.film.x.abo = {schlüssel:1} (Cloud, wird zusammengeführt).
+// Pro Gerät: wl-abo-known (zuletzt gesehene Abo-Treffer je Titel), wl-abo-news (Meldungen), wl-cr-<id> (Besetzung), wl-pc-<person>.
+// ===================================================================================
+const MV_ABOS=[ // Schlüssel, Name, TMDB-Anbieter-IDs, Logo, Namen (normalisiert, für ältere Zwischenspeicher ohne ID)
+  ["netflix","Netflix",[8,1796,175],"/rK1KljqmbvO9HQa1PBFLILWah72.png",["netflix","netflixbasicwithads","netflixstandardwithads","netflixkids"]],
+  ["prime","Prime Video",[9,119,2100],"/gMZdpavHmxFNnLpMHwVxfqeux2g.png",["amazonprimevideo","amazonprimevideowithads"]],
+  ["disney","Disney+",[337],"/5eZ872CghnHFLB1j8grszbrx0dx.png",["disneyplus"]],
+  ["apple","Apple TV+",[350],"/v9SnyvYt0U3KGgBH3Sbh3z4yODe.png",["appletv","appletvplus"]],
+  ["wow","WOW / Sky",[30,29],"/2o26YwA7tXQ7I6CSrMvO9Rj4oNi.png",["wow","skygo"]],
+  ["paramount","Paramount+",[531],"/pkx3klJlwW5JdtaulvDx6hDNtch.png",["paramountplus"]],
+  ["rtl","RTL+",[2750,298],"/er0P3HwuVruKgnOqF8CoNdAAPPD.png",["rtlplus"]],
+  ["joyn","Joyn",[304,421],"/fXtgvU410LTT6NjQ4ERdUzoUHQC.png",["joyn","joynplus"]],
+  ["magenta","MagentaTV",[178],"/f1uWfExJA6DSAvuTL0YJ9Kyftfg.png",["magentatv","magentatvplus"]],
+  ["crunchyroll","Crunchyroll",[283],"/uFL3c4Cq8M6WoLymlC5Y8bmGytV.png",["crunchyroll"]],
+  ["mubi","MUBI",[11],"/k7iSlvgWzZuO4zU5PcBjhABMuia.png",["mubi"]],
+  ["ard","ARD Mediathek",[219],"/t3BatjPEMio5Y6uNZ2OpUifOrEK.png",["ardmediathek"]],
+  ["zdf","ZDF Mediathek",[537],"/sQsgEUFPgsuJaBf68OJ7s6ht6ta.png",["zdf","zdfmediathek"]],
+  ["arte","Arte",[234],"/ieo2l4zOaljYqJNGxWY8jWryld5.png",["arte"]]];
+setTimeout(()=>{XO_T.abo="📺 Eure Abos"},0);   // XO_T entsteht erst weiter unten im Skript
+const mvNorm=s=>String(s||"").toLowerCase().normalize("NFKD").replace(/\+/g,"plus").replace(/[^a-z0-9]/g,"");
+const mvLsJ=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||"null")||d}catch(e){return d}};
+const mvLogo=p=>`<img src="https://image.tmdb.org/t/p/w92${p}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
+function mvAboKeys(){const a=xData().abo||{};return MV_ABOS.filter(p=>a[p[0]]).map(p=>p[0])}
+const mvAboLbl=k=>(MV_ABOS.find(p=>p[0]===k)||[])[1]||k;
+function mvAboOf(pv){for(const p of MV_ABOS){if(pv.i!=null&&p[2].includes(pv.i))return p[0];if(p[4].includes(mvNorm(pv.n)))return p[0]}return null}
+// Welche eurer Abos haben den Titel gerade im Programm? (nur aus dem Zwischenspeicher, lädt nichts)
+function mvAboOn(id){const keys=mvAboKeys();if(!keys.length)return[];const w=mvWpGet(id);if(!w||!w.ok||!w.fl)return[];const out=[];
+  for(const pv of w.fl){const k=mvAboOf(pv);if(k&&keys.includes(k)&&!out.includes(k))out.push(k)}return out}
+function mvAboBadge(id){const on=mvAboOn(id);if(!on.length)return"";const p=MV_ABOS.find(x=>x[0]===on[0]);
+  return`<span class="mvab" title="Im Abo: ${esc(on.map(mvAboLbl).join(", "))}"><span class="sr">Im Abo bei </span>${mvLogo(p[3])}<span>${esc(p[1])}</span>${on.length>1?`<span class="mvab2">+${on.length-1}</span>`:""}</span>`}
+function mvAboTxt(id){const on=mvAboOn(id);return on.length?`<span class="mvabt">Im Abo: ${esc(on.map(mvAboLbl).join(", "))}</span>`:""}
+// Karten ohne komplettes Neuzeichnen aktualisieren
+function mvAboPaintId(id){document.querySelectorAll(`#grid .card[data-k="${CSS.escape(id)}"] .cvw`).forEach(c=>{const o=c.querySelector(".mvab"),h=mvAboBadge(id);if(o)o.remove();if(h)c.insertAdjacentHTML("beforeend",h)})}
+function mvAboIds(){const out=[];for(const k in SEC){const st=ST[k];for(const l of LISTS)if(st.lists[l])for(const id of st.lists[l].list)if(id!=="@"&&M[id]&&!out.includes(id))out.push(id)}return out}
+const mvOnList=id=>{const st=ST[(M[id]||{}).sec];return !!st&&LISTS.some(l=>st.lists[l]&&st.lists[l].list.includes(id))};
+// „Jetzt im Abo“: meldet, wenn ein Titel eurer Watchlist neu bei einem eurer Dienste auftaucht. Erster Blick auf einen Titel zählt nicht.
+function mvAboCheck(id){if(!mvAboKeys().length||!M[id])return;const w=MV_WP[id];if(!w||!w.ok)return;
+  const now=mvAboOn(id),kn=mvLsJ("wl-abo-known",{}),old=kn[id];kn[id]=now.join(",");try{localStorage.setItem("wl-abo-known",JSON.stringify(kn))}catch(e){}
+  mvAboPaintId(id);if(old===undefined)return;const was=old?old.split(","):[],add=now.filter(k=>!was.includes(k));
+  if(add.length&&mvOnList(id)){const N=mvLsJ("wl-abo-news",[]);N.unshift({t:Date.now(),id,k:M[id].sec,p:add});try{localStorage.setItem("wl-abo-news",JSON.stringify(N.slice(0,30)))}catch(e){}try{xBell()}catch(e){}}}
+function mvAboReset(){const kn={};for(const id of mvAboIds())if(mvWpGet(id))kn[id]=mvAboOn(id).join(",");try{localStorage.setItem("wl-abo-known",JSON.stringify(kn))}catch(e){}}
+function mvAboNews(N){const t45=Date.now()-45*864e5;for(const n of mvLsJ("wl-abo-news",[]))if(n.t>t45&&M[n.id])N.push({t:n.t,ic:"📺",h:`<b>${esc(M[n.id].name)}</b> läuft jetzt in eurem Abo bei ${esc(n.p.map(mvAboLbl).join(" und "))}`,go:n.k+":"+n.id})}
+{const _wl=mvWpLoad;mvWpLoad=async function(id){const old=mvLsJ("wl-wp-"+id,null);await _wl(id);if(MV_WP[id]&&!MV_WP[id].ok&&old&&old.ok)MV_WP[id]=old;try{mvAboCheck(id)}catch(e){}}}   // offline: alten Stand behalten
+// Im Hintergrund: Anbieter der Watchlist-Titel auffrischen (höchstens 40 pro Start, älter als 3 Tage, einer nach dem anderen)
+let mvAbT=null;
+function mvAboSweep(){if(mvAbT||!mvAboKeys().length||navigator.onLine===false)return;
+  const ids=mvAboIds().filter(id=>{const j=mvLsJ("wl-wp-"+id,null);return !j||!j.ok||!j.tid||Date.now()-j.t>3*864e5}).slice(0,40);if(!ids.length)return;let i=0;
+  const step=async()=>{if(i>=ids.length){mvAbT=null;return}const id=ids[i++];try{await mvWpLoad(id)}catch(e){}mvAbT=setTimeout(step,700)};mvAbT=setTimeout(step,0)}
+setTimeout(()=>{try{mvAboSweep()}catch(e){}},8000);
+function mvAboHtml(){const a=xData().abo||{};
+  return`<p class="xolead">Welche Dienste habt ihr? Dann zeigen Karten, Filmabend und „Wo läuft's?“, was ihr ohne Aufpreis schauen könnt. Kommt ein Titel eurer Watchlist neu dazu, meldet sich die Glocke.</p>
+<div class="mvabg" role="group" aria-label="Streaming-Dienste">${MV_ABOS.map(p=>`<button class="mvabc${a[p[0]]?" on":""}" data-mvabo="${p[0]}" aria-pressed="${!!a[p[0]]}">${mvLogo(p[3])}<span>${esc(p[1])}</span></button>`).join("")}</div>
+<p class="gn mvabn">Gilt für euch beide. Angebote in Deutschland, Daten: JustWatch über TMDB.</p>`}
+function mvAboBox(){const b=$("abobox");if(!b)return;const k=mvAboKeys();
+  b.innerHTML=`<p class="hint" style="margin-top:0">${k.length?"Eure Abos: "+esc(k.map(mvAboLbl).join(", ")):"Noch keine Abos gewählt. Dann zeigen Karten und Filmabend, was ohne Aufpreis läuft."}</p><button class="rst" data-xo="abo">${k.length?"Abos ändern":"Abos auswählen"}</button>`}
+{const _cui=cloudUI;cloudUI=function(){_cui.apply(this,arguments);try{mvAboBox()}catch(e){}}}
+// „Wo läuft's?“: eure Dienste hervorheben, ohne Abos einen Hinweis zum Einrichten
+{const _mwh=mvWatchHtml;mvWatchHtml=function(id){let h=_mwh(id);if(!h||/aria-busy/.test(h))return h;const keys=mvAboKeys();
+  if(!keys.length)return h.replace(/<p class="mvwpf">/,`<p class="gn mvwpa0"><button class="lnk" data-xo="abo">Eure Abos festlegen</button>, dann seht ihr hier, was ohne Aufpreis läuft</p><p class="mvwpf">`);
+  const sel=MV_ABOS.filter(p=>keys.includes(p[0])),un=t=>t.replace(/&amp;/g,"&").replace(/&quot;/g,'"').replace(/&#39;/g,"'");
+  h=h.replace(/<span class="mvwpb" title="([^"]*)">/g,(m,t)=>sel.some(p=>p[4].includes(mvNorm(un(t))))?`<span class="mvwpb mvwpon" title="${t}">`:m);
+  const on=mvAboOn(id);if(on.length)h=h.replace(/<\/h4>/,`</h4><p class="mvwpa"><span aria-hidden="true">✓</span> In eurem Abo bei ${esc(on.map(mvAboLbl).join(" und "))}</p>`);
+  return h}}
+
+// ---------- Regie & Besetzung (TMDB) ----------
+const MV_CR={},mvCrBusy=new Set();
+function mvCrGet(id){if(MV_CR[id]!==undefined)return MV_CR[id];const j=mvLsJ("wl-cr-"+id,null);if(j&&j.ok&&Date.now()-j.t<30*864e5)return MV_CR[id]=j;return undefined}
+const mvTq=p=>fetch("https://api.themoviedb.org/3"+p+(p.includes("?")?"&":"?")+"api_key="+TMDB_KEY).then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status)));
+async function mvCrLoad(id){if(mvCrBusy.has(id)||!M[id])return;mvCrBusy.add(id);let res;
+  try{for(let i=0;i<60&&mvWpBusy.has(id);i++)await new Promise(r=>setTimeout(r,200));
+    let w=mvWpGet(id);if(!w||!w.tid){await mvWpLoad(id);w=MV_WP[id]}
+    if(!w||!w.ok||!w.tid)res={t:Date.now(),ok:true,none:true};
+    else if(w.k==="movie"){const c=await mvTq(`/movie/${w.tid}/credits?language=de-DE`);
+      res={t:Date.now(),ok:true,dl:"Regie",d:(c.crew||[]).filter(x=>x.job==="Director").slice(0,3).map(x=>({n:x.name,i:x.id})),c:(c.cast||[]).slice(0,8).map(x=>({n:x.name,i:x.id,r:x.character||""}))}}
+    else{const c=await mvTq(`/tv/${w.tid}?language=de-DE&append_to_response=aggregate_credits`),ag=c.aggregate_credits||{};let d=(c.created_by||[]).map(x=>({n:x.name,i:x.id})),dl="Idee";
+      if(!d.length){d=(ag.crew||[]).filter(x=>(x.jobs||[]).some(j=>/Director/.test(j.job||""))).sort((a,b)=>(b.total_episode_count||0)-(a.total_episode_count||0)).slice(0,2).map(x=>({n:x.name,i:x.id}));dl="Regie"}
+      res={t:Date.now(),ok:true,dl,d:d.slice(0,3),c:(ag.cast||[]).slice(0,8).map(x=>({n:x.name,i:x.id,r:((x.roles||[])[0]||{}).character||""}))}}}
+  catch(e){res={t:Date.now(),ok:false}}
+  mvCrBusy.delete(id);MV_CR[id]=res;if(res.ok)try{localStorage.setItem("wl-cr-"+id,JSON.stringify(res))}catch(e){}
+  if(openId===id)render()}
+function mvCrHtml(id){if(!M[id])return"";const c=mvCrGet(id);if(c===undefined&&!mvCrBusy.has(id))setTimeout(()=>mvCrLoad(id),0);
+  const an=M[id].sec==="anime",head=`<h4 class="mvwph"><span aria-hidden="true">🎬</span> ${an?"Regie und Stimmen":"Regie und Besetzung"}</h4>`;
+  if(c===undefined)return`<div class="mvwp mvcrw" aria-busy="true">${head}<p class="gn mvwpw">Wird gesucht …</p></div>`;
+  if(!c.ok)return`<div class="mvwp mvcrw">${head}<p class="gn">Gerade nicht abrufbar.</p></div>`;
+  if(c.none||(!c.d.length&&!c.c.length))return"";
+  const pb=(p,sub)=>`<button class="mvpc" data-mvpers="${p.i}|${esc(p.n)}"><b>${esc(p.n)}</b>${sub?`<small>${esc(sub)}</small>`:""}</button>`;
+  return`<div class="mvwp mvcrw">${head}${c.d.length?`<div class="mvwpr"><span class="mvwpl">${c.dl}</span><div class="mvwpi">${c.d.map(p=>pb(p)).join("")}</div></div>`:""}${c.c.length?`<div class="mvwpr"><span class="mvwpl">${an?"Stimmen":"Besetzung"}</span><div class="mvwpi">${c.c.map(p=>pb(p,p.r)).join("")}</div></div>`:""}<p class="mvwpf">Namen antippen für mehr aus eurem Katalog · Daten: TMDB</p></div>`}
+// „Mehr mit …“: Werke einer Person, die es in eurem Katalog gibt
+const MV_PC={};let MV_IDX=null;
+const MV_JOB={Director:"Regie",Screenplay:"Drehbuch",Writer:"Buch",Story:"Story",Novel:"Romanvorlage",Creator:"Idee","Original Story":"Vorlage","Series Composition":"Serienkonzept",Characters:"Figuren","Original Concept":"Idee"};   // Danksagungen, Produktion usw. zählen nicht
+function mvIdx(){if(MV_IDX)return MV_IDX;const X=new Map();
+  for(const pass of [0,1])for(const m of Object.values(M)){const y=+m.y||+YEAR[m.id]||0;if(!y)continue;
+    for(const nm of [m.name,m.orig]){const n=mvNorm(String(nm||"").replace(/\s*\((19|20)\d\d\)\s*$/,""));if(n.length<2)continue;for(const yy of pass?[y-1,y+1]:[y]){const k=n+"|"+yy;if(!X.has(k))X.set(k,m.id)}}}
+  return MV_IDX=X}
+async function mvPersLoad(pid){let res=mvLsJ("wl-pc-"+pid,null);
+  if(!res||!res.ok||Date.now()-res.t>30*864e5){try{const c=await mvTq(`/person/${pid}/combined_credits?language=de-DE`);
+      const it=(x,r)=>({t:x.title||x.name||"",o:x.original_title||x.original_name||"",y:+String(x.release_date||x.first_air_date||"").slice(0,4)||0,r});
+      res={t:Date.now(),ok:true,c:(c.cast||[]).filter(x=>!/^(Self|Himself|Herself|Themselves|Narrator)\b/i.test(x.character||"")).map(x=>it(x,x.character||""))
+        .concat((c.crew||[]).filter(x=>MV_JOB[x.job]).map(x=>it(x,MV_JOB[x.job])))};
+      try{localStorage.setItem("wl-pc-"+pid,JSON.stringify(res))}catch(e){}}catch(e){res={t:Date.now(),ok:false}}}
+  MV_PC[pid]=res;if(xo&&xo.k==="pers"&&xo.pid===pid)xoRender()}
+function mvPersHtml(){let P=MV_PC[xo.pid];
+  if(P===undefined){const j=mvLsJ("wl-pc-"+xo.pid,null);if(j&&j.ok&&Date.now()-j.t<30*864e5)P=MV_PC[xo.pid]=j}
+  if(P===undefined){if(!xo.busy){xo.busy=1;const pid=xo.pid;setTimeout(()=>mvPersLoad(pid),0)}return`<p class="gn">Wird gesucht …</p>`}   // nicht mitten im Zeichnen laden
+  if(!P.ok)return`<p class="gn">Gerade nicht abrufbar.</p>`;
+  const idx=mvIdx(),hit=new Map();for(const c of P.c){if(!c.y)continue;for(const nm of [c.t,c.o]){const id=idx.get(mvNorm(nm)+"|"+c.y);if(id){const h=hit.get(id);if(!h)hit.set(id,Object.assign({},c));else if(c.r&&!h.r.includes(c.r))h.r=h.r?h.r+", "+c.r:c.r;break}}}
+  const works=new Set(P.c.map(c=>mvNorm(c.o||c.t)+"|"+c.y)).size,rows=[...hit.entries()].sort((a,b)=>b[1].y-a[1].y);
+  const st=id=>{const s0=ST[M[id].sec],u=I();const done=LISTS.some(l=>s0.lists[l]&&s0.lists[l].done.some(d=>d.id===id)),r=((s0.w[id]||{}).r||{});
+    if(done)return"Gesehen"+(r[u]?" · "+fmtR(r[u]):"");return mvOnList(id)?"Auf eurer Liste":""};
+  return`<p class="xolead">${rows.length?`${rows.length} von ${works} Werken gibt es in eurem Katalog.`:`Von ${works} Werken ist keines in eurem Katalog.`}</p>${rows.length?`<ul class="mvpl">${rows.map(([id,c])=>{const s=st(id);return`<li><button class="mvpr" data-info="${id}">${cv(id,M[id].name)}<span class="mvprt"><b>${esc(M[id].name)}</b><small>${[c.y,SEC[M[id].sec].one||"",c.r].filter(Boolean).map(x=>esc(String(x))).join(" · ")}</small>${s?`<em>${esc(s)}</em>`:""}</span></button></li>`}).join("")}</ul>`:""}<p class="gn mvabn">Daten: TMDB</p>`}
+function mvAct5(d){
+  if(d.xo==="abo"){menu=false;rstAsk=false;openId=null;xoOpen("abo");return true}   // auch aus dem Menü und dem Info-Fenster
+  if(d.mvabo){const x=xData();x.abo=Object.assign({},x.abo);if(x.abo[d.mvabo])delete x.abo[d.mvabo];else x.abo[d.mvabo]=1;xSave();mvAboReset();render();setTimeout(()=>{try{mvAboSweep()}catch(e){}},400);return true}
+  if(d.mvpers){const p=d.mvpers.indexOf("|"),pid=+d.mvpers.slice(0,p),name=d.mvpers.slice(p+1);if(!pid)return true;XO_T.pers="🎬 Mehr mit "+esc(name);openId=null;xoOpen("pers",{pid,name});return true}
+  return false}
+// ABO-END
 // BEWEGUNG-END
 
 function render(){
@@ -6112,7 +6268,7 @@ function render(){
       if(fv)return `<article class="card slot slmore" hidden></article>`;fv=true;const rest=nfree-gi;
       return `<article class="card slot${fi>-1?" fresh":""}${ed?"":" slro"}" style="--i:${i}">${ed?`<span class="slp" aria-hidden="true">＋</span>`:""}<div class="nm">${rest===1?"1 Platz frei":rest+" Plätze frei"}</div>${ed?`<button class="slb" data-brw="1">Titel aussuchen</button>`:`<p class="gn">Noch leer.</p>`}</article>`}
     const m=M[id],sn=!!c.seen[id],o=rt(id,O());
-    return `<article class="card${sn?" seen":""}${fmc(id)}" data-k="${id}" style="--i:${i}"><div class="cvw">${cv(id,m.name)}${ed?`<button class="ck${sn?" on":""}" data-ck="${id}" aria-label="${sn?"Gesehen – jetzt bewerten":"Gesehen? Haken setzen und bewerten"}: ${esc(m.name)}">${MV_CK}</button>`:""}${TN&&TN.id===id?`<span class="mvtday">Heute</span>`:""}${view==="both"?mvBlBadge(id):""}${mvMatchPill(id)}</div><button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
+    return `<article class="card${sn?" seen":""}${fmc(id)}" data-k="${id}" style="--i:${i}"><div class="cvw">${cv(id,m.name)}${ed?`<button class="ck${sn?" on":""}" data-ck="${id}" aria-label="${sn?"Gesehen – jetzt bewerten":"Gesehen? Haken setzen und bewerten"}: ${esc(m.name)}">${MV_CK}</button>`:""}${TN&&TN.id===id?`<span class="mvtday">Heute</span>`:""}${view==="both"?mvBlBadge(id):""}${mvMatchPill(id)}${mvAboBadge(id)}</div><button class="nm lnk" data-info="${id}">${m.name}</button>${seaBadge(id)}<div class="gn">${m.sec!=="anime"?fmeta(m):m.g}</div>${m.sec!=="film"?(seaNeed(id),seaHtml(id)+epBtn(id)):""}${ed?`${o?`<div class="oth">${U[O()].n}: ${sst(o)}</div>`:""}`:`<div class="oth">${sn?"✓ gesehen":"noch nicht gesehen"}</div>`}</article>`;
   }).join("");
   const box=$("rec"),free=c.list.includes("@");
   vi=F.length?((vi%F.length)+F.length)%F.length:0;
@@ -6225,6 +6381,7 @@ function act(d){
   try{mvHapFor(d)}catch(e){}
   if(faAct(d))return;
   if(mvAct3(d))return;
+  if(mvAct5(d))return;
   if(d.bl){mvBlindAct(d.bl);return}
   if(d.mvhow){const n=mvTonight();if(n){if(topTab!==n.sec){topTab=n.sec;S=ST[topTab];vi=0}tab="wl";mvBlindOpen(n.id,n.sec);render()}return}
   if(d.mvtnx){mvInvDrop();mvTonightClear();render();return}
@@ -6970,7 +7127,7 @@ function xoOpen(k,o){if(k==="mar"&&topTab!=="film")act({top:"film"});
   const el=$("xo");el.scrollTop=0;const f=el.querySelector(".bwback");if(f)f.focus({preventScroll:true})}
 function xoClose(){const b=xo&&xo.back;if(xo&&xo.url)URL.revokeObjectURL(xo.url);xo=null;document.body.classList.remove("xoon");const el=$("xo");el.hidden=true;el.innerHTML="";render();if(b&&document.contains(b)&&b.getClientRects().length)b.focus()}
 function xoRender(){const el=$("xo");if(!xo){if(!el.hidden){el.hidden=true;el.innerHTML=""}return}el.hidden=false;el.dataset.k=xo.k;
-  const body=xo.k==="soon"?mvSoonHtml():xo.k==="fa"?faHtml2():xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():posterHtml();
+  const body=xo.k==="soon"?mvSoonHtml():xo.k==="fa"?faHtml2():xo.k==="fin"?finHtml():xo.k==="mar"?marHtml():xo.k==="quiz"?quizHtml():xo.k==="news"?newsHtml():xo.k==="abo"?mvAboHtml():xo.k==="pers"?mvPersHtml():posterHtml();
   const st=el.scrollTop;keepFocus(el,()=>el.innerHTML=`<div class="xoin x-${xo.k}"><header class="bwhead mvwh"><h2>${XO_T[xo.k]}</h2><button class="x bwback" data-xoclose="1" aria-label="Schließen">×</button></header>${body}</div>`);el.scrollTop=st;
   if(xo.k==="fin")finResults()}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&xo&&!openId&&!preId&&!rw&&!menu&&$("modal").hidden){e.preventDefault();xoClose()}});
@@ -7261,6 +7418,7 @@ function newsList(){if(!me)return[];const u=I(),o=O(),seen=newsSeen(),N=[],t30=D
   try{for(const p of mvBlPending())N.push(p.kind==="rev"?{t:p.t,ic:"🎴",rev:1,h:`Aufgedeckt: <b>${esc(M[p.id].name)}</b> – schau, wie einig ihr seid`,bl:p.k+":"+p.id}:{t:p.t,pin:1,ic:"🙈",h:`${esc(U[o].n)} hat <b>${esc(M[p.id].name)}</b> verdeckt bewertet – du bist dran`,bl:p.k+":"+p.id});
     const tn=mvTonight();if(tn&&tn.by!==u)N.push({t:tn.t,ic:"🍿",h:`${esc(U[tn.by].n)} hat <b>${esc(M[tn.id].name)}</b> für heute Abend ausgesucht`,go:tn.sec+":"+tn.id})}catch(e){}
   try{mvNews3(N,u,o,t30)}catch(e){}
+  try{mvAboNews(N)}catch(e){}
   for(const n of N)n.neu=n.t>seen;
   return N.sort((a,b)=>(b.neu-a.neu)||(!!b.pin-!!a.pin)||b.t-a.t).slice(0,40)}
 const newsCount=()=>newsList().filter(n=>n.neu).length;

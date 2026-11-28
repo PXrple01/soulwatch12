@@ -1,0 +1,35 @@
+// „Auf drei!“ mit zwei Handys: A bewertet verdeckt, B ist dran und deckt auf, A sieht das Ergebnis
+const L = require('./lib.js');
+const Q = v => { chShow = () => {}; if (chOn) { chOn = false; chRender() } cState = 'ok'; mvLevel = () => {}; mvBadge = () => {}; toastMsg = ''; topTab = 'film'; S = ST.film; view = v; render() };
+L.run('04 Auf drei mit zwei Handys', async (b, t) => {
+  const dump = await L.makeData(b);
+  const A = await L.ctx(b, L.M_VP, Object.assign({}, dump, { 'anime-theme-v1': 'light', 'wl-howto-hide': '1', 'wl-ach-seen-joh': '[]' })); t.watch(A.page, 'A');
+  await A.page.goto(L.BASE); await A.page.waitForTimeout(1500); await A.page.evaluate(Q, 'both');
+  const id = await A.page.evaluate(() => C().list.find(x => x !== '@'));
+  await A.page.click(`#grid .card[data-k="${id}"] .ck`); await A.page.waitForTimeout(1200);
+  await A.page.click('[data-bl="two"]'); await A.page.waitForTimeout(400);
+  await L.rate(A.page, '#modal .rate[data-rate^="bl:"]', .7);
+  await A.page.click('[data-bl="save"]'); await A.page.waitForTimeout(350); await A.page.click('[data-bl="gskip"]'); await A.page.waitForTimeout(800);
+  const a = await A.page.evaluate(id => ({ bl: ST.film.blind[id], hint: !!document.querySelector(`#grid .card[data-k="${id}"] .mvbl`) }), id);
+  t.ok(a.bl && a.bl.r && a.bl.r.joh > 0 && !a.bl.r.jos, 'A: Johanns Zahl liegt verdeckt bereit', a.bl);
+  t.ok(a.hint, 'A: Karte zeigt den Hinweis');
+  const store = await L.dumpLS(A.page); await A.c.close();
+  const B = await L.ctx(b, L.M_VP, Object.assign({}, store, { 'wl-user': 'jos', 'anime-theme-v1': 'baby', 'wl-th-intro': L.today() + 'baby', 'wl-howto-hide': '1', 'wl-ach-seen-jos': '[]' })); t.watch(B.page, 'B');
+  await B.page.goto(L.BASE); await B.page.waitForTimeout(1500); await B.page.evaluate(Q, 'jos'); await B.page.waitForTimeout(500);
+  const bell = await B.page.evaluate(() => newsList().filter(n => n.bl).map(n => n.h.replace(/<[^>]+>/g, '')).join(' | '));
+  t.ok(/verdeckt/.test(bell), 'B: Glocke meldet „verdeckt bewertet“', bell);
+  await B.page.click('#mvtn [data-mvbl]'); await B.page.waitForTimeout(700);
+  await L.rate(B.page, '#modal .rate[data-rate^="bl:"]', .55);
+  await B.page.click('[data-bl="save"]'); await B.page.waitForTimeout(350); await B.page.click('[data-bl="gskip"]'); await B.page.waitForTimeout(500);
+  await B.page.click('[data-bl="go"]'); await B.page.waitForTimeout(3600);
+  await B.page.click('[data-bl="done"]'); await B.page.waitForTimeout(1000);
+  const bb = await B.page.evaluate(id => ({ bl: ST.film.blind[id], r: ST.film.w[id].r, done: ST.film.lists.both.done.some(d => d.id === id) }), id);
+  t.ok(bb.r && bb.r.jos > 0 && bb.r.joh > 0 && bb.done, 'B: beide Bewertungen gespeichert, Titel abgeschlossen', bb);
+  const store2 = await L.dumpLS(B.page); await B.c.close();
+  const A2 = await L.ctx(b, L.M_VP, Object.assign({}, store2, { 'wl-user': 'joh', 'anime-theme-v1': 'light' })); t.watch(A2.page, 'A2');
+  await A2.page.goto(L.BASE); await A2.page.waitForTimeout(1500); await A2.page.evaluate(Q, 'joh'); await A2.page.waitForTimeout(500);
+  await A2.page.click('#mvtn [data-mvbl]'); await A2.page.waitForTimeout(600); await A2.page.click('[data-bl="go"]'); await A2.page.waitForTimeout(3600);
+  t.ok(await A2.page.evaluate(id => !ST.film.blind[id], id), 'A: nach dem Ansehen ist der verdeckte Eintrag weg');
+  await A2.page.click('[data-bl="seen"]'); await A2.page.waitForTimeout(500);
+  await A2.c.close();
+});

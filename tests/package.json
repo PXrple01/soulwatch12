@@ -1,0 +1,11 @@
+{
+  "name": "watchlist-tests",
+  "private": true,
+  "description": "Browser-Tests der Watchlist (Playwright)",
+  "scripts": {
+    "test": "node run.js"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}
